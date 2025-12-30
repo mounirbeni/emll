@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/authorization';
 import { errorResponse } from '@/lib/api-response';
 import { emailService } from '@/services/email.service';
+import { BadRequestError } from '@/lib/errors';
 
 /**
  * POST: Test email sending
@@ -14,7 +15,7 @@ export async function POST(request: Request) {
         const { email } = body;
 
         if (!email) {
-            return errorResponse(new Error('Email address is required'), 400);
+            return errorResponse(new BadRequestError('Email address is required'));
         }
 
         // Test sending a simple email

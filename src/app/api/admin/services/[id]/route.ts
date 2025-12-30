@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { requireAdmin } from '@/lib/authorization';
 import { errorResponse, successResponse } from '@/lib/api-response';
+import { NotFoundError } from '@/lib/errors';
+import { auth } from '@/auth';
 
 export async function GET(
     request: Request,
@@ -14,7 +16,7 @@ export async function GET(
         });
 
         if (!service) {
-            return errorResponse(new Error('Service not found'), 404);
+            return errorResponse(new NotFoundError('Service'));
         }
 
         // Service already has native arrays, no parsing needed

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
 import { errorResponse, successResponse } from "@/lib/api-response";
+import { UnauthorizedError, BadRequestError, NotFoundError, ForbiddenError } from "@/lib/errors";
 
 export async function PATCH(
     request: Request,
@@ -10,13 +11,13 @@ export async function PATCH(
     try {
         const session = await auth();
         if (!session?.user) {
-            return errorResponse(new Error("Unauthorized"), 401);
+            return errorResponse(new UnauthorizedError());
         }
 
         const { id } = await params;
 
         if (!id) {
-            return errorResponse(new Error("Notification ID is required"), 400);
+            return errorResponse(new BadRequestError("Notification ID is required"));
         }
 
         // Fetch the notification
@@ -25,12 +26,12 @@ export async function PATCH(
         });
 
         if (!notification) {
-            return errorResponse(new Error("Notification not found"), 404);
+            return errorResponse(new NotFoundError("Notification"));
         }
 
         // Verify ownership
         if (notification.userId !== session.user.id) {
-            return errorResponse(new Error("Forbidden"), 403);
+            return errorResponse(new ForbiddenError());
         }
 
         // Mark as read (always set to true when marking as read)

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/authorization';
 import { errorResponse, successResponse } from '@/lib/api-response';
 import { supportRepository } from '@/repositories/support.repository';
+import { BadRequestError } from '@/lib/errors';
 
 export async function PATCH(
     request: Request,
@@ -14,7 +15,7 @@ export async function PATCH(
         const { status } = await request.json();
 
         if (!status) {
-            return errorResponse(new Error('Status is required'), 400);
+            return errorResponse(new BadRequestError('Status is required'));
         }
 
         const updated = await supportRepository.updateStatus(id, status);
