@@ -140,87 +140,67 @@ export function Notifications() {
                             No notifications
                         </div>
                     ) : (
-                        notifications.slice(0, 5).map((notification) => (
-                            <DropdownMenuItem
-                                key={notification.id}
-                                className="flex items-start gap-3 px-3 py-2.5 cursor-pointer"
-                                onClick={() => {
-                                    if (!notification.read) {
-                                        handleMarkAsRead(notification.id);
-                                    }
-                                    if (notification.link) {
-                                        setIsOpen(false);
-                                    }
-                                }}
-                                asChild={notification.link ? undefined : "div"}
-                            >
-                                {notification.link ? (
-                                    <Link href={notification.link} className="flex items-start gap-3 w-full">
-                                        <div
-                                            className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${getNotificationIcon(
-                                                notification.type
-                                            )}`}
+                        notifications.slice(0, 5).map((notification) => {
+                            const notificationContent = (
+                                <>
+                                    <div
+                                        className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${getNotificationIcon(
+                                            notification.type
+                                        )}`}
+                                    >
+                                        <Bell className="w-4 h-4" />
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <p
+                                            className={`text-sm font-medium ${!notification.read ? "text-gray-900" : "text-gray-600"
+                                                }`}
                                         >
-                                            <Bell className="w-4 h-4" />
+                                            {notification.title}
+                                        </p>
+                                        <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">
+                                            {notification.message}
+                                        </p>
+                                        <p className="text-xs text-gray-400 mt-1">
+                                            {new Date(notification.createdAt).toLocaleDateString("en-US", {
+                                                month: "short",
+                                                day: "numeric",
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                            })}
+                                        </p>
+                                    </div>
+                                    {!notification.read && (
+                                        <div className="w-2 h-2 rounded-full bg-[#FF5F00] flex-shrink-0 mt-2" />
+                                    )}
+                                </>
+                            );
+
+                            return (
+                                <DropdownMenuItem
+                                    key={notification.id}
+                                    className="flex items-start gap-3 px-3 py-2.5 cursor-pointer"
+                                    onClick={() => {
+                                        if (!notification.read) {
+                                            handleMarkAsRead(notification.id);
+                                        }
+                                        if (notification.link) {
+                                            setIsOpen(false);
+                                        }
+                                    }}
+                                    asChild={notification.link ? true : undefined}
+                                >
+                                    {notification.link ? (
+                                        <Link href={notification.link} className="flex items-start gap-3 w-full">
+                                            {notificationContent}
+                                        </Link>
+                                    ) : (
+                                        <div className="flex items-start gap-3 w-full">
+                                            {notificationContent}
                                         </div>
-                                        <div className="flex-1 min-w-0">
-                                            <p
-                                                className={`text-sm font-medium ${!notification.read ? "text-gray-900" : "text-gray-600"
-                                                    }`}
-                                            >
-                                                {notification.title}
-                                            </p>
-                                            <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">
-                                                {notification.message}
-                                            </p>
-                                            <p className="text-xs text-gray-400 mt-1">
-                                                {new Date(notification.createdAt).toLocaleDateString("en-US", {
-                                                    month: "short",
-                                                    day: "numeric",
-                                                    hour: "2-digit",
-                                                    minute: "2-digit",
-                                                })}
-                                            </p>
-                                        </div>
-                                        {!notification.read && (
-                                            <div className="w-2 h-2 rounded-full bg-[#FF5F00] flex-shrink-0 mt-2" />
-                                        )}
-                                    </Link>
-                                ) : (
-                                    <>
-                                        <div
-                                            className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${getNotificationIcon(
-                                                notification.type
-                                            )}`}
-                                        >
-                                            <Bell className="w-4 h-4" />
-                                        </div>
-                                        <div className="flex-1 min-w-0">
-                                            <p
-                                                className={`text-sm font-medium ${!notification.read ? "text-gray-900" : "text-gray-600"
-                                                    }`}
-                                            >
-                                                {notification.title}
-                                            </p>
-                                            <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">
-                                                {notification.message}
-                                            </p>
-                                            <p className="text-xs text-gray-400 mt-1">
-                                                {new Date(notification.createdAt).toLocaleDateString("en-US", {
-                                                    month: "short",
-                                                    day: "numeric",
-                                                    hour: "2-digit",
-                                                    minute: "2-digit",
-                                                })}
-                                            </p>
-                                        </div>
-                                        {!notification.read && (
-                                            <div className="w-2 h-2 rounded-full bg-[#FF5F00] flex-shrink-0 mt-2" />
-                                        )}
-                                    </>
-                                )}
-                            </DropdownMenuItem>
-                        ))
+                                    )}
+                                </DropdownMenuItem>
+                            );
+                        })
                     )}
                 </div>
                 {notifications.length > 5 && (
