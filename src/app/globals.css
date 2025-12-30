@@ -1,0 +1,348 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+@theme {
+  /* Deep Orange Color Palette - TripAdvisor Style */
+  --color-primary: #FF5F00;
+  --color-primary-dark: #E55500;
+  --color-primary-light: #FF8A4D;
+  --color-primary-foreground: #FFFFFF;
+
+  --color-black: #000000;
+  --color-dark-gray: #1A1A1A;
+  --color-medium-gray: #666666;
+  --color-light-gray: #FAFAFA;
+  --color-border-gray: #E5E5E5;
+
+  --font-sans: var(--font-outfit), -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+
+  /* Compact spacing - TripAdvisor style */
+  --spacing-section: 40px;
+  --spacing-card: 16px;
+  --spacing-grid: 20px;
+}
+
+/* Enhanced Light Mode */
+:root {
+  color-scheme: light;
+  --background: #FFFFFF;
+  --foreground: #1A1A1A;
+
+  --surface: #FAFAFA;
+  --surface-elevated: #FFFFFF;
+
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+
+  --text-primary: #1A1A1A;
+  --text-secondary: #666666;
+  --text-muted: #999999;
+
+  --border: #E5E5E5;
+  --input: #E5E5E5;
+  --ring: #FF5F00;
+
+  --muted: #F5F5F5;
+  --muted-foreground: #999999;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A1A;
+
+  --primary: #FF5F00;
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #F5F5F5;
+  --secondary-foreground: #1A1A1A;
+
+  --accent: #E55500;
+  --accent-foreground: #FFFFFF;
+
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+
+  /* Shadow colors for depth */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Animations - Smooth and polished */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Animation Classes */
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.4s ease-out;
+  }
+
+  /* Enhanced Button Styles */
+  .btn-tripadvisor {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 12px 24px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(255, 87, 34, 0.2);
+  }
+
+  .btn-tripadvisor:hover {
+    background-color: var(--accent);
+    box-shadow: 0 4px 8px rgba(255, 87, 34, 0.3);
+    transform: translateY(-1px);
+  }
+
+  .btn-tripadvisor:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(255, 87, 34, 0.2);
+  }
+
+  .btn-secondary-tripadvisor {
+    background-color: var(--surface);
+    border: 2px solid var(--border);
+    color: var(--foreground);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 22px;
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary-tripadvisor:hover {
+    background-color: var(--surface);
+    border-color: var(--text-muted);
+  }
+
+  /* Enhanced Card Style */
+  .card-tripadvisor {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+  }
+
+  .card-tripadvisor:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px);
+    border-color: var(--primary);
+  }
+
+  /* Rating Bubble - Enhanced */
+  .rating-bubble {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(255, 87, 34, 0.3);
+  }
+
+  .rating-bubble-sm {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .rating-bubble-md {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .rating-bubble-lg {
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+  }
+
+  /* Price Text - Enhanced */
+  .price-text {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* Compact spacing utilities */
+  .section-padding {
+    padding-top: var(--spacing-section);
+    padding-bottom: var(--spacing-section);
+  }
+
+  .card-padding {
+    padding: var(--spacing-card);
+  }
+
+  .grid-gap {
+    gap: var(--spacing-grid);
+  }
+
+  /* Skeleton loading with shimmer */
+  .skeleton {
+    background: linear-gradient(90deg,
+        #F5F5F5 25%,
+        #E5E5E5 50%,
+        #F5F5F5 75%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+    border-radius: 8px;
+  }
+}
+
+/* Base Styles - Enhanced */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+
+  p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Enhanced Focus Styles */
+  *:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Selection - Orange themed */
+  ::selection {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  /* Links */
+  a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--primary);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Remove default margins */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
+  }
+
+  /* Input and form improvements */
+  input,
+  textarea,
+  select {
+    font-family: inherit;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 1;
+  }
+
+  /* Better image rendering */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}

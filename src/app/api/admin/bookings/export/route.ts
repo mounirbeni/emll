@@ -1,0 +1,98 @@
+import { NextResponse } from 'next/server';
+import { requireAdmin } from '@/lib/authorization';
+import { errorResponse, successResponse } from '@/lib/api-response';
+import prisma from '@/lib/prisma';
+import { format } from 'date-fns';
+
+/**
+ * GET: Export bookings as CSV
+ */
+export async function GET(request: Request) {
+    try {
+        await requireAdmin();
+
+        const { searchParams } = new URL(request.url);
+        const status = searchParams.get('status');
+        const startDate = searchParams.get('startDate');
+        const endDate = searchParams.get('endDate');
+
+        // Build where clause
+        const where: any = {};
+        if (status && status !== 'ALL') {
+            where.status = status;
+        }
+        if (startDate || endDate) {
+            where.date = {};
+            if (startDate) {
+                where.date.gte = new Date(startDate);
+            }
+            if (endDate) {
+                where.date.lte = new Date(endDate);
+            }
+        }
+
+        // Fetch bookings
+        const bookings = await prisma.booking.findMany({
+            where,
+            orderBy: { createdAt: 'desc' },
+            include: {
+                user: {
+                    select: {
+                        name: true,
+                        email: true
+                    }
+                }
+            }
+        });
+
+        // Convert to CSV
+        const headers = [
+            'Booking ID',
+            'Short ID',
+            'Customer Name',
+            'Email',
+            'Phone',
+            'Activity Title',
+            'Date',
+            'Time',
+            'Guests',
+            'Total Price',
+            'Status',
+            'Payment Status',
+            'Created At'
+        ];
+
+        const rows = bookings.map(booking => [
+            booking.id,
+            (booking as any).shortId || '',
+            booking.user?.name || booking.name,
+            booking.user?.email || booking.email,
+            booking.phone || '',
+            booking.activityTitle,
+            format(new Date(booking.date), 'yyyy-MM-dd'),
+            format(new Date(booking.date), 'HH:mm'),
+            booking.guests.toString(),
+            booking.totalPrice.toFixed(2),
+            booking.status,
+            booking.paymentStatus,
+            format(new Date(booking.createdAt), 'yyyy-MM-dd HH:mm:ss')
+        ]);
+
+        const csv = [
+            headers.join(','),
+            ...rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+        ].join('\n');
+
+        // Return CSV file
+        return new NextResponse(csv, {
+            headers: {
+                'Content-Type': 'text/csv',
+                'Content-Disposition': `attachment; filename="bookings-${format(new Date(), 'yyyy-MM-dd')}.csv"`
+            }
+        });
+
+    } catch (error) {
+        return errorResponse(error);
+    }
+}
+
