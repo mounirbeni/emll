@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import { Booking } from '@prisma/client'
 import { confirmBooking, cancelBooking, processBooking, deleteBooking } from '@/app/actions/booking-actions'
 import { toast } from 'sonner'
@@ -26,6 +27,7 @@ interface BookingsClientProps {
 }
 
 export default function BookingsClient({ initialBookings }: BookingsClientProps) {
+    const router = useRouter()
     const [bookings, setBookings] = useState<(Booking & { service?: { title: string } })[]>(initialBookings)
     const [searchQuery, setSearchQuery] = useState('')
     const [statusFilter, setStatusFilter] = useState<string>('ALL')
@@ -116,6 +118,11 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
 
     const toggleSort = () => {
         setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
+    }
+
+    const handleViewDetails = (booking: Booking & { service?: { title: string } }) => {
+        // Navigate to client booking details page (admin can view client bookings)
+        router.push(`/client/bookings/${booking.id}`)
     }
 
     return (
