@@ -20,7 +20,8 @@ interface BlogPostPageProps {
 }
 
 async function getPost(slug: string) {
-    const post = await prisma.blogPost.findUnique({
+    // Cast to any to avoid IDE caching issues with new model
+    const post = await (prisma as any).blogPost.findUnique({
         where: { slug },
         include: { author: true }
     })
@@ -29,26 +30,39 @@ async function getPost(slug: string) {
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-    const post = await getPost(params.slug)
-    if (!post) return {}
+    try {
+        const post = await getPost(params.slug)
+        if (!post) {
+            return {
+                title: 'Article Not Found | Explore Marrakesh',
+                description: 'The requested article could not be found.',
+            }
+        }
 
-    return {
-        title: post.metaTitle || post.title,
-        description: post.metaDescription || post.excerpt,
-        keywords: post.keywords,
-        openGraph: {
+        return {
             title: post.metaTitle || post.title,
             description: post.metaDescription || post.excerpt,
-            images: [post.coverImage],
-            type: 'article',
-            publishedTime: post.publishedAt.toISOString(),
-            authors: [post.author?.name || 'Marrakech Expert'],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title: post.metaTitle || post.title,
-            description: post.metaDescription || post.excerpt,
-            images: [post.coverImage],
+            keywords: post.keywords,
+            openGraph: {
+                title: post.metaTitle || post.title,
+                description: post.metaDescription || post.excerpt,
+                images: [post.coverImage],
+                type: 'article',
+                publishedTime: post.publishedAt.toISOString(),
+                authors: [post.author?.name || 'Marrakech Expert'],
+            },
+            twitter: {
+                card: 'summary_large_image',
+                title: post.metaTitle || post.title,
+                description: post.metaDescription || post.excerpt,
+                images: [post.coverImage],
+            }
+        }
+    } catch (error) {
+        console.error('Error generating metadata for blog post:', error)
+        return {
+            title: 'Explore Marrakesh Blog',
+            description: 'Discover the best of Marrakech with our expert travel guides.',
         }
     }
 }
