@@ -33,6 +33,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             },
         })
 
+        console.log(`[SITEMAP] Found ${posts.length} blog posts`)
+
         blogRoutes = posts.map((post: { slug: string; updatedAt: Date }) => ({
             url: `${baseUrl}/blog/${post.slug}`,
             lastModified: post.updatedAt,
@@ -48,6 +50,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             },
         })
 
+        console.log(`[SITEMAP] Found ${services.length} services`)
+
         serviceRoutes = services.map((service) => ({
             url: `${baseUrl}/experiences/${service.id}`,
             lastModified: service.updatedAt,
@@ -55,7 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.9,
         }))
     } catch (error) {
-        console.error('Failed to fetch dynamic sitemap data:', error)
+        console.error('[SITEMAP] Failed to fetch dynamic sitemap data:', error)
         // Check if we are in a build environment where DB might be unreachable
         // We gracefully return just the static routes so the build doesn't fail
     }

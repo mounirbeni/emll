@@ -776,7 +776,7 @@ async function main() {
   })
   console.log('✅ Created Customer 2:', customer2.email)
 
-  // Clean existing services
+  // Clean existing services for fresh seed
   await prisma.service.deleteMany({})
   console.log('🧹 Cleaned existing services')
 
