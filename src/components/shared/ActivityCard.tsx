@@ -31,7 +31,7 @@ export function ActivityCard({ activity }: ActivityCardProps) {
         <Link href={`/experiences/${activity.id}`} className="block h-full group">
             <div className="card-tripadvisor h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow duration-200">
                 {/* Image */}
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-square sm:aspect-[4/3] overflow-hidden">
                     {activity.image ? (
                         <Image
                             src={activity.image}

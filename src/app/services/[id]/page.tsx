@@ -123,14 +123,14 @@ export default function ServiceDetailPage() {
                         Your reservation for <strong>{service?.title}</strong> has been placed successfully.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4">
-                        <Button 
+                        <Button
                             className="w-full sm:w-auto text-sm sm:text-base"
                             onClick={() => router.push('/client')}
                         >
                             View in Dashboard
                         </Button>
-                        <Button 
-                            variant="outline" 
+                        <Button
+                            variant="outline"
                             className="w-full sm:w-auto text-sm sm:text-base"
                             onClick={() => setBookingSuccess(false)}
                         >
@@ -144,9 +144,9 @@ export default function ServiceDetailPage() {
 
     return (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-            <Button 
-                variant="outline" 
-                className="mb-4 sm:mb-6 text-sm sm:text-base" 
+            <Button
+                variant="outline"
+                className="mb-4 sm:mb-6 text-sm sm:text-base"
                 onClick={() => router.back()}
             >
                 ← Back
@@ -214,7 +214,7 @@ export default function ServiceDetailPage() {
                     )}
                 </div>
 
-                <div className="lg:sticky lg:top-4 lg:h-fit">
+                <div className="hidden lg:block lg:sticky lg:top-4 lg:h-fit">
                     <Card>
                         <CardHeader className="pb-3">
                             <CardTitle className="text-lg sm:text-xl">Booking Information</CardTitle>
@@ -264,6 +264,24 @@ export default function ServiceDetailPage() {
                             </div>
                         </CardContent>
                     </Card>
+                </div>
+            </div>
+
+            {/* Mobile Sticky Bottom Bar */}
+            <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 lg:hidden z-40 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+                <div className="flex items-center justify-between gap-4">
+                    <div>
+                        <p className="text-xs text-gray-500 font-medium">Total Price</p>
+                        <p className="text-xl font-bold">€{service?.price.toFixed(2)}</p>
+                    </div>
+                    <Button
+                        size="lg"
+                        onClick={handleBookNow}
+                        disabled={bookingLoading}
+                        className="flex-1 font-bold text-base"
+                    >
+                        {bookingLoading ? 'Checking...' : 'Book Now'}
+                    </Button>
                 </div>
             </div>
         </div>

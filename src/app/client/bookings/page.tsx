@@ -92,7 +92,7 @@ export default function BookingsPage() {
     const BookingCard = ({ booking }: { booking: Booking }) => (
         <Card className="hover:shadow-md transition-shadow">
             <CardContent className="p-6">
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex flex-col sm:flex-row items-start justify-between mb-4 gap-4 sm:gap-0">
                     <div className="flex-1">
                         <h3 className="text-lg font-semibold text-gray-900 mb-2">
                             {booking.activityTitle}
@@ -120,7 +120,7 @@ export default function BookingsPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="text-right">
+                    <div className="text-left sm:text-right w-full sm:w-auto">
                         <p className="text-2xl font-bold text-gray-900">
                             €{booking.totalPrice}
                         </p>

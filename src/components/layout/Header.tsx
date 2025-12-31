@@ -178,9 +178,9 @@ export function Header() {
                                 href={link.href}
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className={cn(
-                                    "text-base font-medium py-3 px-4 rounded-lg transition-colors",
-                                    pathname === link.href 
-                                        ? "text-[#FF5F00] bg-orange-50" 
+                                    "text-base font-medium py-4 px-4 rounded-lg transition-colors min-h-[50px] flex items-center",
+                                    pathname === link.href
+                                        ? "text-[#FF5F00] bg-orange-50"
                                         : "text-gray-900 hover:bg-gray-50"
                                 )}
                             >

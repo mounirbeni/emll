@@ -344,17 +344,20 @@ function ArrayInput({ label, items, onAdd, onRemove }: {
                     <Plus className="h-4 w-4" />
                 </Button>
             </div>
-            <ul className="list-disc pl-5 text-sm space-y-1 mt-2">
+            <ul className="list-disc pl-5 text-sm space-y-2 mt-2">
                 {items.map((item, i) => (
-                    <li key={i} className="group">
-                        <span className="mr-2">{item}</span>
-                        <button
+                    <li key={i} className="group flex justify-between items-start gap-2">
+                        <span className="mt-1.5">{item}</span>
+                        <Button
                             type="button"
+                            variant="ghost"
+                            size="sm"
                             onClick={() => onRemove(i)}
-                            className="text-xs text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="text-muted-foreground hover:text-destructive h-8 px-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity"
                         >
-                            Remove
-                        </button>
+                            <span className="lg:hidden">Remove</span>
+                            <X className="h-4 w-4 hidden lg:block" />
+                        </Button>
                     </li>
                 ))}
             </ul>
