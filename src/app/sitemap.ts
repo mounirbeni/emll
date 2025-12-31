@@ -1,75 +1,53 @@
-import { MetadataRoute } from 'next';
-import { activitiesData } from '@/lib/data/activities-data';
+import { MetadataRoute } from 'next'
+import prisma from '@/lib/prisma'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://marrakech-luxe.vercel.app';
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const baseUrl = 'https://emll.vercel.app'
 
-    // Static pages
-    const staticPages: MetadataRoute.Sitemap = [
-        {
-            url: baseUrl,
-            lastModified: new Date(),
-            changeFrequency: 'daily',
-            priority: 1,
-        },
-        {
-            url: `${baseUrl}/experiences`,
-            lastModified: new Date(),
-            changeFrequency: 'daily',
-            priority: 0.9,
-        },
-        {
-            url: `${baseUrl}/about`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/contact`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/how-it-works`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.7,
-        },
-        {
-            url: `${baseUrl}/faq`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.7,
-        },
-        {
-            url: `${baseUrl}/wishlist`,
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.6,
-        },
-        {
-            url: `${baseUrl}/privacy`,
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.5,
-        },
-        {
-            url: `${baseUrl}/terms`,
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.5,
-        },
-    ];
-
-    // Dynamic experience pages
-    const allActivities = Object.values(activitiesData).flat();
-    const experiencePages: MetadataRoute.Sitemap = allActivities.map((activity) => ({
-        url: `${baseUrl}/experiences/${activity.id}`,
+    // Static Routes
+    const staticRoutes = [
+        '',
+        '/blog',
+        '/services', // or /experiences if that's the main listing
+        '/search',
+        '/contact',
+    ].map((route) => ({
+        url: `${baseUrl}${route}`,
         lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.8,
-    }));
+        changeFrequency: 'daily' as const,
+        priority: route === '' ? 1 : 0.8,
+    }))
 
-    return [...staticPages, ...experiencePages];
+    // Dynamic Blog Posts
+    // Cast to any to avoid IDE caching issues; tsc validates this correctly
+    const posts = await (prisma as any).blogPost.findMany({
+        select: {
+            slug: true,
+            updatedAt: true,
+        },
+    })
+
+    const blogRoutes = posts.map((post: { slug: string; updatedAt: Date }) => ({
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: post.updatedAt,
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+    }))
+
+    // Dynamic Services / Activities
+    const services = await prisma.service.findMany({
+        select: {
+            id: true,
+            updatedAt: true,
+        },
+    })
+
+    const serviceRoutes = services.map((service) => ({
+        url: `${baseUrl}/experiences/${service.id}`,
+        lastModified: service.updatedAt,
+        changeFrequency: 'weekly' as const,
+        priority: 0.9,
+    }))
+
+    return [...staticRoutes, ...blogRoutes, ...serviceRoutes]
 }
