@@ -29,15 +29,15 @@ export function ActivityCard({ activity }: ActivityCardProps) {
 
     return (
         <Link href={`/experiences/${activity.id}`} className="block h-full group">
-            <div className="card-tripadvisor h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow duration-200">
+            <div className="card-tripadvisor h-full flex flex-row sm:flex-col overflow-hidden hover:shadow-lg transition-shadow duration-200">
                 {/* Image */}
-                <div className="relative aspect-square sm:aspect-[4/3] overflow-hidden">
+                <div className="relative w-32 h-auto aspect-square sm:w-full sm:aspect-[4/3] shrink-0 overflow-hidden">
                     {activity.image ? (
                         <Image
                             src={activity.image}
                             alt={activity.title}
                             fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                            sizes="(max-width: 768px) 128px, (max-width: 1200px) 50vw, 25vw"
                             className="object-cover transition-transform duration-300 group-hover:scale-105"
                         />
                     ) : (
@@ -46,24 +46,25 @@ export function ActivityCard({ activity }: ActivityCardProps) {
                         </div>
                     )}
 
-                    {/* Wishlist button */}
+                    {/* Wishlist button - Only show on desktop for cleaner mobile view, or keep if crucial */}
+                    {/* Hiding on very small screens if it overlaps content too much, but keeping for now */}
                     <Button
                         variant="ghost"
                         size="icon"
                         className={cn(
-                            "absolute top-2 right-2 h-8 w-8 rounded-full transition-all z-10",
+                            "absolute top-2 right-2 h-7 w-7 sm:h-8 sm:w-8 rounded-full transition-all z-10",
                             inWishlist
                                 ? "bg-primary text-white hover:bg-primary/90"
                                 : "bg-white/90 text-black hover:bg-white"
                         )}
                         onClick={toggleWishlist}
                     >
-                        <Heart className={cn("h-4 w-4", inWishlist && "fill-current")} />
+                        <Heart className={cn("h-3.5 w-3.5 sm:h-4 sm:w-4", inWishlist && "fill-current")} />
                     </Button>
                 </div>
 
                 {/* Content */}
-                <div className="card-padding flex flex-col flex-grow">
+                <div className="p-3 sm:card-padding flex flex-col flex-grow justify-between sm:justify-start w-full min-w-0">
                     {/* Rating & Reviews */}
                     <div className="flex items-center gap-2 mb-2">
                         <RatingBubble rating={activity.rating} size="sm" />
@@ -90,8 +91,8 @@ export function ActivityCard({ activity }: ActivityCardProps) {
                     </div>
                 </div>
 
-                {/* CTA Button */}
-                <div className="card-padding pt-0">
+                {/* CTA Button - Desktop only */}
+                <div className="hidden sm:block card-padding pt-0">
                     <Button className="btn-tripadvisor w-full text-sm">
                         See availability
                     </Button>

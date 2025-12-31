@@ -58,7 +58,7 @@ export default function AdminLoginPage() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gray-50 relative overflow-hidden">
+        <div className="flex min-h-screen items-center justify-center bg-white relative overflow-hidden">
             {/* Background Decor */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-100/50 rounded-full blur-3xl -mr-32 -mt-32" />

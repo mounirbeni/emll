@@ -41,7 +41,7 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
             if (statusFilter !== 'ALL' && booking.status !== statusFilter) {
                 return false
             }
-            
+
             // Search filter
             const query = searchQuery.toLowerCase()
             return (
@@ -149,7 +149,7 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                         Sort by Date ({sortOrder === 'asc' ? 'Oldest' : 'Newest'})
                     </button>
                 </div>
-                
+
                 {/* Status Filter */}
                 <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-sm font-medium text-gray-700">Filter by Status:</span>
@@ -157,11 +157,10 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                         <button
                             key={status}
                             onClick={() => setStatusFilter(status)}
-                            className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-                                statusFilter === status
+                            className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${statusFilter === status
                                     ? 'bg-[#FF5F00] text-white'
                                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                            }`}
+                                }`}
                         >
                             {status}
                         </button>
@@ -173,51 +172,65 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
             <div className="block md:hidden space-y-4">
                 {filteredBookings && filteredBookings.length > 0 ? (
                     filteredBookings.map((booking) => (
-                                    <Card key={booking.id} className="overflow-hidden">
-                            <CardContent className="p-4 space-y-3">
-                                <div className="flex justify-between items-start">
-                                    <div className="flex-1 min-w-0">
-                                        <h3 className="font-semibold text-sm truncate">{booking.activityTitle || booking.service?.title}</h3>
-                                        <p className="text-xs text-muted-foreground mt-1">{booking.name}</p>
+                        <Card key={booking.id} className="overflow-hidden hover:scale-[1.01] transition-transform">
+                            <CardContent className="p-0 flex h-full">
+                                {/* Left Side status Color Strip or Icon Box */}
+                                <div className={`w-16 flex-shrink-0 flex flex-col items-center justify-center p-2 text-white ${booking.status === 'CONFIRMED' ? 'bg-green-500' :
+                                        booking.status === 'CANCELLED' ? 'bg-red-500' :
+                                            booking.status === 'COMPLETED' ? 'bg-blue-500' : 'bg-yellow-500'
+                                    }`}>
+                                    <div className="text-center">
+                                        <span className="text-xs font-bold uppercase tracking-wider block opacity-90">{booking.status.slice(0, 4)}</span>
+                                        <div className="mt-1 font-bold text-lg">{new Date(booking.date).getDate()}</div>
+                                        <div className="text-[10px] uppercase">{format(new Date(booking.date), 'MMM')}</div>
                                     </div>
-                                    <Badge variant={
-                                        booking.status === 'CONFIRMED' ? 'default' :
-                                        booking.status === 'CANCELLED' ? 'destructive' : 'secondary'
-                                    } className="text-xs">
-                                        {booking.status}
-                                    </Badge>
                                 </div>
-                                <div className="text-xs space-y-1 text-muted-foreground">
-                                    <p>{booking.email}</p>
-                                    {booking.phone && <p>{booking.phone}</p>}
-                                    <p>{format(new Date(booking.date), 'PPP')} • {booking.guests} guests</p>
-                                </div>
-                                <div className="flex justify-between items-center pt-2 border-t">
-                                    <div>
-                                        <span className="font-bold">€{booking.totalPrice.toFixed(2)}</span>
-                                        <span className={`text-xs ml-2 ${booking.paymentStatus === 'PAID' ? 'text-green-600' : 'text-yellow-600'}`}>
-                                            {booking.paymentStatus === 'PAID' ? 'Paid' : 'Unpaid'}
-                                        </span>
+
+                                {/* Right Side Content */}
+                                <div className="flex-1 p-3 flex flex-col justify-between min-w-0">
+                                    <div className="flex justify-between items-start gap-2">
+                                        <div className="min-w-0">
+                                            <h3 className="font-bold text-sm text-gray-900 truncate leading-tight">
+                                                {booking.activityTitle || booking.service?.title}
+                                            </h3>
+                                            <p className="text-xs text-gray-500 truncate mt-0.5">{booking.name}</p>
+                                        </div>
+                                        <div className="flex flex-col items-end shrink-0">
+                                            <span className="font-bold text-primary text-sm">€{booking.totalPrice.toFixed(0)}</span>
+                                            <span className={`text-[10px] ${booking.paymentStatus === 'PAID' ? 'text-green-600' : 'text-yellow-600'} font-medium`}>
+                                                {booking.paymentStatus === 'PAID' ? 'Paid' : 'Unpaid'}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div className="flex gap-2">
-                                        {booking.status === 'PENDING' && (
-                                            <Button size="sm" variant="outline" onClick={() => handleConfirm(booking.id)} disabled={isPending}>
-                                                Confirm
+
+                                    <div className="flex justify-between items-end mt-2">
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex items-center gap-1 text-xs text-gray-500">
+                                                <Users className="h-3 w-3" />
+                                                <span>{booking.guests}</span>
+                                            </div>
+                                            {booking.phone && (
+                                                <div className="flex items-center gap-1 text-xs text-gray-500">
+                                                    <Phone className="h-3 w-3" />
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="flex gap-2">
+                                            {booking.status === 'PENDING' && (
+                                                <Button size="icon" className="h-7 w-7 rounded-full bg-green-100 text-green-700 hover:bg-green-200" onClick={(e) => { e.stopPropagation(); handleConfirm(booking.id); }} disabled={isPending}>
+                                                    <CheckCircle className="h-4 w-4" />
+                                                </Button>
+                                            )}
+                                            {(booking.status === 'PENDING' || booking.status === 'CONFIRMED') && (
+                                                <Button size="icon" className="h-7 w-7 rounded-full bg-red-100 text-red-700 hover:bg-red-200" onClick={(e) => { e.stopPropagation(); handleCancel(booking.id); }} disabled={isPending}>
+                                                    <XCircle className="h-4 w-4" />
+                                                </Button>
+                                            )}
+                                            <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => handleViewDetails(booking)}>
+                                                <ArrowUpDown className="h-4 w-4 rotate-90" />
                                             </Button>
-                                        )}
-                                        {(booking.status === 'PENDING' || booking.status === 'CONFIRMED') && (
-                                            <Button size="sm" variant="outline" onClick={() => handleCancel(booking.id)} disabled={isPending}>
-                                                Cancel
-                                            </Button>
-                                        )}
-                                        {booking.status === 'CONFIRMED' && (
-                                            <Button size="sm" variant="outline" onClick={() => handleProcess(booking.id)} disabled={isPending}>
-                                                Complete
-                                            </Button>
-                                        )}
-                                        <Button size="sm" variant="outline" onClick={() => handleViewDetails(booking)}>
-                                            View
-                                        </Button>
+                                        </div>
                                     </div>
                                 </div>
                             </CardContent>
@@ -298,15 +311,14 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                                         </td>
                                         <td className="px-6 py-4">
                                             <span
-                                                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                                                    booking.status === 'CONFIRMED'
+                                                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${booking.status === 'CONFIRMED'
                                                         ? 'bg-green-100 text-green-800'
                                                         : booking.status === 'CANCELLED'
                                                             ? 'bg-red-100 text-red-800'
                                                             : booking.status === 'COMPLETED'
                                                                 ? 'bg-blue-100 text-blue-800'
                                                                 : 'bg-yellow-100 text-yellow-800'
-                                                }`}
+                                                    }`}
                                             >
                                                 {booking.status}
                                             </span>
@@ -324,7 +336,7 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                                                         <CheckCircle className="h-4 w-4" />
                                                     </button>
                                                 )}
-                                                
+
                                                 {/* Cancel - Show for PENDING and CONFIRMED */}
                                                 {(booking.status === 'PENDING' || booking.status === 'CONFIRMED') && (
                                                     <button
@@ -336,7 +348,7 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                                                         <XCircle className="h-4 w-4" />
                                                     </button>
                                                 )}
-                                                
+
                                                 {/* Process/Complete - Show for CONFIRMED */}
                                                 {booking.status === 'CONFIRMED' && (
                                                     <button
@@ -348,7 +360,7 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                                                         <CheckCircle2 className="h-4 w-4" />
                                                     </button>
                                                 )}
-                                                
+
                                                 {/* Delete - Show for all statuses */}
                                                 <button
                                                     onClick={() => handleDelete(booking.id)}
