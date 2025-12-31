@@ -42,7 +42,7 @@ export function AdminHeader() {
     })
 
     return (
-        <header className="sticky top-0 z-30 flex h-16 items-center gap-2 md:gap-4 border-b bg-background/80 px-4 md:px-6 backdrop-blur-md transition-all">
+        <header className="sticky top-0 z-30 flex h-16 items-center gap-2 md:gap-4 border-b bg-white px-4 md:px-6 transition-all">
             <div className="flex items-center gap-2 md:gap-4">
                 <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
                     <SheetTrigger asChild>
@@ -56,7 +56,7 @@ export function AdminHeader() {
                         <AdminSidebar onClose={() => setSheetOpen(false)} />
                     </SheetContent>
                 </Sheet>
-                
+
                 <div className="flex md:hidden">
                     <h1 className="text-lg font-semibold truncate max-w-[120px] md:max-w-xs">
                         {breadcrumbs.length > 0 ? breadcrumbs[breadcrumbs.length - 1].label : 'Dashboard'}

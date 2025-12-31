@@ -63,7 +63,7 @@ export function AdminSidebar({ onClose }: AdminSidebarProps) {
     const pathname = usePathname()
 
     return (
-        <div className="flex h-full w-full flex-col border-r bg-card/50 backdrop-blur-xl">
+        <div className="flex h-full w-full flex-col border-r bg-white">
             {/* Header */}
             <div className="flex h-16 items-center border-b px-6">
                 <Link href="/admin" className="flex items-center gap-2 font-bold text-xl tracking-tight">

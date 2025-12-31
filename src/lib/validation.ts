@@ -20,7 +20,7 @@ export const createServiceSchema = z.object({
     whatToBring: z.array(z.string()).optional().default([]),
     tags: z.array(z.string()).optional().default([]),
     itinerary: z.array(z.any()).optional().default([]), // Using any for structured Json for now
-    host: z.string().optional().default('Marrakech Tours'),
+    host: z.string().optional().default('Explore Marrakesh'),
 });
 
 export const updateServiceSchema = createServiceSchema.partial();

@@ -58,14 +58,14 @@ export async function POST(request: Request) {
  */
 export async function GET() {
     const hasApiKey = !!process.env.RESEND_API_KEY;
-    const fromEmail = process.env.RESEND_FROM_EMAIL || 'Marrakech Tours <onboarding@resend.dev>';
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'Explore Marrakesh <onboarding@resend.dev>';
 
     return NextResponse.json({
         configured: hasApiKey,
         fromEmail,
         apiKeyPresent: hasApiKey,
-        message: hasApiKey 
-            ? 'Email service is configured and ready' 
+        message: hasApiKey
+            ? 'Email service is configured and ready'
             : 'RESEND_API_KEY not found in environment variables'
     });
 }

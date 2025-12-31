@@ -20,7 +20,7 @@ export class EmailService {
     constructor() {
         // In Next.js, environment variables need to be accessed at runtime, not in constructor
         // We'll initialize Resend lazily when sending emails
-        this.fromEmail = process.env.RESEND_FROM_EMAIL || 'Marrakech Tours <onboarding@resend.dev>';
+        this.fromEmail = process.env.RESEND_FROM_EMAIL || 'Explore Marrakesh <onboarding@resend.dev>';
     }
 
     /**
@@ -53,7 +53,7 @@ export class EmailService {
      */
     private async sendEmail(options: EmailOptions): Promise<void> {
         const resend = this.getResend();
-        
+
         if (!resend) {
             // Fallback: log to console if Resend is not configured
             console.log('📧 Email would be sent (Resend not configured):', {
@@ -299,10 +299,10 @@ export class EmailService {
                             </div>
                             
                             <p class="closing">If you have any questions or need to make changes to your booking, please don't hesitate to contact us.</p>
-                            <p class="signature">Best regards,<br>The Marrakech Tours Team</p>
+                            <p class="signature">Best regards,<br>The Explore Marrakesh Team</p>
                         </div>
                         <div class="footer">
-                            <p><strong>Marrakech Tours</strong></p>
+                            <p><strong>Explore Marrakesh</strong></p>
                             <p>Your trusted partner for authentic experiences</p>
                         </div>
                     </div>
@@ -499,10 +499,10 @@ export class EmailService {
                             </div>
                             
                             <p class="closing">We're looking forward to providing you with an unforgettable experience!</p>
-                            <p class="signature">Best regards,<br>The Marrakech Tours Team</p>
+                            <p class="signature">Best regards,<br>The Explore Marrakesh Team</p>
                         </div>
                         <div class="footer">
-                            <p><strong>Marrakech Tours</strong></p>
+                            <p><strong>Explore Marrakesh</strong></p>
                             <p>Your trusted partner for authentic experiences</p>
                         </div>
                     </div>
@@ -666,10 +666,10 @@ export class EmailService {
                             </div>
                             
                             <p class="closing">Your booking is now confirmed and paid. We'll see you soon!</p>
-                            <p class="signature">Best regards,<br>The Marrakech Tours Team</p>
+                            <p class="signature">Best regards,<br>The Explore Marrakesh Team</p>
                         </div>
                         <div class="footer">
-                            <p><strong>Marrakech Tours</strong></p>
+                            <p><strong>Explore Marrakesh</strong></p>
                             <p>Your trusted partner for authentic experiences</p>
                         </div>
                     </div>
@@ -855,10 +855,10 @@ export class EmailService {
                             </div>
                             
                             <p class="closing">We're looking forward to seeing you!</p>
-                            <p class="signature">Best regards,<br>The Marrakech Tours Team</p>
+                            <p class="signature">Best regards,<br>The Explore Marrakesh Team</p>
                         </div>
                         <div class="footer">
-                            <p><strong>Marrakech Tours</strong></p>
+                            <p><strong>Explore Marrakesh</strong></p>
                             <p>Your trusted partner for authentic experiences</p>
                         </div>
                     </div>
@@ -883,7 +883,7 @@ export class EmailService {
         activityTitle: string,
         refundAmount?: number
     ): Promise<void> {
-        const refundText = refundAmount 
+        const refundText = refundAmount
             ? `<div class="detail-row">
                 <span class="detail-label">Refund Amount</span>
                 <span class="detail-value">€${refundAmount.toFixed(2)}</span>
@@ -1033,10 +1033,10 @@ export class EmailService {
                             </div>
                             
                             <p class="closing">If you have any questions or would like to book a different activity, please don't hesitate to contact us. We hope to see you in the future!</p>
-                            <p class="signature">Best regards,<br>The Marrakech Tours Team</p>
+                            <p class="signature">Best regards,<br>The Explore Marrakesh Team</p>
                         </div>
                         <div class="footer">
-                            <p><strong>Marrakech Tours</strong></p>
+                            <p><strong>Explore Marrakesh</strong></p>
                             <p>Your trusted partner for authentic experiences</p>
                         </div>
                     </div>

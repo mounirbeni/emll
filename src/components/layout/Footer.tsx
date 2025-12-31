@@ -8,7 +8,7 @@ import { toast } from "sonner";
 
 export function Footer() {
     return (
-        <footer className="bg-secondary pt-8 sm:pt-16 pb-6 sm:pb-8">
+        <footer className="bg-white border-t border-gray-100 pt-8 sm:pt-16 pb-6 sm:pb-8">
             <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 mb-8 sm:mb-12">
 

@@ -40,7 +40,7 @@ export async function POST(request: Request) {
             whatToBring: body.whatToBring || [],
             tags: body.tags || [],
             itinerary: body.itinerary || [],
-            host: body.host || 'Marrakech Tours'
+            host: body.host || 'Explore Marrakesh'
         };
 
         const service = await serviceService.createService(serviceData);

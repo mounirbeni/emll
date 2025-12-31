@@ -71,12 +71,12 @@ export class BookingService {
         if (!activityExists) {
             // Try case-insensitive search again (in case findByTitle didn't work)
             const allServices = await serviceRepository.findMany({});
-            const matchingService = allServices.find(s => 
+            const matchingService = allServices.find(s =>
                 s.title.toLowerCase().trim() === data.activityTitle.toLowerCase().trim() ||
                 s.title.toLowerCase().includes(data.activityTitle.toLowerCase()) ||
                 data.activityTitle.toLowerCase().includes(s.title.toLowerCase())
             );
-            
+
             if (matchingService) {
                 actualActivityId = matchingService.id;
                 activityExists = true;
@@ -90,7 +90,7 @@ export class BookingService {
             console.log(`Service not found. Creating service automatically from booking data: ${data.activityTitle}`);
             try {
                 const { generateShortId, ShortIdPrefix } = await import('@/lib/id-generator');
-                
+
                 // Check one more time if service was created by another concurrent request
                 const doubleCheck = await serviceRepository.findByTitle(data.activityTitle);
                 if (doubleCheck) {
@@ -111,12 +111,12 @@ export class BookingService {
                         whatToBring: [],
                         tags: [],
                         itinerary: [],
-                        host: 'Marrakech Tours',
+                        host: 'Explore Marrakesh',
                         rating: 0,
                         reviews: 0,
                         shortId: generateShortId(ShortIdPrefix.SERVICE),
                     } as any);
-                    
+
                     actualActivityId = newService.id;
                     activityExists = true;
                     console.log(`Created new service with ID: ${actualActivityId}`);
@@ -143,7 +143,7 @@ export class BookingService {
         // Compare dates properly - allow same day if time is in the future
         const now = new Date();
         const bookingDate = new Date(data.date);
-        
+
         // If booking is for today, check if time is in the future
         if (bookingDate.toDateString() === now.toDateString()) {
             // Same day - check if time is in the future (at least 1 hour ahead)

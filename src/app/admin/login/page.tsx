@@ -38,11 +38,11 @@ export default function AdminLoginPage() {
                 // Wait a moment for session to update
                 await new Promise(resolve => setTimeout(resolve, 100));
                 router.refresh();
-                
+
                 // Verify admin role before redirecting
                 const sessionRes = await fetch('/api/auth/me');
                 const sessionData = await sessionRes.json();
-                
+
                 if (sessionData?.user?.role === 'ADMIN') {
                     toast.success('Welcome back, Admin!');
                     router.push(callbackUrl.startsWith('/admin') ? callbackUrl : '/admin/dashboard');
@@ -58,14 +58,14 @@ export default function AdminLoginPage() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
+        <div className="flex min-h-screen items-center justify-center bg-gray-50 relative overflow-hidden">
             {/* Background Decor */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-100/50 rounded-full blur-3xl -mr-32 -mt-32" />
                 <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-50/50 rounded-full blur-3xl -ml-32 -mb-32" />
             </div>
 
-            <Card className="w-full max-w-md relative z-10 border-none shadow-2xl bg-white/80 backdrop-blur-xl">
+            <Card className="w-full max-w-md relative z-10 border-none shadow-2xl bg-white">
                 <CardHeader className="text-center pb-8 pt-10">
                     <div className="flex justify-center mb-6">
                         <div className="w-16 h-16 bg-gradient-to-br from-[#FF5F00] to-[#E55500] rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/20 transform rotate-3">

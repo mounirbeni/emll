@@ -54,7 +54,7 @@ export async function POST(request: Request) {
         // Call Service
         const service = await serviceService.createService({
             ...data,
-            host: data.host || 'Marrakech Tours' // Default host if not provided
+            host: data.host || 'Explore Marrakesh' // Default host if not provided
         })
 
         return NextResponse.json(service, { status: 201 })

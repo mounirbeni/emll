@@ -94,7 +94,7 @@ async function getActivity(id: string): Promise<Activity | null> {
             const serviceByTitle = await prisma.service.findFirst({
                 where: { title: staticActivity.title }
             });
-            
+
             if (serviceByTitle) {
                 // Found in DB by title, use the database ID
                 const parsedImages = safeParse(serviceByTitle.images, []);
@@ -134,13 +134,13 @@ async function getActivity(id: string): Promise<Activity | null> {
         } catch (error) {
             console.error("Error looking up service by title:", error);
         }
-        
+
         // If not found in DB by title, try to create it automatically
         // This ensures the service exists for bookings
         try {
             console.log(`Service not found in database. Creating service for: ${staticActivity.title}`);
             const { generateShortId, ShortIdPrefix } = await import('@/lib/id-generator');
-            
+
             const newService = await prisma.service.create({
                 data: {
                     title: staticActivity.title,
@@ -157,13 +157,13 @@ async function getActivity(id: string): Promise<Activity | null> {
                     whatToBring: staticActivity.whatToBring || [],
                     tags: staticActivity.tags || [],
                     itinerary: staticActivity.itinerary ? (typeof staticActivity.itinerary === 'string' ? JSON.parse(staticActivity.itinerary) : staticActivity.itinerary) : [],
-                    host: typeof staticActivity.host === 'object' ? JSON.stringify(staticActivity.host) : (staticActivity.host || 'Marrakech Tours'),
+                    host: typeof staticActivity.host === 'object' ? JSON.stringify(staticActivity.host) : (staticActivity.host || 'Explore Marrakesh'),
                     shortId: generateShortId(ShortIdPrefix.SERVICE),
                 } as any
             });
-            
+
             console.log(`Created service in database with ID: ${newService.id}`);
-            
+
             // Return the newly created service
             const parsedImages = safeParse(newService.images, []);
             return {
@@ -318,8 +318,8 @@ export default async function ActivityPage({ params }: PageProps) {
 
     // Use real reviews if available, otherwise fallback to mock reviews
     const reviewsToDisplay = realReviews.length > 0 ? realReviews : mockReviews;
-    const averageRating = realReviews.length > 0 
-        ? realReviews.reduce((sum, r) => sum + r.rating, 0) / realReviews.length 
+    const averageRating = realReviews.length > 0
+        ? realReviews.reduce((sum, r) => sum + r.rating, 0) / realReviews.length
         : activity.rating;
     const totalReviews = realReviews.length > 0 ? realReviews.length : activity.reviews;
     const hasReviews = totalReviews > 0;

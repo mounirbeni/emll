@@ -95,7 +95,7 @@ export class ServiceService {
             whatToBring: data.whatToBring || [],
             tags: data.tags || [],
             itinerary: data.itinerary || [], // Prisma Json type accepts array/object
-            host: data.host || 'Marrakech Tours',
+            host: data.host || 'Explore Marrakesh',
             rating: 0,
             reviews: 0
         } as any);
