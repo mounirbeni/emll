@@ -3,6 +3,7 @@ import { requireAdmin } from '@/lib/authorization';
 import { errorResponse, successResponse } from '@/lib/api-response';
 import prisma from '@/lib/prisma';
 import { format } from 'date-fns';
+export const dynamic = 'force-dynamic';
 
 /**
  * GET: Export bookings as CSV
