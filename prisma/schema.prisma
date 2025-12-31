@@ -136,6 +136,7 @@ model User {
   accounts           Account[]
   loyaltyPoints      Int                @default(0)
   wishlist           String[]           @default([])
+  blogPosts          BlogPost[]
 
   @@index([email])
   @@index([role])
@@ -268,4 +269,29 @@ model SupportRequest {
   updatedAt DateTime @updatedAt
 
   @@index([shortId])
+}
+
+model BlogPost {
+  id              String   @id @default(uuid())
+  title           String
+  slug            String   @unique
+  content         String   // Markdown or HTML
+  excerpt         String
+  coverImage      String
+  publishedAt     DateTime @default(now())
+  
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+  keywords        String[]
+
+  // Relations
+  authorId        String
+  author          User     @relation(fields: [authorId], references: [id])
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([slug])
+  @@index([authorId])
 }

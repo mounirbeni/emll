@@ -809,6 +809,138 @@ async function main() {
     console.log(`✅ Created activity: ${service.title} (${service.shortId})`)
   }
 
+  // Create Blog Posts
+  const blogPosts = [
+    {
+      title: "Top 10 Hidden Gems in Marrakech Medina You Can't Miss",
+      slug: "top-10-hidden-gems-marrakech-medina",
+      excerpt: "Discover the secret spots in the Red City that most tourists miss. From hidden riads to artisan workshops, here is your guide to the authentic Medina.",
+      content: `
+        <p>Marrakech's Medina is a labyrinth of wonders, but many visitors stick to the main souks and Jemaa el-Fnaa. However, the real magic lies in the hidden corners.</p>
+        <h2>1. The Secret Garden (Le Jardin Secret)</h2>
+        <p>Tucked away in the Mouassine district, this restored palace offers a tranquil escape from the chaos. It's a perfect example of Islamic architecture.</p>
+        <h2>2. Maison de la Photographie</h2>
+        <p>Explore the history of Morocco through vintage photography in this beautiful riad.</p>
+        <h2>Explore Deeper</h2>
+        <p>Want to find these hidden gems with a local expert? <a href="/search?category=Cultural%20%26%20Historical%20Tours" class="text-primary font-bold hover:underline">Book a Guided Walking Tour</a> to see the side of Marrakech others miss.</p>
+        <p>Our local guides know every shortcut and story behind these ancient walls.</p>
+      `,
+      coverImage: "https://images.unsplash.com/photo-1555993538-0c0b0c0c0c0c?w=1200&h=800&fit=crop",
+      keywords: ["Marrakech Medina", "Hidden Gems", "Walking Tour", "Marrakech Secrets"],
+      metaTitle: "Top 10 Hidden Gems in Marrakech Medina | Local Guide",
+      metaDescription: "Discover 10 secret spots in Marrakech Medina that tourists often miss. Explore hidden gardens, riads, and artisan workshops with our local guide."
+    },
+    {
+      title: "Agafay Desert vs. Merzouga: Which One Should You Choose?",
+      slug: "agafay-desert-vs-merzouga",
+      excerpt: "Can't decide between the stone desert of Agafay and the golden dunes of Merzouga? We compare both to help you pick the perfect desert experience.",
+      content: `
+        <p>Choosing between Agafay and Merzouga is the most common dilemma for travelers to Marrakech. Both offer incredible desert experiences, but they are very different.</p>
+        <h2>Agafay Desert: The Stone Desert</h2>
+        <p>Located just 45 minutes from Marrakech, Agafay is perfect for those short on time. It's a stone desert (reg) rather than sand dunes (erg), but the views of the Atlas Mountains are unbeatable.</p>
+        <p><strong>Best for:</strong> Short trips, luxury camps, sunset dinners.</p>
+        <p><a href="/search?category=Desert%20%26%20Adventure%20Activities" class="text-primary font-bold hover:underline">Check out our Agafay Desert Tours</a> for magical sunset dinners and camel rides.</p>
+        <h2>Merzouga: The Sahara Dunes</h2>
+        <p>Merzouga offers the classic Sahara experience with towering golden dunes. However, it requires a 9-10 hour drive or a multi-day trip.</p>
+        <p><strong>Best for:</strong> The full Sahara experience, deep solitude, stargazing.</p>
+        <h2>Conclusion</h2>
+        <p>If you have limited time, Agafay is the winner. If you want the bucket-list sensation of rolling dunes, head to Merzouga.</p>
+      `,
+      coverImage: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=1200&h=800&fit=crop",
+      keywords: ["Agafay vs Merzouga", "Marrakech Desert", "Sahara Tour", "Desert Trip"],
+      metaTitle: "Agafay Desert vs Merzouga: The Ultimate Comparison",
+      metaDescription: "Agafay vs Merzouga? Find out which Moroccan desert experience is right for you. Compare travel time, scenery, and activities."
+    },
+    {
+      title: "Is Marrakech Safe for Solo Female Travelers? Ultimate Guide",
+      slug: "is-marrakech-safe-solo-female-travelers",
+      excerpt: "Honest advice and safety tips for women traveling alone in Marrakech. What to wear, how to handle harassment, and safe areas to stay.",
+      content: `
+        <p>Marrakech is a vibrant and welcoming city, but solo female travelers often have concerns about safety and harassment. Here is your honest guide.</p>
+        <h2>Dress Code</h2>
+        <p>While there is no strict law, dressing modestly (covering shoulders and knees) shows respect for the local culture and can reduce unwanted attention.</p>
+        <h2>Handling Harassment</h2>
+        <p>Catcalling can happen.The best strategy is to ignore it and walk with purpose. wearing sunglasses helps avoid eye contact.</p>
+        <h2>Safe Activities</h2>
+        <p>Booking organized tours is a great way to explore safely and meet other travelers. Our <a href="/search?category=Cooking%20Classes%20%26%20Food%20Experiences" class="text-primary font-bold hover:underline">Group Cooking Classes</a> are very popular with solo travelers.</p>
+        <p>Also, consider hiring a <a href="/search?category=Cultural%20%26%20Historical%20Tours" class="text-primary font-bold hover:underline">Private Guide</a> for your first day to get acclimated to the Medina.</p>
+      `,
+      coverImage: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1200&h=800&fit=crop",
+      keywords: ["Solo Female Travel Marrakech", "Marrakech Safety", "Women Travel Morocco"],
+      metaTitle: "Is Marrakech Safe for Solo Female Travelers? | Safety Guide",
+      metaDescription: "Essential safety tips for solo female travelers in Marrakech. What to wear, how to stay safe, and best activities for solo women."
+    },
+    {
+      title: "How to Avoid Tourist Scams in Jemaa el-Fnaa",
+      slug: "avoid-tourist-scams-jemaa-el-fnaa",
+      excerpt: "Don't let scammers ruin your trip. Learn about the 'henna scam', the 'nice guy' directions, and how to navigate the main square like a pro.",
+      content: `
+        <p>Jemaa el-Fnaa is the beating heart of Marrakech, but it can also be a trap for unsuspecting tourists. Here are the most common scams to watch out for.</p>
+        <h2>The Forced Henna</h2>
+        <p>Women may grab your hand and start applying henna without asking, then demand payment. Keep your hands in your pockets or politely but firmly pull away.</p>
+        <h2>The 'Closed Road' Direction</h2>
+        <p>Someone might tell you the road to your destination is closed or that 'today is a holiday'. This is usually a ploy to lead you to a shop. Check your map and keep walking.</p>
+        <h2>The Monkey/Snake Photo</h2>
+        <p>Handlers may put a monkey or snake on your shoulder for a photo and demand a high price. Keep your distance if you're not interested.</p>
+        <p><strong>Pro Tip:</strong> Experience the square safely on our <a href="/search?category=Cooking%20Classes%20%26%20Food%20Experiences" class="text-primary font-bold hover:underline">Street Food Tasting Trail</a>, where a local guide navigates for you.</p>
+      `,
+      coverImage: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1200&h=800&fit=crop",
+      keywords: ["Marrakech Scams", "Jemaa el-Fnaa tips", "Tourist Traps Morocco"],
+      metaTitle: "How to Avoid Tourist Scams in Jemaa el-Fnaa | Marrakech Survival Guide",
+      metaDescription: "Learn to spot and avoid common tourist scams in Jemaa el-Fnaa. Expert advice on navigating Marrakech's main square safely."
+    },
+    {
+      title: "The Ultimate 3-Day Itinerary for Marrakech",
+      slug: "ultimate-3-day-itinerary-marrakech",
+      excerpt: "Maximize your long weekend in the Red City. A day-by-day plan covering palaces, souks, deserts, and relaxation.",
+      content: `
+        <p>Three days is the perfect amount of time to get a taste of Marrakech. Here is how to spend them wisely.</p>
+        <h2>Day 1: History & Souks</h2>
+        <p>Start with the Koutoubia Mosque, visit the Bahia Palace, and get lost in the souks. End the day at Jemaa el-Fnaa.</p>
+        <h2>Day 2: Gardens & New City</h2>
+        <p>Morning at Majorelle Garden (book <a href="/search?category=Iconic%20Attractions%20%26%20Tickets" class="text-primary font-bold hover:underline">VIP Tickets</a> to skip the line) and explore the YSL Museum. Lunch in Gueliz.</p>
+        <h2>Day 3: Nature or Relaxation</h2>
+        <p>Option A: Take a <a href="/search?category=Day%20Trips%20from%20Marrakech" class="text-primary font-bold hover:underline">Day Trip to the Atlas Mountains</a> to see waterfalls and Berber villages.</p>
+        <p>Option B: Relax with a <a href="/search?category=Spa%20%26%20Hammam%20Treatments" class="text-primary font-bold hover:underline">Luxury Hammam Ritual</a> before your flight.</p>
+      `,
+      coverImage: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200&h=800&fit=crop",
+      keywords: ["Marrakech Itinerary", "3 Days in Marrakech", "Marrakech Travel Guide"],
+      metaTitle: "The Ultimate 3-Day Marrakech Itinerary | Plan Your Trip",
+      metaDescription: "The perfect 3-day itinerary for Marrakech. Explore palaces, souks, gardens, and day trips. Maximize your stay in the Red City."
+    },
+    {
+      title: "Best Traditional Food in Marrakech & Where to Eat",
+      slug: "best-traditional-food-marrakech",
+      excerpt: "Beyond couscous: A foodie's guide to Tanjia, Pastilla, and the best street food spots in the city.",
+      content: `
+        <p>Moroccan cuisine is world-famous, but there is more to it than just Tagine. If you're a foodie, you need to try these dishes.</p>
+        <h2>Tanjia</h2>
+        <p>The signature dish of Marrakech, slow-cooked in a clay pot in the ashes of a hammam. Melt-in-your-mouth beef or lamb.</p>
+        <h2>Pastilla</h2>
+        <p>A sweet and savory pie traditionally made with pigeon (now often chicken), almonds, and dusted with sugar and cinnamon.</p>
+        <h2>Where to eat?</h2>
+        <p>For the bravest foodies, the stalls in Jemaa el-Fnaa offer snail soup and sheep's head. For a curated experience, join our <a href="/search?category=Cooking%20Classes%20%26%20Food%20Experiences" class="text-primary font-bold hover:underline">Ultimate Street Food Tasting Trail</a>.</p>
+        <p>For a romantic dinner, try a rooftop restaurant in the Mouassine district.</p>
+      `,
+      coverImage: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&h=800&fit=crop",
+      keywords: ["Marrakech Food", "Moroccan Cuisine", "Best Restaurants Marrakech", "Tanjia"],
+      metaTitle: "Best Traditional Food in Marrakech & Where to Eat",
+      metaDescription: "Discover the best traditional food in Marrakech. Guide to Tanjia, Pastilla, and street food including top restaurant recommendations."
+    }
+  ]
+
+  for (const post of blogPosts) {
+    await prisma.blogPost.upsert({
+      where: { slug: post.slug },
+      update: {},
+      create: {
+        ...post,
+        authorId: admin.id
+      }
+    })
+    console.log(`✅ Created blog post: ${post.title}`)
+  }
+
   console.log(`\n🎉 Seed completed successfully!`)
   console.log(`📊 Created:`)
   console.log(`   - 1 Admin user`)
