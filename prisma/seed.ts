@@ -930,7 +930,7 @@ async function main() {
   ]
 
   for (const post of blogPosts) {
-    await prisma.blogPost.upsert({
+    await (prisma as any).blogPost.upsert({
       where: { slug: post.slug },
       update: {},
       create: {
