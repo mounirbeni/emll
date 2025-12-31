@@ -1,7 +1,9 @@
 import { z } from "zod";
 
 // Set default AUTH_SECRET for development if not provided
-if (!process.env.AUTH_SECRET && process.env.NODE_ENV !== "production") {
+// Set default AUTH_SECRET for development or build time if not provided
+const isBuild = process.env.npm_lifecycle_event === "build"
+if (!process.env.AUTH_SECRET && (process.env.NODE_ENV !== "production" || isBuild)) {
     process.env.AUTH_SECRET = "dev-secret-key-change-in-production-min-32-chars-required";
 }
 
