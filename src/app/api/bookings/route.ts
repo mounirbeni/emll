@@ -5,6 +5,8 @@ import { errorResponse, successResponse, createdResponse } from '@/lib/api-respo
 import { bookingService } from '@/services/booking.service';
 import { createBookingSchema } from '@/lib/validation';
 
+export const dynamic = 'force-dynamic'
+
 /**
  * GET: Fetch bookings
  * - Admin: Returns all bookings

@@ -4,6 +4,8 @@ import { serviceService } from '@/services/service.service'
 import { createServiceSchema } from '@/lib/validation'
 import { AppError, formatErrorResponse } from '@/lib/errors'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: Request) {
     try {
         const { searchParams } = new URL(request.url)

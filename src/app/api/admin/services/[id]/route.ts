@@ -5,6 +5,8 @@ import { errorResponse, successResponse } from '@/lib/api-response';
 import { NotFoundError } from '@/lib/errors';
 import { auth } from '@/auth';
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(
     request: Request,
     { params }: { params: Promise<{ id: string }> }

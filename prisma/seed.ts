@@ -9,7 +9,7 @@ const prisma = new PrismaClient()
  */
 
 const marrakechActivities = [
-    {
+  {
     title: "Agafay Desert Sunset, Camel & Dinner Show",
     description: "Experience the magic of the Agafay Desert with a sunset camel ride followed by a traditional Berber dinner under the stars. Enjoy live music, fire shows, and authentic Moroccan cuisine in a luxury desert camp setting. This is one of Marrakech's most popular evening experiences, perfect for couples and families seeking an unforgettable desert adventure.",
     price: 95.00, // EUR
@@ -46,7 +46,7 @@ const marrakechActivities = [
     ],
     tags: ["Desert", "Sunset", "Dinner", "Camel", "Evening", "Popular"],
     itinerary: [
-    {
+      {
         time: "16:00",
         title: "Hotel Pickup",
         description: "Comfortable air-conditioned vehicle picks you up from your hotel in Marrakech"
@@ -80,8 +80,8 @@ const marrakechActivities = [
     host: "Marrakech Desert Adventures",
     rating: 4.8,
     reviews: 127
-    },
-    {
+  },
+  {
     title: "Hot Air Balloon Sunrise Over Atlas Mountains",
     description: "Soar above Marrakech and the Atlas Mountains in a hot air balloon at sunrise. This premium experience offers breathtaking panoramic views of the city, palm groves, and snow-capped peaks. Includes traditional Berber breakfast in a nomad tent after landing. Perfect for special occasions and photography enthusiasts.",
     price: 180.00,
@@ -91,7 +91,7 @@ const marrakechActivities = [
       "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1509316975859-7d2d70e8bc86?w=800&h=600&fit=crop"
     ],
-        duration: "5 hours",
+    duration: "5 hours",
     location: "Atlas Mountains, Marrakech",
     latitude: 31.6295,
     longitude: -7.9811,
@@ -145,8 +145,8 @@ const marrakechActivities = [
     host: "Atlas Balloon Adventures",
     rating: 4.9,
     reviews: 89
-    },
-    {
+  },
+  {
     title: "Yves Saint Laurent & Majorelle Garden VIP Tour",
     description: "Exclusive VIP access to the iconic Majorelle Garden and Yves Saint Laurent Museum. Skip the lines with priority entry, enjoy a private guided tour of the stunning blue garden, and explore the fashion museum dedicated to YSL. Includes access to the Berber Museum and the YSL memorial. Perfect for design and fashion enthusiasts.",
     price: 45.00,
@@ -156,7 +156,7 @@ const marrakechActivities = [
       "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
     ],
-        duration: "3 hours",
+    duration: "3 hours",
     location: "Gueliz, Marrakech",
     latitude: 31.6400,
     longitude: -7.9864,
@@ -210,17 +210,17 @@ const marrakechActivities = [
     rating: 4.7,
     reviews: 203
   },
-    {
+  {
     title: "Atlas Mountains & Ourika Valley Day Trip",
     description: "Escape the city and explore the stunning Ourika Valley in the High Atlas Mountains. Visit traditional Berber villages, hike to Setti Fatma waterfalls, enjoy a home-cooked lunch with a Berber family, and experience authentic mountain culture. Perfect for nature lovers and those seeking authentic cultural experiences.",
     price: 45.00,
-        category: "Day Trips from Marrakech",
+    category: "Day Trips from Marrakech",
     images: [
       "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1464822759844-d150ad6bfd06?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop"
     ],
-        duration: "8 hours",
+    duration: "8 hours",
     location: "Ourika Valley, Atlas Mountains",
     latitude: 31.2500,
     longitude: -7.6500,
@@ -255,8 +255,8 @@ const marrakechActivities = [
         time: "09:30",
         title: "Arrive in Ourika Valley",
         description: "First stop at a Berber village"
-    },
-    {
+      },
+      {
         time: "10:00",
         title: "Waterfall Hike",
         description: "Moderate hike to Setti Fatma waterfalls (7 cascades)"
@@ -270,8 +270,8 @@ const marrakechActivities = [
         time: "14:30",
         title: "Village Exploration",
         description: "Visit local markets, meet artisans"
-    },
-    {
+      },
+      {
         time: "16:00",
         title: "Return Journey",
         description: "Scenic drive back to Marrakech"
@@ -320,8 +320,8 @@ const marrakechActivities = [
         time: "09:00",
         title: "Meeting Point",
         description: "Jemaa el-Fnaa square"
-    },
-    {
+      },
+      {
         time: "09:15",
         title: "Medina Exploration",
         description: "Navigate hidden alleys, discover secret passages"
@@ -350,8 +350,8 @@ const marrakechActivities = [
     host: "Marrakech Local Guides",
     rating: 4.8,
     reviews: 94
-    },
-    {
+  },
+  {
     title: "Master the Tagine Cooking Class",
     description: "Learn to cook authentic Moroccan tagine in a traditional riad. Visit a local market to select fresh ingredients, then master the art of tagine cooking with a professional chef. Includes preparing multiple dishes, learning spice blending, and enjoying your creations for lunch. Take home recipes and cooking tips.",
     price: 55.00,
@@ -361,7 +361,7 @@ const marrakechActivities = [
       "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&h=600&fit=crop"
     ],
-        duration: "5 hours",
+    duration: "5 hours",
     location: "Medina Riad, Marrakech",
     latitude: 31.6295,
     longitude: -7.9811,
@@ -417,7 +417,7 @@ const marrakechActivities = [
     rating: 4.9,
     reviews: 178
   },
-    {
+  {
     title: "Royal Moroccan Hammam & Spa Ritual",
     description: "Experience the ultimate Moroccan spa ritual with a traditional hammam steam bath, black soap scrub, and argan oil massage. This luxury spa experience takes place in a beautiful riad spa, combining ancient traditions with modern comfort. Perfect for relaxation after exploring the city.",
     price: 70.00,
@@ -427,7 +427,7 @@ const marrakechActivities = [
       "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=600&fit=crop"
     ],
-        duration: "2.5 hours",
+    duration: "2.5 hours",
     location: "Luxury Riad Spa, Marrakech",
     latitude: 31.6295,
     longitude: -7.9811,
@@ -525,8 +525,8 @@ const marrakechActivities = [
         time: "08:00",
         title: "Departure",
         description: "Pickup from Marrakech hotels"
-    },
-    {
+      },
+      {
         time: "10:30",
         title: "Arrive in Essaouira",
         description: "Welcome to the coastal town"
@@ -571,7 +571,7 @@ const marrakechActivities = [
       "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1509316975859-7d2d70e8bc86?w=800&h=600&fit=crop"
     ],
-        duration: "3 hours",
+    duration: "3 hours",
     location: "Palmeraie, Marrakech",
     latitude: 31.7000,
     longitude: -7.9500,
@@ -626,8 +626,8 @@ const marrakechActivities = [
     host: "Desert Quad Adventures",
     rating: 4.6,
     reviews: 134
-    },
-    {
+  },
+  {
     title: "Ultimate Street Food Tasting Trail",
     description: "Embark on a culinary adventure through Marrakech's food scene with a local food expert. Taste authentic street food, visit hidden food stalls, learn about Moroccan cuisine, and discover flavors you won't find in restaurants. This evening tour takes you through Jemaa el-Fnaa and the medina's best-kept food secrets.",
     price: 45.00,
@@ -682,8 +682,8 @@ const marrakechActivities = [
         time: "20:00",
         title: "Dinner Stop",
         description: "Traditional tagine or couscous"
-    },
-    {
+      },
+      {
         time: "21:00",
         title: "Dessert & Tea",
         description: "Moroccan pastries and mint tea"
@@ -697,7 +697,7 @@ const marrakechActivities = [
     host: "Marrakech Food Adventures",
     rating: 4.8,
     reviews: 167
-    }
+  }
 ]
 
 async function main() {
@@ -707,19 +707,19 @@ async function main() {
   const adminPassword = await bcrypt.hash('admin123', 10)
   const admin = await prisma.user.upsert({
     where: { email: 'admin@marrakech.com' },
-        update: {
-            role: 'ADMIN',
+    update: {
+      role: 'ADMIN',
       password: adminPassword,
       name: 'Admin User'
-        },
-        create: {
+    },
+    create: {
       email: 'admin@marrakech.com',
       password: adminPassword,
-            name: 'Admin User',
-            role: 'ADMIN',
+      name: 'Admin User',
+      role: 'ADMIN',
       phone: '+212 600 000 000'
     }
-    })
+  })
   console.log('✅ Created Admin user:', admin.email)
 
   // Create Provider User
@@ -785,7 +785,7 @@ async function main() {
 
   for (const activity of marrakechActivities) {
     const service = await prisma.service.create({
-            data: {
+      data: {
         shortId: generateShortId(ShortIdPrefix.SERVICE),
         title: activity.title,
         description: activity.description,
@@ -822,11 +822,11 @@ async function main() {
 }
 
 main()
-    .then(async () => {
+  .then(async () => {
     await prisma.$disconnect()
-    })
-    .catch(async (e) => {
+  })
+  .catch(async (e) => {
     console.error('❌ Seed error:', e)
     await prisma.$disconnect()
-        process.exit(1)
-    })
+    process.exit(1)
+  })

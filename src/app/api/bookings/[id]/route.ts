@@ -4,6 +4,8 @@ import { requireAuth } from '@/lib/authorization';
 import { errorResponse, successResponse } from '@/lib/api-response';
 import { updateBookingSchema } from '@/lib/validation';
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(
     request: Request,
     { params }: { params: Promise<{ id: string }> }
