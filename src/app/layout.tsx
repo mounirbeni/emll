@@ -79,6 +79,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    google: "YOUR_GOOGLE_VERIFICATION_CODE", // TODO: Replace with actual code provided by user
+  },
 };
 
 export const viewport = {
