@@ -25,13 +25,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     try {
         // Dynamic Blog Posts
-        // Cast to any to avoid IDE caching issues; tsc validates this correctly
-        const posts = await (prisma as any).blogPost.findMany({
+        const posts = await prisma.blogPost.findMany({
             select: {
                 slug: true,
                 updatedAt: true,
             },
-        })
+        });
 
         console.log(`[SITEMAP] Found ${posts.length} blog posts`)
 

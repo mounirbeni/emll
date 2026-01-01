@@ -29,7 +29,6 @@ interface DashboardStats {
     };
     nextBooking: {
         id: string;
-        shortId?: string; // Short ID support
         activityTitle: string;
         date: string;
         status: string;
@@ -194,11 +193,9 @@ export default function ClientDashboard() {
                                 <h3 className="text-lg font-semibold text-gray-900">
                                     {stats.nextBooking.activityTitle}
                                 </h3>
-                                {(stats.nextBooking as any).shortId && (
-                                    <span className="text-xs font-mono bg-gray-100 px-1 py-0.5 rounded text-gray-500 mr-2">
-                                        {(stats.nextBooking as any).shortId}
-                                    </span>
-                                )}
+                                <span className="text-xs font-mono bg-gray-100 px-1 py-0.5 rounded text-gray-500 mr-2">
+                                    {stats.nextBooking.id}
+                                </span>
                                 <p className="text-sm text-gray-600 mt-1">
                                     {new Date(stats.nextBooking.date).toLocaleDateString(
                                         "en-US",

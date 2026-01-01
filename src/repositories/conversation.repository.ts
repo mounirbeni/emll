@@ -4,7 +4,7 @@
  */
 
 import prisma from '@/lib/prisma';
-import { Conversation, Prisma } from '@prisma/client';
+import { Conversation, ConversationStatus, Prisma } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
 
 export class ConversationRepository implements BaseRepository<
@@ -88,9 +88,9 @@ export class ConversationRepository implements BaseRepository<
     /**
      * Find conversations by status
      */
-    async findByStatus(status: string): Promise<Conversation[]> {
+    async findByStatus(status: ConversationStatus): Promise<Conversation[]> {
         return await prisma.conversation.findMany({
-            where: { status: status as any },
+            where: { status },
             orderBy: { updatedAt: 'desc' },
             include: {
                 user: {
@@ -112,7 +112,7 @@ export class ConversationRepository implements BaseRepository<
      * Find open conversations
      */
     async findOpen(): Promise<Conversation[]> {
-        return await this.findByStatus('OPEN');
+        return await this.findByStatus(ConversationStatus.OPEN);
     }
 
     /**
@@ -159,10 +159,10 @@ export class ConversationRepository implements BaseRepository<
     /**
      * Update conversation status
      */
-    async updateStatus(id: string, status: string): Promise<Conversation> {
+    async updateStatus(id: string, status: ConversationStatus): Promise<Conversation> {
         return await prisma.conversation.update({
             where: { id },
-            data: { status: status as any }
+            data: { status }
         });
     }
 
@@ -170,21 +170,21 @@ export class ConversationRepository implements BaseRepository<
      * Close conversation
      */
     async close(id: string): Promise<Conversation> {
-        return await this.updateStatus(id, 'CLOSED');
+        return await this.updateStatus(id, ConversationStatus.CLOSED);
     }
 
     /**
      * Archive conversation
      */
     async archive(id: string): Promise<Conversation> {
-        return await this.updateStatus(id, 'ARCHIVED');
+        return await this.updateStatus(id, ConversationStatus.ARCHIVED);
     }
 
     /**
      * Reopen conversation
      */
     async reopen(id: string): Promise<Conversation> {
-        return await this.updateStatus(id, 'OPEN');
+        return await this.updateStatus(id, ConversationStatus.OPEN);
     }
 
     /**
@@ -216,9 +216,9 @@ export class ConversationRepository implements BaseRepository<
     /**
      * Get conversation count by status
      */
-    async countByStatus(status: string): Promise<number> {
+    async countByStatus(status: ConversationStatus): Promise<number> {
         return await prisma.conversation.count({
-            where: { status: status as any }
+            where: { status }
         });
     }
 

@@ -87,7 +87,6 @@ interface CustomerDetail extends Customer {
         guests: number
         createdAt: string
         paymentStatus?: string
-        shortId?: string | null
     }>
 }
 
@@ -692,11 +691,9 @@ export default function CustomersPage() {
                                                     <div className="flex-1">
                                                         <div className="flex items-center gap-2 mb-1">
                                                             <div className="font-semibold">{booking.activityTitle}</div>
-                                                            {booking.shortId && (
-                                                                <Badge variant="outline" className="text-xs">
-                                                                    {booking.shortId}
-                                                                </Badge>
-                                                            )}
+                                                            <Badge variant="outline" className="text-xs">
+                                                                {booking.id}
+                                                            </Badge>
                                                         </div>
                                                         <div className="flex items-center gap-4 text-sm text-muted-foreground">
                                                             <div className="flex items-center gap-1">

@@ -179,7 +179,7 @@ export default function BookingDetailsPage({
                 <div className="flex items-center gap-2 mt-1">
                     <span className="text-gray-600">Booking ID:</span>
                     <code className="bg-gray-100 px-2 py-1 rounded text-primary font-bold">
-                        {(booking as any).shortId || booking.id}
+                        {booking.id}
                     </code>
                 </div>
             </div>

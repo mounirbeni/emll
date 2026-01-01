@@ -4,7 +4,7 @@
  */
 
 import prisma from '@/lib/prisma';
-import { Booking, Prisma } from '@prisma/client';
+import { Booking, BookingStatus, Prisma } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
 
 export class BookingRepository implements BaseRepository<
@@ -110,9 +110,9 @@ export class BookingRepository implements BaseRepository<
     /**
      * Find bookings by status
      */
-    async findByStatus(status: string): Promise<Booking[]> {
+    async findByStatus(status: BookingStatus): Promise<Booking[]> {
         return await prisma.booking.findMany({
-            where: { status: status as any },
+            where: { status },
             orderBy: { createdAt: 'desc' }
         });
     }
@@ -125,7 +125,7 @@ export class BookingRepository implements BaseRepository<
         return await prisma.booking.findMany({
             where: {
                 date: { gt: now },
-                status: { in: ['PENDING', 'CONFIRMED'] as any },
+                status: { in: [BookingStatus.PENDING, BookingStatus.CONFIRMED] },
                 ...(userId && { userId })
             },
             orderBy: { date: 'asc' }
@@ -159,10 +159,10 @@ export class BookingRepository implements BaseRepository<
     /**
      * Update booking status
      */
-    async updateStatus(id: string, status: string): Promise<Booking> {
+    async updateStatus(id: string, status: BookingStatus): Promise<Booking> {
         return await prisma.booking.update({
             where: { id },
-            data: { status: status as any }
+            data: { status }
         });
     }
 
@@ -185,10 +185,10 @@ export class BookingRepository implements BaseRepository<
     /**
      * Count bookings by status
      */
-    async countByStatus(status: string, userId?: string): Promise<number> {
+    async countByStatus(status: BookingStatus, userId?: string): Promise<number> {
         return await prisma.booking.count({
             where: {
-                status: status as any,
+                status,
                 ...(userId && { userId })
             }
         });

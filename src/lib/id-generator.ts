@@ -1,12 +1,12 @@
 
 // Alphanumeric, unambiguous characters (removed O, 0, I, L)
 const ALPHABET = '123456789ABCDEFGHJKMNPQRSTUVWXYZ';
-const ID_LENGTH = 4; // Prefix (2) + Random (4) = 6
+const RANDOM_LENGTH = 6;
 
 export const ShortIdPrefix = {
     BOOKING: 'BK',
-    SERVICE: 'AC',
-    SUPPORT: 'SP',
+    SERVICE: 'SRV',
+    SUPPORT: 'SUP',
 } as const;
 
 export type ShortIdPrefixType = typeof ShortIdPrefix[keyof typeof ShortIdPrefix];
@@ -23,17 +23,19 @@ function generateRandomString(length: number): string {
 }
 
 /**
- * Generate a short 6-character ID with prefix (e.g., BK92FQ)
+ * Generate a short public ID with prefix (e.g., BK-92FQ7M)
  */
 export function generateShortId(prefix: ShortIdPrefixType): string {
-    return `${prefix}${generateRandomString(ID_LENGTH)}`;
+    return `${prefix}-${generateRandomString(RANDOM_LENGTH)}`;
 }
 
 /**
  * Validate format
  */
 export function isValidShortId(id: string, prefix?: ShortIdPrefixType): boolean {
-    if (id.length !== 6) return false;
-    if (prefix && !id.startsWith(prefix)) return false;
+    const expectedPrefix = prefix ? `${prefix}-` : null;
+    if (expectedPrefix && !id.startsWith(expectedPrefix)) return false;
+    if (!/^[-A-Z0-9]+$/i.test(id)) return false;
+    if (!/^[A-Z]+-[1-9A-HJKMNPQRSTUVWXYZ]{6}$/i.test(id)) return false;
     return true;
 }

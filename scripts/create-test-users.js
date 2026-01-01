@@ -15,7 +15,7 @@ async function createTestUsers() {
                 email: 'client@test.com',
                 password: clientPassword,
                 name: 'Test Client',
-                role: 'USER'
+                role: 'CUSTOMER'
             }
         });
         console.log('✅ Created/Updated client:', client.email);

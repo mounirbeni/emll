@@ -12,8 +12,7 @@ datasource db {
 // Enums
 enum UserRole {
   ADMIN
-  PROVIDER
-  CLIENT
+  CUSTOMER
 }
 
 enum BookingStatus {
@@ -60,10 +59,11 @@ enum NotificationType {
   WARNING
   ERROR
   BOOKING
+  REVIEW
 }
 
 model Booking {
-  id              String        @id @default(uuid())
+  id              String        @id
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
   name            String
@@ -85,7 +85,6 @@ model Booking {
   paymentStatus   PaymentStatus @default(UNPAID)
   invoiceUrl      String?
   userId          String?
-  shortId         String?       @unique // Short 6-char ID (e.g., BK92FQ)
   user            User?         @relation(fields: [userId], references: [id])
   payments        Payment[]
   review          Review?
@@ -94,7 +93,6 @@ model Booking {
   @@index([status])
   @@index([date])
   @@index([userId])
-  @@index([shortId])
 }
 
 model Payment {
@@ -124,7 +122,7 @@ model User {
   password           String?
   name               String?
   phone              String?
-  role               UserRole           @default(CLIENT)
+  role               UserRole           @default(CUSTOMER)
   canMessage         Boolean            @default(true)
   conversationStatus ConversationStatus @default(NONE)
   createdAt          DateTime           @default(now())
@@ -227,8 +225,7 @@ model Review {
 }
 
 model Service {
-  id          String   @id @default(uuid())
-  shortId     String?  @unique // Short 6-char ID (e.g., AC7M2L)
+  id          String   @id
   title       String
   description String
   price       Float
@@ -254,7 +251,6 @@ model Service {
   @@index([category])
   @@index([price])
   @@index([rating])
-  @@index([shortId])
 }
 
 model SupportRequest {

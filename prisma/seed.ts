@@ -722,38 +722,19 @@ async function main() {
   })
   console.log('✅ Created Admin user:', admin.email)
 
-  // Create Provider User
-  const providerPassword = await bcrypt.hash('provider123', 10)
-  const provider = await prisma.user.upsert({
-    where: { email: 'provider@marrakech.com' },
-    update: {
-      role: 'PROVIDER',
-      password: providerPassword,
-      name: 'Tour Provider'
-    },
-    create: {
-      email: 'provider@marrakech.com',
-      password: providerPassword,
-      name: 'Tour Provider',
-      role: 'PROVIDER',
-      phone: '+212 600 000 001'
-    }
-  })
-  console.log('✅ Created Provider user:', provider.email)
-
   // Create Customer Users
   const customer1Password = await bcrypt.hash('customer123', 10)
   const customer1 = await prisma.user.upsert({
     where: { email: 'customer1@example.com' },
     update: {
-      role: 'CLIENT',
+      role: 'CUSTOMER',
       password: customer1Password
     },
     create: {
       email: 'customer1@example.com',
       password: customer1Password,
       name: 'John Doe',
-      role: 'CLIENT',
+      role: 'CUSTOMER',
       phone: '+212 600 000 002'
     }
   })
@@ -763,14 +744,14 @@ async function main() {
   const customer2 = await prisma.user.upsert({
     where: { email: 'customer2@example.com' },
     update: {
-      role: 'CLIENT',
+      role: 'CUSTOMER',
       password: customer2Password
     },
     create: {
       email: 'customer2@example.com',
       password: customer2Password,
       name: 'Jane Smith',
-      role: 'CLIENT',
+      role: 'CUSTOMER',
       phone: '+212 600 000 003'
     }
   })
@@ -786,7 +767,7 @@ async function main() {
   for (const activity of marrakechActivities) {
     const service = await prisma.service.create({
       data: {
-        shortId: generateShortId(ShortIdPrefix.SERVICE),
+        id: generateShortId(ShortIdPrefix.SERVICE),
         title: activity.title,
         description: activity.description,
         price: activity.price,
@@ -800,13 +781,13 @@ async function main() {
         included: activity.included,
         whatToBring: activity.whatToBring,
         tags: activity.tags,
-        itinerary: activity.itinerary as any, // Prisma Json type
+        itinerary: activity.itinerary,
         host: activity.host,
         rating: activity.rating,
         reviews: activity.reviews
       }
     })
-    console.log(`✅ Created activity: ${service.title} (${service.shortId})`)
+    console.log(`✅ Created activity: ${service.title} (${service.id})`)
   }
 
   // Create Blog Posts
@@ -930,7 +911,7 @@ async function main() {
   ]
 
   for (const post of blogPosts) {
-    await (prisma as any).blogPost.upsert({
+    await prisma.blogPost.upsert({
       where: { slug: post.slug },
       update: {},
       create: {
@@ -944,12 +925,10 @@ async function main() {
   console.log(`\n🎉 Seed completed successfully!`)
   console.log(`📊 Created:`)
   console.log(`   - 1 Admin user`)
-  console.log(`   - 1 Provider user`)
   console.log(`   - 2 Customer users`)
   console.log(`   - ${marrakechActivities.length} Activities`)
   console.log(`\n🔑 Test Credentials:`)
   console.log(`   Admin: admin@marrakech.com / admin123`)
-  console.log(`   Provider: provider@marrakech.com / provider123`)
   console.log(`   Customer: customer1@example.com / customer123`)
 }
 

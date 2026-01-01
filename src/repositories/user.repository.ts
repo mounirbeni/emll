@@ -4,8 +4,14 @@
  */
 
 import prisma from '@/lib/prisma';
-import { User, Prisma } from '@prisma/client';
+import { Prisma, User, UserRole } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
+
+type UserWithBookings = Prisma.UserGetPayload<{
+    include: {
+        bookings: true;
+    };
+}>;
 
 export class UserRepository implements BaseRepository<
     User,
@@ -60,9 +66,9 @@ export class UserRepository implements BaseRepository<
     /**
      * Find users by role
      */
-    async findByRole(role: string): Promise<User[]> {
+    async findByRole(role: UserRole): Promise<User[]> {
         return await prisma.user.findMany({
-            where: { role: role as any },
+            where: { role },
             orderBy: { createdAt: 'desc' }
         });
     }
@@ -126,7 +132,7 @@ export class UserRepository implements BaseRepository<
     /**
      * Get user with bookings
      */
-    async findByIdWithBookings(id: string): Promise<User | null> {
+    async findByIdWithBookings(id: string): Promise<UserWithBookings | null> {
         return await prisma.user.findUnique({
             where: { id },
             include: {

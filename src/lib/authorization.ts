@@ -7,7 +7,7 @@ import { auth } from '@/auth';
 import { UnauthorizedError, ForbiddenError } from './errors';
 import type { Session } from 'next-auth';
 
-export type UserRole = 'CLIENT' | 'ADMIN' | 'SUPPLIER';
+export type UserRole = 'CUSTOMER' | 'ADMIN';
 
 /**
  * Get the current authenticated session

@@ -4,7 +4,7 @@
  */
 
 import prisma from '@/lib/prisma';
-import { Payment, Prisma } from '@prisma/client';
+import { Payment, Prisma, TransactionStatus } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
 
 export class PaymentRepository implements BaseRepository<
@@ -73,9 +73,9 @@ export class PaymentRepository implements BaseRepository<
     /**
      * Find payments by status
      */
-    async findByStatus(status: string): Promise<Payment[]> {
+    async findByStatus(status: TransactionStatus): Promise<Payment[]> {
         return await prisma.payment.findMany({
-            where: { status: status as any },
+            where: { status },
             orderBy: { createdAt: 'desc' }
         });
     }
@@ -87,7 +87,7 @@ export class PaymentRepository implements BaseRepository<
         const result = await prisma.payment.aggregate({
             where: {
                 bookingId,
-                status: 'COMPLETED'
+                status: TransactionStatus.COMPLETED
             },
             _sum: {
                 amount: true
@@ -103,7 +103,7 @@ export class PaymentRepository implements BaseRepository<
         const result = await prisma.payment.aggregate({
             where: {
                 ...where,
-                status: 'COMPLETED'
+                status: TransactionStatus.COMPLETED
             },
             _sum: {
                 amount: true
@@ -125,10 +125,10 @@ export class PaymentRepository implements BaseRepository<
     /**
      * Update payment status
      */
-    async updateStatus(id: string, status: string): Promise<Payment> {
+    async updateStatus(id: string, status: TransactionStatus): Promise<Payment> {
         return await prisma.payment.update({
             where: { id },
-            data: { status: status as any }
+            data: { status }
         });
     }
 
@@ -163,7 +163,7 @@ export class PaymentRepository implements BaseRepository<
      */
     async findPending(): Promise<Payment[]> {
         return await prisma.payment.findMany({
-            where: { status: 'PENDING' },
+            where: { status: TransactionStatus.PENDING },
             orderBy: { createdAt: 'asc' },
             include: {
                 booking: true
@@ -176,7 +176,7 @@ export class PaymentRepository implements BaseRepository<
      */
     async findFailed(): Promise<Payment[]> {
         return await prisma.payment.findMany({
-            where: { status: 'FAILED' },
+            where: { status: TransactionStatus.FAILED },
             orderBy: { createdAt: 'desc' },
             include: {
                 booking: true

@@ -3,11 +3,10 @@
  * Contains all business logic for booking operations
  */
 
-import { Booking } from '@prisma/client';
+import { Booking, BookingStatus, PaymentStatus } from '@prisma/client';
 import { bookingRepository } from '@/repositories/booking.repository';
 import { serviceRepository } from '@/repositories/service.repository';
 import { notificationService } from '@/services/notification.service';
-import { generateBookingId } from '@/lib/utils/id-generator';
 import { generateShortId, ShortIdPrefix } from '@/lib/id-generator';
 import { NotFoundError, BadRequestError } from '@/lib/errors';
 import { createBookingSchema } from '@/lib/validation';
@@ -99,6 +98,7 @@ export class BookingService {
                     console.log(`Service found after double-check. Using database ID: ${actualActivityId}`);
                 } else {
                     const newService = await serviceRepository.create({
+                        id: generateShortId(ShortIdPrefix.SERVICE),
                         title: data.activityTitle,
                         description: `Service created from booking: ${data.activityTitle}`,
                         price: data.totalPrice / data.guests, // Calculate price per person
@@ -114,8 +114,7 @@ export class BookingService {
                         host: 'Explore Marrakesh',
                         rating: 0,
                         reviews: 0,
-                        shortId: generateShortId(ShortIdPrefix.SERVICE),
-                    } as any);
+                    });
 
                     actualActivityId = newService.id;
                     activityExists = true;
@@ -168,8 +167,7 @@ export class BookingService {
 
         // Create booking (use actualActivityId if we found it by title)
         const booking = await bookingRepository.create({
-            id: generateBookingId(),
-            shortId: generateShortId(ShortIdPrefix.BOOKING),
+            id: generateShortId(ShortIdPrefix.BOOKING),
             userId: userId || null,
             name: data.name,
             email: data.email,
@@ -185,9 +183,9 @@ export class BookingService {
             dietary: data.dietary || null,
             specialRequests: data.specialRequests || null,
             packageName: data.packageName || null,
-            status: 'PENDING',
-            paymentStatus: 'UNPAID'
-        } as any);
+            status: BookingStatus.PENDING,
+            paymentStatus: PaymentStatus.UNPAID
+        });
 
         // Send notification to user if they have an account
         if (userId) {
@@ -270,7 +268,7 @@ export class BookingService {
     /**
      * Update booking status
      */
-    async updateBookingStatus(id: string, status: string): Promise<Booking> {
+    async updateBookingStatus(id: string, status: BookingStatus): Promise<Booking> {
         // Validate booking exists
         const booking = await bookingRepository.findById(id);
         if (!booking) {
@@ -317,7 +315,7 @@ export class BookingService {
         }
 
         // Check if booking can be cancelled
-        if (booking.status === 'COMPLETED' || booking.status === 'CANCELLED') {
+        if (booking.status === BookingStatus.COMPLETED || booking.status === BookingStatus.CANCELLED) {
             throw new BadRequestError(`Cannot cancel booking with status: ${booking.status}`);
         }
 
@@ -332,7 +330,7 @@ export class BookingService {
             );
         }
 
-        return await this.updateBookingStatus(id, 'CANCELLED');
+        return await this.updateBookingStatus(id, BookingStatus.CANCELLED);
     }
 
     /**
@@ -351,7 +349,7 @@ export class BookingService {
         }
 
         // Only allow updates for pending bookings
-        if (booking.status !== 'PENDING') {
+        if (booking.status !== BookingStatus.PENDING) {
             throw new BadRequestError('Only pending bookings can be modified');
         }
 
@@ -376,10 +374,10 @@ export class BookingService {
 
         const [total, upcoming, completed, cancelled, pending, totalRevenue] = await Promise.all([
             bookingRepository.count(where),
-            bookingRepository.countByStatus('CONFIRMED', userId),
-            bookingRepository.countByStatus('COMPLETED', userId),
-            bookingRepository.countByStatus('CANCELLED', userId),
-            bookingRepository.countByStatus('PENDING', userId),
+            bookingRepository.countByStatus(BookingStatus.CONFIRMED, userId),
+            bookingRepository.countByStatus(BookingStatus.COMPLETED, userId),
+            bookingRepository.countByStatus(BookingStatus.CANCELLED, userId),
+            bookingRepository.countByStatus(BookingStatus.PENDING, userId),
             bookingRepository.getTotalRevenue(where)
         ]);
 
@@ -429,12 +427,12 @@ export class BookingService {
     /**
      * Validate status transition
      */
-    private validateStatusTransition(currentStatus: string, newStatus: string): void {
-        const validTransitions: Record<string, string[]> = {
-            ['PENDING']: ['CONFIRMED', 'CANCELLED'],
-            ['CONFIRMED']: ['COMPLETED', 'CANCELLED'],
-            ['COMPLETED']: [], // Cannot change from completed
-            ['CANCELLED']: []  // Cannot change from cancelled
+    private validateStatusTransition(currentStatus: BookingStatus, newStatus: BookingStatus): void {
+        const validTransitions: Record<BookingStatus, BookingStatus[]> = {
+            [BookingStatus.PENDING]: [BookingStatus.CONFIRMED, BookingStatus.CANCELLED],
+            [BookingStatus.CONFIRMED]: [BookingStatus.COMPLETED, BookingStatus.CANCELLED],
+            [BookingStatus.COMPLETED]: [], // Cannot change from completed
+            [BookingStatus.CANCELLED]: []  // Cannot change from cancelled
         };
 
         const allowedStatuses = validTransitions[currentStatus] || [];

@@ -16,7 +16,7 @@ export async function GET(
         const { id } = await params;
 
         // Verify user owns this conversation
-        const conversation = await (prisma as any).conversation.findUnique({
+        const conversation = await prisma.conversation.findUnique({
             where: { id }
         });
 
@@ -24,7 +24,7 @@ export async function GET(
             return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
         }
 
-        const messages = await (prisma as any).message.findMany({
+        const messages = await prisma.message.findMany({
             where: { conversationId: id },
             orderBy: { createdAt: 'asc' }
         });
@@ -50,7 +50,7 @@ export async function POST(
         const { content } = await request.json();
 
         // Verify user owns this conversation
-        const conversation = await (prisma as any).conversation.findUnique({
+        const conversation = await prisma.conversation.findUnique({
             where: { id }
         });
 
@@ -66,7 +66,7 @@ export async function POST(
         }
 
         // Create message
-        const message = await (prisma as any).message.create({
+        const message = await prisma.message.create({
             data: {
                 content,
                 sender: 'USER',
@@ -76,7 +76,7 @@ export async function POST(
         });
 
         // Update conversation timestamp
-        await (prisma as any).conversation.update({
+        await prisma.conversation.update({
             where: { id },
             data: { updatedAt: new Date() }
         });

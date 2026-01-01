@@ -3,7 +3,7 @@
  * Contains all business logic for user operations
  */
 
-import { User } from '@prisma/client';
+import { BookingStatus, User, UserRole } from '@prisma/client';
 import { userRepository } from '@/repositories/user.repository';
 import { hashPassword, comparePassword } from '@/lib/auth';
 import { NotFoundError, BadRequestError, ConflictError } from '@/lib/errors';
@@ -13,7 +13,7 @@ export interface CreateUserDTO {
     password: string;
     name?: string;
     phone?: string;
-    role?: 'CLIENT' | 'ADMIN';
+    role?: UserRole;
 }
 
 export interface UpdateUserDTO {
@@ -60,7 +60,7 @@ export class UserService {
             password: hashedPassword,
             name: data.name || null,
             phone: data.phone || null,
-            role: data.role || 'CLIENT',
+            role: data.role || UserRole.CUSTOMER,
         });
 
         return user;
@@ -170,17 +170,17 @@ export class UserService {
      * Get user statistics
      */
     async getUserStats(id: string): Promise<UserStats> {
-        const user = await userRepository.findByIdWithBookings(id) as any;
+        const user = await userRepository.findByIdWithBookings(id);
 
         if (!user) {
             throw new NotFoundError('User', id);
         }
 
         const totalBookings = user.bookings?.length || 0;
-        const completedBookings = user.bookings?.filter((b: any) => b.status === 'COMPLETED').length || 0;
+        const completedBookings = user.bookings?.filter((b) => b.status === BookingStatus.COMPLETED).length || 0;
         const totalSpent = user.bookings
-            ?.filter((b: any) => b.status === 'COMPLETED')
-            .reduce((sum: number, b: any) => sum + b.totalPrice, 0) || 0;
+            ?.filter((b) => b.status === BookingStatus.COMPLETED)
+            .reduce((sum, b) => sum + b.totalPrice, 0) || 0;
 
         return {
             totalBookings,
@@ -209,7 +209,7 @@ export class UserService {
     /**
      * Get users by role
      */
-    async getUsersByRole(role: string): Promise<User[]> {
+    async getUsersByRole(role: UserRole): Promise<User[]> {
         return await userRepository.findByRole(role);
     }
 
@@ -250,7 +250,7 @@ export class UserService {
     /**
      * Update user role (admin only)
      */
-    async updateUserRole(id: string, role: 'CLIENT' | 'ADMIN'): Promise<User> {
+    async updateUserRole(id: string, role: UserRole): Promise<User> {
         const user = await userRepository.findById(id);
 
         if (!user) {

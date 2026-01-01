@@ -1,22 +1,19 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import { auth } from '@/auth';
+import { requireAdmin } from '@/lib/authorization';
 
 export async function GET(
     request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
-    const session = await auth();
-    if (!session?.user || session.user.role !== 'ADMIN') {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     try {
+        await requireAdmin();
+
         // id param is the conversationId
         const { id: conversationId } = await params;
 
         // Verify conversation exists
-        const conversation = await (prisma as any).conversation.findUnique({
+        const conversation = await prisma.conversation.findUnique({
             where: { id: conversationId }
         });
 
@@ -24,13 +21,13 @@ export async function GET(
             return NextResponse.json({ error: 'Conversation not found' }, { status: 404 });
         }
 
-        const messages = await (prisma as any).message.findMany({
+        const messages = await prisma.message.findMany({
             where: { conversationId },
             orderBy: { createdAt: 'asc' }
         });
 
         // Mark user messages as read
-        await (prisma as any).message.updateMany({
+        await prisma.message.updateMany({
             where: { conversationId, sender: 'USER', read: false },
             data: { read: true }
         });
@@ -45,18 +42,15 @@ export async function POST(
     request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
-    const session = await auth();
-    if (!session?.user || session.user.role !== 'ADMIN') {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     try {
+        await requireAdmin();
+
         // id param is the conversationId
         const { id: conversationId } = await params;
         const { content } = await request.json();
 
         // Verify conversation exists
-        const conversation = await (prisma as any).conversation.findUnique({
+        const conversation = await prisma.conversation.findUnique({
             where: { id: conversationId }
         });
 
@@ -64,7 +58,7 @@ export async function POST(
             return NextResponse.json({ error: 'Conversation not found' }, { status: 404 });
         }
 
-        const message = await (prisma as any).message.create({
+        const message = await prisma.message.create({
             data: {
                 content,
                 sender: 'ADMIN',
@@ -75,7 +69,7 @@ export async function POST(
         });
 
         // Update conversation timestamp
-        await (prisma as any).conversation.update({
+        await prisma.conversation.update({
             where: { id: conversationId },
             data: { updatedAt: new Date() }
         });

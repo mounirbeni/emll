@@ -242,7 +242,7 @@ export default function ServiceDetailPage() {
                                 <ul className="space-y-2 text-xs sm:text-sm">
                                     <li className="flex justify-between items-start border-b pb-2 gap-2">
                                         <span className="text-muted-foreground">Activity ID:</span>
-                                        <span className="font-mono font-medium text-right">{(service as any)?.shortId || 'N/A'}</span>
+                                        <span className="font-mono font-medium text-right">{service?.id || 'N/A'}</span>
                                     </li>
                                     {service?.duration && (
                                         <li className="flex justify-between items-start gap-2">

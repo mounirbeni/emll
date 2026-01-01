@@ -17,7 +17,7 @@ export async function GET(request: Request) {
 
         // Build where clause
         const where: any = {
-            role: 'CLIENT'
+            role: 'CUSTOMER'
         };
 
         if (search && search.trim()) {

@@ -11,7 +11,10 @@ export async function GET(request: Request) {
         const { searchParams } = new URL(request.url)
         const category = searchParams.get('category') || undefined
         const search = searchParams.get('search') || undefined
-        const sortBy = searchParams.get('sortBy') as any || undefined
+        const sortByParam = searchParams.get('sortBy')
+        const sortBy = sortByParam && ['price', 'rating', 'reviews', 'newest'].includes(sortByParam)
+            ? (sortByParam as 'price' | 'rating' | 'reviews' | 'newest')
+            : undefined
 
         const services = await serviceService.getServices({
             category,

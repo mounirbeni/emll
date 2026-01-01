@@ -1,7 +1,12 @@
 import { z } from 'zod';
-import { BookingStatus, PaymentStatus, PaymentCurrency, PaymentMethod, UserRole } from '@prisma/client';
+import { BookingStatus, PaymentStatus, PaymentCurrency, PaymentMethod } from '@prisma/client';
 
 // Helper for JSON/Array fields
+
+const bookingIdSchema = z.string().regex(/^BK-[1-9A-HJKMNPQRSTUVWXYZ]{6}$/i, 'Invalid Booking ID');
+const serviceIdSchema = z.string().regex(/^SRV-[1-9A-HJKMNPQRSTUVWXYZ]{6}$/i, 'Invalid Service ID');
+
+const userRoleSchema = z.enum(['ADMIN', 'CUSTOMER']);
 
 
 // Service Schemas
@@ -61,12 +66,12 @@ export const registerSchema = z.object({
     name: z.string().min(2),
     email: z.string().email(),
     password: z.string().min(6),
-    role: z.nativeEnum(UserRole).optional().default(UserRole.CLIENT),
+    role: userRoleSchema.optional().default('CUSTOMER'),
 });
 
 // Payment Schemas
 export const createPaymentSchema = z.object({
-    bookingId: z.string().uuid('Invalid Booking ID'),
+    bookingId: bookingIdSchema,
     amount: z.coerce.number().positive('Amount must be positive'),
     currency: z.nativeEnum(PaymentCurrency).optional().default(PaymentCurrency.EUR),
     method: z.nativeEnum(PaymentMethod).optional(),
@@ -79,8 +84,8 @@ export const processPaymentSchema = z.object({
 
 // Review Schemas
 export const createReviewSchema = z.object({
-    bookingId: z.string().uuid('Invalid Booking ID'),
-    serviceId: z.string().min(1, 'Invalid Service ID'),
+    bookingId: bookingIdSchema,
+    serviceId: serviceIdSchema,
     rating: z.coerce.number().int().min(1).max(5, 'Rating must be between 1 and 5'),
     comment: z.string().min(10, 'Review comment must be at least 10 characters'),
 });
@@ -103,7 +108,7 @@ export const changePasswordSchema = z.object({
 });
 
 export const updateUserRoleSchema = z.object({
-    role: z.nativeEnum(UserRole),
+    role: userRoleSchema,
 });
 
 // Notification Schemas
@@ -111,7 +116,7 @@ export const createNotificationSchema = z.object({
     userId: z.string().uuid('Invalid User ID'),
     title: z.string().min(1, 'Title is required'),
     message: z.string().min(1, 'Message is required'),
-    type: z.enum(['INFO', 'SUCCESS', 'WARNING', 'ERROR', 'BOOKING']).optional(),
+    type: z.enum(['INFO', 'SUCCESS', 'WARNING', 'ERROR', 'BOOKING', 'REVIEW']).optional(),
     link: z.string().optional(),
 });
 

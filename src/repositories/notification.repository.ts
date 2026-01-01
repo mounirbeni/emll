@@ -4,7 +4,7 @@
  */
 
 import prisma from '@/lib/prisma';
-import { Notification, Prisma } from '@prisma/client';
+import { Notification, NotificationType, Prisma } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
 
 export class NotificationRepository implements BaseRepository<
@@ -198,11 +198,11 @@ export class NotificationRepository implements BaseRepository<
     /**
      * Find notifications by type
      */
-    async findByType(userId: string, type: string): Promise<Notification[]> {
+    async findByType(userId: string, type: NotificationType): Promise<Notification[]> {
         return await prisma.notification.findMany({
             where: {
                 userId,
-                type: type as any
+                type
             },
             orderBy: { createdAt: 'desc' }
         });

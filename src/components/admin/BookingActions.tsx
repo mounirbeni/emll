@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Check, X, MoreHorizontal, FileText } from "lucide-react";
+import { BookingStatus } from "@prisma/client";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -15,11 +16,11 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { confirmBooking, updateBookingStatus } from "@/app/actions/booking-actions";
 
-export function BookingActions({ bookingId, status }: { bookingId: string, status: string }) {
+export function BookingActions({ bookingId, status }: { bookingId: string, status: BookingStatus }) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
-    const updateStatus = async (newStatus: string) => {
+    const updateStatus = async (newStatus: BookingStatus) => {
         setLoading(true);
         try {
             await updateBookingStatus(bookingId, newStatus);
@@ -43,18 +44,18 @@ export function BookingActions({ bookingId, status }: { bookingId: string, statu
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                {status !== 'CONFIRMED' && (
+                {status !== BookingStatus.CONFIRMED && (
                     <DropdownMenuItem
                         className="text-green-600 cursor-pointer"
-                        onClick={() => updateStatus('CONFIRMED')}
+                        onClick={() => updateStatus(BookingStatus.CONFIRMED)}
                     >
                         <Check className="mr-2 h-4 w-4" /> Confirm Booking
                     </DropdownMenuItem>
                 )}
-                {status !== 'CANCELLED' && (
+                {status !== BookingStatus.CANCELLED && (
                     <DropdownMenuItem
                         className="text-destructive cursor-pointer"
-                        onClick={() => updateStatus('CANCELLED')}
+                        onClick={() => updateStatus(BookingStatus.CANCELLED)}
                     >
                         <X className="mr-2 h-4 w-4" /> Cancel Booking
                     </DropdownMenuItem>

@@ -59,8 +59,7 @@ export async function GET(
                     totalPrice: true,
                     guests: true,
                     createdAt: true,
-                    paymentStatus: true,
-                    shortId: true
+                    paymentStatus: true
                 }
             }),
             prisma.booking.findFirst({

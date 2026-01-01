@@ -20,8 +20,7 @@ interface BlogPostPageProps {
 }
 
 async function getPost(slug: string) {
-    // Cast to any to avoid IDE caching issues with new model
-    const post = await (prisma as any).blogPost.findUnique({
+    const post = await prisma.blogPost.findUnique({
         where: { slug },
         include: { author: true }
     })

@@ -20,7 +20,7 @@ export async function POST(request: Request) {
                 subject,
                 message,
                 status: 'PENDING'
-            } as any
+            }
         });
 
         return NextResponse.json({ success: true, request: supportRequest });

@@ -237,7 +237,7 @@ export class AdminService {
      */
     async getUserAnalytics() {
         const totalUsers = await userRepository.count();
-        const clientCount = await userRepository.count({ role: 'CLIENT' });
+        const customerCount = await userRepository.count({ role: 'CUSTOMER' });
         const adminCount = await userRepository.count({ role: 'ADMIN' });
         const activeUsers = await userRepository.findActiveUsers(30);
 
@@ -250,7 +250,7 @@ export class AdminService {
         return {
             total: totalUsers,
             byRole: {
-                clients: clientCount,
+                customers: customerCount,
                 admins: adminCount
             },
             active: activeUsers.length,

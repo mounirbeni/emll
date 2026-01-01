@@ -80,7 +80,7 @@ export class ServiceService {
 
         // Create service with native arrays
         const service = await serviceRepository.create({
-            shortId: generateShortId(ShortIdPrefix.SERVICE),
+            id: generateShortId(ShortIdPrefix.SERVICE),
             title: data.title,
             description: data.description,
             price: data.price,
@@ -98,7 +98,7 @@ export class ServiceService {
             host: data.host || 'Explore Marrakesh',
             rating: 0,
             reviews: 0
-        } as any);
+        });
 
 
         return service;

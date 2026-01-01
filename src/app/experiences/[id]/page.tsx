@@ -26,7 +26,20 @@ interface PageProps {
     params: Promise<{ id: string }>;
 }
 
-const safeParse = (data: any, fallback: any) => {
+type ServiceWithExtras = Service & Partial<{
+    exclusions: unknown;
+    meetingPoint: unknown;
+    endingPoint: unknown;
+    cancellationPolicy: unknown;
+    requirements: unknown;
+    ageRestrictions: unknown;
+    experienceHighlights: unknown;
+    additionalInfo: unknown;
+    minGroupSize: unknown;
+    maxGroupSize: unknown;
+}>;
+
+const safeParse = (data: unknown, fallback: unknown) => {
     if (!data) return fallback;
     if (typeof data === 'object') return data; // Handle already parsed arrays/objects
     try {
@@ -143,6 +156,7 @@ async function getActivity(id: string): Promise<Activity | null> {
 
             const newService = await prisma.service.create({
                 data: {
+                    id: generateShortId(ShortIdPrefix.SERVICE),
                     title: staticActivity.title,
                     description: staticActivity.description || `Experience: ${staticActivity.title}`,
                     price: staticActivity.price,
@@ -158,8 +172,7 @@ async function getActivity(id: string): Promise<Activity | null> {
                     tags: staticActivity.tags || [],
                     itinerary: staticActivity.itinerary ? (typeof staticActivity.itinerary === 'string' ? JSON.parse(staticActivity.itinerary) : staticActivity.itinerary) : [],
                     host: typeof staticActivity.host === 'object' ? JSON.stringify(staticActivity.host) : (staticActivity.host || 'Explore Marrakesh'),
-                    shortId: generateShortId(ShortIdPrefix.SERVICE),
-                } as any
+                }
             });
 
             console.log(`Created service in database with ID: ${newService.id}`);
@@ -241,7 +254,7 @@ export default async function ActivityPage({ params }: PageProps) {
     }
 
     // Get related activities
-    let relatedServices: any[] = [];
+    let relatedServices: ServiceWithExtras[] = [];
     try {
         relatedServices = await prisma.service.findMany({
             where: {
@@ -255,7 +268,7 @@ export default async function ActivityPage({ params }: PageProps) {
         relatedServices = [];
     }
 
-    const relatedActivities: Activity[] = (relatedServices as any[]).map(service => {
+    const relatedActivities: Activity[] = relatedServices.map((service) => {
         if (!service.id) return null;
 
         const parsedImages = safeParse(service.images, []);
@@ -275,18 +288,18 @@ export default async function ActivityPage({ params }: PageProps) {
             host: safeParse(service.host, { name: "Marrakech Host", image: "/localexpert.jpg" }),
             description: service.description,
             included: safeParse(service.included, []),
-            exclusions: (service as any).exclusions || [],
-            meetingPoint: (service as any).meetingPoint || "",
-            endingPoint: (service as any).endingPoint || "",
-            cancellationPolicy: (service as any).cancellationPolicy || "",
-            requirements: (service as any).requirements || [],
-            ageRestrictions: (service as any).ageRestrictions || "",
+            exclusions: safeParse(service.exclusions, []),
+            meetingPoint: String(service.meetingPoint || ""),
+            endingPoint: String(service.endingPoint || ""),
+            cancellationPolicy: String(service.cancellationPolicy || ""),
+            requirements: safeParse(service.requirements, []),
+            ageRestrictions: String(service.ageRestrictions || ""),
             whatToBring: safeParse(service.whatToBring, []),
-            experienceHighlights: (service as any).experienceHighlights || [],
-            additionalInfo: (service as any).additionalInfo || "",
+            experienceHighlights: safeParse(service.experienceHighlights, []),
+            additionalInfo: String(service.additionalInfo || ""),
             itinerary: safeParse(service.itinerary, []),
-            minGroupSize: (service as any).minGroupSize || 1,
-            maxGroupSize: (service as any).maxGroupSize || 8,
+            minGroupSize: Number(service.minGroupSize || 1),
+            maxGroupSize: Number(service.maxGroupSize || 8),
             packages: [],
             packageCategories: []
         };
@@ -303,7 +316,7 @@ export default async function ActivityPage({ params }: PageProps) {
         const dbReviews = await reviewService.getServiceReviews(activity.id, 10);
         realReviews = dbReviews.map((review: any) => ({
             id: review.id,
-            author: (review.user as any)?.name || 'Anonymous',
+            author: (review.user as unknown as { name?: string | null } | null)?.name || 'Anonymous',
             nationality: 'Traveler',
             countryCode: 'MA',
             rating: review.rating,

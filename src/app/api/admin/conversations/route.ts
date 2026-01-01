@@ -1,16 +1,13 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import { auth } from '@/auth';
+import { requireAdmin } from '@/lib/authorization';
 
 export async function GET() {
-    const session = await auth();
-    if (!session?.user || session.user.role !== 'ADMIN') {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     try {
+        await requireAdmin();
+
         // Get all conversations with user info and messages
-        const conversations = await (prisma as any).conversation.findMany({
+        const conversations = await prisma.conversation.findMany({
             include: {
                 user: {
                     select: {
@@ -29,8 +26,8 @@ export async function GET() {
         });
 
         // Format response
-        const formattedConversations = conversations.map((conv: any) => {
-            const unreadCount = conv.messages.filter((m: any) => m.sender === 'USER' && !m.read).length;
+        const formattedConversations = conversations.map((conv) => {
+            const unreadCount = conv.messages.filter((m) => m.sender === 'USER' && !m.read).length;
             const lastMessage = conv.messages[0];
 
             return {

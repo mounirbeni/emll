@@ -75,11 +75,9 @@ export default async function AdminDashboard() {
                                         <div className="space-y-1">
                                             <p className="text-sm font-medium leading-none">
                                                 {booking.user?.name || booking.name}
-                                                {(booking as any).shortId && (
-                                                    <span className="ml-2 text-xs font-mono text-muted-foreground bg-gray-100 px-1 rounded">
-                                                        {(booking as any).shortId}
-                                                    </span>
-                                                )}
+                                                <span className="ml-2 text-xs font-mono text-muted-foreground bg-gray-100 px-1 rounded">
+                                                    {booking.id}
+                                                </span>
                                             </p>
                                             <p className="text-xs text-muted-foreground">{booking.activityTitle}</p>
                                         </div>

@@ -45,16 +45,23 @@ export async function POST(request: Request) {
 
         // Create Notification
         try {
-            await (prisma as any).notification.create({
-                data: {
-                    type: 'REVIEW',
-                    title: 'New Review Received',
-                    message: `${rating} stars from ${session.user.name || 'User'}`,
-                    link: '/admin/reviews',
-                    read: false,
-                    userId: null // Admin only
-                }
-            })
+            const admins = await prisma.user.findMany({
+                where: { role: 'ADMIN' },
+                select: { id: true }
+            });
+
+            if (admins.length > 0) {
+                await prisma.notification.createMany({
+                    data: admins.map(a => ({
+                        userId: a.id,
+                        type: 'REVIEW',
+                        title: 'New Review Received',
+                        message: `${rating} stars from ${session.user.name || 'User'}`,
+                        link: '/admin/reviews',
+                        read: false,
+                    })),
+                });
+            }
         } catch (error) {
             console.error('Failed to create notification for review', error)
         }

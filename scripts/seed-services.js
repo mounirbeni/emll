@@ -1,5 +1,15 @@
 const { PrismaClient } = require('@prisma/client');
 
+// Node scripts shouldn't import TS modules from src/. Inline minimal short-id generator.
+const ALPHABET = '123456789ABCDEFGHJKMNPQRSTUVWXYZ';
+function generateShortId(prefix) {
+    let result = '';
+    for (let i = 0; i < 6; i++) {
+        result += ALPHABET.charAt(Math.floor(Math.random() * ALPHABET.length));
+    }
+    return `${prefix}-${result}`;
+}
+
 const prisma = new PrismaClient();
 
 async function main() {
@@ -70,8 +80,27 @@ async function main() {
     ];
 
     for (const s of services) {
+        const data = {
+            id: generateShortId('SRV'),
+            title: s.title,
+            description: s.description,
+            price: s.price,
+            rating: s.rating,
+            reviews: s.reviews,
+            category: s.category,
+            duration: s.duration,
+            location: s.location,
+            features: (s.features || '').split(',').filter(Boolean),
+            included: (s.included || '').split(',').filter(Boolean),
+            whatToBring: (s.whatToBring || '').split(',').filter(Boolean),
+            itinerary: s.itinerary ? [{ title: 'Itinerary', description: s.itinerary }] : [],
+            host: s.host,
+            tags: (s.tags || '').split(',').filter(Boolean),
+            images: JSON.parse(s.images || '[]'),
+        };
+
         await prisma.service.create({
-            data: s
+            data
         });
     }
 

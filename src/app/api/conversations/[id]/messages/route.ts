@@ -37,7 +37,7 @@ export async function POST(
                 content,
                 conversationId,
                 userId: session.user.id,
-                sender: session.user.role // 'CLIENT' or 'ADMIN'
+                sender: session.user.role === 'ADMIN' ? 'ADMIN' : 'USER'
             }
         });
 

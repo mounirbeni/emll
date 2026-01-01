@@ -1,17 +1,14 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import { auth } from '@/auth';
+import { requireAdmin } from '@/lib/authorization';
 
 export async function PATCH(
     request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
-    const session = await auth();
-    if (!session?.user || session.user.role !== 'ADMIN') {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     try {
+        await requireAdmin();
+
         const { action } = await request.json();
         const { id: conversationId } = await params;
 
@@ -23,7 +20,7 @@ export async function PATCH(
         }
 
         // Update conversation status
-        const updatedConversation = await (prisma as any).conversation.update({
+        const updatedConversation = await prisma.conversation.update({
             where: { id: conversationId },
             data: {
                 status: action === 'close' ? 'CLOSED' : 'OPEN',

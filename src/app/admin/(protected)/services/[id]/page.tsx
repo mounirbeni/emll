@@ -38,8 +38,9 @@ export default async function EditServicePage({ params }: { params: Promise<{ id
         tags: (service.tags as unknown as string[]) || [],
 
         // Complex Objects
-        // Itinerary is Json type, need casting
-        itinerary: (service.itinerary as any) || [],
+        itinerary: Array.isArray(service.itinerary)
+            ? (service.itinerary as unknown as Service['itinerary'])
+            : [],
         // host: service.host ? JSON.parse(service.host) : undefined, // Host not in Admin Type yet?
 
         // Optionals

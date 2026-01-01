@@ -1,6 +1,7 @@
 'use server'
 
 import prisma from '@/lib/prisma'
+import { BookingStatus } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 
 export async function getBookings() {
@@ -17,11 +18,11 @@ export async function getBookings() {
     }
 }
 
-export async function updateBookingStatus(id: string, status: string) {
+export async function updateBookingStatus(id: string, status: BookingStatus) {
     try {
         await prisma.booking.update({
             where: { id },
-            data: { status: status as any },
+            data: { status },
         })
         revalidatePath('/admin/bookings')
         revalidatePath('/admin/dashboard')

@@ -49,7 +49,6 @@ export async function GET(request: Request) {
         // Convert to CSV
         const headers = [
             'Booking ID',
-            'Short ID',
             'Customer Name',
             'Email',
             'Phone',
@@ -65,7 +64,6 @@ export async function GET(request: Request) {
 
         const rows = bookings.map(booking => [
             booking.id,
-            (booking as any).shortId || '',
             booking.user?.name || booking.name,
             booking.user?.email || booking.email,
             booking.phone || '',

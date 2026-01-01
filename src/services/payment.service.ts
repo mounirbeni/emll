@@ -3,7 +3,7 @@
  * Contains all business logic for payment operations
  */
 
-import { Payment } from '@prisma/client';
+import { Payment, PaymentCurrency, PaymentMethod, PaymentStatus, TransactionStatus } from '@prisma/client';
 import { paymentRepository } from '@/repositories/payment.repository';
 import { bookingRepository } from '@/repositories/booking.repository';
 import { NotFoundError, BadRequestError } from '@/lib/errors';
@@ -12,8 +12,8 @@ import { notificationService } from '@/services/notification.service';
 export interface CreatePaymentDTO {
     bookingId: string;
     amount: number;
-    currency?: 'EUR' | 'USD' | 'MAD';
-    method?: 'CREDIT_CARD' | 'PAYPAL' | 'CASH';
+    currency?: PaymentCurrency;
+    method?: PaymentMethod;
 }
 
 export interface ProcessPaymentDTO {
@@ -52,9 +52,9 @@ export class PaymentService {
         const payment = await paymentRepository.create({
             booking: { connect: { id: data.bookingId } },
             amount: data.amount,
-            currency: data.currency || 'EUR',
+            currency: data.currency || PaymentCurrency.EUR,
             method: data.method || undefined,
-            status: 'PENDING'
+            status: TransactionStatus.PENDING
         });
 
         return payment;
@@ -71,14 +71,14 @@ export class PaymentService {
             throw new NotFoundError('Payment', data.paymentId);
         }
 
-        if (payment.status !== 'PENDING') {
+        if (payment.status !== TransactionStatus.PENDING) {
             throw new BadRequestError(`Cannot process payment with status: ${payment.status}`);
         }
 
         // TODO: Integrate with actual payment gateway (Stripe, PayPal, etc.)
         // For now, just mark as completed
 
-        const updatedPayment = await paymentRepository.updateStatus(data.paymentId, 'COMPLETED');
+        const updatedPayment = await paymentRepository.updateStatus(data.paymentId, TransactionStatus.COMPLETED);
 
         // Update booking payment status if fully paid
         const booking = await bookingRepository.findById(payment.bookingId);
@@ -87,7 +87,7 @@ export class PaymentService {
 
             if (totalPaid >= booking.totalPrice) {
                 await bookingRepository.update(payment.bookingId, {
-                    paymentStatus: 'PAID'
+                    paymentStatus: PaymentStatus.PAID
                 });
             }
         }
@@ -119,11 +119,11 @@ export class PaymentService {
             throw new NotFoundError('Payment', paymentId);
         }
 
-        if (payment.status !== 'PENDING') {
+        if (payment.status !== TransactionStatus.PENDING) {
             throw new BadRequestError(`Cannot fail payment with status: ${payment.status}`);
         }
 
-        return await paymentRepository.updateStatus(paymentId, 'FAILED');
+        return await paymentRepository.updateStatus(paymentId, TransactionStatus.FAILED);
     }
 
     /**
@@ -136,7 +136,7 @@ export class PaymentService {
             throw new NotFoundError('Payment', paymentId);
         }
 
-        if (payment.status !== 'COMPLETED') {
+        if (payment.status !== TransactionStatus.COMPLETED) {
             throw new BadRequestError('Can only refund completed payments');
         }
 
@@ -149,7 +149,7 @@ export class PaymentService {
         const booking = await bookingRepository.findById(payment.bookingId);
         if (booking) {
             await bookingRepository.update(payment.bookingId, {
-                paymentStatus: 'REFUNDED'
+                paymentStatus: PaymentStatus.REFUNDED
             });
         }
 

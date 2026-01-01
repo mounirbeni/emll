@@ -6,7 +6,7 @@ export interface Booking {
     activityTitle: string
     guests: number
     date: string
-    status: 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'UNPROCESSED'
+    status: 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED'
     totalPrice?: number
     createdAt: string
     pickupLocation?: string
@@ -58,7 +58,7 @@ export interface User {
     id: string
     name: string | null
     email: string
-    role: 'ADMIN' | 'USER'
+    role: 'ADMIN' | 'CUSTOMER'
     source?: 'REGISTERED' | 'NEWSLETTER'
     createdAt: string
     _count?: {
@@ -68,7 +68,7 @@ export interface User {
 
 export interface Notification {
     id: string
-    type: 'BOOKING' | 'COMPLAINT' | 'SYSTEM'
+    type: 'INFO' | 'SUCCESS' | 'WARNING' | 'ERROR' | 'BOOKING' | 'REVIEW'
     title: string
     message: string
     read: boolean
