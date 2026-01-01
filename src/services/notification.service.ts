@@ -3,7 +3,7 @@
  * Contains all business logic for notification operations
  */
 
-import { Notification } from '@prisma/client';
+import { Notification, NotificationType } from '@prisma/client';
 import { notificationRepository } from '@/repositories/notification.repository';
 import { NotFoundError, BadRequestError } from '@/lib/errors';
 
@@ -11,7 +11,7 @@ export interface CreateNotificationDTO {
     userId: string;
     title: string;
     message: string;
-    type?: 'INFO' | 'SUCCESS' | 'WARNING' | 'ERROR' | 'BOOKING';
+    type?: NotificationType;
     link?: string;
 }
 
@@ -44,7 +44,7 @@ export class NotificationService {
         userIds: string[],
         title: string,
         message: string,
-        type?: 'INFO' | 'SUCCESS' | 'WARNING' | 'ERROR' | 'BOOKING',
+        type?: NotificationType,
         link?: string
     ): Promise<number> {
         const notifications = userIds.map(userId => ({
@@ -225,7 +225,7 @@ export class NotificationService {
     /**
      * Get notifications by type
      */
-    async getNotificationsByType(userId: string, type: string): Promise<Notification[]> {
+    async getNotificationsByType(userId: string, type: NotificationType): Promise<Notification[]> {
         return await notificationRepository.findByType(userId, type);
     }
 

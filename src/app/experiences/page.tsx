@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'; // Ensure real-time updates
 
 const safeParse = (data: any, fallback: any) => {
     if (!data) return fallback;
-    if (typeof data === 'object') return data; // Handle already parsed arrays/objects
+    if (typeof data !== 'string') return data; // Handle already parsed arrays/objects
     try {
         return JSON.parse(data);
     } catch {
