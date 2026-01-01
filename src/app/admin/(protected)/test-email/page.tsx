@@ -28,14 +28,14 @@ export default function TestEmailPage() {
         try {
             setCheckingStatus(true);
             const res = await fetch('/api/admin/test-email');
-            
+
             if (!res.ok) {
                 const errorData = await res.json().catch(() => ({}));
                 throw new Error(errorData.error || errorData.message || 'Failed to check email status');
             }
-            
+
             const data = await res.json();
-            
+
             // Handle both response formats for compatibility
             if (data.data) {
                 setStatus(data.data);
@@ -56,7 +56,7 @@ export default function TestEmailPage() {
 
     const handleSendTestEmail = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         if (!email) {
             toast.error('Please enter an email address');
             return;
@@ -132,7 +132,7 @@ export default function TestEmailPage() {
                                     <p className="text-sm text-muted-foreground">{status.message}</p>
                                 </div>
                             </div>
-                            
+
                             {status.configured && (
                                 <div className="rounded-lg bg-muted p-4 space-y-2">
                                     <div className="flex items-center justify-between">
@@ -151,7 +151,7 @@ export default function TestEmailPage() {
                                                 Configuration Required
                                             </p>
                                             <p className="text-sm text-yellow-700 dark:text-yellow-300">
-                                                Make sure RESEND_API_KEY is set in your .env.local file and restart the server.
+                                                Make sure RESEND_API_KEY is set in your .env file and restart the server.
                                             </p>
                                         </div>
                                     </div>
@@ -237,10 +237,10 @@ export default function TestEmailPage() {
                         <div>
                             <p className="font-medium mb-1">1. Environment Variables</p>
                             <p className="text-muted-foreground">
-                                Make sure your <code className="px-1.5 py-0.5 bg-muted rounded">.env.local</code> file contains:
+                                Make sure your <code className="px-1.5 py-0.5 bg-muted rounded">.env</code> file contains:
                             </p>
                             <pre className="mt-2 p-3 bg-muted rounded-lg text-xs overflow-x-auto">
-{`RESEND_API_KEY=your_api_key_here
+                                {`RESEND_API_KEY=your_api_key_here
 RESEND_FROM_EMAIL=Your Name <your-email@domain.com>`}
                             </pre>
                         </div>

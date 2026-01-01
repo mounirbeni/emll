@@ -34,7 +34,7 @@ export class EmailService {
         const apiKey = process.env.RESEND_API_KEY;
         if (!apiKey) {
             console.warn('⚠️ RESEND_API_KEY not found in environment variables. Emails will be logged to console only.');
-            console.warn('⚠️ Make sure RESEND_API_KEY is set in .env.local and restart the server.');
+            console.warn('⚠️ Make sure RESEND_API_KEY is set in .env and restart the server.');
             return null;
         }
 

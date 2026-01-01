@@ -4,7 +4,7 @@ const prismaClientSingleton = () => {
     // Check if DATABASE_URL is set
     if (!process.env.DATABASE_URL) {
         console.error('❌ DATABASE_URL is not set in environment variables!')
-        console.error('Please add DATABASE_URL to your .env.local file')
+        console.error('Please add DATABASE_URL to your .env file')
         throw new Error('DATABASE_URL environment variable is required')
     }
 

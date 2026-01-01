@@ -23,7 +23,7 @@ export async function POST(request: Request) {
             return NextResponse.json({
                 error: 'RESEND_API_KEY not configured',
                 configured: false,
-                message: 'Please add RESEND_API_KEY to .env.local and restart the server'
+                message: 'Please add RESEND_API_KEY to .env and restart the server'
             }, { status: 500 });
         }
 
