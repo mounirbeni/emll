@@ -56,12 +56,12 @@ export default function ServiceDetailPage() {
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
 
     const { data: session, status } = useSession()
+    const isGuest = status === 'unauthenticated'
 
     const handleBookNow = () => {
-        if (status === 'unauthenticated') {
-            // Redirect to login with return URL
-            const returnUrl = encodeURIComponent(`/services/${id}`)
-            window.location.href = `/login?from=${returnUrl}`
+        if (isGuest) {
+            const callbackUrl = encodeURIComponent(`/services/${id}`)
+            router.push(`/auth/login?callbackUrl=${callbackUrl}`)
             return
         }
 
@@ -234,7 +234,7 @@ export default function ServiceDetailPage() {
                                 onClick={handleBookNow}
                                 disabled={bookingLoading}
                             >
-                                {bookingLoading ? 'Checking...' : 'Book Now'}
+                                {isGuest ? 'Login to Book' : (bookingLoading ? 'Checking...' : 'Book Now')}
                             </Button>
 
                             <div className="pt-4 border-t">
@@ -267,23 +267,23 @@ export default function ServiceDetailPage() {
                 </div>
             </div>
 
-            {/* Mobile Sticky Bottom Bar */}
-            <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 lg:hidden z-40 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
-                <div className="flex items-center justify-between gap-4">
-                    <div>
-                        <p className="text-xs text-gray-500 font-medium">Total Price</p>
-                        <p className="text-xl font-bold">€{service?.price.toFixed(2)}</p>
-                    </div>
-                    <Button
-                        size="lg"
-                        onClick={handleBookNow}
-                        disabled={bookingLoading}
-                        className="flex-1 font-bold text-base"
-                    >
-                        {bookingLoading ? 'Checking...' : 'Book Now'}
-                    </Button>
+        {/* Mobile Sticky Bottom Bar */}
+        <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 lg:hidden z-40 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+            <div className="flex items-center justify-between gap-4">
+                <div>
+                    <p className="text-xs text-gray-500 font-medium">Total Price</p>
+                    <p className="text-xl font-bold">€{service?.price.toFixed(2)}</p>
                 </div>
+                <Button
+                    size="lg"
+                    onClick={handleBookNow}
+                    disabled={bookingLoading}
+                    className="flex-1 font-bold text-base"
+                >
+                    {isGuest ? 'Login to Book' : (bookingLoading ? 'Checking...' : 'Book Now')}
+                </Button>
             </div>
         </div>
-    )
+    </div>
+    );
 }

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
 import {
     Dialog,
     DialogContent,
@@ -38,6 +39,7 @@ export function BookingModal({
     onBookingSuccess,
     user
 }: BookingModalProps) {
+    const router = useRouter()
     const [date, setDate] = useState<Date>()
     const [guests, setGuests] = useState(1)
     const [name, setName] = useState(user?.name || "")
@@ -99,6 +101,15 @@ export function BookingModal({
                     email: email.trim()
                 }),
             })
+
+            if (res.status === 401) {
+                const callbackUrl = typeof window !== 'undefined'
+                    ? `${window.location.pathname}${window.location.search}`
+                    : '/services';
+                toast.error('Please log in to book this service.')
+                router.push(`/auth/login?callbackUrl=${encodeURIComponent(callbackUrl)}`)
+                return
+            }
 
             const data = await res.json()
 

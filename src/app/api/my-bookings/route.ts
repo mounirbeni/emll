@@ -1,22 +1,19 @@
 
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import { auth } from '@/auth';
+import { requireAuth } from '@/lib/authorization';
 
 export async function GET() {
-    const session = await auth();
+    const session = await requireAuth();
     if (!session?.user) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     try {
-        // Fetch bookings linked to user OR matches email
+        // Fetch bookings linked to user
         const bookings = await prisma.booking.findMany({
             where: {
-                OR: [
-                    { userId: session.user.id as string },
-                    { email: session.user.email as string }
-                ]
+                userId: session.user.id as string
             },
             orderBy: { createdAt: 'desc' },
             include: { review: true }

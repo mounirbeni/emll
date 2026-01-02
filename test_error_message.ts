@@ -20,7 +20,7 @@ async function main() {
             totalPrice: 100,
             name: "Test",
             email: "test@test.com"
-        } as any);
+        } as any, 'TEST_USER_ID');
     } catch (e: any) {
         console.log("Error caught:", e.message);
     }
@@ -35,7 +35,7 @@ async function main() {
             totalPrice: 100,
             name: "Test",
             email: "test@test.com"
-        } as any);
+        } as any, 'TEST_USER_ID');
     } catch (e: any) {
         console.log("Error caught:", e.message);
     }
@@ -50,7 +50,7 @@ async function main() {
             totalPrice: 100,
             name: "Test",
             email: "test@test.com"
-        } as any);
+        } as any, 'TEST_USER_ID');
     } catch (e: any) {
         console.log("Error caught:", e.message);
         if (e.message && e.message.includes("Activity with ID")) {

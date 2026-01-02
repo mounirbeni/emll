@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { auth } from '@/auth';
 import { requireAuth, isAdmin } from '@/lib/authorization';
 import { errorResponse, successResponse, createdResponse } from '@/lib/api-response';
 import { bookingService } from '@/services/booking.service';
@@ -10,7 +9,7 @@ export const dynamic = 'force-dynamic'
 /**
  * GET: Fetch bookings
  * - Admin: Returns all bookings
- * - Client: Returns their own bookings (by userId OR email for guest bookings)
+ * - Client: Returns their own bookings
  */
 export async function GET(request: Request) {
     try {
@@ -23,10 +22,7 @@ export async function GET(request: Request) {
             bookings = await bookingService.getAllBookings();
         } else {
             // Client sees their own bookings
-            bookings = await bookingService.getUserBookings(
-                session.user.id,
-                session.user.email || undefined
-            );
+            bookings = await bookingService.getUserBookings(session.user.id);
         }
 
         return successResponse(bookings);
@@ -37,13 +33,11 @@ export async function GET(request: Request) {
 
 /**
  * POST: Create a new booking
- * - Authenticated users: booking linked to their account
- * - Guest users: booking created with email only
+ * - Authenticated users only: booking linked to their account
  */
 export async function POST(request: Request) {
     try {
-        // Get session (optional - allows guest bookings)
-        const session = await auth();
+        const session = await requireAuth();
 
         const body = await request.json();
 
@@ -77,10 +71,7 @@ export async function POST(request: Request) {
         */
 
         // Create booking through service (handles all validation)
-        const booking = await bookingService.createBooking(
-            bookingData,
-            session?.user?.id
-        );
+        const booking = await bookingService.createBooking(bookingData, session.user.id);
 
         return createdResponse(booking);
 

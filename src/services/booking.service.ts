@@ -49,7 +49,7 @@ export class BookingService {
     /**
      * Create a new booking
      */
-    async createBooking(data: CreateBookingDTO, userId?: string): Promise<Booking> {
+    async createBooking(data: CreateBookingDTO, userId: string): Promise<Booking> {
         // Validate activity exists by ID first
         let activityExists = await serviceRepository.exists(data.activityId);
         let actualActivityId = data.activityId;
@@ -168,7 +168,7 @@ export class BookingService {
         // Create booking (use actualActivityId if we found it by title)
         const booking = await bookingRepository.create({
             id: generateShortId(ShortIdPrefix.BOOKING),
-            userId: userId || null,
+            userId,
             name: data.name,
             email: data.email,
             phone: data.phone || null,
@@ -233,7 +233,7 @@ export class BookingService {
         }
 
         // If userId provided, verify ownership (admins bypass this in the route)
-        if (userId && booking.userId !== userId && booking.email !== userId) {
+        if (userId && booking.userId !== userId) {
             throw new NotFoundError('Booking', id); // Don't reveal existence
         }
 
@@ -243,8 +243,8 @@ export class BookingService {
     /**
      * Get all bookings for a user
      */
-    async getUserBookings(userId: string, email?: string): Promise<Booking[]> {
-        return await bookingRepository.findByUserIdOrEmail(userId, email);
+    async getUserBookings(userId: string): Promise<Booking[]> {
+        return await bookingRepository.findByUserId(userId);
     }
 
     /**

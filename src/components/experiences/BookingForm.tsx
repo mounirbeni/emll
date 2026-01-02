@@ -6,7 +6,9 @@ import { CalendarIcon, MessageCircle, Clock } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
 import { Calendar } from "@/components/ui/calendar";
+import { useRouter } from "next/navigation";
 import {
     Popover,
     PopoverContent,
@@ -23,6 +25,9 @@ interface BookingFormProps {
 }
 
 export function BookingForm({ activity }: BookingFormProps) {
+    const router = useRouter();
+    const { status } = useSession();
+    const isGuest = status === 'unauthenticated';
     const [date, setDate] = useState<Date>();
     const [guests, setGuests] = useState(2);
     const [name, setName] = useState("");
@@ -311,6 +316,13 @@ export function BookingForm({ activity }: BookingFormProps) {
                     <Button
                         className="w-full text-base sm:text-lg font-semibold py-6 sm:py-5 h-auto min-h-[52px] rounded-full shadow-lg hover:shadow-xl transition-all"
                         onClick={() => {
+                            if (isGuest) {
+                                const callbackUrl = typeof window !== 'undefined'
+                                    ? `${window.location.pathname}${window.location.search}`
+                                    : '/experiences';
+                                router.push(`/auth/login?callbackUrl=${encodeURIComponent(callbackUrl)}`);
+                                return;
+                            }
                             if (!date) {
                                 alert("Please select a date");
                                 return;
@@ -407,7 +419,7 @@ export function BookingForm({ activity }: BookingFormProps) {
                             });
                         }}
                     >
-                        Check Availability
+                        {isGuest ? 'Login to Book' : 'Check Availability'}
                     </Button>
                 </div>
             </CardContent>

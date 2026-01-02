@@ -52,8 +52,8 @@ export default function LoginPage() {
             if (sessionData?.user?.role === 'ADMIN') {
                 router.push('/admin/dashboard');
             } else {
-                // Only redirect to client if callbackUrl is /client or default
-                const finalUrl = callbackUrl.startsWith('/client') ? callbackUrl : '/client';
+                const isSafeCallbackUrl = callbackUrl.startsWith('/') && !callbackUrl.startsWith('//');
+                const finalUrl = isSafeCallbackUrl ? callbackUrl : '/client';
                 router.push(finalUrl);
             }
         } catch (error) {
