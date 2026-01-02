@@ -113,7 +113,20 @@ export default function RootLayout({
               <PublicLayout>
                 {children}
               </PublicLayout>
-              <Toaster />
+              <Toaster 
+                richColors
+                position="top-center"
+                toastOptions={{
+                  style: {
+                    borderRadius: '12px',
+                    fontFamily: 'var(--font-outfit)',
+                  },
+                  classNames: {
+                    success: 'bg-success text-white',
+                    error: 'bg-destructive text-white',
+                  }
+                }}
+              />
             </ThemeProvider>
           </WishlistProvider>
         </AuthProvider>

@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { Service } from '@/types/admin'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { SkeletonCard } from '@/components/ui/skeleton'
+import { EmptyState } from '@/components/ui/empty-state'
 import Image from 'next/image'
 import Link from 'next/link'
+import { MapPin, Clock, Star, Users } from 'lucide-react'
 
 export default function ServicesPage() {
     const [services, setServices] = useState<Service[]>([])
@@ -36,12 +38,16 @@ export default function ServicesPage() {
 
     if (loading) {
         return (
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Our Services</h1>
-                <div className="flex items-center justify-center py-12">
-                    <div className="text-center">
-                        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-                        <p className="text-sm text-muted-foreground">Loading services...</p>
+            <div className="min-h-screen bg-cream">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div className="mb-8">
+                        <h1 className="text-3xl sm:text-4xl font-bold text-charcoal mb-2">Discover Experiences</h1>
+                        <p className="text-medium-gray">Explore our curated collection of authentic Marrakech adventures</p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {[...Array(8)].map((_, i) => (
+                            <SkeletonCard key={i} />
+                        ))}
                     </div>
                 </div>
             </div>
@@ -50,69 +56,130 @@ export default function ServicesPage() {
 
     if (error) {
         return (
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Our Services</h1>
-                <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
-                    <p className="text-destructive">{error}</p>
-                    <Button 
-                        variant="outline" 
-                        className="mt-4"
-                        onClick={() => window.location.reload()}
-                    >
-                        Retry
-                    </Button>
+            <div className="min-h-screen bg-cream">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div className="mb-8">
+                        <h1 className="text-3xl sm:text-4xl font-bold text-charcoal mb-2">Discover Experiences</h1>
+                        <p className="text-medium-gray">Explore our curated collection of authentic Marrakech adventures</p>
+                    </div>
+                    <div className="bg-white rounded-xl border border-border p-8 text-center max-w-md mx-auto">
+                        <div className="w-16 h-16 bg-destructive/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span className="text-2xl">⚠️</span>
+                        </div>
+                        <h3 className="text-lg font-semibold text-charcoal mb-2">Unable to load services</h3>
+                        <p className="text-medium-gray text-sm mb-4">{error}</p>
+                        <Button onClick={() => window.location.reload()}>
+                            Try Again
+                        </Button>
+                    </div>
                 </div>
             </div>
         )
     }
 
     return (
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-            <h1 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-6">Our Services</h1>
-            <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base">
-                Explore our wide range of luxury services and experiences.
-            </p>
-            
-            {services.length === 0 ? (
-                <div className="text-center py-12">
-                    <p className="text-muted-foreground">No services available at the moment.</p>
+        <div className="min-h-screen bg-cream">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {/* Page Header */}
+                <div className="mb-8">
+                    <h1 className="text-3xl sm:text-4xl font-bold text-charcoal mb-2">Discover Experiences</h1>
+                    <p className="text-medium-gray">Explore our curated collection of authentic Marrakech adventures</p>
                 </div>
-            ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                    {services.map((service) => (
-                        <Card key={service.id} className="flex flex-col hover:shadow-lg transition-shadow">
-                            {service.images && service.images[0] && (
-                                <div className="relative h-48 sm:h-56 w-full">
-                                    <Image
-                                        src={service.images[0]}
-                                        alt={service.title || 'Service image'}
-                                        fill
-                                        className="object-cover rounded-t-lg"
-                                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                    />
+                
+                {services.length === 0 ? (
+                    <EmptyState
+                        icon="services"
+                        title="No experiences available yet"
+                        description="We're preparing amazing experiences for you. Check back soon!"
+                        action={{
+                            label: "Back to Home",
+                            onClick: () => window.location.href = '/'
+                        }}
+                    />
+                ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {services.map((service) => (
+                            <Link 
+                                key={service.id} 
+                                href={`/services/${service.id}`}
+                                className="group"
+                            >
+                                <div className="bg-white rounded-xl border border-border overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-primary/30">
+                                    {/* Image Container */}
+                                    <div className="relative h-48 sm:h-52 w-full overflow-hidden">
+                                        {service.images && service.images[0] ? (
+                                            <Image
+                                                src={service.images[0]}
+                                                alt={service.title || 'Experience image'}
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
+                                                <span className="text-4xl">🏛️</span>
+                                            </div>
+                                        )}
+                                        {/* Category Badge */}
+                                        <div className="absolute top-3 left-3">
+                                            <span className="bg-white/95 backdrop-blur-sm text-charcoal text-xs font-medium px-2.5 py-1 rounded-full shadow-sm">
+                                                {service.category}
+                                            </span>
+                                        </div>
+                                        {/* Rating Badge */}
+                                        {service.rating && (
+                                            <div className="absolute top-3 right-3">
+                                                <span className="bg-primary text-white text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1 shadow-md">
+                                                    <Star className="w-3 h-3 fill-current" />
+                                                    {service.rating}
+                                                </span>
+                                            </div>
+                                        )}
+                                    </div>
+                                    
+                                    {/* Content */}
+                                    <div className="p-4">
+                                        <h3 className="font-semibold text-charcoal text-base mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                                            {service.title}
+                                        </h3>
+                                        
+                                        {/* Meta Info */}
+                                        <div className="flex items-center gap-3 text-xs text-medium-gray mb-3">
+                                            {service.duration && (
+                                                <span className="flex items-center gap-1">
+                                                    <Clock className="w-3.5 h-3.5" />
+                                                    {service.duration}
+                                                </span>
+                                            )}
+                                            {service.location && (
+                                                <span className="flex items-center gap-1">
+                                                    <MapPin className="w-3.5 h-3.5" />
+                                                    {service.location.split(',')[0]}
+                                                </span>
+                                            )}
+                                        </div>
+                                        
+                                        <p className="text-sm text-medium-gray line-clamp-2 mb-4">
+                                            {service.description}
+                                        </p>
+                                        
+                                        {/* Price & CTA */}
+                                        <div className="flex items-center justify-between pt-3 border-t border-border">
+                                            <div>
+                                                <span className="text-xs text-medium-gray">From</span>
+                                                <p className="text-lg font-bold text-primary">€{service.price.toFixed(0)}</p>
+                                            </div>
+                                            <Button size="sm" className="rounded-full px-4 shadow-md shadow-primary/20">
+                                                View Details
+                                            </Button>
+                                        </div>
+                                    </div>
                                 </div>
-                            )}
-                            <CardHeader className="pb-3">
-                                <CardTitle className="text-lg sm:text-xl line-clamp-2">{service.title}</CardTitle>
-                                <CardDescription className="text-xs sm:text-sm">{service.category}</CardDescription>
-                            </CardHeader>
-                            <CardContent className="flex-grow pb-3">
-                                <p className="text-xs sm:text-sm text-muted-foreground line-clamp-3 mb-3">
-                                    {service.description}
-                                </p>
-                                <div className="mt-2 sm:mt-4">
-                                    <span className="text-lg sm:text-xl font-bold">€{service.price.toFixed(2)}</span>
-                                </div>
-                            </CardContent>
-                            <CardFooter className="pt-3">
-                                <Button asChild className="w-full text-sm sm:text-base">
-                                    <Link href={`/services/${service.id}`}>View Details</Link>
-                                </Button>
-                            </CardFooter>
-                        </Card>
-                    ))}
-                </div>
-            )}
+                            </Link>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
-import { CalendarIcon, MessageCircle, Clock } from "lucide-react";
+import { CalendarIcon, MessageCircle, Clock, Users, User, Mail, Phone, MapPin, FileText, ChevronRight, Shield, Star, Check } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -89,48 +89,56 @@ export function BookingForm({ activity }: BookingFormProps) {
     });
 
     return (
-        <Card className="border-border shadow-xl sticky top-28">
-            <CardHeader className="pb-4">
-                {activity.rating >= 4.8 && (
-                    <div className="mb-4 flex justify-center">
-                        <div className="inline-flex items-center gap-1.5 rounded-full bg-red-100 px-3 py-1 text-xs font-medium text-red-600 dark:bg-red-900/30 dark:text-red-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5">
-                                <path fillRule="evenodd" d="M13.5 4.938a7 7 0 11-9.006 1.737c.202-.257.59-.218.793.039.278.352.594.672.943.954.332.269.786-.049.773-.476a5.977 5.977 0 01.572-2.759 6.026 6.026 0 012.486-2.665c.247-.14.55-.016.677.216.093.174.204.338.341.48.214.22.583.19.758-.058a9.8 9.8 0 00.663-.468zM10.5 15.25a5.25 5.25 0 00-3.099-9.628 5.8 5.8 0 01-1.96 3.283.75.75 0 01-1.192-.555 6.75 6.75 0 009.283 5.83.75.75 0 01.932.932c-.5.94-1.193 1.777-2.016 2.442a5.25 5.25 0 00-1.948-2.304z" clipRule="evenodd" />
-                            </svg>
-                            Likely to Sell Out
-                        </div>
-                    </div>
-                )}
-                <div className="text-center space-y-3">
+        <Card className="border-border shadow-2xl sticky top-28 rounded-2xl overflow-hidden">
+            {/* Premium Header with Gradient */}
+            <div className="bg-gradient-to-r from-primary to-accent p-4 text-white">
+                <div className="flex items-center justify-between">
                     <div>
-                        <p className="text-sm text-muted-foreground mb-1">Price per person</p>
-                        <div className="text-lg font-semibold text-foreground">
-                            {pricePerPerson} €
-                        </div>
+                        <p className="text-white/80 text-sm font-medium">From</p>
+                        <div className="text-2xl font-bold">€{pricePerPerson}</div>
+                        <p className="text-white/70 text-xs">per person</p>
                     </div>
-                    <div className="pt-2 border-t border-border/50">
-                        <p className="text-sm text-muted-foreground mb-1">Total Price</p>
-                        <div className="flex items-baseline justify-center gap-1">
-                            <span className="text-3xl font-bold text-primary">{totalPrice} €</span>
+                    {activity.rating >= 4.8 && (
+                        <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                            <Star className="w-4 h-4 fill-current" />
+                            <span className="text-sm font-semibold">Popular</span>
                         </div>
-                        <p className="text-xs text-muted-foreground mt-1">
-                            for {guests} {guests === 1 ? 'person' : 'people'}
-                        </p>
+                    )}
+                </div>
+            </div>
+
+            <CardHeader className="pb-2 pt-4">
+                {/* Price Summary */}
+                <div className="bg-muted/50 rounded-xl p-4 border border-border">
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <p className="text-sm text-muted-foreground">Total for {guests} {guests === 1 ? 'person' : 'people'}</p>
+                            <div className="flex items-baseline gap-1 mt-1">
+                                <span className="text-3xl font-bold text-foreground">€{totalPrice}</span>
+                            </div>
+                        </div>
+                        <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+                            <Users className="h-6 w-6 text-primary" />
+                        </div>
                     </div>
                 </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-5 pt-4">
                 {/* Package Selection */}
                 {((activity.packageCategories && activity.packageCategories.length > 0) || (activity.packages && activity.packages.length > 0)) && (
                     <div className="space-y-3">
-                        <Label>Select Package</Label>
+                        <div className="flex items-center gap-2">
+                            <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
+                                <span className="text-xs font-bold text-primary">1</span>
+                            </div>
+                            <Label className="text-sm font-semibold">Select Package</Label>
+                        </div>
                         <RadioGroup
                             value={selectedPackageName}
                             onValueChange={setSelectedPackageName}
-                            className="flex flex-col gap-3"
+                            className="flex flex-col gap-2"
                         >
                             {activity.packageCategories && activity.packageCategories.length > 0 ? (
-                                // Categorized packages
                                 activity.packageCategories.map((category) => (
                                     <div key={category.name} className="space-y-2">
                                         <div className="pt-2 first:pt-0">
@@ -140,181 +148,204 @@ export function BookingForm({ activity }: BookingFormProps) {
                                             )}
                                         </div>
                                         {category.packages.map((pkg) => (
-                                            <div key={pkg.name} className="flex items-start space-x-2 border border-border rounded-lg p-3 hover:bg-accent/5 transition-colors">
-                                                <RadioGroupItem value={pkg.name} id={pkg.name} className="mt-1" />
-                                                <div className="grid gap-1.5 leading-none w-full">
-                                                    <Label htmlFor={pkg.name} className="font-semibold cursor-pointer">
-                                                        {pkg.name}
-                                                    </Label>
-                                                    <p className="text-sm text-muted-foreground">
-                                                        {pkg.description}
-                                                    </p>
-                                                    <p className="text-sm font-medium text-primary">
-                                                        {pkg.price} €
-                                                    </p>
+                                            <label key={pkg.name} className={cn(
+                                                "flex items-start gap-3 border-2 rounded-xl p-3 cursor-pointer transition-all duration-200",
+                                                selectedPackageName === pkg.name 
+                                                    ? "border-primary bg-primary/5 shadow-sm" 
+                                                    : "border-border hover:border-primary/50 hover:bg-muted/50"
+                                            )}>
+                                                <RadioGroupItem value={pkg.name} id={pkg.name} className="mt-0.5" />
+                                                <div className="flex-1 min-w-0">
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <span className="font-semibold text-sm">{pkg.name}</span>
+                                                        <span className="text-primary font-bold text-sm whitespace-nowrap">€{pkg.price}</span>
+                                                    </div>
+                                                    <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{pkg.description}</p>
                                                 </div>
-                                            </div>
+                                            </label>
                                         ))}
                                     </div>
                                 ))
                             ) : activity.packages && activity.packages.length > 0 ? (
-                                // Legacy flat packages
                                 activity.packages.map((pkg) => (
-                                    <div key={pkg.name} className="flex items-start space-x-2 border border-border rounded-lg p-3 hover:bg-accent/5 transition-colors">
-                                        <RadioGroupItem value={pkg.name} id={pkg.name} className="mt-1" />
-                                        <div className="grid gap-1.5 leading-none w-full">
-                                            <Label htmlFor={pkg.name} className="font-semibold cursor-pointer">
-                                                {pkg.name}
-                                            </Label>
-                                            <p className="text-sm text-muted-foreground">
-                                                {pkg.description}
-                                            </p>
-                                            <p className="text-sm font-medium text-primary">
-                                                {pkg.price} €
-                                            </p>
+                                    <label key={pkg.name} className={cn(
+                                        "flex items-start gap-3 border-2 rounded-xl p-3 cursor-pointer transition-all duration-200",
+                                        selectedPackageName === pkg.name 
+                                            ? "border-primary bg-primary/5 shadow-sm" 
+                                            : "border-border hover:border-primary/50 hover:bg-muted/50"
+                                    )}>
+                                        <RadioGroupItem value={pkg.name} id={pkg.name} className="mt-0.5" />
+                                        <div className="flex-1 min-w-0">
+                                            <div className="flex items-center justify-between gap-2">
+                                                <span className="font-semibold text-sm">{pkg.name}</span>
+                                                <span className="text-primary font-bold text-sm whitespace-nowrap">€{pkg.price}</span>
+                                            </div>
+                                            <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{pkg.description}</p>
                                         </div>
-                                    </div>
+                                    </label>
                                 ))
                             ) : null}
                         </RadioGroup>
                     </div>
                 )}
 
-                <div className="space-y-2">
-                    <Label>Select Date</Label>
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <Button
-                                variant={"outline"}
-                                className={cn(
-                                    "w-full justify-start text-left font-normal h-auto min-h-[48px] px-4",
-                                    !date && "text-muted-foreground"
-                                )}
-                            >
-                                <CalendarIcon className="mr-2 h-4 w-4" />
-                                {date ? format(date, "PPP") : <span>Pick a date</span>}
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
-                                mode="single"
-                                selected={date}
-                                onSelect={setDate}
-                                initialFocus
-                                disabled={(date) => {
-                                    const today = new Date();
-                                    today.setHours(0, 0, 0, 0);
-                                    const selectedDate = new Date(date);
-                                    selectedDate.setHours(0, 0, 0, 0);
-                                    return selectedDate < today;
-                                }}
-                            />
-                        </PopoverContent>
-                    </Popover>
-                </div>
+                {/* Date & Time Section */}
+                <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                        <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
+                            <span className="text-xs font-bold text-primary">2</span>
+                        </div>
+                        <Label className="text-sm font-semibold">When would you like to go?</Label>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-3">
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant="outline"
+                                    className={cn(
+                                        "w-full justify-start text-left font-normal h-12 rounded-xl border-2",
+                                        !date && "text-muted-foreground",
+                                        date && "border-primary/50 bg-primary/5"
+                                    )}
+                                >
+                                    <CalendarIcon className="mr-2 h-4 w-4 text-primary" />
+                                    {date ? format(date, "MMM d") : "Date"}
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0 rounded-xl" align="start">
+                                <Calendar
+                                    mode="single"
+                                    selected={date}
+                                    onSelect={setDate}
+                                    initialFocus
+                                    disabled={(date) => {
+                                        const today = new Date();
+                                        today.setHours(0, 0, 0, 0);
+                                        const selectedDate = new Date(date);
+                                        selectedDate.setHours(0, 0, 0, 0);
+                                        return selectedDate < today;
+                                    }}
+                                />
+                            </PopoverContent>
+                        </Popover>
 
-                {/* Time Selection */}
-                <div className="space-y-2">
-                    <Label>Select Time</Label>
-                    <div className="relative">
-                        <select
-                            className="flex h-auto min-h-[48px] w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none"
-                            value={selectedTime}
-                            onChange={(e) => setSelectedTime(e.target.value)}
-                        >
-                            <option value="" disabled>Select a time</option>
-                            {timeSlots.map((time) => {
-                                // Filter past times if date is today
-                                if (date) {
-                                    const now = new Date();
-                                    const isToday = date.toDateString() === now.toDateString();
-                                    if (isToday) {
-                                        const [hours] = time.split(':').map(Number);
-                                        if (hours <= now.getHours()) {
-                                            return null;
+                        <div className="relative">
+                            <select
+                                className={cn(
+                                    "flex h-12 w-full items-center rounded-xl border-2 bg-white px-3 py-2 text-sm transition-all duration-200 outline-none appearance-none cursor-pointer",
+                                    selectedTime ? "border-primary/50 bg-primary/5" : "border-border",
+                                    "hover:border-primary/50 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                                )}
+                                value={selectedTime}
+                                onChange={(e) => setSelectedTime(e.target.value)}
+                            >
+                                <option value="" disabled>Time</option>
+                                {timeSlots.map((time) => {
+                                    if (date) {
+                                        const now = new Date();
+                                        const isToday = date.toDateString() === now.toDateString();
+                                        if (isToday) {
+                                            const [hours] = time.split(':').map(Number);
+                                            if (hours <= now.getHours()) return null;
                                         }
                                     }
-                                }
-                                return (
-                                    <option key={time} value={time}>
-                                        {time}
-                                    </option>
-                                );
-                            })}
-                        </select>
-                        <Clock className="absolute right-3 top-3 h-4 w-4 text-muted-foreground pointer-events-none" />
+                                    return <option key={time} value={time}>{time}</option>;
+                                })}
+                            </select>
+                            <Clock className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary pointer-events-none" />
+                        </div>
                     </div>
                 </div>
 
-                <div className="space-y-2">
-                    <Label>Number of Guests</Label>
+                {/* Guests Section */}
+                <div className="space-y-3">
                     <div className="flex items-center gap-2">
+                        <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
+                            <span className="text-xs font-bold text-primary">3</span>
+                        </div>
+                        <Label className="text-sm font-semibold">Number of Guests</Label>
+                    </div>
+                    <div className="flex items-center gap-3 bg-muted/50 rounded-xl p-2">
                         <Button
                             type="button"
                             variant="outline"
                             size="icon"
                             onClick={() => setGuests(Math.max(1, guests - 1))}
                             disabled={guests <= 1}
-                            className="h-12 w-12 sm:h-10 sm:w-10"
+                            className="h-10 w-10 rounded-lg border-2 font-bold text-lg"
                         >
-                            -
+                            −
                         </Button>
-                        <Input
-                            type="number"
-                            min={1}
-                            max={20}
-                            value={guests}
-                            onChange={(e) => {
-                                const val = parseInt(e.target.value) || 1;
-                                setGuests(Math.max(1, Math.min(20, val)));
-                            }}
-                            className="text-center h-12 sm:h-10 text-base"
-                        />
+                        <div className="flex-1 text-center">
+                            <span className="text-2xl font-bold text-foreground">{guests}</span>
+                            <p className="text-xs text-muted-foreground">{guests === 1 ? 'guest' : 'guests'}</p>
+                        </div>
                         <Button
                             type="button"
                             variant="outline"
                             size="icon"
                             onClick={() => setGuests(Math.min(20, guests + 1))}
                             disabled={guests >= 20}
-                            className="h-12 w-12 sm:h-10 sm:w-10"
+                            className="h-10 w-10 rounded-lg border-2 font-bold text-lg"
                         >
                             +
                         </Button>
                     </div>
-                    <p className="text-xs text-muted-foreground">Maximum 20 guests</p>
                 </div>
 
-                <div className="space-y-2">
-                    <Label>Full Name</Label>
-                    <Input placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} className="h-12 sm:h-10" />
+                {/* Contact Details Section */}
+                <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                        <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
+                            <span className="text-xs font-bold text-primary">4</span>
+                        </div>
+                        <Label className="text-sm font-semibold">Your Details</Label>
+                    </div>
+                    
+                    <div className="space-y-3">
+                        <div className="relative">
+                            <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                            <Input placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} className="pl-10 h-12 rounded-xl" />
+                        </div>
+
+                        <div className="relative">
+                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                            <Input type="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} className="pl-10 h-12 rounded-xl" />
+                        </div>
+
+                        <div className="relative">
+                            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                            <Input placeholder="Phone / WhatsApp" value={phone} onChange={(e) => setPhone(e.target.value)} className="pl-10 h-12 rounded-xl" />
+                        </div>
+
+                        <div className="relative">
+                            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                            <Input placeholder="Pickup Location (Optional)" value={pickupLocation} onChange={(e) => setPickupLocation(e.target.value)} className="pl-10 h-12 rounded-xl" />
+                        </div>
+
+                        <div className="relative">
+                            <FileText className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                            <Input placeholder="Special Requests (Optional)" value={specialRequests} onChange={(e) => setSpecialRequests(e.target.value)} className="pl-10 h-12 rounded-xl" />
+                        </div>
+                    </div>
                 </div>
 
-                <div className="space-y-2">
-                    <Label>Email</Label>
-                    <Input type="email" placeholder="john@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="h-12 sm:h-10" />
-                </div>
-
-                <div className="space-y-2">
-                    <Label>Phone / WhatsApp</Label>
-                    <Input placeholder="+212 601 439 975" value={phone} onChange={(e) => setPhone(e.target.value)} className="h-12 sm:h-10" />
-                </div>
-
-                <div className="space-y-2">
-                    <Label>Pickup Location (Optional)</Label>
-                    <Input placeholder="Hotel name or address" value={pickupLocation} onChange={(e) => setPickupLocation(e.target.value)} className="h-12 sm:h-10" />
-                </div>
-
-                <div className="space-y-2">
-                    <Label>Special Requests (Optional)</Label>
-                    <Input placeholder="Dietary requirements, accessibility, etc." value={specialRequests} onChange={(e) => setSpecialRequests(e.target.value)} className="h-12 sm:h-10" />
+                {/* Trust Badges */}
+                <div className="flex items-center justify-center gap-4 py-3 border-t border-border">
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <Shield className="h-4 w-4 text-green-600" />
+                        <span>Secure Booking</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <Check className="h-4 w-4 text-green-600" />
+                        <span>Free Cancellation</span>
+                    </div>
                 </div>
 
                 <div className="pt-2">
-                    <p className="text-xs text-center text-muted-foreground mb-3">
-                        No payment required today
-                    </p>
                     <Button
-                        className="w-full text-base sm:text-lg font-semibold py-6 sm:py-5 h-auto min-h-[52px] rounded-full shadow-lg hover:shadow-xl transition-all"
+                        className="w-full text-base font-bold py-6 h-auto min-h-[56px] rounded-xl bg-gradient-to-r from-primary to-accent hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5"
                         onClick={() => {
                             if (isGuest) {
                                 const callbackUrl = typeof window !== 'undefined'

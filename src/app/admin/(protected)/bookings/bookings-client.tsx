@@ -16,11 +16,15 @@ import {
     ArrowUpDown,
     Phone,
     Mail,
-    Users
+    Users,
+    Filter,
+    MoreHorizontal,
+    Eye
 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { BookingStatusBadge, PaymentStatusBadge } from '@/components/ui/status-badge'
+import { EmptyState } from '@/components/ui/empty-state'
 
 interface BookingsClientProps {
     initialBookings: (Booking & { service?: { title: string } })[]
@@ -128,61 +132,69 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
     return (
         <div className="space-y-6">
             {/* Controls */}
-            <div className="flex flex-col gap-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
-                    <div className="relative w-full sm:w-96">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <div className="flex flex-col gap-4 bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-border">
+                <div className="flex flex-col sm:flex-row gap-3 justify-between items-stretch sm:items-center">
+                    <div className="relative flex-1 max-w-md">
+                        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
                         <input
                             type="text"
                             placeholder="Search by name, email, or activity..."
-                            className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-black/5"
+                            className="w-full pl-10 pr-4 py-2.5 border-2 border-border rounded-xl bg-white text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
                     </div>
 
-                    <button
+                    <Button
+                        variant="outline"
                         onClick={toggleSort}
-                        className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors"
+                        className="flex items-center gap-2 rounded-xl border-2"
                     >
                         <ArrowUpDown className="h-4 w-4" />
-                        Sort by Date ({sortOrder === 'asc' ? 'Oldest' : 'Newest'})
-                    </button>
+                        <span className="hidden sm:inline">Sort:</span> {sortOrder === 'asc' ? 'Oldest' : 'Newest'}
+                    </Button>
                 </div>
 
                 {/* Status Filter */}
                 <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-sm font-medium text-gray-700">Filter by Status:</span>
+                    <div className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground mr-2">
+                        <Filter className="h-4 w-4" />
+                        <span className="hidden sm:inline">Status:</span>
+                    </div>
                     {['ALL', 'PENDING', 'CONFIRMED', 'COMPLETED', 'CANCELLED'].map((status) => (
                         <button
                             key={status}
                             onClick={() => setStatusFilter(status)}
-                            className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${statusFilter === status
-                                    ? 'bg-[#FF5F00] text-white'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            className={`px-3 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 ${statusFilter === status
+                                    ? 'bg-primary text-white shadow-md shadow-primary/25'
+                                    : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
                                 }`}
                         >
-                            {status}
+                            {status === 'ALL' ? 'All' : status.charAt(0) + status.slice(1).toLowerCase()}
                         </button>
                     ))}
                 </div>
             </div>
 
             {/* Mobile Card View */}
-            <div className="block md:hidden space-y-4">
+            <div className="block md:hidden space-y-3">
                 {filteredBookings && filteredBookings.length > 0 ? (
                     filteredBookings.map((booking) => (
-                        <Card key={booking.id} className="overflow-hidden hover:scale-[1.01] transition-transform">
+                        <Card key={booking.id} className="overflow-hidden rounded-xl border-border hover:shadow-md transition-all duration-200">
                             <CardContent className="p-0 flex h-full">
-                                {/* Left Side status Color Strip or Icon Box */}
-                                <div className={`w-16 flex-shrink-0 flex flex-col items-center justify-center p-2 text-white ${booking.status === 'CONFIRMED' ? 'bg-green-500' :
-                                        booking.status === 'CANCELLED' ? 'bg-red-500' :
-                                            booking.status === 'COMPLETED' ? 'bg-blue-500' : 'bg-yellow-500'
-                                    }`}>
+                                {/* Left Side - Date & Status */}
+                                <div className={`w-20 flex-shrink-0 flex flex-col items-center justify-center p-3 text-white ${
+                                    booking.status === 'CONFIRMED' ? 'bg-gradient-to-b from-emerald-500 to-emerald-600' :
+                                    booking.status === 'CANCELLED' ? 'bg-gradient-to-b from-red-500 to-red-600' :
+                                    booking.status === 'COMPLETED' ? 'bg-gradient-to-b from-blue-500 to-blue-600' : 
+                                    'bg-gradient-to-b from-amber-500 to-amber-600'
+                                }`}>
                                     <div className="text-center">
-                                        <span className="text-xs font-bold uppercase tracking-wider block opacity-90">{booking.status.slice(0, 4)}</span>
-                                        <div className="mt-1 font-bold text-lg">{new Date(booking.date).getDate()}</div>
-                                        <div className="text-[10px] uppercase">{format(new Date(booking.date), 'MMM')}</div>
+                                        <div className="font-bold text-2xl">{new Date(booking.date).getDate()}</div>
+                                        <div className="text-xs uppercase font-medium opacity-90">{format(new Date(booking.date), 'MMM')}</div>
+                                        <div className="mt-2 text-[10px] font-semibold uppercase tracking-wider bg-white/20 px-2 py-0.5 rounded">
+                                            {booking.status.slice(0, 4)}
+                                        </div>
                                     </div>
                                 </div>
 
@@ -190,45 +202,43 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                                 <div className="flex-1 p-3 flex flex-col justify-between min-w-0">
                                     <div className="flex justify-between items-start gap-2">
                                         <div className="min-w-0">
-                                            <h3 className="font-bold text-sm text-gray-900 truncate leading-tight">
+                                            <h3 className="font-semibold text-sm text-foreground truncate leading-tight">
                                                 {booking.activityTitle || booking.service?.title}
                                             </h3>
-                                            <p className="text-xs text-gray-500 truncate mt-0.5">{booking.name}</p>
+                                            <p className="text-xs text-muted-foreground truncate mt-0.5">{booking.name}</p>
                                         </div>
                                         <div className="flex flex-col items-end shrink-0">
-                                            <span className="font-bold text-primary text-sm">€{booking.totalPrice.toFixed(0)}</span>
-                                            <span className={`text-[10px] ${booking.paymentStatus === 'PAID' ? 'text-green-600' : 'text-yellow-600'} font-medium`}>
-                                                {booking.paymentStatus === 'PAID' ? 'Paid' : 'Unpaid'}
-                                            </span>
+                                            <span className="font-bold text-primary text-base">€{booking.totalPrice.toFixed(0)}</span>
+                                            <PaymentStatusBadge status={booking.paymentStatus} />
                                         </div>
                                     </div>
 
-                                    <div className="flex justify-between items-end mt-2">
+                                    <div className="flex justify-between items-end mt-3">
                                         <div className="flex items-center gap-3">
-                                            <div className="flex items-center gap-1 text-xs text-gray-500">
+                                            <div className="flex items-center gap-1.5 text-xs text-muted-foreground bg-muted px-2 py-1 rounded-md">
                                                 <Users className="h-3 w-3" />
                                                 <span>{booking.guests}</span>
                                             </div>
                                             {booking.phone && (
-                                                <div className="flex items-center gap-1 text-xs text-gray-500">
+                                                <div className="flex items-center gap-1.5 text-xs text-muted-foreground bg-muted px-2 py-1 rounded-md">
                                                     <Phone className="h-3 w-3" />
                                                 </div>
                                             )}
                                         </div>
 
-                                        <div className="flex gap-2">
+                                        <div className="flex gap-1.5">
                                             {booking.status === 'PENDING' && (
-                                                <Button size="icon" className="h-7 w-7 rounded-full bg-green-100 text-green-700 hover:bg-green-200" onClick={(e) => { e.stopPropagation(); handleConfirm(booking.id); }} disabled={isPending}>
+                                                <Button size="icon" className="h-8 w-8 rounded-lg bg-emerald-100 text-emerald-700 hover:bg-emerald-200 shadow-sm" onClick={(e) => { e.stopPropagation(); handleConfirm(booking.id); }} disabled={isPending}>
                                                     <CheckCircle className="h-4 w-4" />
                                                 </Button>
                                             )}
                                             {(booking.status === 'PENDING' || booking.status === 'CONFIRMED') && (
-                                                <Button size="icon" className="h-7 w-7 rounded-full bg-red-100 text-red-700 hover:bg-red-200" onClick={(e) => { e.stopPropagation(); handleCancel(booking.id); }} disabled={isPending}>
+                                                <Button size="icon" className="h-8 w-8 rounded-lg bg-red-100 text-red-700 hover:bg-red-200 shadow-sm" onClick={(e) => { e.stopPropagation(); handleCancel(booking.id); }} disabled={isPending}>
                                                     <XCircle className="h-4 w-4" />
                                                 </Button>
                                             )}
-                                            <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => handleViewDetails(booking)}>
-                                                <ArrowUpDown className="h-4 w-4 rotate-90" />
+                                            <Button size="icon" variant="outline" className="h-8 w-8 rounded-lg" onClick={() => handleViewDetails(booking)}>
+                                                <Eye className="h-4 w-4" />
                                             </Button>
                                         </div>
                                     </div>
@@ -237,139 +247,143 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                         </Card>
                     ))
                 ) : (
-                    <div className="text-center py-12 text-muted-foreground">
-                        <p>No bookings found.</p>
-                    </div>
+                    <EmptyState
+                        icon="bookings"
+                        title="No bookings found"
+                        description={searchQuery ? `No results for "${searchQuery}"` : "Bookings will appear here when customers make reservations."}
+                        compact
+                    />
                 )}
             </div>
 
             {/* Desktop Table View */}
-            <div className="hidden md:block bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+            <div className="hidden md:block bg-white rounded-xl shadow-sm border border-border overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-sm">
-                        <thead className="bg-gray-50 border-b border-gray-100">
+                        <thead className="bg-muted/50 border-b border-border">
                             <tr>
-                                <th className="px-6 py-4 font-semibold text-gray-900">Guest</th>
-                                <th className="px-6 py-4 font-semibold text-gray-900">Contact</th>
-                                <th className="px-6 py-4 font-semibold text-gray-900">Activity</th>
-                                <th className="px-6 py-4 font-semibold text-gray-900">Date & Guests</th>
-                                <th className="px-6 py-4 font-semibold text-gray-900">Total</th>
-                                <th className="px-6 py-4 font-semibold text-gray-900">Status</th>
-                                <th className="px-6 py-4 font-semibold text-gray-900 text-right">Actions</th>
+                                <th className="px-5 py-4 font-semibold text-foreground text-xs uppercase tracking-wider">Guest</th>
+                                <th className="px-5 py-4 font-semibold text-foreground text-xs uppercase tracking-wider">Contact</th>
+                                <th className="px-5 py-4 font-semibold text-foreground text-xs uppercase tracking-wider">Activity</th>
+                                <th className="px-5 py-4 font-semibold text-foreground text-xs uppercase tracking-wider">Date & Guests</th>
+                                <th className="px-5 py-4 font-semibold text-foreground text-xs uppercase tracking-wider">Total</th>
+                                <th className="px-5 py-4 font-semibold text-foreground text-xs uppercase tracking-wider">Status</th>
+                                <th className="px-5 py-4 font-semibold text-foreground text-xs uppercase tracking-wider text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-100">
+                        <tbody className="divide-y divide-border">
                             {filteredBookings.length === 0 ? (
                                 <tr>
-                                    <td colSpan={7} className="px-6 py-12 text-center text-gray-500">
-                                        No bookings found matching your search.
+                                    <td colSpan={7} className="px-6 py-16">
+                                        <EmptyState
+                                            icon="bookings"
+                                            title="No bookings found"
+                                            description={searchQuery ? `No results for "${searchQuery}"` : "Bookings will appear here when customers make reservations."}
+                                            compact
+                                        />
                                     </td>
                                 </tr>
                             ) : (
                                 filteredBookings.map((booking) => (
-                                    <tr key={booking.id} className="hover:bg-gray-50/50 transition-colors">
-                                        <td className="px-6 py-4">
-                                            <div className="font-medium text-gray-900">{booking.name}</div>
-                                            <div className="text-xs text-gray-500 mt-0.5">ID: {booking.id}</div>
+                                    <tr key={booking.id} className="hover:bg-muted/30 transition-colors">
+                                        <td className="px-5 py-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                                                    <span className="text-primary font-semibold text-sm">
+                                                        {booking.name?.charAt(0)?.toUpperCase() || '?'}
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <div className="font-medium text-foreground">{booking.name}</div>
+                                                    <div className="text-xs text-muted-foreground font-mono">#{booking.id.slice(-6)}</div>
+                                                </div>
+                                            </div>
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <div className="flex items-center gap-2 text-gray-600">
-                                                <Mail className="h-3.5 w-3.5" />
-                                                {booking.email}
+                                        <td className="px-5 py-4">
+                                            <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                                                <Mail className="h-3.5 w-3.5 shrink-0" />
+                                                <span className="truncate max-w-[150px]">{booking.email}</span>
                                             </div>
                                             {booking.phone && (
-                                                <div className="flex items-center gap-2 text-gray-600 mt-1">
-                                                    <Phone className="h-3.5 w-3.5" />
+                                                <div className="flex items-center gap-2 text-muted-foreground text-sm mt-1">
+                                                    <Phone className="h-3.5 w-3.5 shrink-0" />
                                                     {booking.phone}
                                                 </div>
                                             )}
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <div className="font-medium text-gray-900">{booking.activityTitle || booking.service?.title}</div>
+                                        <td className="px-5 py-4">
+                                            <div className="font-medium text-foreground max-w-[200px] truncate">{booking.activityTitle || booking.service?.title}</div>
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <div className="flex items-center gap-2 text-gray-600">
-                                                <Calendar className="h-3.5 w-3.5" />
+                                        <td className="px-5 py-4">
+                                            <div className="flex items-center gap-2 text-foreground">
+                                                <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
                                                 {format(new Date(booking.date), 'MMM d, yyyy')}
                                             </div>
-                                            <div className="flex items-center gap-2 text-gray-600 mt-1">
+                                            <div className="flex items-center gap-2 text-muted-foreground text-sm mt-1">
                                                 <Users className="h-3.5 w-3.5" />
                                                 {booking.guests} guest{booking.guests !== 1 && 's'}
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <div className="font-medium text-gray-900">
-                                                €{booking.totalPrice.toFixed(2)}
+                                        <td className="px-5 py-4">
+                                            <div className="font-bold text-foreground text-base">
+                                                €{booking.totalPrice.toFixed(0)}
                                             </div>
-                                            <div className="text-xs text-gray-500 mt-0.5">
-                                                {booking.paymentStatus === 'PAID' ? (
-                                                    <span className="text-green-600">Paid</span>
-                                                ) : (
-                                                    <span className="text-yellow-600">Unpaid</span>
-                                                )}
-                                            </div>
+                                            <PaymentStatusBadge status={booking.paymentStatus} />
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <span
-                                                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${booking.status === 'CONFIRMED'
-                                                        ? 'bg-green-100 text-green-800'
-                                                        : booking.status === 'CANCELLED'
-                                                            ? 'bg-red-100 text-red-800'
-                                                            : booking.status === 'COMPLETED'
-                                                                ? 'bg-blue-100 text-blue-800'
-                                                                : 'bg-yellow-100 text-yellow-800'
-                                                    }`}
-                                            >
-                                                {booking.status}
-                                            </span>
+                                        <td className="px-5 py-4">
+                                            <BookingStatusBadge status={booking.status} />
                                         </td>
-                                        <td className="px-6 py-4 text-right">
-                                            <div className="flex items-center justify-end gap-2">
-                                                {/* Confirm - Only show for PENDING */}
+                                        <td className="px-5 py-4 text-right">
+                                            <div className="flex items-center justify-end gap-1">
                                                 {booking.status === 'PENDING' && (
-                                                    <button
+                                                    <Button
+                                                        size="icon"
+                                                        variant="ghost"
                                                         onClick={() => handleConfirm(booking.id)}
                                                         disabled={isPending}
-                                                        className="p-2 text-green-600 hover:bg-green-50 rounded-full transition-colors"
+                                                        className="h-8 w-8 rounded-lg text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700"
                                                         title="Confirm Booking"
                                                     >
                                                         <CheckCircle className="h-4 w-4" />
-                                                    </button>
+                                                    </Button>
                                                 )}
 
-                                                {/* Cancel - Show for PENDING and CONFIRMED */}
                                                 {(booking.status === 'PENDING' || booking.status === 'CONFIRMED') && (
-                                                    <button
+                                                    <Button
+                                                        size="icon"
+                                                        variant="ghost"
                                                         onClick={() => handleCancel(booking.id)}
                                                         disabled={isPending}
-                                                        className="p-2 text-orange-600 hover:bg-orange-50 rounded-full transition-colors"
+                                                        className="h-8 w-8 rounded-lg text-amber-600 hover:bg-amber-50 hover:text-amber-700"
                                                         title="Cancel Booking"
                                                     >
                                                         <XCircle className="h-4 w-4" />
-                                                    </button>
+                                                    </Button>
                                                 )}
 
-                                                {/* Process/Complete - Show for CONFIRMED */}
                                                 {booking.status === 'CONFIRMED' && (
-                                                    <button
+                                                    <Button
+                                                        size="icon"
+                                                        variant="ghost"
                                                         onClick={() => handleProcess(booking.id)}
                                                         disabled={isPending}
-                                                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
+                                                        className="h-8 w-8 rounded-lg text-blue-600 hover:bg-blue-50 hover:text-blue-700"
                                                         title="Mark as Completed"
                                                     >
                                                         <CheckCircle2 className="h-4 w-4" />
-                                                    </button>
+                                                    </Button>
                                                 )}
 
-                                                {/* Delete - Show for all statuses */}
-                                                <button
+                                                <Button
+                                                    size="icon"
+                                                    variant="ghost"
                                                     onClick={() => handleDelete(booking.id)}
                                                     disabled={isPending}
-                                                    className="p-2 text-red-600 hover:bg-red-50 rounded-full transition-colors"
+                                                    className="h-8 w-8 rounded-lg text-red-600 hover:bg-red-50 hover:text-red-700"
                                                     title="Delete Booking"
                                                 >
                                                     <Trash2 className="h-4 w-4" />
-                                                </button>
+                                                </Button>
                                             </div>
                                         </td>
                                     </tr>
