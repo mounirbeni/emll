@@ -16,7 +16,7 @@ export async function GET(request: Request) {
         }
 
         const reviews = await prisma.review.findMany({
-            where: { serviceId },
+            where: { serviceId, status: 'APPROVED' },
             orderBy: { createdAt: 'desc' },
             take: limit ? Math.min(50, Math.max(1, parseInt(limit, 10))) : 20,
             include: {

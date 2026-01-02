@@ -15,6 +15,50 @@ function signCloudinaryParams(params: Record<string, string | number | undefined
   return crypto.createHash('sha1').update(toSign + apiSecret).digest('hex')
 }
 
+export async function GET() {
+  try {
+    await requireAdmin()
+
+    const cloudName = process.env.CLOUDINARY_CLOUD_NAME
+    const apiKey = process.env.CLOUDINARY_API_KEY
+    const apiSecret = process.env.CLOUDINARY_API_SECRET
+    const uploadPreset = process.env.CLOUDINARY_UPLOAD_PRESET
+
+    if (!cloudName || !apiKey || !apiSecret || !uploadPreset) {
+      return NextResponse.json(
+        { error: 'Cloudinary env vars are missing' },
+        { status: 500 }
+      )
+    }
+
+    const timestamp = Math.floor(Date.now() / 1000)
+    const folder = 'blog'
+
+    const signature = signCloudinaryParams(
+      {
+        folder,
+        timestamp,
+        upload_preset: uploadPreset,
+      },
+      apiSecret
+    )
+
+    return NextResponse.json({
+      cloudName,
+      apiKey,
+      uploadPreset,
+      timestamp,
+      folder,
+      signature,
+    })
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Failed to create Cloudinary signature' },
+      { status: 500 }
+    )
+  }
+}
+
 export async function POST(request: Request) {
   try {
     await requireAdmin()

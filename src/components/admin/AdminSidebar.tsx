@@ -32,6 +32,18 @@ const sidebarItems = [
         description: 'Experience listings',
     },
     {
+        title: 'Blog',
+        href: '/admin/blog',
+        icon: MessageSquare,
+        description: 'Content & posts',
+    },
+    {
+        title: 'Reviews',
+        href: '/admin/reviews',
+        icon: Shield,
+        description: 'Moderate reviews',
+    },
+    {
         title: 'Customers',
         href: '/admin/customers',
         icon: Users,

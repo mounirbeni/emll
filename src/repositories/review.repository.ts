@@ -117,11 +117,11 @@ export class ReviewRepository implements BaseRepository<
     }
 
     /**
-     * Get average rating for a service
+     * Get average rating for a service (approved reviews only)
      */
     async getAverageRating(serviceId: string): Promise<number> {
         const result = await prisma.review.aggregate({
-            where: { serviceId },
+            where: { serviceId, status: 'APPROVED' },
             _avg: {
                 rating: true
             }
@@ -130,11 +130,11 @@ export class ReviewRepository implements BaseRepository<
     }
 
     /**
-     * Get review count for a service
+     * Get review count for a service (approved reviews only)
      */
     async getReviewCount(serviceId: string): Promise<number> {
         return await prisma.review.count({
-            where: { serviceId }
+            where: { serviceId, status: 'APPROVED' }
         });
     }
 
