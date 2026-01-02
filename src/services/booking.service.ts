@@ -214,6 +214,16 @@ export class BookingService {
                 data.guests,
                 data.totalPrice
             );
+
+            await emailService.sendAdminBookingNotification(
+                booking.id,
+                data.activityTitle,
+                data.date,
+                data.guests,
+                data.totalPrice,
+                data.name,
+                data.email
+            );
         } catch (error) {
             // Don't fail booking creation if email fails
             console.error('Failed to send booking received email:', error);

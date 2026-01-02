@@ -60,16 +60,17 @@ export async function GET() {
     try {
         await requireAdmin();
 
-        const hasApiKey = !!process.env.RESEND_API_KEY;
-        const fromEmail = process.env.RESEND_FROM_EMAIL || 'Explore Marrakesh <onboarding@resend.dev>';
+        const configured = !!process.env.GMAIL_USER && !!process.env.GMAIL_APP_PASSWORD;
+        const gmailUser = process.env.GMAIL_USER;
+        const fromEmail = gmailUser ? `Explore Marrakesh <${gmailUser}>` : 'Explore Marrakesh <no-reply@example.com>';
 
         return NextResponse.json({
             data: {
-                configured: hasApiKey,
+                configured,
                 fromEmail,
-                message: hasApiKey
+                message: configured
                     ? 'Email service is configured and ready'
-                    : 'RESEND_API_KEY not found in environment variables'
+                    : 'GMAIL_USER / GMAIL_APP_PASSWORD not found in environment variables'
             }
         }, { status: 200 });
     } catch (error) {

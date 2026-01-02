@@ -1,10 +1,10 @@
 /**
  * Email Service
  * Handles sending emails for bookings, confirmations, and notifications
- * Uses Resend for email delivery
+ * Uses Nodemailer (Gmail) for email delivery
  */
 
-import { Resend } from 'resend';
+import nodemailer, { type Transporter } from 'nodemailer';
 
 interface EmailOptions {
     to: string;
@@ -14,49 +14,56 @@ interface EmailOptions {
 }
 
 export class EmailService {
-    private resend: Resend | null = null;
+    private transporter: Transporter | null = null;
     private fromEmail: string;
+    private adminEmail: string | null;
 
     constructor() {
         // In Next.js, environment variables need to be accessed at runtime, not in constructor
-        // We'll initialize Resend lazily when sending emails
-        this.fromEmail = process.env.RESEND_FROM_EMAIL || 'Explore Marrakesh <onboarding@resend.dev>';
+        // We'll initialize Nodemailer lazily when sending emails
+        const gmailUser = process.env.GMAIL_USER;
+        this.fromEmail = gmailUser ? `Explore Marrakesh <${gmailUser}>` : 'Explore Marrakesh <no-reply@example.com>';
+        this.adminEmail = gmailUser || null;
     }
 
-    /**
-     * Get or initialize Resend client
-     */
-    private getResend(): Resend | null {
-        if (this.resend) {
-            return this.resend;
+    private getTransporter(): Transporter | null {
+        if (this.transporter) {
+            return this.transporter;
         }
 
-        const apiKey = process.env.RESEND_API_KEY;
-        if (!apiKey) {
-            console.warn('⚠️ RESEND_API_KEY not found in environment variables. Emails will be logged to console only.');
-            console.warn('⚠️ Make sure RESEND_API_KEY is set in .env and restart the server.');
+        const user = process.env.GMAIL_USER;
+        const pass = process.env.GMAIL_APP_PASSWORD;
+
+        if (!user || !pass) {
+            console.warn('⚠️ Gmail email credentials not found in environment variables. Emails will be logged to console only.');
+            console.warn('⚠️ Make sure GMAIL_USER and GMAIL_APP_PASSWORD are set in .env and restart the server.');
             return null;
         }
 
         try {
-            this.resend = new Resend(apiKey);
-            console.log('✅ Resend email service initialized successfully');
-            return this.resend;
+            this.transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user,
+                    pass
+                }
+            });
+            console.log('✅ Nodemailer Gmail service initialized successfully');
+            return this.transporter;
         } catch (error) {
-            console.error('❌ Failed to initialize Resend:', error);
+            console.error('❌ Failed to initialize Nodemailer transport:', error);
             return null;
         }
     }
 
     /**
-     * Send an email using Resend
+     * Send an email using Nodemailer
      */
     private async sendEmail(options: EmailOptions): Promise<void> {
-        const resend = this.getResend();
+        const transporter = this.getTransporter();
 
-        if (!resend) {
-            // Fallback: log to console if Resend is not configured
-            console.log('📧 Email would be sent (Resend not configured):', {
+        if (!transporter) {
+            console.log('📧 Email would be sent (Gmail not configured):', {
                 to: options.to,
                 subject: options.subject,
             });
@@ -64,45 +71,24 @@ export class EmailService {
         }
 
         try {
-            console.log('📧 Attempting to send email via Resend:', {
+            console.log('📧 Attempting to send email via Gmail:', {
                 to: options.to,
                 subject: options.subject,
                 from: this.fromEmail
             });
 
-            const result = await resend.emails.send({
+            const info = await transporter.sendMail({
                 from: this.fromEmail,
                 to: options.to,
                 subject: options.subject,
                 html: options.html,
-                text: options.text || options.html.replace(/<[^>]*>/g, ''), // Strip HTML for text version
+                text: options.text || options.html.replace(/<[^>]*>/g, ''),
             });
 
-            console.log('📧 Resend API response:', {
-                hasError: !!result.error,
-                hasData: !!result.data,
-                error: result.error,
-                data: result.data
-            });
-
-            if (result.error) {
-                console.error('❌ Resend API error:', {
-                    error: result.error,
-                    message: result.error.message,
-                    name: result.error.name
-                });
-                throw new Error(`Email sending failed: ${result.error.message}`);
-            }
-
-            if (!result.data || !result.data.id) {
-                console.error('❌ Resend API returned no email ID:', result);
-                throw new Error('Email sending failed: No email ID returned from Resend');
-            }
-
-            console.log('✅ Email sent successfully via Resend:', {
+            console.log('✅ Email sent successfully via Gmail:', {
                 to: options.to,
                 subject: options.subject,
-                emailId: result.data.id,
+                messageId: info.messageId,
                 from: this.fromEmail
             });
         } catch (error: any) {
@@ -113,9 +99,59 @@ export class EmailService {
                 to: options.to,
                 subject: options.subject
             });
-            // Re-throw the error so callers can handle it appropriately
             throw error;
         }
+    }
+
+    async sendAdminBookingNotification(
+        bookingId: string,
+        activityTitle: string,
+        date: Date,
+        guests: number,
+        totalPrice: number,
+        customerName: string,
+        customerEmail: string
+    ): Promise<void> {
+        if (!this.adminEmail) {
+            console.warn('⚠️ Admin email is not configured. Skipping admin booking notification.');
+            return;
+        }
+
+        const formattedDate = new Date(date).toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        const html = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            </head>
+            <body>
+                <h2>New Booking Received</h2>
+                <p><strong>Booking ID:</strong> ${bookingId}</p>
+                <p><strong>Activity:</strong> ${activityTitle}</p>
+                <p><strong>Date & Time:</strong> ${formattedDate}</p>
+                <p><strong>Guests:</strong> ${guests}</p>
+                <p><strong>Total Price:</strong> €${totalPrice.toFixed(2)}</p>
+                <hr />
+                <p><strong>Customer:</strong> ${customerName}</p>
+                <p><strong>Customer Email:</strong> ${customerEmail}</p>
+            </body>
+            </html>
+        `;
+
+        await this.sendEmail({
+            to: this.adminEmail,
+            subject: `New Booking Received: ${activityTitle}`,
+            html
+        });
     }
 
     /**

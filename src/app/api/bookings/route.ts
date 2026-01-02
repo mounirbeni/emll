@@ -50,6 +50,9 @@ export async function POST(request: Request) {
 
         const bookingData = validationResult.data;
 
+        const customerEmail = session.user.email || bookingData.email;
+        const customerName = session.user.name || bookingData.name;
+
         // Default sensitive/missing fields if needed (e.g. email/name from session if missing in body but present in session)
         // However, schema requires name/email. If client didn't send them but is logged in, we might want to pre-fill?
         // Let's assume frontend sends them pre-filled or we update Schema to optional?
@@ -71,7 +74,11 @@ export async function POST(request: Request) {
         */
 
         // Create booking through service (handles all validation)
-        const booking = await bookingService.createBooking(bookingData, session.user.id);
+        const booking = await bookingService.createBooking({
+            ...bookingData,
+            email: customerEmail,
+            name: customerName,
+        }, session.user.id);
 
         return createdResponse(booking);
 

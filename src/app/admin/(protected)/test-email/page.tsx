@@ -151,7 +151,7 @@ export default function TestEmailPage() {
                                                 Configuration Required
                                             </p>
                                             <p className="text-sm text-yellow-700 dark:text-yellow-300">
-                                                Make sure RESEND_API_KEY is set in your .env file and restart the server.
+                                                Make sure GMAIL_USER and GMAIL_APP_PASSWORD are set in your .env file and restart the server.
                                             </p>
                                         </div>
                                     </div>
@@ -240,8 +240,8 @@ export default function TestEmailPage() {
                                 Make sure your <code className="px-1.5 py-0.5 bg-muted rounded">.env</code> file contains:
                             </p>
                             <pre className="mt-2 p-3 bg-muted rounded-lg text-xs overflow-x-auto">
-                                {`RESEND_API_KEY=your_api_key_here
-RESEND_FROM_EMAIL=Your Name <your-email@domain.com>`}
+                                {`GMAIL_USER=your-email@gmail.com
+GMAIL_APP_PASSWORD=your_app_password_here`}
                             </pre>
                         </div>
                         <div>

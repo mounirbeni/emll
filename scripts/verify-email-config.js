@@ -8,8 +8,8 @@ const path = require('path');
 
 console.log('🔍 Verifying Email Configuration...\n');
 
-// Check .env.local file
-const envPath = path.join(__dirname, '..', '.env.local');
+// Check .env file
+const envPath = path.join(__dirname, '..', '.env');
 let envVars = {};
 
 if (fs.existsSync(envPath)) {
@@ -35,25 +35,25 @@ if (fs.existsSync(envPath)) {
         }
     });
     
-    console.log('✅ .env.local file found\n');
+    console.log('✅ .env file found\n');
 } else {
-    console.log('❌ .env.local file not found\n');
+    console.log('❌ .env file not found\n');
     process.exit(1);
 }
 
 // Check required environment variables
 console.log('📋 Environment Variables:');
 const requiredVars = {
-    'RESEND_API_KEY': 'Resend API Key',
-    'RESEND_FROM_EMAIL': 'Resend From Email',
+    'GMAIL_USER': 'Gmail User',
+    'GMAIL_APP_PASSWORD': 'Gmail App Password',
     'DATABASE_URL': 'Database URL'
 };
 
 let allPresent = true;
 Object.keys(requiredVars).forEach(key => {
     if (envVars[key]) {
-        const displayValue = key === 'RESEND_API_KEY' 
-            ? `${envVars[key].substring(0, 10)}...` 
+        const displayValue = key === 'GMAIL_APP_PASSWORD'
+            ? `${envVars[key].substring(0, 4)}...`
             : key === 'DATABASE_URL'
             ? `${envVars[key].substring(0, 30)}...`
             : envVars[key];
@@ -72,7 +72,7 @@ if (fs.existsSync(packagePath)) {
     const allDeps = { ...packageJson.dependencies, ...packageJson.devDependencies };
     
     const requiredPackages = {
-        'resend': 'Resend SDK',
+        'nodemailer': 'Nodemailer',
         '@react-email/components': 'React Email Components',
         'react-email': 'React Email (dev)',
         '@react-email/preview-server': 'React Email Preview (dev)'
@@ -91,40 +91,28 @@ if (fs.existsSync(packagePath)) {
     allPresent = false;
 }
 
-// Validate RESEND_API_KEY format
+// Validate app password format
 console.log('\n🔑 API Key Validation:');
-if (envVars.RESEND_API_KEY) {
-    if (envVars.RESEND_API_KEY.startsWith('re_')) {
-        console.log('  ✅ API Key format is valid (starts with re_)');
+if (envVars.GMAIL_APP_PASSWORD) {
+    if (envVars.GMAIL_APP_PASSWORD.replace(/\s/g, '').length >= 16) {
+        console.log('  ✅ App Password length looks valid');
     } else {
-        console.log('  ⚠️  API Key format may be invalid (should start with re_)');
-    }
-    
-    if (envVars.RESEND_API_KEY.length >= 20) {
-        console.log('  ✅ API Key length is valid');
-    } else {
-        console.log('  ⚠️  API Key seems too short');
+        console.log('  ⚠️  App Password seems too short (expected 16 characters)');
     }
 } else {
-    console.log('  ❌ No API Key to validate');
+    console.log('  ❌ No App Password to validate');
 }
 
-// Validate RESEND_FROM_EMAIL format
+// Validate Gmail user format
 console.log('\n📧 From Email Validation:');
-if (envVars.RESEND_FROM_EMAIL) {
-    const emailMatch = envVars.RESEND_FROM_EMAIL.match(/<(.+)>/);
-    if (emailMatch) {
-        const email = emailMatch[1];
-        if (email.includes('@')) {
-            console.log(`  ✅ From Email format is valid: ${email}`);
-        } else {
-            console.log('  ⚠️  From Email format may be invalid');
-        }
+if (envVars.GMAIL_USER) {
+    if (envVars.GMAIL_USER.includes('@')) {
+        console.log(`  ✅ Gmail User format looks valid: ${envVars.GMAIL_USER}`);
     } else {
-        console.log('  ⚠️  From Email should be in format: "Name <email@domain.com>"');
+        console.log('  ⚠️  Gmail User format may be invalid (should contain @)');
     }
 } else {
-    console.log('  ❌ No From Email to validate');
+    console.log('  ❌ No Gmail User to validate');
 }
 
 // Summary
