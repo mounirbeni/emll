@@ -20,23 +20,23 @@ async function createTestUsers() {
         });
         console.log('✅ Created/Updated client:', client.email);
 
-        // Create test admin
+        // Create admin
         const adminPassword = await bcrypt.hash('admin123', 10);
         const admin = await prisma.user.upsert({
-            where: { email: 'admin@test.com' },
+            where: { email: 'admin@marrakech.com' },
             update: { password: adminPassword },
             create: {
-                email: 'admin@test.com',
+                email: 'admin@marrakech.com',
                 password: adminPassword,
-                name: 'Test Admin',
+                name: 'Admin User',
                 role: 'ADMIN'
             }
         });
         console.log('✅ Created/Updated admin:', admin.email);
 
-        console.log('\n📋 Test Credentials:');
+        console.log('\n📋 Credentials:');
         console.log('Client: client@test.com / password123');
-        console.log('Admin: admin@test.com / admin123');
+        console.log('Admin: admin@marrakech.com / admin123');
     } catch (error) {
         console.error('❌ Error:', error);
     } finally {
