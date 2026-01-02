@@ -3,6 +3,39 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { auth } from '@/auth';
 
+export const dynamic = 'force-dynamic'
+
+export async function GET(request: Request) {
+    try {
+        const { searchParams } = new URL(request.url)
+        const serviceId = searchParams.get('serviceId')
+        const limit = searchParams.get('limit')
+
+        if (!serviceId) {
+            return NextResponse.json({ error: 'Missing serviceId' }, { status: 400 })
+        }
+
+        const reviews = await prisma.review.findMany({
+            where: { serviceId },
+            orderBy: { createdAt: 'desc' },
+            take: limit ? Math.min(50, Math.max(1, parseInt(limit, 10))) : 20,
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        name: true,
+                    }
+                }
+            }
+        })
+
+        return NextResponse.json(reviews)
+    } catch (error) {
+        console.error('Failed to fetch reviews', error)
+        return NextResponse.json({ error: 'Failed to fetch reviews' }, { status: 500 })
+    }
+}
+
 export async function POST(request: Request) {
     const session = await auth();
     if (!session?.user) {

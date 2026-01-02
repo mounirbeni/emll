@@ -22,9 +22,15 @@ export const createServiceSchema = z.object({
     images: z.array(z.string()).optional().default([]),
     features: z.array(z.string()).optional().default([]),
     included: z.array(z.string()).optional().default([]),
+    excluded: z.array(z.string()).optional().default([]),
     whatToBring: z.array(z.string()).optional().default([]),
+    highlights: z.array(z.string()).optional().default([]),
     tags: z.array(z.string()).optional().default([]),
-    itinerary: z.array(z.any()).optional().default([]), // Using any for structured Json for now
+    itinerary: z.array(z.object({
+        time: z.string().min(1),
+        title: z.string().min(1),
+        description: z.string().min(1),
+    })).optional().default([]),
     host: z.string().optional().default('Explore Marrakesh'),
 });
 

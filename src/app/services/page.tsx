@@ -126,15 +126,6 @@ export default function ServicesPage() {
                                                 {service.category}
                                             </span>
                                         </div>
-                                        {/* Rating Badge */}
-                                        {service.rating && (
-                                            <div className="absolute top-3 right-3">
-                                                <span className="bg-primary text-white text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1 shadow-md">
-                                                    <Star className="w-3 h-3 fill-current" />
-                                                    {service.rating}
-                                                </span>
-                                            </div>
-                                        )}
                                     </div>
                                     
                                     {/* Content */}
@@ -142,6 +133,26 @@ export default function ServicesPage() {
                                         <h3 className="font-semibold text-charcoal text-base mb-2 line-clamp-2 group-hover:text-primary transition-colors">
                                             {service.title}
                                         </h3>
+
+                                        <div className="flex items-center justify-between mb-3">
+                                            <div className="flex items-center gap-1">
+                                                {[...Array(5)].map((_, i) => (
+                                                    <Star
+                                                        key={i}
+                                                        className={`w-3.5 h-3.5 ${i < Math.floor(service.rating || 0)
+                                                            ? 'text-primary fill-primary'
+                                                            : 'text-border'
+                                                            }`}
+                                                    />
+                                                ))}
+                                                <span className="text-xs font-semibold text-charcoal ml-1">
+                                                    {(service.rating || 0).toFixed(1)}
+                                                </span>
+                                            </div>
+                                            <span className="text-xs text-medium-gray">
+                                                {(service.reviews || 0) > 0 ? `${service.reviews} reviews` : 'New'}
+                                            </span>
+                                        </div>
                                         
                                         {/* Meta Info */}
                                         <div className="flex items-center gap-3 text-xs text-medium-gray mb-3">

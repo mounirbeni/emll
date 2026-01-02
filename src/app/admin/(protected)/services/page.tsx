@@ -50,40 +50,40 @@ const fetcher = async (url: string) => {
 }
 
 export default function ServicesPage() {
-    const { data: services, error, isLoading } = useSWR<Service[]>('/api/services', fetcher)
+    const { data: services, error, isLoading } = useSWR<Service[]>('/api/admin/services', fetcher)
     const [isDialogOpen, setIsDialogOpen] = useState(false)
     const [editingService, setEditingService] = useState<Service | null>(null)
     const [searchQuery, setSearchQuery] = useState('')
     const [categoryFilter, setCategoryFilter] = useState('ALL')
 
     const handleCreate = async (data: Omit<Service, 'id'> | Partial<Service>) => {
-        await fetch('/api/services', {
+        await fetch('/api/admin/services', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
         })
-        mutate('/api/services')
+        mutate('/api/admin/services')
         setIsDialogOpen(false)
     }
 
     const handleUpdate = async (data: Omit<Service, 'id'> | Partial<Service>) => {
         if (!editingService) return
-        await fetch(`/api/services/${editingService.id}`, {
-            method: 'PUT',
+        await fetch(`/api/admin/services/${editingService.id}`, {
+            method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
         })
-        mutate('/api/services')
+        mutate('/api/admin/services')
         setIsDialogOpen(false)
         setEditingService(null)
     }
 
     const handleDelete = async (id: string) => {
         if (!confirm('Are you sure you want to delete this service?')) return
-        await fetch(`/api/services/${id}`, {
+        await fetch(`/api/admin/services/${id}`, {
             method: 'DELETE',
         })
-        mutate('/api/services')
+        mutate('/api/admin/services')
     }
 
     // Client-side filtering

@@ -20,6 +20,7 @@ import { ReviewsSection } from "@/components/experiences/ReviewsSection";
 import { BookingForm } from "@/components/experiences/BookingForm";
 import { InfoCard } from "@/components/experiences/InfoCard";
 import { mockReviews, calculateAverageRating } from "@/lib/data/mock-reviews";
+import { getTravelerIdentity } from "@/lib/reviews/traveler-identity";
 import { reviewService } from "@/services/review.service";
 
 interface PageProps {
@@ -316,9 +317,13 @@ export default async function ActivityPage({ params }: PageProps) {
         const dbReviews = await reviewService.getServiceReviews(activity.id, 10);
         realReviews = dbReviews.map((review: any) => ({
             id: review.id,
-            author: (review.user as unknown as { name?: string | null } | null)?.name || 'Anonymous',
-            nationality: 'Traveler',
-            countryCode: 'MA',
+            ...(() => {
+                const name = (review.user as unknown as { name?: string | null } | null)?.name
+                if (name && name.trim().length > 0) {
+                    return { author: name, nationality: 'Traveler', countryCode: 'MA' }
+                }
+                return getTravelerIdentity(String(review.id || review.userId || review.serviceId))
+            })(),
             rating: review.rating,
             date: new Date(review.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
             comment: review.comment,

@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/button'
 import { useSession } from 'next-auth/react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { ReviewsSection, type Review as DisplayReview } from '@/components/experiences/ReviewsSection'
+import { mockReviews } from '@/lib/data/mock-reviews'
+import { getTravelerIdentity } from '@/lib/reviews/traveler-identity'
 import Image from 'next/image'
 import { useParams, useRouter } from 'next/navigation'
 import { BookingModal } from '@/components/bookings/BookingModal'
@@ -20,6 +23,9 @@ export default function ServiceDetailPage() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const [notFound, setNotFound] = useState(false)
+
+    const [reviews, setReviews] = useState<DisplayReview[]>([])
+    const [reviewsLoading, setReviewsLoading] = useState(false)
 
     useEffect(() => {
         const fetchService = async () => {
@@ -52,6 +58,66 @@ export default function ServiceDetailPage() {
 
         fetchService()
     }, [id])
+
+    useEffect(() => {
+        const fetchReviews = async () => {
+            if (!id) return
+            setReviewsLoading(true)
+            try {
+                const res = await fetch(`/api/reviews?serviceId=${encodeURIComponent(id)}&limit=10`)
+                if (!res.ok) throw new Error('Failed to fetch reviews')
+                const data = await res.json()
+
+                const mapped: DisplayReview[] = Array.isArray(data)
+                    ? data.map((r: any) => {
+                        const rawName = (r?.user as { name?: string | null } | null)?.name
+                        const identity = rawName && rawName.trim().length > 0
+                            ? { author: rawName, nationality: 'Traveler', countryCode: 'MA' }
+                            : getTravelerIdentity(String(r?.id || r?.userId || r?.serviceId || id))
+
+                        return {
+                            id: String(r?.id || cryptoRandomFallback()),
+                            author: identity.author,
+                            nationality: identity.nationality,
+                            countryCode: identity.countryCode,
+                            rating: Number(r?.rating || 0),
+                            date: new Date(r?.createdAt || Date.now()).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                            }),
+                            comment: String(r?.comment || ''),
+                            verified: true,
+                            helpful: 0,
+                        }
+                    })
+                    : []
+
+                setReviews(mapped)
+            } catch (e) {
+                setReviews([])
+            } finally {
+                setReviewsLoading(false)
+            }
+        }
+
+        fetchReviews()
+    }, [id])
+
+    const reviewsToDisplay = reviews.length > 0 ? reviews : mockReviews
+    const averageRating = reviews.length > 0
+        ? reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / reviews.length
+        : (service?.rating || 0)
+    const totalReviews = reviews.length > 0 ? reviews.length : (service?.reviews || 0)
+    const hasReviews = totalReviews > 0
+
+    function cryptoRandomFallback() {
+        try {
+            return Math.random().toString(36).slice(2)
+        } catch {
+            return 'id'
+        }
+    }
 
     const [bookingLoading, setBookingLoading] = useState(false)
     const [bookingSuccess, setBookingSuccess] = useState(false)
@@ -337,6 +403,16 @@ export default function ServiceDetailPage() {
                                 </div>
                             </div>
                         </div>
+
+                        {hasReviews && (
+                            <div className="mt-12">
+                                <ReviewsSection
+                                    reviews={reviewsToDisplay}
+                                    averageRating={averageRating}
+                                    totalReviews={totalReviews}
+                                />
+                            </div>
+                        )}
                     </div>
 
                     {/* Booking Sidebar (Desktop) */}

@@ -5,6 +5,9 @@ import { serviceService } from '@/services/service.service';
 
 export async function GET(request: Request) {
     try {
+        // Require admin authentication
+        await requireAdmin();
+
         const { searchParams } = new URL(request.url);
         const category = searchParams.get('category');
 
@@ -37,7 +40,9 @@ export async function POST(request: Request) {
             images: body.images || [],
             features: body.features || [],
             included: body.included || [],
+            excluded: body.excluded || [],
             whatToBring: body.whatToBring || [],
+            highlights: body.highlights || [],
             tags: body.tags || [],
             itinerary: body.itinerary || [],
             host: body.host || 'Explore Marrakesh'

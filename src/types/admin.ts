@@ -31,11 +31,13 @@ export interface Service {
     maxPeople?: number
     languages?: string[]
     included?: string[]
+    excluded?: string[]
     requirements?: string[]
     rating?: number
     reviews?: number
     features?: string[]
     whatToBring?: string[]
+    highlights?: string[]
     itinerary?: ItineraryItem[]
     host?: Host | string
     tags?: string[]

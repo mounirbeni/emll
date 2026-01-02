@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { format } from 'date-fns'
-import { ChevronLeft, Calendar, User as UserIcon } from 'lucide-react'
+import { ChevronLeft, Calendar, User as UserIcon, Clock, Tag } from 'lucide-react'
 import prisma from '@/lib/prisma'
 import { ShareButtons } from '@/components/blog/ShareButtons'
 import { RelatedActivities } from '@/components/blog/RelatedActivities'
@@ -78,6 +78,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         notFound()
     }
 
+    const category = (post as unknown as { category?: string | null }).category
+    const plainText = String(post.content || '').replace(/<[^>]*>?/gm, '')
+    const words = plainText.trim().split(/\s+/).filter(Boolean).length
+    const readingTime = Math.max(1, Math.round(words / 220))
+
     // JSON-LD Structured Data for Google SEO
     const jsonLd = {
         '@context': 'https://schema.org',
@@ -95,39 +100,50 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     }
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-cream">
             <Header />
 
-            <article className="max-w-4xl mx-auto px-4 py-8 sm:py-12">
+            <article className="max-w-6xl mx-auto px-4 py-8 sm:py-12">
                 {/* Breadcrumb */}
-                <Link href="/blog" className="inline-flex items-center text-sm text-gray-500 hover:text-[#FF5F00] mb-8 transition-colors">
+                <Link href="/blog" className="inline-flex items-center text-sm text-medium-gray hover:text-primary mb-8 transition-colors">
                     <ChevronLeft className="h-4 w-4 mr-1" />
                     Back to Blog
                 </Link>
 
                 {/* Header */}
                 <header className="mb-8">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+                    {category && (
+                        <div className="inline-flex items-center gap-2 rounded-full bg-white border border-border px-3 py-1 text-xs font-semibold text-charcoal">
+                            <Tag className="h-3.5 w-3.5 text-primary" />
+                            {category}
+                        </div>
+                    )}
+                    <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-charcoal leading-tight">
                         {post.title}
                     </h1>
 
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 border-b border-gray-100 pb-8">
+                    <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-medium-gray border-b border-border pb-8">
                         <div className="flex items-center gap-2">
-                            <div className="h-8 w-8 rounded-full bg-orange-100 flex items-center justify-center text-[#FF5F00]">
+                            <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                                 <UserIcon className="h-4 w-4" />
                             </div>
-                            <span className="font-medium text-gray-900">{post.author?.name || 'Team Explore'}</span>
+                            <span className="font-semibold text-charcoal">{post.author?.name || 'Team Explore'}</span>
                         </div>
                         <span className="hidden sm:inline">•</span>
                         <div className="flex items-center gap-2">
                             <Calendar className="h-4 w-4" />
                             <span>{format(new Date(post.publishedAt), 'MMMM d, yyyy')}</span>
                         </div>
+                        <span className="hidden sm:inline">•</span>
+                        <div className="flex items-center gap-2">
+                            <Clock className="h-4 w-4" />
+                            <span>{readingTime} min read</span>
+                        </div>
                     </div>
                 </header>
 
                 {/* Featured Image */}
-                <div className="relative aspect-[16/9] mb-12 rounded-2xl overflow-hidden shadow-lg">
+                <div className="relative aspect-[16/9] mb-10 rounded-2xl overflow-hidden shadow-lg border border-border bg-white">
                     <Image
                         src={post.coverImage}
                         alt={post.title}
@@ -153,9 +169,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     <div className="lg:col-span-8">
                         <div
                             className="prose prose-lg prose-orange max-w-none 
-                            prose-headings:font-bold prose-headings:text-gray-900 
-                            prose-p:text-gray-700 prose-p:leading-relaxed
-                            prose-a:text-[#FF5F00] prose-a:no-underline hover:prose-a:underline
+                            prose-headings:font-bold prose-headings:text-charcoal 
+                            prose-p:text-charcoal/80 prose-p:leading-relaxed
+                            prose-a:text-primary prose-a:no-underline hover:prose-a:underline
                             prose-img:rounded-xl prose-img:shadow-md"
                             dangerouslySetInnerHTML={{ __html: post.content }}
                         />
@@ -172,11 +188,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     {/* Right Sidebar (Toc or Ads - Empty for now) */}
                     <div className="lg:col-span-3">
                         {/* Placeholder for Table of Contents or CTA */}
-                        <div className="bg-orange-50 rounded-xl p-6 sticky top-24">
-                            <h3 className="font-bold text-gray-900 mb-2">Ready to explore?</h3>
-                            <p className="text-sm text-gray-600 mb-4">Book your dream Marrakech experience today.</p>
-                            <Link href="/search" className="block w-full py-2 px-4 bg-[#FF5F00] text-white text-center font-semibold rounded-lg hover:bg-[#e05500] transition-colors">
-                                Find Activities
+                        <div className="bg-white rounded-2xl border border-border p-6 sticky top-24 shadow-sm">
+                            <h3 className="font-bold text-charcoal mb-2">Ready to explore?</h3>
+                            <p className="text-sm text-medium-gray mb-4">Book your dream Marrakech experience today.</p>
+                            <Link href="/services" className="block w-full py-2.5 px-4 bg-primary text-white text-center font-semibold rounded-xl hover:bg-accent transition-colors">
+                                Explore Experiences
                             </Link>
                         </div>
                     </div>

@@ -34,7 +34,9 @@ export default async function EditServicePage({ params }: { params: Promise<{ id
         images: (service.images as unknown as string[]) || [],
         features: (service.features as unknown as string[]) || [],
         included: (service.included as unknown as string[]) || [],
+        excluded: ((service as unknown as { excluded?: unknown }).excluded as unknown as string[]) || [],
         whatToBring: (service.whatToBring as unknown as string[]) || [],
+        highlights: ((service as unknown as { highlights?: unknown }).highlights as unknown as string[]) || [],
         tags: (service.tags as unknown as string[]) || [],
 
         // Complex Objects

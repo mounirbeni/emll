@@ -20,7 +20,9 @@ export interface CreateServiceDTO {
     images: string[];
     features: string[];
     included: string[];
+    excluded: string[];
     whatToBring: string[];
+    highlights: string[];
     tags: string[];
     itinerary: any;
     host: string;
@@ -38,7 +40,9 @@ export interface UpdateServiceDTO {
     images?: string[];
     features?: string[];
     included?: string[];
+    excluded?: string[];
     whatToBring?: string[];
+    highlights?: string[];
     tags?: string[];
     itinerary?: any;
     host?: string;
@@ -92,13 +96,15 @@ export class ServiceService {
             images: data.images || [],
             features: data.features || [],
             included: data.included || [],
+            excluded: data.excluded || [],
             whatToBring: data.whatToBring || [],
+            highlights: data.highlights || [],
             tags: data.tags || [],
             itinerary: data.itinerary || [], // Prisma Json type accepts array/object
             host: data.host || 'Explore Marrakesh',
             rating: 0,
             reviews: 0
-        });
+        } as any);
 
 
         return service;

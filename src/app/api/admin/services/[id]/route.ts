@@ -1,9 +1,7 @@
-import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { requireAdmin } from '@/lib/authorization';
 import { errorResponse, successResponse } from '@/lib/api-response';
 import { NotFoundError } from '@/lib/errors';
-import { auth } from '@/auth';
 
 export const dynamic = 'force-dynamic'
 
@@ -12,6 +10,8 @@ export async function GET(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        await requireAdmin();
+
         const { id } = await params;
         const service = await prisma.service.findUnique({
             where: { id }
@@ -33,8 +33,7 @@ export async function PATCH(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const session = await auth();
-        if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        await requireAdmin();
 
         const { id } = await params;
         const body = await request.json();
@@ -53,7 +52,9 @@ export async function PATCH(
         if (body.images !== undefined) data.images = body.images; // Native array
         if (body.features !== undefined) data.features = body.features; // Native array
         if (body.included !== undefined) data.included = body.included; // Native array
+        if (body.excluded !== undefined) data.excluded = body.excluded; // Native array
         if (body.whatToBring !== undefined) data.whatToBring = body.whatToBring; // Native array
+        if (body.highlights !== undefined) data.highlights = body.highlights; // Native array
         if (body.tags !== undefined) data.tags = body.tags; // Native array
         if (body.itinerary !== undefined) data.itinerary = body.itinerary; // JSON type
         if (body.host !== undefined) data.host = body.host;

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,9 +8,10 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { X, Plus, Save, ArrowLeft, Image as ImageIcon, List } from 'lucide-react';
+import { X, Plus, Save, ArrowLeft, Upload, Loader2, GripVertical } from 'lucide-react';
 import { Service } from '@/types/admin';
 import Link from 'next/link';
+import { toast } from 'sonner';
 
 interface ServiceEditorProps {
     initialData?: Service | null;
@@ -19,7 +20,9 @@ interface ServiceEditorProps {
 
 export function ServiceEditor({ initialData, isNew = false }: ServiceEditorProps) {
     const router = useRouter();
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [loading, setLoading] = useState(false);
+    const [isUploading, setIsUploading] = useState(false);
     const [formData, setFormData] = useState<Partial<Service>>({
         title: '',
         description: '',
@@ -30,14 +33,16 @@ export function ServiceEditor({ initialData, isNew = false }: ServiceEditorProps
         images: [],
         features: [],
         included: [],
+        excluded: [],
         whatToBring: [],
+        highlights: [],
         tags: [],
         itinerary: [], // TODO: Complex itinerary builder later
         ...initialData
     });
 
     const [tagInput, setTagInput] = useState('');
-    const [imageInput, setImageInput] = useState('');
+    const [itineraryDraft, setItineraryDraft] = useState({ time: '', title: '', description: '' });
 
     useEffect(() => {
         if (initialData) {
@@ -64,10 +69,90 @@ export function ServiceEditor({ initialData, isNew = false }: ServiceEditorProps
             router.refresh();
         } catch (error) {
             console.error(error);
-            alert('Failed to save service');
+            toast.error('Failed to save service');
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleUploadImage = async (file: File) => {
+        setIsUploading(true);
+        try {
+            const signRes = await fetch('/api/admin/cloudinary/signature', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ folder: 'services' }),
+            });
+
+            if (!signRes.ok) throw new Error('Failed to get upload signature');
+            const sign = await signRes.json();
+
+            const uploadUrl = `https://api.cloudinary.com/v1_1/${sign.cloudName}/image/upload`;
+            const data = new FormData();
+            data.append('file', file);
+            data.append('api_key', sign.apiKey);
+            data.append('timestamp', String(sign.timestamp));
+            data.append('signature', sign.signature);
+            data.append('upload_preset', sign.uploadPreset);
+            data.append('folder', sign.folder);
+
+            const uploadRes = await fetch(uploadUrl, {
+                method: 'POST',
+                body: data,
+            });
+
+            const uploadJson = await uploadRes.json();
+            if (!uploadRes.ok) throw new Error(uploadJson?.error?.message || 'Upload failed');
+
+            const url = uploadJson.secure_url as string;
+            if (!url) throw new Error('Upload succeeded but no URL returned');
+
+            setFormData((prev) => ({
+                ...prev,
+                images: [...((prev.images as string[]) || []), url],
+            }));
+
+            toast.success('Image uploaded');
+        } catch (err: any) {
+            console.error(err);
+            toast.error(err?.message || 'Failed to upload image');
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
+    const handleAddItineraryStep = () => {
+        const time = itineraryDraft.time.trim();
+        const title = itineraryDraft.title.trim();
+        const description = itineraryDraft.description.trim();
+
+        if (!time || !title || !description) {
+            toast.error('Please fill out time, title, and description');
+            return;
+        }
+
+        setFormData((prev) => ({
+            ...prev,
+            itinerary: [...((prev.itinerary as any[]) || []), { time, title, description }],
+        }));
+        setItineraryDraft({ time: '', title: '', description: '' });
+    };
+
+    const handleUpdateItineraryStep = (index: number, key: 'time' | 'title' | 'description', value: string) => {
+        setFormData((prev) => {
+            const itinerary = Array.isArray(prev.itinerary) ? [...(prev.itinerary as any[])] : [];
+            const current = itinerary[index] || { time: '', title: '', description: '' };
+            itinerary[index] = { ...current, [key]: value };
+            return { ...prev, itinerary };
+        });
+    };
+
+    const handleRemoveItineraryStep = (index: number) => {
+        setFormData((prev) => {
+            const itinerary = Array.isArray(prev.itinerary) ? [...(prev.itinerary as any[])] : [];
+            itinerary.splice(index, 1);
+            return { ...prev, itinerary };
+        });
     };
 
     const handleArrayInput = (field: keyof Service, value: string, action: 'add' | 'remove', index?: number) => {
@@ -142,21 +227,43 @@ export function ServiceEditor({ initialData, isNew = false }: ServiceEditorProps
                     <Card>
                         <CardHeader>
                             <CardTitle>Gallery</CardTitle>
-                            <CardDescription>Add image URLs for the slider.</CardDescription>
+                            <CardDescription>Upload images from your device.</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
-                            <div className="flex gap-2">
-                                <Input
-                                    placeholder="https://..."
-                                    value={imageInput}
-                                    onChange={e => setImageInput(e.target.value)}
+                            <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+                                <input
+                                    ref={fileInputRef}
+                                    type="file"
+                                    accept="image/*"
+                                    className="hidden"
+                                    onChange={(e) => {
+                                        const file = e.target.files?.[0];
+                                        if (!file) return;
+                                        handleUploadImage(file);
+                                        e.currentTarget.value = '';
+                                    }}
                                 />
-                                <Button type="button" onClick={() => {
-                                    handleArrayInput('images', imageInput, 'add');
-                                    setImageInput('');
-                                }}>
-                                    <Plus className="h-4 w-4" />
+
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    className="sm:w-[170px] justify-center"
+                                    disabled={isUploading}
+                                    onClick={() => fileInputRef.current?.click()}
+                                >
+                                    {isUploading ? (
+                                        <>
+                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                            Uploading
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Upload className="mr-2 h-4 w-4" />
+                                            Select Image
+                                        </>
+                                    )}
                                 </Button>
+                                <p className="text-xs text-muted-foreground">JPG/PNG/WebP</p>
                             </div>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
                                 {(formData.images || []).map((img, i) => (
@@ -176,6 +283,92 @@ export function ServiceEditor({ initialData, isNew = false }: ServiceEditorProps
 
                     <Card>
                         <CardHeader>
+                            <CardTitle>Itinerary</CardTitle>
+                            <CardDescription>Add step-by-step itinerary items.</CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div className="grid gap-2">
+                                    <Label>Time / Day</Label>
+                                    <Input
+                                        value={itineraryDraft.time}
+                                        onChange={(e) => setItineraryDraft((p) => ({ ...p, time: e.target.value }))}
+                                        placeholder="Day 1 / 09:00"
+                                    />
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label>Title</Label>
+                                    <Input
+                                        value={itineraryDraft.title}
+                                        onChange={(e) => setItineraryDraft((p) => ({ ...p, title: e.target.value }))}
+                                        placeholder="Pickup & Welcome"
+                                    />
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label>Action</Label>
+                                    <Button type="button" onClick={handleAddItineraryStep} className="mt-6">
+                                        <Plus className="h-4 w-4 mr-2" />
+                                        Add Step
+                                    </Button>
+                                </div>
+                            </div>
+
+                            <div className="grid gap-2">
+                                <Label>Description</Label>
+                                <Textarea
+                                    value={itineraryDraft.description}
+                                    onChange={(e) => setItineraryDraft((p) => ({ ...p, description: e.target.value }))}
+                                    placeholder="Describe what happens in this step..."
+                                />
+                            </div>
+
+                            <div className="space-y-3">
+                                {(Array.isArray(formData.itinerary) ? formData.itinerary : []).map((item: any, idx: number) => (
+                                    <div key={idx} className="rounded-xl border border-border p-4 bg-muted/20">
+                                        <div className="flex items-start gap-3">
+                                            <div className="pt-2 text-muted-foreground">
+                                                <GripVertical className="h-4 w-4" />
+                                            </div>
+                                            <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3">
+                                                <div className="grid gap-2">
+                                                    <Label className="text-xs text-muted-foreground">Time / Day</Label>
+                                                    <Input
+                                                        value={item?.time || ''}
+                                                        onChange={(e) => handleUpdateItineraryStep(idx, 'time', e.target.value)}
+                                                    />
+                                                </div>
+                                                <div className="grid gap-2 md:col-span-2">
+                                                    <Label className="text-xs text-muted-foreground">Title</Label>
+                                                    <Input
+                                                        value={item?.title || ''}
+                                                        onChange={(e) => handleUpdateItineraryStep(idx, 'title', e.target.value)}
+                                                    />
+                                                </div>
+                                                <div className="grid gap-2 md:col-span-3">
+                                                    <Label className="text-xs text-muted-foreground">Description</Label>
+                                                    <Textarea
+                                                        value={item?.description || ''}
+                                                        onChange={(e) => handleUpdateItineraryStep(idx, 'description', e.target.value)}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <Button
+                                                type="button"
+                                                variant="ghost"
+                                                className="text-muted-foreground hover:text-destructive"
+                                                onClick={() => handleRemoveItineraryStep(idx)}
+                                            >
+                                                <X className="h-4 w-4" />
+                                            </Button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>
                             <CardTitle>Details & Lists</CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-6">
@@ -184,6 +377,18 @@ export function ServiceEditor({ initialData, isNew = false }: ServiceEditorProps
                                 items={formData.included || []}
                                 onAdd={val => handleArrayInput('included', val, 'add')}
                                 onRemove={idx => handleArrayInput('included', '', 'remove', idx)}
+                            />
+                            <ArrayInput
+                                label="Excluded"
+                                items={formData.excluded || []}
+                                onAdd={val => handleArrayInput('excluded', val, 'add')}
+                                onRemove={idx => handleArrayInput('excluded', '', 'remove', idx)}
+                            />
+                            <ArrayInput
+                                label="Highlights"
+                                items={formData.highlights || []}
+                                onAdd={val => handleArrayInput('highlights', val, 'add')}
+                                onRemove={idx => handleArrayInput('highlights', '', 'remove', idx)}
                             />
                             <ArrayInput
                                 label="Features"

@@ -34,6 +34,12 @@ enum TransactionStatus { // For Payment transaction state
   FAILED
 }
 
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  HIDDEN
+}
+
 enum PaymentMethod {
   CREDIT_CARD
   PAYPAL
@@ -212,6 +218,7 @@ model Review {
   rating    Int
   comment   String
   createdAt DateTime @default(now())
+  status    ReviewStatus @default(PENDING)
   serviceId String
   userId    String
   bookingId String   @unique
@@ -241,7 +248,9 @@ model Service {
   longitude   Float?
   features    String[] // Native array
   included    String[] // Native array
+  excluded    String[] @default([])
   whatToBring String[] // Native array
+  highlights  String[] @default([])
   itinerary   Json?    // Structured data
   host        String
   tags        String[] // Native array
@@ -276,6 +285,8 @@ model BlogPost {
   excerpt         String
   coverImage      String
   publishedAt     DateTime @default(now())
+  category        String?
+  featured        Boolean  @default(false)
   
   // SEO
   metaTitle       String?
