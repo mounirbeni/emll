@@ -289,7 +289,7 @@ export default function ServiceDetailPage() {
                                                     <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-sm">
                                                         {index + 1}
                                                     </div>
-                                                    {index < service.itinerary.length - 1 && (
+                                                    {index < (service.itinerary?.length || 0) - 1 && (
                                                         <div className="w-0.5 h-full bg-primary/20 mt-2" />
                                                     )}
                                                 </div>
