@@ -103,6 +103,177 @@ export class EmailService {
         }
     }
 
+    private getAppBaseUrl(): string {
+        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || '';
+        return baseUrl.replace(/\/$/, '');
+    }
+
+    private buildAppUrl(path: string): string {
+        if (/^https?:\/\//i.test(path)) {
+            return path;
+        }
+
+        const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+        const baseUrl = this.getAppBaseUrl();
+        return baseUrl ? `${baseUrl}${normalizedPath}` : normalizedPath;
+    }
+
+    private escapeHtml(value: string): string {
+        return value
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    private renderKeyValueRows(rows: Array<{ label: string; value: string }>): string {
+        return rows
+            .map(({ label, value }, idx) => {
+                const borderTop = idx === 0 ? 'border-top: none;' : 'border-top: 1px solid #F1F5F9;';
+                return `
+                    <tr>
+                        <td style="padding: 12px 0; ${borderTop}">
+                            <span style="font-size: 13px; color: #6B7280;">${this.escapeHtml(label)}</span>
+                        </td>
+                        <td align="right" style="padding: 12px 0; ${borderTop}">
+                            <span style="font-size: 13px; font-weight: 700; color: #111827;">${this.escapeHtml(value)}</span>
+                        </td>
+                    </tr>
+                `;
+            })
+            .join('');
+    }
+
+    private renderEmailTemplate(options: {
+        title: string;
+        preheader: string;
+        greetingName?: string;
+        messageHtml: string;
+        detailsTitle?: string;
+        detailsRows?: Array<{ label: string; value: string }>;
+        ctaLabel?: string;
+        ctaUrl?: string;
+        accentColor?: string;
+        accentColorDark?: string;
+    }): string {
+        const accentColor = options.accentColor || '#FF5F00';
+        const accentColorDark = options.accentColorDark || '#E55500';
+        const greetingName = options.greetingName ? this.escapeHtml(options.greetingName) : '';
+        const detailsTitle = options.detailsTitle ? this.escapeHtml(options.detailsTitle) : '';
+        const ctaUrl = options.ctaUrl ? this.escapeHtml(options.ctaUrl) : '';
+        const ctaLabel = options.ctaLabel ? this.escapeHtml(options.ctaLabel) : '';
+
+        const detailsBlock = options.detailsRows && options.detailsRows.length
+            ? `
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin: 22px 0 18px; border: 1px solid #E5E7EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 10px 20px rgba(17, 24, 39, 0.06);">
+                    <tr>
+                        <td style="padding: 18px 18px 10px;">
+                            <div style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B7280;">${detailsTitle || 'Details'}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0 18px 18px;">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                ${this.renderKeyValueRows(options.detailsRows)}
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            `
+            : '';
+
+        const ctaBlock = options.ctaLabel && options.ctaUrl
+            ? `
+                <table role="presentation" cellpadding="0" cellspacing="0" style="margin: 18px 0 0;">
+                    <tr>
+                        <td bgcolor="${accentColor}" style="border-radius: 12px;">
+                            <a href="${ctaUrl}" style="display: inline-block; padding: 12px 18px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 14px; font-weight: 700; color: #FFFFFF; text-decoration: none; border-radius: 12px;">
+                                ${ctaLabel}
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <div style="margin-top: 10px; font-size: 12px; color: #9CA3AF;">If the button doesn't work, copy and paste this link: <span style="color: ${accentColor};">${ctaUrl}</span></div>
+            `
+            : '';
+
+        return `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta name="x-apple-disable-message-reformatting">
+                <title>${this.escapeHtml(options.title)}</title>
+                <style>
+                    body { margin: 0; padding: 0; background-color: #F5F5F5; }
+                    table { border-collapse: collapse; }
+                    img { border: 0; outline: none; text-decoration: none; }
+                    a { color: inherit; }
+                    .container { width: 600px; max-width: 600px; }
+                    .px { padding-left: 24px; padding-right: 24px; }
+                    @media (max-width: 600px) {
+                        .container { width: 100% !important; }
+                        .px { padding-left: 16px !important; padding-right: 16px !important; }
+                        .h1 { font-size: 20px !important; }
+                    }
+                    .preheader { display: none !important; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0; overflow: hidden; mso-hide: all; }
+                </style>
+            </head>
+            <body>
+                <div class="preheader">${this.escapeHtml(options.preheader)}</div>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #F5F5F5;">
+                    <tr>
+                        <td align="center" style="padding: 28px 12px;">
+                            <table role="presentation" class="container" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 600px; background: #FFFFFF; border-radius: 16px; overflow: hidden; box-shadow: 0 18px 50px rgba(17, 24, 39, 0.10);">
+                                <tr>
+                                    <td style="background: linear-gradient(135deg, ${accentColor} 0%, ${accentColorDark} 100%);" class="px">
+                                        <div style="padding: 22px 0 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;">
+                                            <div style="font-size: 18px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.02em;">Explore Marrakesh</div>
+                                            <div style="font-size: 12px; color: rgba(255, 255, 255, 0.92); margin-top: 4px;">Your trusted partner for authentic experiences</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px" style="padding-top: 22px;">
+                                        <div class="h1" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 22px; font-weight: 800; color: #111827; line-height: 1.25;">
+                                            ${this.escapeHtml(options.title)}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px" style="padding-top: 14px; padding-bottom: 22px;">
+                                        ${greetingName ? `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 15px; color: #111827;">Dear ${greetingName},</div>` : ''}
+                                        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 14px; line-height: 1.7; color: #374151; margin-top: ${greetingName ? '10px' : '0'};">
+                                            ${options.messageHtml}
+                                        </div>
+                                        ${detailsBlock}
+                                        ${ctaBlock}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background: #FAFAFA; border-top: 1px solid #E5E7EB;" class="px">
+                                        <div style="padding: 18px 0; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;">
+                                            <div style="font-size: 12px; color: #6B7280;">Follow us</div>
+                                            <div style="margin-top: 10px; font-size: 12px;">
+                                                <a href="#" style="color: ${accentColor}; text-decoration: none; margin: 0 8px;">Instagram</a>
+                                                <a href="#" style="color: ${accentColor}; text-decoration: none; margin: 0 8px;">Facebook</a>
+                                                <a href="#" style="color: ${accentColor}; text-decoration: none; margin: 0 8px;">WhatsApp</a>
+                                            </div>
+                                            <div style="margin-top: 12px; font-size: 11px; color: #9CA3AF;">© ${new Date().getFullYear()} Explore Marrakesh</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </body>
+            </html>
+        `;
+    }
+
     async sendAdminBookingNotification(
         bookingId: string,
         activityTitle: string,
@@ -126,26 +297,23 @@ export class EmailService {
             minute: '2-digit'
         });
 
-        const html = `
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            </head>
-            <body>
-                <h2>New Booking Received</h2>
-                <p><strong>Booking ID:</strong> ${bookingId}</p>
-                <p><strong>Activity:</strong> ${activityTitle}</p>
-                <p><strong>Date & Time:</strong> ${formattedDate}</p>
-                <p><strong>Guests:</strong> ${guests}</p>
-                <p><strong>Total Price:</strong> €${totalPrice.toFixed(2)}</p>
-                <hr />
-                <p><strong>Customer:</strong> ${customerName}</p>
-                <p><strong>Customer Email:</strong> ${customerEmail}</p>
-            </body>
-            </html>
-        `;
+        const html = this.renderEmailTemplate({
+            title: 'New booking received',
+            preheader: `Booking ${bookingId} received for ${activityTitle}`,
+            messageHtml: `<div style="margin: 0;">A new booking request has been received.</div>`,
+            detailsTitle: 'Booking details',
+            detailsRows: [
+                { label: 'Activity', value: activityTitle },
+                { label: 'Date & Time', value: formattedDate },
+                { label: 'Guests', value: String(guests) },
+                { label: 'Total', value: `€${totalPrice.toFixed(2)}` },
+                { label: 'Booking ID', value: bookingId },
+                { label: 'Customer', value: customerName },
+                { label: 'Customer email', value: customerEmail },
+            ],
+            ctaLabel: 'Open admin bookings',
+            ctaUrl: this.buildAppUrl('/admin/bookings'),
+        });
 
         await this.sendEmail({
             to: this.adminEmail,
@@ -175,177 +343,26 @@ export class EmailService {
             minute: '2-digit'
         });
 
-        const html = `
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <style>
-                    * { margin: 0; padding: 0; box-sizing: border-box; }
-                    body { 
-                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-                        line-height: 1.6; 
-                        color: #1f2937; 
-                        background-color: #f3f4f6;
-                    }
-                    .email-wrapper { 
-                        max-width: 600px; 
-                        margin: 0 auto; 
-                        background-color: #ffffff;
-                    }
-                    .header { 
-                        background: linear-gradient(135deg, #FF5F00 0%, #E55500 100%);
-                        color: white; 
-                        padding: 40px 30px; 
-                        text-align: center;
-                    }
-                    .header h1 {
-                        font-size: 28px;
-                        font-weight: 600;
-                        margin: 0;
-                        letter-spacing: -0.5px;
-                    }
-                    .content { 
-                        padding: 40px 30px; 
-                        background-color: #ffffff;
-                    }
-                    .greeting {
-                        font-size: 16px;
-                        color: #1f2937;
-                        margin-bottom: 20px;
-                    }
-                    .message {
-                        font-size: 15px;
-                        color: #4b5563;
-                        margin-bottom: 30px;
-                        line-height: 1.7;
-                    }
-                    .booking-details { 
-                        background: #f9fafb; 
-                        border: 1px solid #e5e7eb;
-                        border-radius: 8px;
-                        padding: 24px; 
-                        margin: 30px 0;
-                    }
-                    .booking-details h3 {
-                        font-size: 18px;
-                        font-weight: 600;
-                        color: #111827;
-                        margin-bottom: 20px;
-                        padding-bottom: 12px;
-                        border-bottom: 2px solid #FF5F00;
-                    }
-                    .detail-row {
-                        display: flex;
-                        justify-content: space-between;
-                        padding: 12px 0;
-                        border-bottom: 1px solid #e5e7eb;
-                    }
-                    .detail-row:last-child {
-                        border-bottom: none;
-                    }
-                    .detail-label {
-                        font-weight: 500;
-                        color: #6b7280;
-                        font-size: 14px;
-                    }
-                    .detail-value {
-                        font-weight: 600;
-                        color: #111827;
-                        font-size: 14px;
-                        text-align: right;
-                    }
-                    .info-box {
-                        background: #eff6ff;
-                        border-left: 4px solid #3b82f6;
-                        padding: 16px 20px;
-                        margin: 24px 0;
-                        border-radius: 4px;
-                    }
-                    .info-box p {
-                        margin: 0;
-                        font-size: 14px;
-                        color: #1e40af;
-                        line-height: 1.6;
-                    }
-                    .closing {
-                        margin-top: 30px;
-                        font-size: 15px;
-                        color: #4b5563;
-                    }
-                    .signature {
-                        margin-top: 20px;
-                        font-size: 15px;
-                        color: #111827;
-                        font-weight: 500;
-                    }
-                    .footer { 
-                        text-align: center; 
-                        padding: 30px; 
-                        background-color: #f9fafb;
-                        border-top: 1px solid #e5e7eb;
-                    }
-                    .footer p {
-                        color: #6b7280;
-                        font-size: 13px;
-                        margin: 4px 0;
-                    }
-                </style>
-            </head>
-            <body>
-                <div style="padding: 20px 0;">
-                    <div class="email-wrapper">
-                        <div class="header">
-                            <h1>Booking Received</h1>
-                        </div>
-                        <div class="content">
-                            <p class="greeting">Dear ${name},</p>
-                            <p class="message">
-                                We have received your booking request. We will review it and get back to you as soon as possible with a confirmation or any additional information we may need.
-                            </p>
-                            
-                            <div class="booking-details">
-                                <h3>Booking Details</h3>
-                                <div class="detail-row">
-                                    <span class="detail-label">Activity</span>
-                                    <span class="detail-value">${activityTitle}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Date & Time</span>
-                                    <span class="detail-value">${formattedDate}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Number of Guests</span>
-                                    <span class="detail-value">${guests}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Total Price</span>
-                                    <span class="detail-value">€${totalPrice.toFixed(2)}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Booking ID</span>
-                                    <span class="detail-value">${bookingId}</span>
-                                </div>
-                            </div>
-                            
-                            <div class="info-box">
-                                <p><strong>What's Next?</strong><br>
-                                Our team will review your booking and send you a confirmation email once it's been processed. You will receive an email notification when your booking is confirmed or if we need any additional information.</p>
-                            </div>
-                            
-                            <p class="closing">If you have any questions or need to make changes to your booking, please don't hesitate to contact us.</p>
-                            <p class="signature">Best regards,<br>The Explore Marrakesh Team</p>
-                        </div>
-                        <div class="footer">
-                            <p><strong>Explore Marrakesh</strong></p>
-                            <p>Your trusted partner for authentic experiences</p>
-                        </div>
-                    </div>
-                </div>
-            </body>
-            </html>
-        `;
+        const html = this.renderEmailTemplate({
+            title: 'Booking received',
+            preheader: `We received your booking for ${activityTitle}`,
+            greetingName: name,
+            messageHtml: `
+                <div style="margin: 0 0 12px;">We’ve received your booking request and our team is reviewing it now.</div>
+                <div style="margin: 0;">You’ll get a confirmation email as soon as it’s processed.</div>
+            `,
+            detailsTitle: 'Booking details',
+            detailsRows: [
+                { label: 'Activity', value: activityTitle },
+                { label: 'Date & Time', value: formattedDate },
+                { label: 'Guests', value: String(guests) },
+                { label: 'Booking ID', value: bookingId },
+            ],
+            ctaLabel: 'View my bookings',
+            ctaUrl: this.buildAppUrl('/bookings'),
+            accentColor: '#FF5F00',
+            accentColorDark: '#E55500',
+        });
 
         await this.sendEmail({
             to: email,
@@ -375,177 +392,27 @@ export class EmailService {
             minute: '2-digit'
         });
 
-        const html = `
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <style>
-                    * { margin: 0; padding: 0; box-sizing: border-box; }
-                    body { 
-                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-                        line-height: 1.6; 
-                        color: #1f2937; 
-                        background-color: #f3f4f6;
-                    }
-                    .email-wrapper { 
-                        max-width: 600px; 
-                        margin: 0 auto; 
-                        background-color: #ffffff;
-                    }
-                    .header { 
-                        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-                        color: white; 
-                        padding: 40px 30px; 
-                        text-align: center;
-                    }
-                    .header h1 {
-                        font-size: 28px;
-                        font-weight: 600;
-                        margin: 0;
-                        letter-spacing: -0.5px;
-                    }
-                    .content { 
-                        padding: 40px 30px; 
-                        background-color: #ffffff;
-                    }
-                    .greeting {
-                        font-size: 16px;
-                        color: #1f2937;
-                        margin-bottom: 20px;
-                    }
-                    .message {
-                        font-size: 15px;
-                        color: #4b5563;
-                        margin-bottom: 30px;
-                        line-height: 1.7;
-                    }
-                    .booking-details { 
-                        background: #f0fdf4; 
-                        border: 1px solid #bbf7d0;
-                        border-radius: 8px;
-                        padding: 24px; 
-                        margin: 30px 0;
-                    }
-                    .booking-details h3 {
-                        font-size: 18px;
-                        font-weight: 600;
-                        color: #111827;
-                        margin-bottom: 20px;
-                        padding-bottom: 12px;
-                        border-bottom: 2px solid #10b981;
-                    }
-                    .detail-row {
-                        display: flex;
-                        justify-content: space-between;
-                        padding: 12px 0;
-                        border-bottom: 1px solid #d1fae5;
-                    }
-                    .detail-row:last-child {
-                        border-bottom: none;
-                    }
-                    .detail-label {
-                        font-weight: 500;
-                        color: #6b7280;
-                        font-size: 14px;
-                    }
-                    .detail-value {
-                        font-weight: 600;
-                        color: #111827;
-                        font-size: 14px;
-                        text-align: right;
-                    }
-                    .info-box {
-                        background: #eff6ff;
-                        border-left: 4px solid #3b82f6;
-                        padding: 16px 20px;
-                        margin: 24px 0;
-                        border-radius: 4px;
-                    }
-                    .info-box p {
-                        margin: 0;
-                        font-size: 14px;
-                        color: #1e40af;
-                        line-height: 1.6;
-                    }
-                    .closing {
-                        margin-top: 30px;
-                        font-size: 15px;
-                        color: #4b5563;
-                    }
-                    .signature {
-                        margin-top: 20px;
-                        font-size: 15px;
-                        color: #111827;
-                        font-weight: 500;
-                    }
-                    .footer { 
-                        text-align: center; 
-                        padding: 30px; 
-                        background-color: #f9fafb;
-                        border-top: 1px solid #e5e7eb;
-                    }
-                    .footer p {
-                        color: #6b7280;
-                        font-size: 13px;
-                        margin: 4px 0;
-                    }
-                </style>
-            </head>
-            <body>
-                <div style="padding: 20px 0;">
-                    <div class="email-wrapper">
-                        <div class="header">
-                            <h1>Booking Confirmed</h1>
-                        </div>
-                        <div class="content">
-                            <p class="greeting">Dear ${name},</p>
-                            <p class="message">
-                                Great news! Your booking has been confirmed. We're excited to have you join us for this experience.
-                            </p>
-                            
-                            <div class="booking-details">
-                                <h3>Booking Details</h3>
-                                <div class="detail-row">
-                                    <span class="detail-label">Activity</span>
-                                    <span class="detail-value">${activityTitle}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Date & Time</span>
-                                    <span class="detail-value">${formattedDate}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Number of Guests</span>
-                                    <span class="detail-value">${guests}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Total Price</span>
-                                    <span class="detail-value">€${totalPrice.toFixed(2)}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Booking ID</span>
-                                    <span class="detail-value">${bookingId}</span>
-                                </div>
-                            </div>
-                            
-                            <div class="info-box">
-                                <p><strong>Important Information</strong><br>
-                                We'll send you a reminder 24 hours before your activity. If you have any questions or need to make changes, please contact us as soon as possible.</p>
-                            </div>
-                            
-                            <p class="closing">We're looking forward to providing you with an unforgettable experience!</p>
-                            <p class="signature">Best regards,<br>The Explore Marrakesh Team</p>
-                        </div>
-                        <div class="footer">
-                            <p><strong>Explore Marrakesh</strong></p>
-                            <p>Your trusted partner for authentic experiences</p>
-                        </div>
-                    </div>
-                </div>
-            </body>
-            </html>
-        `;
+        const html = this.renderEmailTemplate({
+            title: 'Booking confirmed',
+            preheader: `Your booking ${bookingId} is confirmed`,
+            greetingName: name,
+            messageHtml: `
+                <div style="margin: 0 0 12px;">Great news — your booking has been confirmed.</div>
+                <div style="margin: 0;">We’re excited to welcome you. You can review your details anytime from your dashboard.</div>
+            `,
+            detailsTitle: 'Booking details',
+            detailsRows: [
+                { label: 'Activity', value: activityTitle },
+                { label: 'Date & Time', value: formattedDate },
+                { label: 'Guests', value: String(guests) },
+                { label: 'Total', value: `€${totalPrice.toFixed(2)}` },
+                { label: 'Booking ID', value: bookingId },
+            ],
+            ctaLabel: 'View my bookings',
+            ctaUrl: this.buildAppUrl('/bookings'),
+            accentColor: '#FF5F00',
+            accentColorDark: '#E55500',
+        });
 
         await this.sendEmail({
             to: email,
@@ -564,155 +431,33 @@ export class EmailService {
         amount: number,
         activityTitle: string
     ): Promise<void> {
-        const html = `
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <style>
-                    * { margin: 0; padding: 0; box-sizing: border-box; }
-                    body { 
-                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-                        line-height: 1.6; 
-                        color: #1f2937; 
-                        background-color: #f3f4f6;
-                    }
-                    .email-wrapper { 
-                        max-width: 600px; 
-                        margin: 0 auto; 
-                        background-color: #ffffff;
-                    }
-                    .header { 
-                        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-                        color: white; 
-                        padding: 40px 30px; 
-                        text-align: center;
-                    }
-                    .header h1 {
-                        font-size: 28px;
-                        font-weight: 600;
-                        margin: 0;
-                        letter-spacing: -0.5px;
-                    }
-                    .content { 
-                        padding: 40px 30px; 
-                        background-color: #ffffff;
-                    }
-                    .greeting {
-                        font-size: 16px;
-                        color: #1f2937;
-                        margin-bottom: 20px;
-                    }
-                    .message {
-                        font-size: 15px;
-                        color: #4b5563;
-                        margin-bottom: 30px;
-                        line-height: 1.7;
-                    }
-                    .receipt { 
-                        background: #f0fdf4; 
-                        border: 1px solid #bbf7d0;
-                        border-radius: 8px;
-                        padding: 24px; 
-                        margin: 30px 0;
-                    }
-                    .receipt h3 {
-                        font-size: 18px;
-                        font-weight: 600;
-                        color: #111827;
-                        margin-bottom: 20px;
-                        padding-bottom: 12px;
-                        border-bottom: 2px solid #10b981;
-                    }
-                    .detail-row {
-                        display: flex;
-                        justify-content: space-between;
-                        padding: 12px 0;
-                        border-bottom: 1px solid #d1fae5;
-                    }
-                    .detail-row:last-child {
-                        border-bottom: none;
-                    }
-                    .detail-label {
-                        font-weight: 500;
-                        color: #6b7280;
-                        font-size: 14px;
-                    }
-                    .detail-value {
-                        font-weight: 600;
-                        color: #111827;
-                        font-size: 14px;
-                        text-align: right;
-                    }
-                    .closing {
-                        margin-top: 30px;
-                        font-size: 15px;
-                        color: #4b5563;
-                    }
-                    .signature {
-                        margin-top: 20px;
-                        font-size: 15px;
-                        color: #111827;
-                        font-weight: 500;
-                    }
-                    .footer { 
-                        text-align: center; 
-                        padding: 30px; 
-                        background-color: #f9fafb;
-                        border-top: 1px solid #e5e7eb;
-                    }
-                    .footer p {
-                        color: #6b7280;
-                        font-size: 13px;
-                        margin: 4px 0;
-                    }
-                </style>
-            </head>
-            <body>
-                <div style="padding: 20px 0;">
-                    <div class="email-wrapper">
-                        <div class="header">
-                            <h1>Payment Received</h1>
-                        </div>
-                        <div class="content">
-                            <p class="greeting">Dear ${name},</p>
-                            <p class="message">
-                                Thank you for your payment! We have successfully processed your transaction.
-                            </p>
-                            
-                            <div class="receipt">
-                                <h3>Payment Receipt</h3>
-                                <div class="detail-row">
-                                    <span class="detail-label">Activity</span>
-                                    <span class="detail-value">${activityTitle}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Amount Paid</span>
-                                    <span class="detail-value">€${amount.toFixed(2)}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Booking ID</span>
-                                    <span class="detail-value">${bookingId}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Payment Date</span>
-                                    <span class="detail-value">${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                                </div>
-                            </div>
-                            
-                            <p class="closing">Your booking is now confirmed and paid. We'll see you soon!</p>
-                            <p class="signature">Best regards,<br>The Explore Marrakesh Team</p>
-                        </div>
-                        <div class="footer">
-                            <p><strong>Explore Marrakesh</strong></p>
-                            <p>Your trusted partner for authentic experiences</p>
-                        </div>
-                    </div>
-                </div>
-            </body>
-            </html>
-        `;
+        const paymentDate = new Date().toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        const html = this.renderEmailTemplate({
+            title: 'Payment received',
+            preheader: `Payment received for booking ${bookingId}`,
+            greetingName: name,
+            messageHtml: `
+                <div style="margin: 0 0 12px;">Thank you — we’ve successfully processed your payment.</div>
+                <div style="margin: 0;">This email serves as your receipt.</div>
+            `,
+            detailsTitle: 'Payment receipt',
+            detailsRows: [
+                { label: 'Activity', value: activityTitle },
+                { label: 'Amount paid', value: `€${amount.toFixed(2)}` },
+                { label: 'Booking ID', value: bookingId },
+                { label: 'Payment date', value: paymentDate },
+            ],
+            ctaLabel: 'View my bookings',
+            ctaUrl: this.buildAppUrl('/bookings'),
+            accentColor: '#FF5F00',
+            accentColorDark: '#E55500',
+        });
 
         await this.sendEmail({
             to: email,
@@ -740,168 +485,25 @@ export class EmailService {
             minute: '2-digit'
         });
 
-        const html = `
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <style>
-                    * { margin: 0; padding: 0; box-sizing: border-box; }
-                    body { 
-                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-                        line-height: 1.6; 
-                        color: #1f2937; 
-                        background-color: #f3f4f6;
-                    }
-                    .email-wrapper { 
-                        max-width: 600px; 
-                        margin: 0 auto; 
-                        background-color: #ffffff;
-                    }
-                    .header { 
-                        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-                        color: white; 
-                        padding: 40px 30px; 
-                        text-align: center;
-                    }
-                    .header h1 {
-                        font-size: 28px;
-                        font-weight: 600;
-                        margin: 0;
-                        letter-spacing: -0.5px;
-                    }
-                    .content { 
-                        padding: 40px 30px; 
-                        background-color: #ffffff;
-                    }
-                    .greeting {
-                        font-size: 16px;
-                        color: #1f2937;
-                        margin-bottom: 20px;
-                    }
-                    .message {
-                        font-size: 15px;
-                        color: #4b5563;
-                        margin-bottom: 30px;
-                        line-height: 1.7;
-                    }
-                    .reminder { 
-                        background: #eff6ff; 
-                        border: 1px solid #bfdbfe;
-                        border-radius: 8px;
-                        padding: 24px; 
-                        margin: 30px 0;
-                    }
-                    .reminder h3 {
-                        font-size: 18px;
-                        font-weight: 600;
-                        color: #111827;
-                        margin-bottom: 20px;
-                        padding-bottom: 12px;
-                        border-bottom: 2px solid #3b82f6;
-                    }
-                    .detail-row {
-                        display: flex;
-                        justify-content: space-between;
-                        padding: 12px 0;
-                        border-bottom: 1px solid #dbeafe;
-                    }
-                    .detail-row:last-child {
-                        border-bottom: none;
-                    }
-                    .detail-label {
-                        font-weight: 500;
-                        color: #6b7280;
-                        font-size: 14px;
-                    }
-                    .detail-value {
-                        font-weight: 600;
-                        color: #111827;
-                        font-size: 14px;
-                        text-align: right;
-                    }
-                    .info-box {
-                        background: #fef3c7;
-                        border-left: 4px solid #f59e0b;
-                        padding: 16px 20px;
-                        margin: 24px 0;
-                        border-radius: 4px;
-                    }
-                    .info-box p {
-                        margin: 0;
-                        font-size: 14px;
-                        color: #92400e;
-                        line-height: 1.6;
-                    }
-                    .closing {
-                        margin-top: 30px;
-                        font-size: 15px;
-                        color: #4b5563;
-                    }
-                    .signature {
-                        margin-top: 20px;
-                        font-size: 15px;
-                        color: #111827;
-                        font-weight: 500;
-                    }
-                    .footer { 
-                        text-align: center; 
-                        padding: 30px; 
-                        background-color: #f9fafb;
-                        border-top: 1px solid #e5e7eb;
-                    }
-                    .footer p {
-                        color: #6b7280;
-                        font-size: 13px;
-                        margin: 4px 0;
-                    }
-                </style>
-            </head>
-            <body>
-                <div style="padding: 20px 0;">
-                    <div class="email-wrapper">
-                        <div class="header">
-                            <h1>Activity Reminder</h1>
-                        </div>
-                        <div class="content">
-                            <p class="greeting">Dear ${name},</p>
-                            <p class="message">
-                                This is a friendly reminder that your activity is scheduled for tomorrow!
-                            </p>
-                            
-                            <div class="reminder">
-                                <h3>Activity Details</h3>
-                                <div class="detail-row">
-                                    <span class="detail-label">Activity</span>
-                                    <span class="detail-value">${activityTitle}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Date & Time</span>
-                                    <span class="detail-value">${formattedDate}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Number of Guests</span>
-                                    <span class="detail-value">${guests}</span>
-                                </div>
-                            </div>
-                            
-                            <div class="info-box">
-                                <p><strong>Important:</strong> Please arrive 15 minutes early. If you have any questions or need to make changes, please contact us immediately.</p>
-                            </div>
-                            
-                            <p class="closing">We're looking forward to seeing you!</p>
-                            <p class="signature">Best regards,<br>The Explore Marrakesh Team</p>
-                        </div>
-                        <div class="footer">
-                            <p><strong>Explore Marrakesh</strong></p>
-                            <p>Your trusted partner for authentic experiences</p>
-                        </div>
-                    </div>
-                </div>
-            </body>
-            </html>
-        `;
+        const html = this.renderEmailTemplate({
+            title: 'Reminder: your experience is tomorrow',
+            preheader: `Reminder for ${activityTitle} on ${formattedDate}`,
+            greetingName: name,
+            messageHtml: `
+                <div style="margin: 0 0 12px;">This is a friendly reminder that your experience is scheduled for tomorrow.</div>
+                <div style="margin: 0;">Please arrive 15 minutes early. If you need to make changes, contact us as soon as possible.</div>
+            `,
+            detailsTitle: 'Experience details',
+            detailsRows: [
+                { label: 'Activity', value: activityTitle },
+                { label: 'Date & Time', value: formattedDate },
+                { label: 'Guests', value: String(guests) },
+            ],
+            ctaLabel: 'View my bookings',
+            ctaUrl: this.buildAppUrl('/bookings'),
+            accentColor: '#FF5F00',
+            accentColorDark: '#E55500',
+        });
 
         await this.sendEmail({
             to: email,
@@ -919,167 +521,36 @@ export class EmailService {
         activityTitle: string,
         refundAmount?: number
     ): Promise<void> {
-        const refundText = refundAmount
-            ? `<div class="detail-row">
-                <span class="detail-label">Refund Amount</span>
-                <span class="detail-value">€${refundAmount.toFixed(2)}</span>
-            </div>
-            <div class="info-box" style="margin-top: 16px;">
-                <p>Your refund will be processed within 5-7 business days and returned to your original payment method.</p>
-            </div>`
-            : '';
+        const detailsRows: Array<{ label: string; value: string }> = [
+            { label: 'Activity', value: activityTitle },
+        ];
 
-        const html = `
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <style>
-                    * { margin: 0; padding: 0; box-sizing: border-box; }
-                    body { 
-                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-                        line-height: 1.6; 
-                        color: #1f2937; 
-                        background-color: #f3f4f6;
-                    }
-                    .email-wrapper { 
-                        max-width: 600px; 
-                        margin: 0 auto; 
-                        background-color: #ffffff;
-                    }
-                    .header { 
-                        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-                        color: white; 
-                        padding: 40px 30px; 
-                        text-align: center;
-                    }
-                    .header h1 {
-                        font-size: 28px;
-                        font-weight: 600;
-                        margin: 0;
-                        letter-spacing: -0.5px;
-                    }
-                    .content { 
-                        padding: 40px 30px; 
-                        background-color: #ffffff;
-                    }
-                    .greeting {
-                        font-size: 16px;
-                        color: #1f2937;
-                        margin-bottom: 20px;
-                    }
-                    .message {
-                        font-size: 15px;
-                        color: #4b5563;
-                        margin-bottom: 30px;
-                        line-height: 1.7;
-                    }
-                    .cancellation-details { 
-                        background: #fef2f2; 
-                        border: 1px solid #fecaca;
-                        border-radius: 8px;
-                        padding: 24px; 
-                        margin: 30px 0;
-                    }
-                    .cancellation-details h3 {
-                        font-size: 18px;
-                        font-weight: 600;
-                        color: #111827;
-                        margin-bottom: 20px;
-                        padding-bottom: 12px;
-                        border-bottom: 2px solid #ef4444;
-                    }
-                    .detail-row {
-                        display: flex;
-                        justify-content: space-between;
-                        padding: 12px 0;
-                        border-bottom: 1px solid #fee2e2;
-                    }
-                    .detail-row:last-child {
-                        border-bottom: none;
-                    }
-                    .detail-label {
-                        font-weight: 500;
-                        color: #6b7280;
-                        font-size: 14px;
-                    }
-                    .detail-value {
-                        font-weight: 600;
-                        color: #111827;
-                        font-size: 14px;
-                        text-align: right;
-                    }
-                    .info-box {
-                        background: #eff6ff;
-                        border-left: 4px solid #3b82f6;
-                        padding: 16px 20px;
-                        margin: 24px 0;
-                        border-radius: 4px;
-                    }
-                    .info-box p {
-                        margin: 0;
-                        font-size: 14px;
-                        color: #1e40af;
-                        line-height: 1.6;
-                    }
-                    .closing {
-                        margin-top: 30px;
-                        font-size: 15px;
-                        color: #4b5563;
-                    }
-                    .signature {
-                        margin-top: 20px;
-                        font-size: 15px;
-                        color: #111827;
-                        font-weight: 500;
-                    }
-                    .footer { 
-                        text-align: center; 
-                        padding: 30px; 
-                        background-color: #f9fafb;
-                        border-top: 1px solid #e5e7eb;
-                    }
-                    .footer p {
-                        color: #6b7280;
-                        font-size: 13px;
-                        margin: 4px 0;
-                    }
-                </style>
-            </head>
-            <body>
-                <div style="padding: 20px 0;">
-                    <div class="email-wrapper">
-                        <div class="header">
-                            <h1>Booking Cancelled</h1>
-                        </div>
-                        <div class="content">
-                            <p class="greeting">Dear ${name},</p>
-                            <p class="message">
-                                We're sorry to inform you that your booking has been cancelled.
-                            </p>
-                            
-                            <div class="cancellation-details">
-                                <h3>Cancellation Details</h3>
-                                <div class="detail-row">
-                                    <span class="detail-label">Activity</span>
-                                    <span class="detail-value">${activityTitle}</span>
-                                </div>
-                                ${refundText}
-                            </div>
-                            
-                            <p class="closing">If you have any questions or would like to book a different activity, please don't hesitate to contact us. We hope to see you in the future!</p>
-                            <p class="signature">Best regards,<br>The Explore Marrakesh Team</p>
-                        </div>
-                        <div class="footer">
-                            <p><strong>Explore Marrakesh</strong></p>
-                            <p>Your trusted partner for authentic experiences</p>
-                        </div>
-                    </div>
-                </div>
-            </body>
-            </html>
-        `;
+        if (refundAmount !== undefined) {
+            detailsRows.push({ label: 'Refund amount', value: `€${refundAmount.toFixed(2)}` });
+        }
+
+        const messageHtml = refundAmount !== undefined
+            ? `
+                <div style="margin: 0 0 12px;">Your booking has been cancelled.</div>
+                <div style="margin: 0;">Your refund will be processed within 5–7 business days and returned to your original payment method.</div>
+            `
+            : `
+                <div style="margin: 0 0 12px;">Your booking has been cancelled.</div>
+                <div style="margin: 0;">If you have questions or would like to book a different experience, reply to this email and we’ll be happy to help.</div>
+            `;
+
+        const html = this.renderEmailTemplate({
+            title: 'Booking cancelled',
+            preheader: `Your booking for ${activityTitle} has been cancelled`,
+            greetingName: name,
+            messageHtml,
+            detailsTitle: 'Cancellation details',
+            detailsRows,
+            ctaLabel: 'View my bookings',
+            ctaUrl: this.buildAppUrl('/bookings'),
+            accentColor: '#FF5F00',
+            accentColorDark: '#E55500',
+        });
 
         await this.sendEmail({
             to: email,
