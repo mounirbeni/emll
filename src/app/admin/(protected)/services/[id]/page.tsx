@@ -25,7 +25,7 @@ export default async function EditServicePage({ params }: { params: Promise<{ id
         id: service.id,
         title: service.title,
         description: service.description,
-        price: service.price,
+        price: Number(service.price),
         category: service.category,
         duration: service.duration,
         location: service.location,

@@ -100,8 +100,8 @@ export default function ServicesPage() {
             <div className="flex-1 space-y-4 p-4 sm:p-6 lg:p-8 pt-4 sm:pt-6">
                 <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
                     <p className="text-destructive">Failed to load services</p>
-                    <Button 
-                        variant="outline" 
+                    <Button
+                        variant="outline"
                         className="mt-4"
                         onClick={() => window.location.reload()}
                     >
@@ -212,7 +212,7 @@ export default function ServicesPage() {
                                         <div className="flex-1 min-w-0">
                                             <h3 className="font-semibold text-sm truncate">{service.title}</h3>
                                             <p className="text-xs text-muted-foreground mt-1">{service.category}</p>
-                                            <p className="text-sm font-bold mt-2">€{service.price.toFixed(2)}</p>
+                                            <p className="text-sm font-bold mt-2">€{Number(service.price).toFixed(2)}</p>
                                         </div>
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
@@ -275,7 +275,7 @@ export default function ServicesPage() {
                                         </TableCell>
                                         <TableCell className="font-medium">{service.title}</TableCell>
                                         <TableCell>{service.category}</TableCell>
-                                        <TableCell>€{service.price.toFixed(2)}</TableCell>
+                                        <TableCell>€{Number(service.price).toFixed(2)}</TableCell>
                                         <TableCell className="text-right">
                                             <DropdownMenu>
                                                 <DropdownMenuTrigger asChild>
