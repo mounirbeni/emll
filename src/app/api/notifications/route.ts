@@ -30,14 +30,18 @@ export async function PUT(request: Request) {
         }
 
         const body = await request.json();
-        const { id, read } = body;
+        const { id } = body;
 
         // Mark single or all as read
         if (id) {
-            await prisma.notification.update({
+            const result = await prisma.notification.updateMany({
                 where: { id, userId: session.user.id },
                 data: { read: true }
             });
+
+            if (result.count === 0) {
+                return new NextResponse('Not Found', { status: 404 });
+            }
         } else {
             await prisma.notification.updateMany({
                 where: { userId: session.user.id, read: false },

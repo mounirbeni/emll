@@ -6,6 +6,7 @@
 import prisma from '@/lib/prisma';
 import { Booking, BookingStatus, Prisma } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
+import { decimalToNumber } from '@/lib/decimal';
 
 export class BookingRepository implements BaseRepository<
     Booking,
@@ -204,7 +205,7 @@ export class BookingRepository implements BaseRepository<
                 totalPrice: true
             }
         });
-        return result._sum.totalPrice || 0;
+        return decimalToNumber(result._sum.totalPrice);
     }
 
     /**

@@ -5,9 +5,7 @@ generator client {
 // prisma/schema.prisma
 datasource db {
   provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
-  // uncomment next line if you use Prisma <5.10
-  // directUrl = env("DATABASE_URL_UNPOOLED")
+  url       = env("DATABASE_URL")            
 }
 
 // Enums
@@ -70,7 +68,7 @@ enum NotificationType {
 }
 
 model Booking {
-  id              String        @id
+  id              String        @id @default(uuid())
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
   name            String
@@ -81,7 +79,7 @@ model Booking {
   activityTitle   String
   date            DateTime
   guests          Int
-  totalPrice      Float
+  totalPrice      Decimal
   pickupLocation  String?
   flightNumber    String?
   language        String?
@@ -104,7 +102,7 @@ model Booking {
 
 model Payment {
   id        String        @id @default(uuid())
-  amount    Float
+  amount    Decimal
   currency  PaymentCurrency @default(EUR)
   status    TransactionStatus @default(PENDING)
   method    PaymentMethod?
@@ -233,10 +231,10 @@ model Review {
 }
 
 model Service {
-  id          String   @id
+  id          String   @id @default(uuid())
   title       String
   description String
-  price       Float
+  price       Decimal
   images      String[] // Native array
   category    String
   createdAt   DateTime @default(now())

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { auth } from '@/auth';
+import { successResponse } from '@/lib/api-response';
 
 export async function GET() {
     try {
@@ -96,7 +97,7 @@ export async function GET() {
             };
         });
 
-        return NextResponse.json({
+        return successResponse({
             user: {
                 name: user?.name,
                 loyaltyPoints: user?.loyaltyPoints || 0,

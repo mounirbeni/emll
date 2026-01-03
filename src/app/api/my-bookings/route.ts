@@ -2,14 +2,15 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { requireAuth } from '@/lib/authorization';
+import { errorResponse, successResponse } from '@/lib/api-response';
 
 export async function GET() {
-    const session = await requireAuth();
-    if (!session?.user) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     try {
+        const session = await requireAuth();
+        if (!session?.user) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
         // Fetch bookings linked to user
         const bookings = await prisma.booking.findMany({
             where: {
@@ -45,8 +46,8 @@ export async function GET() {
             };
         });
 
-        return NextResponse.json(bookingsWithImages);
+        return successResponse(bookingsWithImages);
     } catch (error) {
-        return NextResponse.json({ error: 'Failed to fetch bookings' }, { status: 500 });
+        return errorResponse(error);
     }
 }

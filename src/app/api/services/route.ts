@@ -3,6 +3,7 @@ import { auth } from '@/auth'
 import { serviceService } from '@/services/service.service'
 import { createServiceSchema } from '@/lib/validation'
 import { AppError, formatErrorResponse } from '@/lib/errors'
+import { errorResponse, createdResponse, successResponse } from '@/lib/api-response'
 
 export const dynamic = 'force-dynamic'
 
@@ -22,10 +23,9 @@ export async function GET(request: Request) {
             sortBy
         })
 
-        return NextResponse.json(services)
+        return successResponse(services)
     } catch (error) {
-        const { statusCode, body } = formatErrorResponse(error)
-        return NextResponse.json(body, { status: statusCode })
+        return errorResponse(error)
     }
 }
 
@@ -60,10 +60,9 @@ export async function POST(request: Request) {
             host: data.host || 'Explore Marrakesh' // Default host if not provided
         })
 
-        return NextResponse.json(service, { status: 201 })
+        return createdResponse(service)
     } catch (error) {
         console.error('Create service error:', error)
-        const { statusCode, body } = formatErrorResponse(error)
-        return NextResponse.json(body, { status: statusCode })
+        return errorResponse(error)
     }
 }

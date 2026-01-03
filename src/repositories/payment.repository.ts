@@ -6,6 +6,7 @@
 import prisma from '@/lib/prisma';
 import { Payment, Prisma, TransactionStatus } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
+import { decimalToNumber } from '@/lib/decimal';
 
 export class PaymentRepository implements BaseRepository<
     Payment,
@@ -93,7 +94,7 @@ export class PaymentRepository implements BaseRepository<
                 amount: true
             }
         });
-        return result._sum.amount || 0;
+        return decimalToNumber(result._sum.amount);
     }
 
     /**
@@ -109,7 +110,7 @@ export class PaymentRepository implements BaseRepository<
                 amount: true
             }
         });
-        return result._sum.amount || 0;
+        return decimalToNumber(result._sum.amount);
     }
 
     /**

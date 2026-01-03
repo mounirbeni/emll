@@ -30,7 +30,7 @@ export function rateLimit(options?: RateLimitConfig) {
                 tokenCount[0] += 1;
 
                 const currentUsage = tokenCount[0];
-                const isRateLimited = currentUsage >= limit;
+                const isRateLimited = currentUsage > limit;
 
                 // In LRU cache 7+, items with TTL are removed automatically.
                 // We just increment logic here effectively fixed window/usage.

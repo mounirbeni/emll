@@ -8,6 +8,7 @@ import { paymentRepository } from '@/repositories/payment.repository';
 import { bookingRepository } from '@/repositories/booking.repository';
 import { NotFoundError, BadRequestError } from '@/lib/errors';
 import { notificationService } from '@/services/notification.service';
+import { decimalToNumber } from '@/lib/decimal';
 
 export interface CreatePaymentDTO {
     bookingId: string;
@@ -40,7 +41,7 @@ export class PaymentService {
 
         // Check if amount matches booking total
         const totalPaid = await paymentRepository.getTotalForBooking(data.bookingId);
-        const remaining = booking.totalPrice - totalPaid;
+        const remaining = decimalToNumber(booking.totalPrice) - totalPaid;
 
         if (data.amount > remaining) {
             throw new BadRequestError(
@@ -85,7 +86,7 @@ export class PaymentService {
         if (booking) {
             const totalPaid = await paymentRepository.getTotalForBooking(payment.bookingId);
 
-            if (totalPaid >= booking.totalPrice) {
+            if (totalPaid >= decimalToNumber(booking.totalPrice)) {
                 await bookingRepository.update(payment.bookingId, {
                     paymentStatus: PaymentStatus.PAID
                 });
@@ -194,10 +195,11 @@ export class PaymentService {
 
         const payments = await paymentRepository.findByBookingId(bookingId);
         const totalPaid = await paymentRepository.getTotalForBooking(bookingId);
-        const remaining = booking.totalPrice - totalPaid;
+        const totalPrice = decimalToNumber(booking.totalPrice);
+        const remaining = totalPrice - totalPaid;
 
         return {
-            totalPrice: booking.totalPrice,
+            totalPrice,
             totalPaid,
             remaining: Math.max(0, remaining),
             fullyPaid: remaining <= 0,

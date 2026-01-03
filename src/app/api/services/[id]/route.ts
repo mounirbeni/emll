@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import { auth } from '@/auth'
+import { errorResponse, successResponse } from '@/lib/api-response'
 
 export const dynamic = 'force-dynamic'
 
@@ -15,18 +16,12 @@ export async function GET(
         })
 
         if (!service) {
-            return NextResponse.json(
-                { error: 'Service not found' },
-                { status: 404 }
-            )
+            return NextResponse.json({ error: 'Service not found' }, { status: 404 })
         }
 
-        return NextResponse.json(service)
-    } catch {
-        return NextResponse.json(
-            { error: 'Failed to fetch service' },
-            { status: 500 }
-        )
+        return successResponse(service)
+    } catch (error) {
+        return errorResponse(error)
     }
 }
 
@@ -67,12 +62,9 @@ export async function PUT(
             data,
         })
 
-        return NextResponse.json(service)
-    } catch {
-        return NextResponse.json(
-            { error: 'Failed to update service' },
-            { status: 500 }
-        )
+        return successResponse(service)
+    } catch (error) {
+        return errorResponse(error)
     }
 }
 
@@ -91,11 +83,8 @@ export async function DELETE(
             where: { id },
         })
 
-        return NextResponse.json({ success: true })
-    } catch {
-        return NextResponse.json(
-            { error: 'Failed to delete service' },
-            { status: 500 }
-        )
+        return successResponse({ success: true })
+    } catch (error) {
+        return errorResponse(error)
     }
 }

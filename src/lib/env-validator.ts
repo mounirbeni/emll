@@ -6,7 +6,7 @@
 
 interface EnvConfig {
     DATABASE_URL: string;
-    NEXTAUTH_SECRET: string;
+    AUTH_SECRET: string;
     NEXTAUTH_URL: string;
     NODE_ENV: 'development' | 'production' | 'test';
 
@@ -25,7 +25,7 @@ export function validateEnv(): EnvConfig {
     // Required variables
     const required = {
         DATABASE_URL: process.env.DATABASE_URL,
-        NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+        AUTH_SECRET: process.env.AUTH_SECRET,
         NEXTAUTH_URL: process.env.NEXTAUTH_URL,
         NODE_ENV: process.env.NODE_ENV,
     };
@@ -37,9 +37,9 @@ export function validateEnv(): EnvConfig {
         }
     });
 
-    // Validate NEXTAUTH_SECRET strength (minimum 32 characters)
-    if (required.NEXTAUTH_SECRET && required.NEXTAUTH_SECRET.length < 32) {
-        errors.push('NEXTAUTH_SECRET must be at least 32 characters long');
+    // Validate AUTH_SECRET strength (minimum 32 characters)
+    if (required.AUTH_SECRET && required.AUTH_SECRET.length < 32) {
+        errors.push('AUTH_SECRET must be at least 32 characters long');
     }
 
     // Validate DATABASE_URL format
@@ -77,7 +77,7 @@ export function validateEnv(): EnvConfig {
     // Return validated config
     return {
         DATABASE_URL: required.DATABASE_URL!,
-        NEXTAUTH_SECRET: required.NEXTAUTH_SECRET!,
+        AUTH_SECRET: required.AUTH_SECRET!,
         NEXTAUTH_URL: required.NEXTAUTH_URL!,
         NODE_ENV: required.NODE_ENV as 'development' | 'production' | 'test',
         GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,

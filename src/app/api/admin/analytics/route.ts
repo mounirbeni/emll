@@ -3,6 +3,7 @@ import { requireAdmin } from '@/lib/authorization';
 import { errorResponse, successResponse } from '@/lib/api-response';
 import prisma from '@/lib/prisma';
 import { subDays, startOfDay, endOfDay } from 'date-fns';
+import { decimalToNumber } from '@/lib/decimal';
 
 export async function GET(request: Request) {
     try {
@@ -156,8 +157,15 @@ export async function GET(request: Request) {
         );
 
         // Calculate percentage changes
-        const revenueChange = revenuePreviousPeriod._sum.totalPrice
-            ? ((revenueThisPeriod._sum.totalPrice || 0) - (revenuePreviousPeriod._sum.totalPrice || 0)) / (revenuePreviousPeriod._sum.totalPrice || 1) * 100
+        const revenueThis = decimalToNumber(revenueThisPeriod._sum.totalPrice);
+        const revenuePrev = decimalToNumber(revenuePreviousPeriod._sum.totalPrice);
+        const revenueTodayValue = decimalToNumber(revenueToday._sum.totalPrice);
+        const revenueWeekValue = decimalToNumber(revenueWeek._sum.totalPrice);
+        const revenueMonthValue = decimalToNumber(revenueMonth._sum.totalPrice);
+        const revenueTotalValue = decimalToNumber(totalRevenue._sum.totalPrice);
+
+        const revenueChange = revenuePrev
+            ? ((revenueThis - revenuePrev) / (revenuePrev || 1)) * 100
             : 0;
 
         const bookingsChange = bookingsPreviousPeriod
@@ -166,10 +174,10 @@ export async function GET(request: Request) {
 
         const analytics = {
             revenue: {
-                today: revenueToday._sum.totalPrice || 0,
-                week: revenueWeek._sum.totalPrice || 0,
-                month: revenueMonth._sum.totalPrice || 0,
-                total: totalRevenue._sum.totalPrice || 0,
+                today: revenueTodayValue,
+                week: revenueWeekValue,
+                month: revenueMonthValue,
+                total: revenueTotalValue,
                 change: revenueChange
             },
             bookings: {

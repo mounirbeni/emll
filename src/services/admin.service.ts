@@ -9,6 +9,7 @@ import { serviceRepository } from '@/repositories/service.repository';
 import { paymentRepository } from '@/repositories/payment.repository';
 import { reviewRepository } from '@/repositories/review.repository';
 import { supportRepository } from '@/repositories/support.repository';
+import { decimalToNumber } from '@/lib/decimal';
 
 export interface DashboardStats {
     overview: {
@@ -154,7 +155,7 @@ export class AdminService {
         completedBookings.forEach(booking => {
             // By month
             const monthKey = booking.createdAt.toISOString().slice(0, 7); // YYYY-MM
-            byMonth[monthKey] = (byMonth[monthKey] || 0) + booking.totalPrice;
+            byMonth[monthKey] = (byMonth[monthKey] || 0) + decimalToNumber(booking.totalPrice);
 
             // By service
             if (!byService[booking.activityId]) {
@@ -163,7 +164,7 @@ export class AdminService {
                     revenue: 0
                 };
             }
-            byService[booking.activityId].revenue += booking.totalPrice;
+            byService[booking.activityId].revenue += decimalToNumber(booking.totalPrice);
         });
 
         // Convert to arrays and sort
@@ -190,7 +191,7 @@ export class AdminService {
                 };
             }
             serviceBookingCounts[booking.activityId].count++;
-            serviceBookingCounts[booking.activityId].revenue += booking.totalPrice;
+            serviceBookingCounts[booking.activityId].revenue += decimalToNumber(booking.totalPrice);
         });
 
         const topServices = Object.entries(serviceBookingCounts)

@@ -6,11 +6,34 @@
 import { NextResponse } from 'next/server';
 import { formatErrorResponse, isAppError } from './errors';
 
+function serializeDecimals(value: unknown): unknown {
+    if (value === null || value === undefined) return value;
+
+    if (typeof value === 'object') {
+        if (value && 'toNumber' in value && typeof (value as any).toNumber === 'function') {
+            return (value as any).toNumber();
+        }
+
+        if (Array.isArray(value)) {
+            return value.map(serializeDecimals);
+        }
+
+        const obj = value as Record<string, unknown>;
+        const out: Record<string, unknown> = {};
+        for (const [k, v] of Object.entries(obj)) {
+            out[k] = serializeDecimals(v);
+        }
+        return out;
+    }
+
+    return value;
+}
+
 /**
  * Success response with data
  */
 export function successResponse<T>(data: T, statusCode = 200) {
-    return NextResponse.json(data, { status: statusCode });
+    return NextResponse.json(serializeDecimals(data), { status: statusCode });
 }
 
 /**
