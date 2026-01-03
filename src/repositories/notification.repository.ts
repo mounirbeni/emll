@@ -3,7 +3,7 @@
  * Handles all database operations for notifications
  */
 
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { Notification, NotificationType, Prisma } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
 

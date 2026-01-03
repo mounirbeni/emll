@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/authorization';
 import { errorResponse, successResponse } from '@/lib/api-response';
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { subDays, startOfDay, endOfDay } from 'date-fns';
 
 export async function GET(request: Request) {
@@ -10,7 +10,7 @@ export async function GET(request: Request) {
 
         const { searchParams } = new URL(request.url);
         const range = searchParams.get('range') || '30d';
-        
+
         const days = range === '7d' ? 7 : range === '90d' ? 90 : 30;
         const startDate = startOfDay(subDays(new Date(), days));
         const previousStartDate = startOfDay(subDays(startDate, days));
@@ -156,7 +156,7 @@ export async function GET(request: Request) {
         );
 
         // Calculate percentage changes
-        const revenueChange = revenuePreviousPeriod._sum.totalPrice 
+        const revenueChange = revenuePreviousPeriod._sum.totalPrice
             ? ((revenueThisPeriod._sum.totalPrice || 0) - (revenuePreviousPeriod._sum.totalPrice || 0)) / (revenuePreviousPeriod._sum.totalPrice || 1) * 100
             : 0;
 

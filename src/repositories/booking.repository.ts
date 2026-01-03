@@ -3,7 +3,7 @@
  * Handles all database operations for bookings
  */
 
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { Booking, BookingStatus, Prisma } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
 

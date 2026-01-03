@@ -3,7 +3,7 @@
  * Handles all database operations for users
  */
 
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { Prisma, User, UserRole } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
 

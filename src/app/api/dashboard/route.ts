@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { determineTripState } from '@/lib/trip-logic';
 import { auth } from '@/auth';
 

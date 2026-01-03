@@ -3,7 +3,7 @@
  * Handles all database operations for messages
  */
 
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import { Message, Prisma } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
 
