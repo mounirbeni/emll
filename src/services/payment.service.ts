@@ -100,7 +100,7 @@ export class PaymentService {
                 await notificationService.sendPaymentConfirmation(
                     booking.userId,
                     booking.id,
-                    payment.amount
+                    decimalToNumber(payment.amount)
                 );
             } catch (error) {
                 console.error('Failed to send payment notification:', error);

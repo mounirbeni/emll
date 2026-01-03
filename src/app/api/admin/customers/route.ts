@@ -91,7 +91,7 @@ export async function GET(request: Request) {
             }
             acc[booking.userId].bookings.push(booking);
             if (booking.status !== 'CANCELLED') {
-                acc[booking.userId].totalSpent += booking.totalPrice || 0;
+                acc[booking.userId].totalSpent += Number(booking.totalPrice) || 0;
             }
             acc[booking.userId].statusCounts[booking.status as keyof typeof acc[string]['statusCounts']] += 1;
             if (!acc[booking.userId].lastBookingDate || booking.createdAt > acc[booking.userId].lastBookingDate!) {

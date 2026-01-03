@@ -180,7 +180,7 @@ export class UserService {
         const completedBookings = user.bookings?.filter((b) => b.status === BookingStatus.COMPLETED).length || 0;
         const totalSpent = user.bookings
             ?.filter((b) => b.status === BookingStatus.COMPLETED)
-            .reduce((sum, b) => sum + b.totalPrice, 0) || 0;
+            .reduce((sum, b) => sum + Number(b.totalPrice), 0) || 0;
 
         return {
             totalBookings,
