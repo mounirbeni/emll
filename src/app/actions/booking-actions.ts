@@ -59,7 +59,9 @@ export async function confirmBooking(id: string) {
                 booking.activityTitle,
                 booking.date,
                 booking.guests,
-                booking.totalPrice
+                typeof (booking.totalPrice as any)?.toNumber === 'function'
+                    ? (booking.totalPrice as any).toNumber()
+                    : Number(booking.totalPrice)
             );
         } catch (error) {
             console.error('Failed to send confirmation email:', error);
@@ -96,7 +98,11 @@ export async function cancelBooking(id: string) {
                 booking.email,
                 booking.name,
                 booking.activityTitle,
-                booking.paymentStatus === 'PAID' ? booking.totalPrice : undefined
+                booking.paymentStatus === 'PAID'
+                    ? (typeof (booking.totalPrice as any)?.toNumber === 'function'
+                        ? (booking.totalPrice as any).toNumber()
+                        : Number(booking.totalPrice))
+                    : undefined
             );
         } catch (error) {
             console.error('Failed to send cancellation email:', error);
