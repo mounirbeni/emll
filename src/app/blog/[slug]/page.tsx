@@ -72,7 +72,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     // However, params is passed as prop, in Next 13/14 it's object.
     const { slug } = await Promise.resolve(params); // Handle potential future async params
 
-    const post = await getPost(slug)
+    let post = null
+    try {
+        post = await getPost(slug)
+    } catch (error) {
+        console.error(`Error fetching blog post with slug ${slug}:`, error)
+        // Optionally redirect to error page or just show 404
+    }
 
     if (!post) {
         notFound()

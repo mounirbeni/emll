@@ -26,8 +26,9 @@ export default function ServicesPage() {
                 const servicesData = Array.isArray(data) ? data : (data.data || data)
                 setServices(Array.isArray(servicesData) ? servicesData : [])
             } catch (err) {
-                setError('Failed to load services')
-                console.error(err)
+                const message = err instanceof Error ? err.message : 'Unknown error'
+                setError(`Failed to load services: ${message}`)
+                console.error('Services Page Error details:', err)
             } finally {
                 setLoading(false)
             }
@@ -85,7 +86,7 @@ export default function ServicesPage() {
                     <h1 className="text-3xl sm:text-4xl font-bold text-charcoal mb-2">Discover Experiences</h1>
                     <p className="text-medium-gray">Explore our curated collection of authentic Marrakech adventures</p>
                 </div>
-                
+
                 {services.length === 0 ? (
                     <EmptyState
                         icon="services"
@@ -99,8 +100,8 @@ export default function ServicesPage() {
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {services.map((service) => (
-                            <Link 
-                                key={service.id} 
+                            <Link
+                                key={service.id}
                                 href={`/services/${service.id}`}
                                 className="group"
                             >
@@ -127,7 +128,7 @@ export default function ServicesPage() {
                                             </span>
                                         </div>
                                     </div>
-                                    
+
                                     {/* Content */}
                                     <div className="p-4">
                                         <h3 className="font-semibold text-charcoal text-base mb-2 line-clamp-2 group-hover:text-primary transition-colors">
@@ -153,7 +154,7 @@ export default function ServicesPage() {
                                                 {(service.reviews || 0) > 0 ? `${service.reviews} reviews` : 'New'}
                                             </span>
                                         </div>
-                                        
+
                                         {/* Meta Info */}
                                         <div className="flex items-center gap-3 text-xs text-medium-gray mb-3">
                                             {service.duration && (
@@ -169,11 +170,11 @@ export default function ServicesPage() {
                                                 </span>
                                             )}
                                         </div>
-                                        
+
                                         <p className="text-sm text-medium-gray line-clamp-2 mb-4">
                                             {service.description}
                                         </p>
-                                        
+
                                         {/* Price & CTA */}
                                         <div className="flex items-center justify-between pt-3 border-t border-border">
                                             <div>
