@@ -1,6 +1,6 @@
 
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import { comparePassword } from '@/lib/auth';
 import { applyRateLimit, createRateLimitResponse, RATE_LIMITS } from '@/lib/middleware/rate-limiter';
 import { errorResponse } from '@/lib/api-response';

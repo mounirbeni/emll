@@ -3,7 +3,7 @@
  * Handles all database operations for support requests
  */
 
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import { SupportRequest, Prisma } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
 

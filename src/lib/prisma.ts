@@ -8,9 +8,6 @@ const prismaClientSingleton = () => {
         throw new Error('DATABASE_URL environment variable is required')
     }
 
-    // Debug: Log that we are initializing (don't log the full URL for security)
-    console.log('🔌 Initializing Prisma Client with DATABASE_URL present')
-
     return new PrismaClient({
         log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
     })

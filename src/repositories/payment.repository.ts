@@ -3,7 +3,7 @@
  * Handles all database operations for payments
  */
 
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import { Payment, Prisma, TransactionStatus } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
 

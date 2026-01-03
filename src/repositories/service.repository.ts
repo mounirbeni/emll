@@ -3,7 +3,7 @@
  * Handles all database operations for services/activities
  */
 
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import { Service, Prisma } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
 

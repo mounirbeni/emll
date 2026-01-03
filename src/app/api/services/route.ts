@@ -24,7 +24,6 @@ export async function GET(request: Request) {
 
         return NextResponse.json(services)
     } catch (error) {
-        console.error('API Error [GET /api/services]:', error)
         const { statusCode, body } = formatErrorResponse(error)
         return NextResponse.json(body, { status: statusCode })
     }

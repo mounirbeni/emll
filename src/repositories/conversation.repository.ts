@@ -3,7 +3,7 @@
  * Handles all database operations for conversations
  */
 
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import { Conversation, ConversationStatus, Prisma } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
 

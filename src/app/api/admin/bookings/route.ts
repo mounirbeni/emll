@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { requireAdmin } from '@/lib/authorization'
 import { errorResponse, successResponse, noContentResponse } from '@/lib/api-response'
 import { BadRequestError } from '@/lib/errors'

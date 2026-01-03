@@ -26,9 +26,8 @@ export default function ServicesPage() {
                 const servicesData = Array.isArray(data) ? data : (data.data || data)
                 setServices(Array.isArray(servicesData) ? servicesData : [])
             } catch (err) {
-                const message = err instanceof Error ? err.message : 'Unknown error'
-                setError(`Failed to load services: ${message}`)
-                console.error('Services Page Error details:', err)
+                setError('Failed to load services')
+                console.error(err)
             } finally {
                 setLoading(false)
             }

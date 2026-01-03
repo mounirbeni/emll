@@ -3,7 +3,7 @@
  * Handles all database operations for reviews
  */
 
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import { Review, Prisma } from '@prisma/client';
 import { BaseRepository, FindManyOptions } from './base.repository';
 

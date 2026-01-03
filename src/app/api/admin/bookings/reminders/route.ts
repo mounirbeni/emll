@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/authorization';
 import { errorResponse, successResponse } from '@/lib/api-response';
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 import { emailService } from '@/services/email.service';
 import { addHours, startOfDay, endOfDay } from 'date-fns';
 

@@ -18,22 +18,10 @@ async function getBlogPosts() {
     })
 }
 
-import { BlogPost } from '@prisma/client'
-
 export default async function BlogPage() {
-    let posts: (BlogPost & { author: { id: string; name: string | null; email: string; password: string | null; phone: string | null; role: "ADMIN" | "CUSTOMER"; canMessage: boolean; conversationStatus: "OPEN" | "CLOSED" | "ARCHIVED" | "NONE"; createdAt: Date; updatedAt: Date; loyaltyPoints: number; wishlist: string[]; } })[] = []
-    let error = null
-
-    try {
-        posts = await getBlogPosts()
-    } catch (e) {
-        console.error('Failed to fetch blog posts:', e)
-        error = 'Unable to load blog posts at this time.'
-    }
-
-    // Determine featured and rest based on successful fetch
-    const featured = posts.length > 0 ? posts[0] : null
-    const rest = posts.length > 0 ? posts.slice(1) : []
+    const posts = await getBlogPosts()
+    const featured = posts[0]
+    const rest = posts.slice(1)
 
     return (
         <div className="min-h-screen bg-cream flex flex-col">
