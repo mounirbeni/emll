@@ -48,7 +48,7 @@ export function BookingModal({
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
-    const totalPrice = servicePrice * guests
+    const totalPrice = Number(servicePrice) * guests
 
     const handleBooking = async () => {
         // Validate required fields

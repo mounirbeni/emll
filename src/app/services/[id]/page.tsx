@@ -259,7 +259,7 @@ export default function ServiceDetailPage() {
                         isOpen={isBookingModalOpen}
                         onClose={() => setIsBookingModalOpen(false)}
                         serviceTitle={service.title}
-                        servicePrice={service.price}
+                        servicePrice={Number(service.price)}
                         serviceId={service.id}
                         onBookingSuccess={() => setBookingSuccess(true)}
                         user={session?.user}
@@ -423,7 +423,7 @@ export default function ServiceDetailPage() {
                                 <div className="mb-6">
                                     <p className="text-sm text-medium-gray mb-1">From</p>
                                     <div className="flex items-baseline gap-2">
-                                        <span className="text-3xl font-bold text-primary">€{service?.price.toFixed(0)}</span>
+                                        <span className="text-3xl font-bold text-primary">€{Number(service?.price).toFixed(0)}</span>
                                         <span className="text-medium-gray">per person</span>
                                     </div>
                                 </div>
@@ -478,7 +478,7 @@ export default function ServiceDetailPage() {
                 <div className="flex items-center justify-between gap-4 max-w-lg mx-auto">
                     <div>
                         <p className="text-xs text-medium-gray">From</p>
-                        <p className="text-xl font-bold text-primary">€{service?.price.toFixed(0)}</p>
+                        <p className="text-xl font-bold text-primary">€{Number(service?.price).toFixed(0)}</p>
                     </div>
                     <Button
                         size="lg"

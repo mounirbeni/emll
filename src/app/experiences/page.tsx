@@ -31,7 +31,7 @@ export default async function ExperiencesPage() {
                 return {
                     id: service.id, // Use database ID - this is critical for bookings!
                     title: service.title,
-                    price: service.price,
+                    price: Number(service.price),
                     rating: service.rating,
                     reviews: service.reviews || 0,
                     category: service.category,

@@ -69,7 +69,7 @@ async function getActivity(id: string): Promise<Activity | null> {
         return {
             id: service.id, // Use the database ID - critical for bookings!
             title: service.title,
-            price: service.price,
+            price: Number(service.price),
             rating: service.rating,
             reviews: service.reviews || 0,
             category: service.category,
@@ -115,7 +115,7 @@ async function getActivity(id: string): Promise<Activity | null> {
                 return {
                     id: serviceByTitle.id, // Use database ID for bookings!
                     title: serviceByTitle.title,
-                    price: serviceByTitle.price,
+                    price: Number(serviceByTitle.price),
                     rating: serviceByTitle.rating,
                     reviews: serviceByTitle.reviews || 0,
                     category: serviceByTitle.category,
@@ -183,7 +183,7 @@ async function getActivity(id: string): Promise<Activity | null> {
             return {
                 id: newService.id, // Use database ID for bookings!
                 title: newService.title,
-                price: newService.price,
+                price: Number(newService.price),
                 rating: newService.rating,
                 reviews: newService.reviews || 0,
                 category: newService.category,
@@ -276,7 +276,7 @@ export default async function ActivityPage({ params }: PageProps) {
         return {
             id: service.id,
             title: service.title,
-            price: service.price,
+            price: Number(service.price),
             rating: service.rating,
             reviews: service.reviews,
             category: service.category,

@@ -79,7 +79,7 @@ export function BookingForm({ activity }: BookingFormProps) {
     }, [activity, prevActivityId]);
 
     const selectedPackage = findPackage(selectedPackageName);
-    const pricePerPerson = selectedPackage ? selectedPackage.price : (activity ? activity.price : 0);
+    const pricePerPerson = Number(selectedPackage ? selectedPackage.price : (activity ? activity.price : 0));
     const totalPrice = pricePerPerson * guests;
 
     // Generate time slots (09:00 to 18:00)
@@ -150,15 +150,15 @@ export function BookingForm({ activity }: BookingFormProps) {
                                         {category.packages.map((pkg) => (
                                             <label key={pkg.name} className={cn(
                                                 "flex items-start gap-3 border-2 rounded-xl p-3 cursor-pointer transition-all duration-200",
-                                                selectedPackageName === pkg.name 
-                                                    ? "border-primary bg-primary/5 shadow-sm" 
+                                                selectedPackageName === pkg.name
+                                                    ? "border-primary bg-primary/5 shadow-sm"
                                                     : "border-border hover:border-primary/50 hover:bg-muted/50"
                                             )}>
                                                 <RadioGroupItem value={pkg.name} id={pkg.name} className="mt-0.5" />
                                                 <div className="flex-1 min-w-0">
                                                     <div className="flex items-center justify-between gap-2">
                                                         <span className="font-semibold text-sm">{pkg.name}</span>
-                                                        <span className="text-primary font-bold text-sm whitespace-nowrap">€{pkg.price}</span>
+                                                        <span className="text-primary font-bold text-sm whitespace-nowrap">€{pkg.price.toString()}</span>
                                                     </div>
                                                     <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{pkg.description}</p>
                                                 </div>
@@ -170,15 +170,15 @@ export function BookingForm({ activity }: BookingFormProps) {
                                 activity.packages.map((pkg) => (
                                     <label key={pkg.name} className={cn(
                                         "flex items-start gap-3 border-2 rounded-xl p-3 cursor-pointer transition-all duration-200",
-                                        selectedPackageName === pkg.name 
-                                            ? "border-primary bg-primary/5 shadow-sm" 
+                                        selectedPackageName === pkg.name
+                                            ? "border-primary bg-primary/5 shadow-sm"
                                             : "border-border hover:border-primary/50 hover:bg-muted/50"
                                     )}>
                                         <RadioGroupItem value={pkg.name} id={pkg.name} className="mt-0.5" />
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center justify-between gap-2">
                                                 <span className="font-semibold text-sm">{pkg.name}</span>
-                                                <span className="text-primary font-bold text-sm whitespace-nowrap">€{pkg.price}</span>
+                                                <span className="text-primary font-bold text-sm whitespace-nowrap">€{pkg.price.toString()}</span>
                                             </div>
                                             <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{pkg.description}</p>
                                         </div>
@@ -197,7 +197,7 @@ export function BookingForm({ activity }: BookingFormProps) {
                         </div>
                         <Label className="text-sm font-semibold">When would you like to go?</Label>
                     </div>
-                    
+
                     <div className="grid grid-cols-2 gap-3">
                         <Popover>
                             <PopoverTrigger asChild>
@@ -302,7 +302,7 @@ export function BookingForm({ activity }: BookingFormProps) {
                         </div>
                         <Label className="text-sm font-semibold">Your Details</Label>
                     </div>
-                    
+
                     <div className="space-y-3">
                         <div className="relative">
                             <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -366,7 +366,7 @@ export function BookingForm({ activity }: BookingFormProps) {
                                 alert("Please fill in your name and email");
                                 return;
                             }
-                            
+
                             // Validate email format
                             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                             if (!emailRegex.test(email)) {

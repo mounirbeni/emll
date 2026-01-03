@@ -21,7 +21,7 @@ export function PriceCard({ activity }: PriceCardProps) {
             <div className="border-b border-border pb-4">
                 <div className="flex items-baseline gap-2">
                     <span className="text-4xl font-bold text-foreground">
-                        €{activity.price}
+                        €{activity.price.toString()}
                     </span>
                     <span className="text-muted-foreground">per person</span>
                 </div>

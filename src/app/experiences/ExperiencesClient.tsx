@@ -20,7 +20,7 @@ export default function ExperiencesClient({ initialActivities }: ExperiencesClie
     const [selectedCategory, setSelectedCategory] = useState(searchParams.get("category") || "All");
 
     const initialMinPrice = searchParams.get("minPrice") ? Number(searchParams.get("minPrice")) : 0;
-    const initialMaxPrice = searchParams.get("maxPrice") ? Number(searchParams.get("maxPrice")) : 600;
+    const initialMaxPrice = searchParams.get("maxPrice") ? Number(searchParams.get("maxPrice")) : 3000;
     const [priceRange, setPriceRange] = useState([initialMinPrice, initialMaxPrice]);
 
     const [selectedDuration, setSelectedDuration] = useState(searchParams.get("duration") || "all");
@@ -72,7 +72,7 @@ export default function ExperiencesClient({ initialActivities }: ExperiencesClie
             }
 
             // Price Filter
-            if (activity.price < priceRange[0] || activity.price > priceRange[1]) {
+            if (Number(activity.price) < priceRange[0] || Number(activity.price) > priceRange[1]) {
                 return false;
             }
 

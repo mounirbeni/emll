@@ -52,7 +52,7 @@ export function ActivityCard({ activity }: ActivityCardProps) {
                     {/* Price Badge - Top Left */}
                     <div className="absolute top-3 left-3 z-10">
                         <span className="inline-flex items-center gap-1 bg-white/95 backdrop-blur-sm text-primary font-bold text-sm px-3 py-1.5 rounded-full shadow-lg">
-                            From €{activity.price}
+                            From €{activity.price.toString()}
                         </span>
                     </div>
 
@@ -113,7 +113,7 @@ export function ActivityCard({ activity }: ActivityCardProps) {
                     {/* Mobile Price - Only show on mobile since desktop has badge */}
                     <div className="sm:hidden mt-auto">
                         <div className="text-primary font-bold text-lg">
-                            €{activity.price} <span className="text-muted-foreground text-sm font-normal">per person</span>
+                            €{activity.price.toString()} <span className="text-muted-foreground text-sm font-normal">per person</span>
                         </div>
                     </div>
                 </div>

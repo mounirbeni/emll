@@ -183,7 +183,7 @@ export default function PaymentsPage() {
                                                     </Link>
                                                 </TableCell>
                                                 <TableCell className="font-medium">
-                                                    €{payment.amount.toFixed(2)}
+                                                    €{Number(payment.amount).toFixed(2)}
                                                 </TableCell>
                                                 <TableCell className="capitalize">
                                                     {payment.method?.toLowerCase() || "N/A"}

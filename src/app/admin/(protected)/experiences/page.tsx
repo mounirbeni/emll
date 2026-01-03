@@ -59,7 +59,7 @@ export default async function AdminExperiencesPage() {
                                 <TableRow key={service.id}>
                                     <TableCell className="font-medium">{service.title}</TableCell>
                                     <TableCell className="capitalize">{service.category}</TableCell>
-                                    <TableCell>€{service.price}</TableCell>
+                                    <TableCell>€{service.price.toString()}</TableCell>
                                     <TableCell>{service.duration}</TableCell>
                                     <TableCell>{service.rating}</TableCell>
                                     <TableCell className="text-right">
@@ -69,9 +69,9 @@ export default async function AdminExperiencesPage() {
                                                     <Edit className="h-4 w-4" />
                                                 </Link>
                                             </Button>
-                                            <Button 
-                                                size="icon" 
-                                                variant="ghost" 
+                                            <Button
+                                                size="icon"
+                                                variant="ghost"
                                                 className="h-8 w-8 text-destructive"
                                                 onClick={async () => {
                                                     if (confirm('Delete this service?')) {
