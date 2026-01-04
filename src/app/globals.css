@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 
 @theme {
@@ -13,7 +14,7 @@
   --color-dark-gray: #1A1A1A;
   --color-charcoal: #2D2D2D;
   --color-medium-gray: #666666;
-  
+
   /* Soft Cream/White backgrounds */
   --color-cream: #FDF8F3;
   --color-cream-dark: #F5EDE4;

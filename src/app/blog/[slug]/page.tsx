@@ -157,7 +157,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                     {/* Sidebar / Left Column (Share) */}
                     <div className="lg:col-span-1 hidden lg:block">
-                        <div className="sticky top-24">
+                        <div className="sticky top-24 space-y-6">
                             <ShareButtons
                                 title={post.title}
                                 url={`${process.env.NEXT_PUBLIC_APP_URL || 'https://explore-marrakesh.com'}/blog/${post.slug}`}
@@ -168,16 +168,36 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     {/* Main Content */}
                     <div className="lg:col-span-8">
                         <div
-                            className="prose prose-lg prose-orange max-w-none 
+                            className="prose prose-lg prose-slate max-w-none 
                             prose-headings:font-bold prose-headings:text-charcoal 
-                            prose-p:text-charcoal/80 prose-p:leading-relaxed
-                            prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-                            prose-img:rounded-xl prose-img:shadow-md"
+                            prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
+                            prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
+                            prose-p:text-charcoal/80 prose-p:leading-relaxed prose-p:mb-6
+                            prose-a:text-primary prose-a:font-semibold prose-a:no-underline hover:prose-a:underline
+                            prose-img:rounded-2xl prose-img:shadow-lg prose-img:my-8
+                            prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-orange-50/50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-blockquote:italic
+                            prose-strong:text-charcoal prose-strong:font-bold
+                            prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-6
+                            prose-li:text-charcoal/80 prose-li:mb-2"
                             dangerouslySetInnerHTML={{ __html: post.content }}
                         />
 
+                        {/* Author Bio Card */}
+                        <div className="mt-12 p-6 bg-white border border-border rounded-2xl flex items-start gap-4 shadow-sm">
+                            <div className="h-14 w-14 rounded-full bg-primary/10 flex-shrink-0 flex items-center justify-center text-primary text-xl font-bold">
+                                {post.author?.name?.[0] || 'E'}
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-charcoal text-lg mb-1">Written by {post.author?.name || 'Explore Marrakesh Team'}</h3>
+                                <p className="text-medium-gray text-sm leading-relaxed">
+                                    Our team of local experts shares the best tips, hidden gems, and cultural insights to help you make the most of your trip to the Red City.
+                                </p>
+                            </div>
+                        </div>
+
                         {/* Mobile Share */}
-                        <div className="lg:hidden mt-12 border-t pt-8">
+                        <div className="lg:hidden mt-8 border-t pt-8">
+                            <h4 className="font-bold text-charcoal mb-4">Share this article</h4>
                             <ShareButtons
                                 title={post.title}
                                 url={`${process.env.NEXT_PUBLIC_APP_URL || 'https://explore-marrakesh.com'}/blog/${post.slug}`}
@@ -187,13 +207,33 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                     {/* Right Sidebar (Toc or Ads - Empty for now) */}
                     <div className="lg:col-span-3">
-                        {/* Placeholder for Table of Contents or CTA */}
-                        <div className="bg-white rounded-2xl border border-border p-6 sticky top-24 shadow-sm">
-                            <h3 className="font-bold text-charcoal mb-2">Ready to explore?</h3>
-                            <p className="text-sm text-medium-gray mb-4">Book your dream Marrakech experience today.</p>
-                            <Link href="/services" className="block w-full py-2.5 px-4 bg-primary text-white text-center font-semibold rounded-xl hover:bg-accent transition-colors">
-                                Explore Experiences
-                            </Link>
+                        {/* Improved Sticky Booking CTA */}
+                        <div className="sticky top-24 space-y-6">
+                            <div className="bg-white rounded-2xl border border-border overflow-hidden shadow-lg group hover:shadow-xl transition-shadow duration-300">
+                                <div className="bg-primary p-4">
+                                    <h3 className="font-bold text-white text-lg">Plan Your Trip</h3>
+                                    <p className="text-white/90 text-sm">Experience the real Marrakech</p>
+                                </div>
+                                <div className="p-6">
+                                    <ul className="space-y-3 mb-6">
+                                        <li className="flex items-center gap-2 text-sm text-charcoal">
+                                            <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                                            Certfied Local Guides
+                                        </li>
+                                        <li className="flex items-center gap-2 text-sm text-charcoal">
+                                            <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                                            Authentic Experiences
+                                        </li>
+                                        <li className="flex items-center gap-2 text-sm text-charcoal">
+                                            <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                                            Instant Confirmation
+                                        </li>
+                                    </ul>
+                                    <Link href="/services" className="block w-full py-3 px-4 bg-charcoal text-white text-center font-bold rounded-xl hover:bg-primary transition-colors shadow-md">
+                                        Browse Experiences
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
