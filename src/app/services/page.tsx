@@ -122,7 +122,7 @@ export default function ServicesPage() {
                                         )}
                                         {/* Category Badge */}
                                         <div className="absolute top-3 left-3">
-                                            <span className="bg-white/95 backdrop-blur-sm text-charcoal text-xs font-medium px-2.5 py-1 rounded-full shadow-sm">
+                                            <span className="bg-white text-charcoal text-xs font-medium px-2.5 py-1 rounded-full shadow-sm">
                                                 {service.category}
                                             </span>
                                         </div>

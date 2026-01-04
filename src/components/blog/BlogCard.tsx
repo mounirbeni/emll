@@ -37,7 +37,7 @@ export function BlogCard({ post }: BlogCardProps) {
 
                     {category && (
                         <div className="absolute top-3 left-3">
-                            <span className="bg-white/95 backdrop-blur-sm text-charcoal text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+                            <span className="bg-white text-charcoal text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
                                 {category}
                             </span>
                         </div>

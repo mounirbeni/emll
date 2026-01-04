@@ -51,7 +51,7 @@ export function ActivityCard({ activity }: ActivityCardProps) {
 
                     {/* Price Badge - Top Left */}
                     <div className="absolute top-3 left-3 z-10">
-                        <span className="inline-flex items-center gap-1 bg-white/95 backdrop-blur-sm text-primary font-bold text-sm px-3 py-1.5 rounded-full shadow-lg">
+                        <span className="inline-flex items-center gap-1 bg-white text-primary font-bold text-sm px-3 py-1.5 rounded-full shadow-lg">
                             From €{activity.price.toString()}
                         </span>
                     </div>
@@ -64,7 +64,7 @@ export function ActivityCard({ activity }: ActivityCardProps) {
                             "absolute top-3 right-3 h-9 w-9 rounded-full transition-all duration-300 z-10 shadow-lg",
                             inWishlist
                                 ? "bg-primary text-white hover:bg-primary/90 scale-110"
-                                : "bg-white/95 backdrop-blur-sm text-gray-600 hover:bg-white hover:text-primary hover:scale-110"
+                                : "bg-white text-gray-600 hover:bg-white hover:text-primary hover:scale-110"
                         )}
                         onClick={toggleWishlist}
                     >

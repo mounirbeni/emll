@@ -474,7 +474,7 @@ export default function ServiceDetailPage() {
             </div>
 
             {/* Mobile Sticky Bottom Bar */}
-            <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-md border-t border-border lg:hidden z-40 shadow-[0_-4px_20px_-4px_rgba(0,0,0,0.15)]">
+            <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-border lg:hidden z-40 shadow-[0_-4px_20px_-4px_rgba(0,0,0,0.15)]">
                 <div className="flex items-center justify-between gap-4 max-w-lg mx-auto">
                     <div>
                         <p className="text-xs text-medium-gray">From</p>

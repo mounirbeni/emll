@@ -99,9 +99,9 @@ export function BookingForm({ activity }: BookingFormProps) {
                         <p className="text-white/70 text-xs">per person</p>
                     </div>
                     {activity.rating >= 4.8 && (
-                        <div className="flex items-center gap-1.5 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                            <Star className="w-4 h-4 fill-current" />
-                            <span className="text-sm font-semibold">Popular</span>
+                        <div className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full">
+                            <Star className="w-4 h-4 text-primary fill-primary" />
+                            <span className="text-sm font-semibold text-primary">Popular</span>
                         </div>
                     )}
                 </div>

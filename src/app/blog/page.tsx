@@ -57,7 +57,7 @@ export default async function BlogPage() {
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                                                 <div className="absolute bottom-5 left-5 right-5">
-                                                    <div className="inline-flex items-center rounded-full bg-white/90 backdrop-blur-sm text-charcoal text-xs font-semibold px-3 py-1">
+                                                    <div className="inline-flex items-center rounded-full bg-white text-charcoal text-xs font-semibold px-3 py-1">
                                                         Featured Story
                                                     </div>
                                                     <h2 className="mt-3 text-2xl sm:text-3xl font-bold text-white leading-tight">
