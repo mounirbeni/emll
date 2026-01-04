@@ -757,7 +757,15 @@ async function main() {
   })
   console.log('✅ Created Customer 2:', customer2.email)
 
-  // Clean existing services for fresh seed
+  // Clean existing data for fresh seed
+  console.log('🧹 Cleaning existing data...')
+  await prisma.review.deleteMany({})
+  await prisma.payment.deleteMany({})
+  await prisma.booking.deleteMany({})
+  // We can also clear blog posts to avoid duplicates if we wanted, though upsert handles creation
+  // But if we want a fresh start:
+  // await prisma.blogPost.deleteMany({}) 
+
   await prisma.service.deleteMany({})
   console.log('🧹 Cleaned existing services')
 
