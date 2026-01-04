@@ -155,18 +155,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                 {/* Content Layout */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                    {/* Sidebar / Left Column (Share) */}
-                    <div className="lg:col-span-1 hidden lg:block">
-                        <div className="sticky top-24 space-y-6">
-                            <ShareButtons
-                                title={post.title}
-                                url={`${process.env.NEXT_PUBLIC_APP_URL || 'https://explore-marrakesh.com'}/blog/${post.slug}`}
-                            />
-                        </div>
-                    </div>
-
                     {/* Main Content */}
-                    <div className="lg:col-span-8">
+                    <div className="lg:col-span-9">
                         <div
                             className="prose prose-lg prose-slate max-w-none 
                             prose-headings:font-bold prose-headings:text-charcoal 
@@ -195,8 +185,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                             </div>
                         </div>
 
-                        {/* Mobile Share */}
-                        <div className="lg:hidden mt-8 border-t pt-8">
+                        {/* Share Section */}
+                        <div className="mt-8 border-t pt-8">
                             <h4 className="font-bold text-charcoal mb-4">Share this article</h4>
                             <ShareButtons
                                 title={post.title}
