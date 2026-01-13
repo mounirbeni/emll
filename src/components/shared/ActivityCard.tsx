@@ -28,7 +28,7 @@ export function ActivityCard({ activity }: ActivityCardProps) {
     };
 
     return (
-        <Link href={`/experiences/${activity.id}`} className="block h-full group">
+        <Link href={`/experiences/${encodeURIComponent(activity.id)}`} className="block h-full group">
             <div className="bg-white h-full flex flex-row sm:flex-col rounded-xl border border-border overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1 hover:border-primary/30">
                 {/* Image Container */}
                 <div className="relative w-32 h-auto aspect-square sm:w-full sm:aspect-[4/3] shrink-0 overflow-hidden">

@@ -79,15 +79,21 @@ export async function middleware(request: NextRequest) {
 
     // 4. Rate Limiting for API routes
     if (pathname.startsWith('/api')) {
-        const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || '127.0.0.1'
-        const limit = pathname.startsWith('/api/auth') ? 5 : 100
-        try {
-            await limiter.check(limit, ip)
-        } catch {
-            return NextResponse.json(
-                { error: 'Rate limit exceeded' },
-                { status: 429 }
-            )
+        const hostname = request.nextUrl.hostname
+        const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1'
+        const bypassRateLimit = isLocalhost || process.env.NODE_ENV !== 'production' || process.env.DISABLE_RATE_LIMIT === 'true'
+
+        if (!bypassRateLimit) {
+            const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || '127.0.0.1'
+            const limit = pathname.startsWith('/api/auth') ? 30 : 100
+            try {
+                await limiter.check(limit, ip)
+            } catch {
+                return NextResponse.json(
+                    { error: 'Rate limit exceeded' },
+                    { status: 429 }
+                )
+            }
         }
     }
 

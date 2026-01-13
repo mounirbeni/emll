@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
 import {
     Menu, X, Search, User, LogOut, LayoutDashboard,
-    Heart, ShoppingBag, ChevronDown, Compass
+    Heart, ShoppingBag, ChevronDown, Compass, Globe
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -31,9 +31,21 @@ const navLinks = [
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [language, setLanguage] = useState("en");
     const pathname = usePathname();
     const { data: session, status } = useSession();
     const isLoading = status === "loading";
+    const languages = [
+        { code: "en", label: "English" },
+        { code: "fr", label: "Français" },
+        { code: "ar", label: "العربية" },
+    ];
+
+    const languageMap: Record<string, string> = {
+        en: "en-US",
+        fr: "fr-FR",
+        ar: "ar-MA",
+    };
 
     // Handle scroll effect
     useEffect(() => {
@@ -43,6 +55,20 @@ export function Header() {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    useEffect(() => {
+        const stored = localStorage.getItem("emll-language");
+        if (stored) {
+            setLanguage(stored);
+            document.documentElement.lang = languageMap[stored] || "en-US";
+        }
+    }, []);
+
+    const updateLanguage = (code: string) => {
+        setLanguage(code);
+        localStorage.setItem("emll-language", code);
+        document.documentElement.lang = languageMap[code] || "en-US";
+    };
 
     // Close mobile menu on route change
     useEffect(() => {
@@ -96,6 +122,31 @@ export function Header() {
                                 <span className="sr-only">Search</span>
                             </Button>
                         </Link>
+
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" size="icon" className="hover:text-[#FF5F00]">
+                                    <Globe className="w-5 h-5" />
+                                    <span className="sr-only">Select language</span>
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end" className="w-40">
+                                <DropdownMenuLabel>Language</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                {languages.map((option) => (
+                                    <DropdownMenuItem
+                                        key={option.code}
+                                        onClick={() => updateLanguage(option.code)}
+                                        className={cn(
+                                            "cursor-pointer",
+                                            language === option.code && "font-semibold text-[#FF5F00]"
+                                        )}
+                                    >
+                                        {option.label}
+                                    </DropdownMenuItem>
+                                ))}
+                            </DropdownMenuContent>
+                        </DropdownMenu>
 
                         {isLoading ? (
                             <div className="w-8 h-8 rounded-full bg-gray-200 animate-pulse" />
@@ -188,6 +239,28 @@ export function Header() {
                             </Link>
                         ))}
                     </nav>
+
+                    <div className="mb-6 space-y-3">
+                        <p className="px-4 text-xs uppercase text-gray-500">Language</p>
+                        <div className="grid grid-cols-3 gap-2 px-4">
+                            {languages.map((option) => (
+                                <Button
+                                    key={option.code}
+                                    type="button"
+                                    variant={language === option.code ? "default" : "outline"}
+                                    className={cn(
+                                        "h-10 rounded-full text-sm",
+                                        language === option.code
+                                            ? "bg-[#FF5F00] text-white hover:bg-[#E55500]"
+                                            : "border-gray-200 text-gray-700"
+                                    )}
+                                    onClick={() => updateLanguage(option.code)}
+                                >
+                                    {option.label}
+                                </Button>
+                            ))}
+                        </div>
+                    </div>
 
                     <div className="mt-auto space-y-3 pt-4 border-t border-gray-200">
                         {session ? (
