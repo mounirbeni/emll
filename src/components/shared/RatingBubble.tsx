@@ -3,10 +3,9 @@
 interface RatingBubbleProps {
     rating: number;
     size?: "sm" | "md" | "lg";
-    showNumber?: boolean;
 }
 
-export function RatingBubble({ rating, size = "md", showNumber = true }: RatingBubbleProps) {
+export function RatingBubble({ rating, size = "md" }: RatingBubbleProps) {
     // Ensure rating is valid
     const safeRating = Math.max(0, Math.min(5, rating || 0));
     const fullCircles = Math.floor(safeRating);
@@ -16,15 +15,15 @@ export function RatingBubble({ rating, size = "md", showNumber = true }: RatingB
     return (
         <div className="flex items-center gap-0.5" title={`${safeRating.toFixed(1)} of 5 bubbles`}>
             {[...Array(fullCircles)].map((_, i) => (
-                <div key={`full-${i}`} className={`rounded-full bg-[#FF5F00] ${size === "sm" ? "w-3 h-3" : "w-4 h-4"} border border-[#FF5F00]`} />
+                <div key={`full-${i}`} className={`rounded-full bg-primary ${size === "sm" ? "w-3 h-3" : "w-4 h-4"} border border-primary`} />
             ))}
             {hasHalfCircle && (
-                <div className={`rounded-full relative overflow-hidden bg-white border border-[#FF5F00] ${size === "sm" ? "w-3 h-3" : "w-4 h-4"}`}>
-                    <div className="absolute top-0 left-0 h-full w-1/2 bg-[#FF5F00]" />
+                <div className={`rounded-full relative overflow-hidden bg-white border border-primary ${size === "sm" ? "w-3 h-3" : "w-4 h-4"}`}>
+                    <div className="absolute top-0 left-0 h-full w-1/2 bg-primary" />
                 </div>
             )}
             {[...Array(emptyCircles)].map((_, i) => (
-                <div key={`empty-${i}`} className={`rounded-full bg-white border border-[#FF5F00] ${size === "sm" ? "w-3 h-3" : "w-4 h-4"}`} />
+                <div key={`empty-${i}`} className={`rounded-full bg-white border border-primary ${size === "sm" ? "w-3 h-3" : "w-4 h-4"}`} />
             ))}
         </div>
     );

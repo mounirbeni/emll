@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
             }
         }
 
+        const publishedAt = post.publishedAt || post.createdAt;
         return {
             title: post.metaTitle || post.title,
             description: post.metaDescription || post.excerpt,
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
                 description: post.metaDescription || post.excerpt,
                 images: [post.coverImage],
                 type: 'article',
-                publishedTime: post.publishedAt.toISOString(),
+                publishedTime: publishedAt.toISOString(),
                 authors: [post.author?.name || 'Marrakech Expert'],
             },
             twitter: {
@@ -84,12 +85,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     const readingTime = Math.max(1, Math.round(words / 220))
 
     // JSON-LD Structured Data for Google SEO
+    const publishedAt = post.publishedAt || post.createdAt;
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
         headline: post.title,
         image: [post.coverImage],
-        datePublished: post.publishedAt.toISOString(),
+        datePublished: publishedAt.toISOString(),
         dateModified: post.updatedAt.toISOString(),
         author: [{
             '@type': 'Person',
@@ -132,7 +134,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         <span className="hidden sm:inline">•</span>
                         <div className="flex items-center gap-2">
                             <Calendar className="h-4 w-4" />
-                            <span>{format(new Date(post.publishedAt), 'MMMM d, yyyy')}</span>
+                            <span>{format(new Date(post.publishedAt || post.createdAt), 'MMMM d, yyyy')}</span>
                         </div>
                         <span className="hidden sm:inline">•</span>
                         <div className="flex items-center gap-2">

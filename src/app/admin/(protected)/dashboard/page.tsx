@@ -8,6 +8,15 @@ import { adminService } from "@/services/admin.service";
 
 export const dynamic = 'force-dynamic';
 
+interface RecentBooking {
+    id: string;
+    name: string;
+    activityTitle: string;
+    totalPrice: number | { toNumber(): number };
+    status: string;
+    user?: { name: string | null; email: string } | null;
+}
+
 async function getData() {
     const stats = await adminService.getDashboardStats();
 
@@ -18,7 +27,7 @@ async function getData() {
             servicesCount: stats.overview.totalServices,
             totalRevenue: stats.revenue.total
         },
-        recentBookings: stats.recent.bookings
+        recentBookings: (stats.recent.bookings as RecentBooking[])
     };
 }
 
@@ -106,7 +115,7 @@ export default async function AdminDashboard() {
                                         </div>
                                         <div className="flex items-center gap-3 shrink-0">
                                             <div className="text-right hidden sm:block">
-                                                <p className="font-semibold text-foreground">€{booking.totalPrice}</p>
+                                                <p className="font-semibold text-foreground">€{typeof booking.totalPrice === 'number' ? booking.totalPrice.toFixed(2) : booking.totalPrice.toNumber().toFixed(2)}</p>
                                             </div>
                                             <BookingStatusBadge status={booking.status} />
                                         </div>

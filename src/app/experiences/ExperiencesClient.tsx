@@ -32,7 +32,7 @@ export default function ExperiencesClient({ initialActivities }: ExperiencesClie
     useEffect(() => {
         const categoryParam = searchParams.get("category");
         if (categoryParam && categoryParam !== selectedCategory) {
-            // eslint-disable-next-line react-hooks/exhaustive-deps
+             
             setSelectedCategory(categoryParam);
         }
     }, [searchParams]);

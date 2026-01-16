@@ -2,70 +2,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// prisma/schema.prisma
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DATABASE_URL_UNPOOLED")
-}
-
-// Enums
-enum UserRole {
-  ADMIN
-  CUSTOMER
-}
-
-enum BookingStatus {
-  PENDING
-  CONFIRMED
-  CANCELLED
-  COMPLETED
-}
-
-enum PaymentStatus { // For Booking payment state
-  UNPAID
-  PAID
-  REFUNDED
-}
-
-enum TransactionStatus { // For Payment transaction state
-  PENDING
-  COMPLETED
-  FAILED
-}
-
-enum ReviewStatus {
-  PENDING
-  APPROVED
-  HIDDEN
-}
-
-enum PaymentMethod {
-  CREDIT_CARD
-  PAYPAL
-  CASH
-}
-
-enum PaymentCurrency {
-  EUR
-  USD
-  MAD
-}
-
-enum ConversationStatus {
-  OPEN
-  CLOSED
-  ARCHIVED
-  NONE
-}
-
-enum NotificationType {
-  INFO
-  SUCCESS
-  WARNING
-  ERROR
-  BOOKING
-  REVIEW
 }
 
 model Booking {
@@ -76,21 +16,21 @@ model Booking {
   email           String
   phone           String?
   activityId      String
-  service         Service       @relation(fields: [activityId], references: [id])
   activityTitle   String
   date            DateTime
   guests          Int
   totalPrice      Decimal
-  pickupLocation  String?
+  dietary         String?
   flightNumber    String?
   language        String?
-  dietary         String?
-  specialRequests String?
   packageName     String?
-  status          BookingStatus @default(PENDING)
-  paymentStatus   PaymentStatus @default(UNPAID)
-  invoiceUrl      String?
+  pickupLocation  String?
+  specialRequests String?
   userId          String?
+  invoiceUrl      String?
+  paymentStatus   PaymentStatus @default(UNPAID)
+  status          BookingStatus @default(PENDING)
+  service         Service       @relation(fields: [activityId], references: [id])
   user            User?         @relation(fields: [userId], references: [id])
   payments        Payment[]
   review          Review?
@@ -102,14 +42,14 @@ model Booking {
 }
 
 model Payment {
-  id        String        @id @default(uuid())
+  id        String            @id @default(uuid())
   amount    Decimal
-  currency  PaymentCurrency @default(EUR)
+  currency  PaymentCurrency   @default(EUR)
   status    TransactionStatus @default(PENDING)
   method    PaymentMethod?
-  createdAt DateTime      @default(now())
+  createdAt DateTime          @default(now())
   bookingId String
-  booking   Booking       @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  booking   Booking           @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 
   @@index([bookingId])
   @@index([status])
@@ -127,21 +67,21 @@ model User {
   email              String             @unique
   password           String?
   name               String?
-  phone              String?
-  role               UserRole           @default(CUSTOMER)
-  canMessage         Boolean            @default(true)
-  conversationStatus ConversationStatus @default(NONE)
   createdAt          DateTime           @default(now())
   updatedAt          DateTime           @updatedAt
+  canMessage         Boolean            @default(true)
+  loyaltyPoints      Int                @default(0)
+  phone              String?
+  wishlist           String[]           @default([])
+  conversationStatus ConversationStatus @default(NONE)
+  role               UserRole           @default(CUSTOMER)
+  accounts           Account[]
+  blogPosts          BlogPost[]
   bookings           Booking[]
   conversations      Conversation[]
   messages           Message[]
   notifications      Notification[]
   reviews            Review[]
-  accounts           Account[]
-  loyaltyPoints      Int                @default(0)
-  wishlist           String[]           @default([])
-  blogPosts          BlogPost[]
 
   @@index([email])
   @@index([role])
@@ -160,8 +100,7 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@index([userId])
@@ -170,10 +109,10 @@ model Account {
 model Conversation {
   id        String             @id @default(uuid())
   subject   String
-  status    ConversationStatus @default(OPEN)
   userId    String
   createdAt DateTime           @default(now())
   updatedAt DateTime           @updatedAt
+  status    ConversationStatus @default(OPEN)
   user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   messages  Message[]
 
@@ -214,17 +153,17 @@ model Notification {
 }
 
 model Review {
-  id        String   @id @default(uuid())
+  id        String       @id @default(uuid())
   rating    Int
   comment   String
-  createdAt DateTime @default(now())
-  status    ReviewStatus @default(PENDING)
+  createdAt DateTime     @default(now())
   serviceId String
   userId    String
-  bookingId String   @unique
-  booking   Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
-  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookingId String       @unique
+  status    ReviewStatus @default(PENDING)
+  booking   Booking      @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  service   Service      @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([serviceId])
   @@index([userId])
@@ -232,30 +171,31 @@ model Review {
 }
 
 model Service {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   title       String
   description String
   price       Decimal
-  images      String[] // Native array
+  images      String[]
   category    String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  rating      Float    @default(0)
-  reviews     Int      @default(0)
-  duration    String   @default("")
-  location    String   @default("")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  rating      Float     @default(0)
+  reviews     Int       @default(0)
+  duration    String    @default("")
+  location    String    @default("")
+  features    String[]
+  included    String[]
+  whatToBring String[]
+  itinerary   Json?
+  host        String
+  tags        String[]
   latitude    Float?
   longitude   Float?
-  features    String[] // Native array
-  included    String[] // Native array
-  excluded    String[] @default([])
-  whatToBring String[] // Native array
-  highlights  String[] @default([])
-  itinerary   Json?    // Structured data
-  host        String
-  tags        String[] // Native array
-  userReviews Review[]
+  excluded    String[]  @default([])
+  highlights  String[]  @default([])
+  shortId     String?   @unique
   bookings    Booking[]
+  userReviews Review[]
 
   @@index([category])
   @@index([price])
@@ -264,7 +204,6 @@ model Service {
 
 model SupportRequest {
   id        String   @id @default(uuid())
-  shortId   String?  @unique // Short 6-char ID (e.g., SP4A9C)
   name      String
   email     String
   phone     String?
@@ -273,33 +212,87 @@ model SupportRequest {
   status    String   @default("PENDING")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  shortId   String?  @unique
 
   @@index([shortId])
 }
 
 model BlogPost {
-  id              String   @id @default(uuid())
+  id              String    @id @default(uuid())
   title           String
-  slug            String   @unique
-  content         String   // Markdown or HTML
+  slug            String    @unique
+  content         String
   excerpt         String
   coverImage      String
-  publishedAt     DateTime @default(now())
+  publishedAt     DateTime? @default(now())
   category        String?
-  featured        Boolean  @default(false)
-  
-  // SEO
+  featured        Boolean   @default(false)
   metaTitle       String?
   metaDescription String?
   keywords        String[]
-
-  // Relations
   authorId        String
-  author          User     @relation(fields: [authorId], references: [id])
-  
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  author          User      @relation(fields: [authorId], references: [id])
 
   @@index([slug])
   @@index([authorId])
+}
+
+enum UserRole {
+  ADMIN
+  CUSTOMER
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  REFUNDED
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  HIDDEN
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  PAYPAL
+  CASH
+}
+
+enum PaymentCurrency {
+  EUR
+  USD
+  MAD
+}
+
+enum ConversationStatus {
+  OPEN
+  CLOSED
+  ARCHIVED
+  NONE
+}
+
+enum NotificationType {
+  INFO
+  SUCCESS
+  WARNING
+  ERROR
+  BOOKING
+  REVIEW
 }

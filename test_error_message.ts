@@ -1,7 +1,5 @@
 
-import { PrismaClient } from '@prisma/client';
 import { BookingService } from './src/services/booking.service';
-import { NotFoundError } from './src/lib/errors';
 
 // Mock dependencies if needed, or just instantiate logic if possible
 // But BookingService imports repositories which import prisma.
@@ -20,7 +18,7 @@ async function main() {
             totalPrice: 100,
             name: "Test",
             email: "test@test.com"
-        } as any, 'TEST_USER_ID');
+        } as Parameters<typeof service.createBooking>[0], 'TEST_USER_ID');
     } catch (e: any) {
         console.log("Error caught:", e.message);
     }
@@ -35,7 +33,7 @@ async function main() {
             totalPrice: 100,
             name: "Test",
             email: "test@test.com"
-        } as any, 'TEST_USER_ID');
+        } as Parameters<typeof service.createBooking>[0], 'TEST_USER_ID');
     } catch (e: any) {
         console.log("Error caught:", e.message);
     }
@@ -50,7 +48,7 @@ async function main() {
             totalPrice: 100,
             name: "Test",
             email: "test@test.com"
-        } as any, 'TEST_USER_ID');
+        } as Parameters<typeof service.createBooking>[0], 'TEST_USER_ID');
     } catch (e: any) {
         console.log("Error caught:", e.message);
         if (e.message && e.message.includes("Activity with ID")) {

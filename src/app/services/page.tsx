@@ -1,28 +1,97 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Service } from '@/types/admin'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { SkeletonCard } from '@/components/ui/skeleton'
 import { EmptyState } from '@/components/ui/empty-state'
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MapPin, Clock, Star, Users } from 'lucide-react'
+import { MapPin, Clock, Star, Users, Search, Filter, X, SlidersHorizontal } from 'lucide-react'
+import { Card, CardContent } from '@/components/ui/card'
+
+type SortOption = 'relevant' | 'price-low' | 'price-high' | 'rating' | 'newest'
 
 export default function ServicesPage() {
     const [services, setServices] = useState<Service[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
+    
+    // Filter states
+    const [searchQuery, setSearchQuery] = useState('')
+    const [selectedCategory, setSelectedCategory] = useState<string>('all')
+    const [sortBy, setSortBy] = useState<SortOption>('relevant')
+    const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 1000 })
+    const [showFilters, setShowFilters] = useState(false)
+    const [appliedFilters, setAppliedFilters] = useState(0)
 
+    // Fetch services
     useEffect(() => {
         const fetchServices = async () => {
             try {
-                const response = await fetch('/api/services')
+                setLoading(true)
+                setError(null)
+                
+                // Build query params
+                const params = new URLSearchParams()
+                if (searchQuery.trim()) {
+                    params.set('search', searchQuery.trim())
+                }
+                if (selectedCategory && selectedCategory !== 'all') {
+                    params.set('category', selectedCategory)
+                }
+                if (priceRange.min > 0) {
+                    params.set('minPrice', priceRange.min.toString())
+                }
+                if (priceRange.max < 1000) {
+                    params.set('maxPrice', priceRange.max.toString())
+                }
+                
+                // Map sort options to API params
+                let sortByParam: string | undefined
+                let sortOrderParam: 'asc' | 'desc' | undefined
+                switch (sortBy) {
+                    case 'price-low':
+                        sortByParam = 'price'
+                        sortOrderParam = 'asc'
+                        break
+                    case 'price-high':
+                        sortByParam = 'price'
+                        sortOrderParam = 'desc'
+                        break
+                    case 'rating':
+                        sortByParam = 'rating'
+                        sortOrderParam = 'desc'
+                        break
+                    case 'newest':
+                        sortByParam = 'newest'
+                        sortOrderParam = 'desc'
+                        break
+                    default:
+                        // 'relevant' - no sort param, let backend decide
+                        break
+                }
+                
+                if (sortByParam) {
+                    params.set('sortBy', sortByParam)
+                    if (sortOrderParam) {
+                        params.set('sortOrder', sortOrderParam)
+                    }
+                }
+
+                const response = await fetch(`/api/services?${params.toString()}`)
                 if (!response.ok) {
                     throw new Error('Failed to fetch services')
                 }
                 const data = await response.json()
-                // Handle both wrapped and unwrapped responses
                 const servicesData = Array.isArray(data) ? data : (data.data || data)
                 setServices(Array.isArray(servicesData) ? servicesData : [])
             } catch (err) {
@@ -34,9 +103,35 @@ export default function ServicesPage() {
         }
 
         fetchServices()
-    }, [])
+    }, [searchQuery, selectedCategory, sortBy, priceRange])
 
-    if (loading) {
+    // Get unique categories
+    const categories = useMemo(() => {
+        const cats = new Set<string>()
+        services.forEach(s => {
+            if (s.category) cats.add(s.category)
+        })
+        return Array.from(cats).sort()
+    }, [services])
+
+    // Count applied filters
+    useEffect(() => {
+        let count = 0
+        if (searchQuery.trim()) count++
+        if (selectedCategory && selectedCategory !== 'all') count++
+        if (priceRange.min > 0 || priceRange.max < 1000) count++
+        if (sortBy !== 'relevant') count++
+        setAppliedFilters(count)
+    }, [searchQuery, selectedCategory, priceRange, sortBy])
+
+    const clearFilters = () => {
+        setSearchQuery('')
+        setSelectedCategory('all')
+        setSortBy('relevant')
+        setPriceRange({ min: 0, max: 1000 })
+    }
+
+    if (loading && services.length === 0) {
         return (
             <div className="min-h-screen bg-cream">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -54,14 +149,136 @@ export default function ServicesPage() {
         )
     }
 
-    if (error) {
-        return (
-            <div className="min-h-screen bg-cream">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                    <div className="mb-8">
-                        <h1 className="text-3xl sm:text-4xl font-bold text-charcoal mb-2">Discover Experiences</h1>
-                        <p className="text-medium-gray">Explore our curated collection of authentic Marrakech adventures</p>
+    return (
+        <div className="min-h-screen bg-cream">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {/* Page Header */}
+                <div className="mb-8">
+                    <h1 className="text-3xl sm:text-4xl font-bold text-charcoal mb-2">Discover Experiences</h1>
+                    <p className="text-medium-gray">Explore our curated collection of authentic Marrakech adventures</p>
+                </div>
+
+                {/* Search and Filters Bar */}
+                <Card className="mb-6 border-0 shadow-sm">
+                    <CardContent className="p-4">
+                        <div className="space-y-4">
+                            {/* Search Bar */}
+                            <div className="relative">
+                                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-medium-gray" />
+                                <Input
+                                    placeholder="Search experiences..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="pl-9 h-11"
+                                />
+                            </div>
+
+                            {/* Filters Row */}
+                            <div className="flex flex-wrap items-center gap-3">
+                                {/* Category Filter */}
+                                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                                    <SelectTrigger className="w-full sm:w-[180px] h-11">
+                                        <Filter className="mr-2 h-4 w-4" />
+                                        <SelectValue placeholder="Category" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="all">All Categories</SelectItem>
+                                        {categories.map((cat) => (
+                                            <SelectItem key={cat} value={cat}>
+                                                {cat}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+
+                                {/* Sort Filter */}
+                                <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortOption)}>
+                                    <SelectTrigger className="w-full sm:w-[180px] h-11">
+                                        <SelectValue placeholder="Sort by" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="relevant">Most Relevant</SelectItem>
+                                        <SelectItem value="price-low">Price: Low to High</SelectItem>
+                                        <SelectItem value="price-high">Price: High to Low</SelectItem>
+                                        <SelectItem value="rating">Highest Rated</SelectItem>
+                                        <SelectItem value="newest">Newest First</SelectItem>
+                                    </SelectContent>
+                                </Select>
+
+                                {/* Price Range Toggle */}
+                                <Button
+                                    variant="outline"
+                                    onClick={() => setShowFilters(!showFilters)}
+                                    className="h-11"
+                                >
+                                    <SlidersHorizontal className="mr-2 h-4 w-4" />
+                                    Price Range
+                                    {appliedFilters > 0 && (
+                                        <span className="ml-2 bg-primary text-white text-xs rounded-full px-2 py-0.5">
+                                            {appliedFilters}
+                                        </span>
+                                    )}
+                                </Button>
+
+                                {/* Clear Filters */}
+                                {appliedFilters > 0 && (
+                                    <Button
+                                        variant="ghost"
+                                        onClick={clearFilters}
+                                        className="h-11"
+                                    >
+                                        <X className="mr-2 h-4 w-4" />
+                                        Clear
+                                    </Button>
+                                )}
+                            </div>
+
+                            {/* Price Range Slider (Expanded) */}
+                            {showFilters && (
+                                <div className="pt-4 border-t border-border">
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="text-sm font-medium text-charcoal mb-2 block">
+                                                Min Price (€)
+                                            </label>
+                                            <Input
+                                                type="number"
+                                                min="0"
+                                                max="1000"
+                                                value={priceRange.min}
+                                                onChange={(e) => setPriceRange({ ...priceRange, min: parseFloat(e.target.value) || 0 })}
+                                                className="h-10"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm font-medium text-charcoal mb-2 block">
+                                                Max Price (€)
+                                            </label>
+                                            <Input
+                                                type="number"
+                                                min="0"
+                                                max="1000"
+                                                value={priceRange.max}
+                                                onChange={(e) => setPriceRange({ ...priceRange, max: parseFloat(e.target.value) || 1000 })}
+                                                className="h-10"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {/* Results Count */}
+                {!loading && (
+                    <div className="mb-6 text-sm text-medium-gray">
+                        {services.length} {services.length === 1 ? 'experience' : 'experiences'} found
                     </div>
+                )}
+
+                {/* Error State */}
+                {error && !loading && (
                     <div className="bg-white rounded-xl border border-border p-8 text-center max-w-md mx-auto">
                         <div className="w-16 h-16 bg-destructive/10 rounded-full flex items-center justify-center mx-auto mb-4">
                             <span className="text-2xl">⚠️</span>
@@ -72,31 +289,29 @@ export default function ServicesPage() {
                             Try Again
                         </Button>
                     </div>
-                </div>
-            </div>
-        )
-    }
+                )}
 
-    return (
-        <div className="min-h-screen bg-cream">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {/* Page Header */}
-                <div className="mb-8">
-                    <h1 className="text-3xl sm:text-4xl font-bold text-charcoal mb-2">Discover Experiences</h1>
-                    <p className="text-medium-gray">Explore our curated collection of authentic Marrakech adventures</p>
-                </div>
-
-                {services.length === 0 ? (
+                {/* Empty State */}
+                {!loading && !error && services.length === 0 && (
                     <EmptyState
                         icon="services"
-                        title="No experiences available yet"
-                        description="We're preparing amazing experiences for you. Check back soon!"
-                        action={{
+                        title="No experiences found"
+                        description={appliedFilters > 0 
+                            ? "Try adjusting your filters to see more results."
+                            : "We're preparing amazing experiences for you. Check back soon!"
+                        }
+                        action={appliedFilters > 0 ? {
+                            label: "Clear Filters",
+                            onClick: clearFilters
+                        } : {
                             label: "Back to Home",
                             onClick: () => window.location.href = '/'
                         }}
                     />
-                ) : (
+                )}
+
+                {/* Services Grid */}
+                {!loading && !error && services.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {services.map((service) => (
                             <Link

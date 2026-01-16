@@ -91,7 +91,7 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
                                 key={index}
                                 onClick={() => goToImage(index)}
                                 className={`relative aspect-video rounded-lg overflow-hidden border-2 transition-all ${currentIndex === index
-                                        ? "border-[#FF5F00] ring-2 ring-[#FF5F00]/20"
+                                        ? "border-primary ring-2 ring-primary/20"
                                         : "border-transparent hover:border-gray-300"
                                     }`}
                             >

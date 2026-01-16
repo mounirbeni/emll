@@ -6,25 +6,25 @@
 type LogLevel = 'info' | 'warn' | 'error' | 'debug';
 
 class Logger {
-    private formatMessage(level: LogLevel, message: string, meta?: any) {
+    private formatMessage(level: LogLevel, message: string, meta?: unknown) {
         const timestamp = new Date().toISOString();
         const base = `[${timestamp}] [${level.toUpperCase()}] ${message}`;
         return meta ? `${base} ${JSON.stringify(meta)}` : base;
     }
 
-    info(message: string, meta?: any) {
+    info(message: string, meta?: unknown) {
         console.log(this.formatMessage('info', message, meta));
     }
 
-    warn(message: string, meta?: any) {
+    warn(message: string, meta?: unknown) {
         console.warn(this.formatMessage('warn', message, meta));
     }
 
-    error(message: string, meta?: any) {
+    error(message: string, meta?: unknown) {
         console.error(this.formatMessage('error', message, meta));
     }
 
-    debug(message: string, meta?: any) {
+    debug(message: string, meta?: unknown) {
         if (process.env.NODE_ENV === 'development') {
             console.debug(this.formatMessage('debug', message, meta));
         }

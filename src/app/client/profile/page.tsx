@@ -132,7 +132,7 @@ export default function ProfilePage() {
         return (
             <div className="flex items-center justify-center min-h-[400px]">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-[#FF5F00] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                     <p className="text-gray-600">Loading profile...</p>
                 </div>
             </div>
@@ -153,7 +153,7 @@ export default function ProfilePage() {
                 <Card>
                     <CardContent className="pt-6">
                         <div className="text-center">
-                            <div className="w-24 h-24 bg-[#FF5F00] rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-4">
+                            <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-4">
                                 {profile?.name?.[0]?.toUpperCase() || "U"}
                             </div>
                             <h3 className="font-semibold text-gray-900">{profile?.name}</h3>

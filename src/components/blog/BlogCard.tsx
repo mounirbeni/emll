@@ -49,7 +49,7 @@ export function BlogCard({ post }: BlogCardProps) {
                     <div className="flex flex-wrap items-center gap-3 text-xs text-medium-gray mb-3">
                         <span className="inline-flex items-center gap-2">
                             <Calendar className="h-4 w-4" />
-                            {format(new Date(post.publishedAt), 'MMM d, yyyy')}
+                            {format(new Date(post.publishedAt || post.createdAt), 'MMM d, yyyy')}
                         </span>
                         <span className="inline-flex items-center gap-2">
                             <Clock className="h-4 w-4" />

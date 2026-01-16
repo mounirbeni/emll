@@ -1,15 +1,18 @@
-
-import { NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import prisma from '@/lib/prisma';
 import { auth } from '@/auth';
+import { safeJsonParse } from '@/lib/api-utils';
+import { sanitizeString } from '@/lib/sanitize';
+import { errorResponse, successResponse, createdResponse } from '@/lib/api-response';
+import { UnauthorizedError, BadRequestError, ForbiddenError } from '@/lib/errors';
 
 export async function GET() {
-    const session = await auth();
-    if (!session?.user) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     try {
+        const session = await auth();
+        if (!session?.user) {
+            throw new UnauthorizedError();
+        }
+
         const conversation = await prisma.conversation.findFirst({
             where: {
                 userId: session.user.id as string,
@@ -19,7 +22,7 @@ export async function GET() {
         });
 
         if (!conversation) {
-            return NextResponse.json([]);
+            return successResponse([]);
         }
 
         const messages = await prisma.message.findMany({
@@ -27,24 +30,27 @@ export async function GET() {
             orderBy: { createdAt: 'asc' }
         });
 
-        return NextResponse.json(messages);
+        return successResponse(messages);
     } catch (error) {
-        return NextResponse.json({ error: 'Failed to fetch messages' }, { status: 500 });
+        return errorResponse(error);
     }
 }
 
-export async function POST(request: Request) {
-    const session = await auth();
-    if (!session?.user) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
+export async function POST(request: NextRequest) {
     try {
-        const { content } = await request.json();
-
-        if (!content || typeof content !== 'string') {
-            return NextResponse.json({ error: 'Content required' }, { status: 400 });
+        const session = await auth();
+        if (!session?.user) {
+            throw new UnauthorizedError();
         }
+
+        const body = await safeJsonParse<{ content: string }>(request);
+
+        if (!body.content || typeof body.content !== 'string') {
+            throw new BadRequestError('Content is required');
+        }
+
+        // Sanitize content
+        const content = sanitizeString(body.content);
 
         // Check if user is allowed to message
         const user = await prisma.user.findUnique({
@@ -55,16 +61,12 @@ export async function POST(request: Request) {
         const conversationStatus = String(user?.conversationStatus ?? 'NONE');
 
         if (!user?.canMessage) {
-            return NextResponse.json({
-                error: 'This conversation has been closed by support. Please contact us through other channels if you need assistance.'
-            }, { status: 403 });
+            throw new ForbiddenError('This conversation has been closed by support. Please contact us through other channels if you need assistance.');
         }
 
         // Check conversation status
         if (conversationStatus === 'CLOSED') {
-            return NextResponse.json({
-                error: 'This support ticket is closed. Please submit a new ticket if you need further assistance.'
-            }, { status: 403 });
+            throw new ForbiddenError('This support ticket is closed. Please submit a new ticket if you need further assistance.');
         }
 
         // If conversation is NONE, this is a new ticket submission
@@ -72,11 +74,11 @@ export async function POST(request: Request) {
 
         // Only allow messaging if conversation is OPEN or if it's a new ticket
         if (conversationStatus !== 'OPEN' && !isNewTicket) {
-            return NextResponse.json({
-                error: conversationStatus === 'CLOSED'
+            throw new ForbiddenError(
+                conversationStatus === 'CLOSED'
                     ? 'This support ticket is closed. Please submit a new ticket if you need further assistance.'
                     : 'Unable to send message at this time.'
-            }, { status: 403 });
+            );
         }
 
         // Find the most recent open conversation for this user
@@ -115,9 +117,7 @@ export async function POST(request: Request) {
         });
 
         if (lastUserMessage && lastUserMessage.content === content) {
-            return NextResponse.json({
-                error: 'You cannot send the same message twice. Please provide different details or wait for our response.'
-            }, { status: 400 });
+            throw new BadRequestError('You cannot send the same message twice. Please provide different details or wait for our response.');
         }
 
         // Create user message
@@ -149,8 +149,8 @@ export async function POST(request: Request) {
             data: { updatedAt: new Date() }
         });
 
-        return NextResponse.json(message);
+        return createdResponse(message);
     } catch (error) {
-        return NextResponse.json({ error: 'Failed to send message' }, { status: 500 });
+        return errorResponse(error);
     }
 }

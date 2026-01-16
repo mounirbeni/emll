@@ -38,7 +38,7 @@ export default function ArticlePage() {
 
             {/* Content */}
             <article className="container mx-auto px-4 max-w-3xl -mt-20 relative z-10 bg-white rounded-3xl p-8 md:p-12 shadow-xl">
-                <Link href="/" className="inline-flex items-center text-[#FF5F00] font-bold mb-8 hover:underline">
+                <Link href="/" className="inline-flex items-center text-primary font-bold mb-8 hover:underline">
                     <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
                 </Link>
 

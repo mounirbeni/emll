@@ -21,10 +21,25 @@ export default function LoginPage() {
     // Form state
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
+        setErrorMessage('');
+
+        // Basic validation
+        if (!email || !password) {
+            setErrorMessage('Email and password are required');
+            setIsLoading(false);
+            return;
+        }
+
+        if (!email.includes('@')) {
+            setErrorMessage('Please enter a valid email address');
+            setIsLoading(false);
+            return;
+        }
 
         try {
             const result = await signIn('credentials', {
@@ -34,30 +49,70 @@ export default function LoginPage() {
             });
 
             if (result?.error) {
-                toast.error('Invalid email or password');
+                // Parse error message to provide better feedback
+                if (result.error === 'CredentialsSignin') {
+                    setErrorMessage('Invalid email or password');
+                } else if (result.error === 'Email and password are required') {
+                    setErrorMessage('Email and password are required');
+                } else if (result.error === 'Invalid email or password') {
+                    setErrorMessage('Invalid email or password');
+                } else {
+                    setErrorMessage(result.error || 'Sign in failed. Please try again.');
+                }
+                toast.error(result.error || 'Sign in failed');
+                return;
+            }
+
+            if (!result?.ok) {
+                setErrorMessage('Sign in failed. Please try again.');
+                toast.error('Sign in failed');
                 return;
             }
 
             toast.success('Welcome back!');
             
-            // Wait a moment for session to update, then check role
-            await new Promise(resolve => setTimeout(resolve, 100));
+            // Use router.refresh() to update session, then redirect
             router.refresh();
             
-            // Fetch session to check role
-            const sessionRes = await fetch('/api/auth/me');
-            const sessionData = await sessionRes.json();
+            // Wait a moment for session to update
+            await new Promise(resolve => setTimeout(resolve, 300));
             
-            // Redirect based on role
-            if (sessionData?.user?.role === 'ADMIN') {
-                router.push('/admin/dashboard');
-            } else {
-                const isSafeCallbackUrl = callbackUrl.startsWith('/') && !callbackUrl.startsWith('//');
-                const finalUrl = isSafeCallbackUrl ? callbackUrl : '/client';
-                router.push(finalUrl);
+            // Fetch session to check role and determine redirect
+            try {
+                const sessionRes = await fetch('/api/auth/me', { cache: 'no-store' });
+                const sessionData = await sessionRes.json();
+                
+                if (!sessionData?.authenticated) {
+                    // Session might still be updating, try redirect anyway
+                    // Middleware will handle redirect if needed
+                    let finalUrl = '/client';
+                    if (callbackUrl && callbackUrl.startsWith('/') && !callbackUrl.startsWith('//')) {
+                        finalUrl = callbackUrl;
+                    }
+                    window.location.href = finalUrl;
+                    return;
+                }
+
+                // Redirect based on role
+                if (sessionData?.user?.role === 'ADMIN') {
+                    window.location.href = '/admin/dashboard';
+                } else {
+                    // Validate callback URL to prevent open redirects
+                    let finalUrl = '/client';
+                    if (callbackUrl && callbackUrl.startsWith('/') && !callbackUrl.startsWith('//')) {
+                        finalUrl = callbackUrl;
+                    }
+                    window.location.href = finalUrl;
+                }
+            } catch (err) {
+                // Fallback: redirect to client dashboard
+                window.location.href = '/client';
             }
         } catch (error) {
-            toast.error('Something went wrong. Please try again.');
+            console.error('Login error:', error);
+            const errorMsg = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
+            setErrorMessage(errorMsg);
+            toast.error(errorMsg);
         } finally {
             setIsLoading(false);
         }
@@ -70,8 +125,8 @@ export default function LoginPage() {
                 <div className="w-full max-w-md space-y-8">
                     <div className="space-y-2">
                         <Link href="/" className="inline-flex items-center gap-2 mb-8">
-                            <Compass className="w-8 h-8 text-[#FF5F00]" />
-                            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF5F00] to-[#E55500]">
+                            <Compass className="w-8 h-8 text-primary" />
+                            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
                                 Explore Marrakesh
                             </span>
                         </Link>
@@ -82,6 +137,13 @@ export default function LoginPage() {
                             Enter your credentials to access your account
                         </p>
                     </div>
+
+                    {/* Error Message */}
+                    {errorMessage && (
+                        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                            {errorMessage}
+                        </div>
+                    )}
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="space-y-4">
@@ -108,8 +170,13 @@ export default function LoginPage() {
                                 <div className="flex items-center justify-between">
                                     <Label htmlFor="password">Password</Label>
                                     <Link
-                                        href="/forgot-password"
-                                        className="text-sm font-medium text-[#FF5F00] hover:text-[#E55500]"
+                                        href="#"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            // TODO: Implement forgot password functionality
+                                            alert('Password reset functionality coming soon. Please contact support.');
+                                        }}
+                                        className="text-sm font-medium text-primary hover:text-accent"
                                     >
                                         Forgot password?
                                     </Link>
@@ -155,7 +222,7 @@ export default function LoginPage() {
                         <Button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full h-11 bg-[#FF5F00] hover:bg-[#E55500] font-bold text-lg shadow-lg shadow-orange-500/20"
+                            className="w-full h-11 bg-primary hover:bg-accent font-bold text-lg shadow-lg shadow-orange-500/20"
                         >
                             {isLoading ? (
                                 <>
@@ -211,7 +278,7 @@ export default function LoginPage() {
 
                     <p className="text-center text-sm text-muted-foreground">
                         Don't have an account?{" "}
-                        <Link href="/register" className="font-semibold text-[#FF5F00] hover:text-[#E55500]">
+                        <Link href="/register" className="font-semibold text-primary hover:text-accent">
                             Sign up
                         </Link>
                     </p>
@@ -236,7 +303,7 @@ export default function LoginPage() {
                         </p>
                         <div className="flex items-center justify-center gap-2">
                             {[1, 2, 3, 4, 5].map((i) => (
-                                <svg key={i} className="w-6 h-6 text-[#FF5F00] fill-current" viewBox="0 0 20 20">
+                                <svg key={i} className="w-6 h-6 text-primary fill-current" viewBox="0 0 20 20">
                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                 </svg>
                             ))}

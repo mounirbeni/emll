@@ -115,6 +115,34 @@ export async function GET(request: Request) {
             }
         });
 
+        // Bookings over time (daily breakdown)
+        const recentTrends: Array<{ date: string; bookings: number; revenue: number }> = []
+        for (let i = days - 1; i >= 0; i--) {
+            const date = startOfDay(subDays(new Date(), i))
+            const nextDate = startOfDay(subDays(new Date(), i - 1))
+            
+            const dayBookings = await prisma.booking.count({
+                where: {
+                    date: { gte: date, lt: nextDate },
+                    status: { not: 'CANCELLED' }
+                }
+            })
+            
+            const dayRevenue = await prisma.booking.aggregate({
+                where: {
+                    date: { gte: date, lt: nextDate },
+                    status: { not: 'CANCELLED' }
+                },
+                _sum: { totalPrice: true }
+            })
+            
+            recentTrends.push({
+                date: date.toISOString(),
+                bookings: dayBookings,
+                revenue: decimalToNumber(dayRevenue._sum.totalPrice)
+            })
+        }
+
         // Top services
         const topServicesData = await prisma.booking.groupBy({
             by: ['activityId', 'activityTitle'],
@@ -128,33 +156,31 @@ export async function GET(request: Request) {
             take: 5
         });
 
-        const topServices = await Promise.all(
-            topServicesData
-                .filter(item => item.activityId) // Filter out null activityIds
-                .map(async (item) => {
-                    let serviceTitle = item.activityTitle;
-                    if (item.activityId) {
-                        try {
-                            const service = await prisma.service.findUnique({
-                                where: { id: item.activityId },
-                                select: { title: true }
-                            });
-                            if (service?.title) {
-                                serviceTitle = service.title;
-                            }
-                        } catch (error) {
-                            // If service not found, use activityTitle from booking
-                            console.warn(`Service ${item.activityId} not found, using activityTitle`);
-                        }
-                    }
-                    return {
-                        id: item.activityId || 'unknown',
-                        title: serviceTitle || 'Unknown Service',
-                        bookings: item._count.id,
-                        revenue: item._sum.totalPrice || 0
-                    };
-                })
-        );
+        // Fix N+1: Fetch all services in one query
+        const activityIds = topServicesData
+            .filter(item => item.activityId)
+            .map(item => item.activityId!);
+        
+        const services = activityIds.length > 0
+            ? await prisma.service.findMany({
+                where: { id: { in: activityIds } },
+                select: { id: true, title: true }
+            })
+            : [];
+
+        const serviceMap = new Map(services.map(s => [s.id, s.title]));
+
+        const topServices = topServicesData
+            .filter(item => item.activityId)
+            .map((item) => {
+                const serviceTitle = serviceMap.get(item.activityId!) || item.activityTitle || 'Unknown Service';
+                return {
+                    id: item.activityId || 'unknown',
+                    title: serviceTitle,
+                    bookings: item._count.id,
+                    revenue: item._sum.totalPrice || 0
+                };
+            });
 
         // Calculate percentage changes
         const revenueThis = decimalToNumber(revenueThisPeriod._sum.totalPrice);
@@ -193,7 +219,7 @@ export async function GET(request: Request) {
                 change: 0 // Can be calculated if needed
             },
             topServices,
-            recentTrends: [] // Can be enhanced with daily breakdown
+            recentTrends
         };
 
         return successResponse(analytics);

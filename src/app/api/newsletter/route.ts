@@ -1,31 +1,32 @@
-import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
+import { z } from "zod";
+import { safeJsonParse, validateBody } from "@/lib/api-utils";
+import { sanitizeEmail } from "@/lib/sanitize";
+import { errorResponse, createdResponse } from "@/lib/api-response";
 
-export async function POST(request: Request) {
+const newsletterSchema = z.object({
+    email: z.string().email("Invalid email address")
+});
+
+export async function POST(request: NextRequest) {
     try {
-        const body = await request.json();
-        const { email } = body;
+        // Safely parse and validate body
+        const body = await safeJsonParse(request);
+        const { email } = validateBody(newsletterSchema, body);
 
-        if (!email || !email.includes("@")) {
-            return NextResponse.json(
-                { error: "Invalid email address" },
-                { status: 400 }
-            );
-        }
+        // Sanitize email
+        const sanitizedEmail = sanitizeEmail(email);
 
         // Upsert to handle duplicates gracefully
         const subscriber = await prisma.newsletterSubscriber.upsert({
-            where: { email },
+            where: { email: sanitizedEmail },
             update: { active: true },
-            create: { email },
+            create: { email: sanitizedEmail },
         });
 
-        return NextResponse.json({ success: true, subscriber }, { status: 201 });
+        return createdResponse({ success: true, subscriber });
     } catch (error) {
-        console.error("Newsletter error:", error);
-        return NextResponse.json(
-            { error: "Failed to subscribe" },
-            { status: 500 }
-        );
+        return errorResponse(error);
     }
 }

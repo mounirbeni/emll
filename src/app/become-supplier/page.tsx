@@ -18,7 +18,7 @@ export default function BecomeSupplierPage() {
                     </Button>
                 </Link>
                 <Link href="/contact">
-                    <Button className="bg-[#FF5F00] hover:bg-[#E55500] text-white rounded-full px-8 py-6 text-lg font-bold">
+                    <Button className="bg-primary hover:bg-accent text-white rounded-full px-8 py-6 text-lg font-bold">
                         Contact Us
                     </Button>
                 </Link>

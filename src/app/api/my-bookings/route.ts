@@ -11,38 +11,36 @@ export async function GET() {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        // Fetch bookings linked to user
+        // Fetch bookings with service images in a single query (fixes N+1)
         const bookings = await prisma.booking.findMany({
             where: {
                 userId: session.user.id as string
             },
             orderBy: { createdAt: 'desc' },
-            include: { review: true }
-        });
-
-        // Manually fetch images for these bookings since there's no direct relation
-        const activityIds = bookings.map(b => b.activityId);
-        const services = await prisma.service.findMany({
-            where: { id: { in: activityIds } },
-            select: { id: true, images: true }
-        });
-
-        const bookingsWithImages = bookings.map(booking => {
-            const service = services.find(s => s.id === booking.activityId);
-            let imageUrl = null;
-            if (service && service.images) {
-                try {
-                    const images = (service.images as unknown as string[]) || [];
-                    if (Array.isArray(images) && images.length > 0) {
-                        imageUrl = images[0];
+            include: {
+                review: true,
+                service: {
+                    select: {
+                        id: true,
+                        images: true
                     }
-                } catch (e) {
-                    // Ignore error
+                }
+            }
+        });
+
+        // Map bookings with image URLs
+        const bookingsWithImages = bookings.map(booking => {
+            let imageUrl = null;
+            if (booking.service?.images) {
+                const images = booking.service.images as string[];
+                if (Array.isArray(images) && images.length > 0) {
+                    imageUrl = images[0];
                 }
             }
             return {
                 ...booking,
-                imageUrl
+                imageUrl,
+                service: undefined // Remove service object, keep only imageUrl
             };
         });
 

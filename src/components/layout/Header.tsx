@@ -65,8 +65,8 @@ export function Header() {
                         {/* Assuming Logo component takes className or similar, 
                  but sticking to simple link wrapper if Logo text is internal */}
                         <div className="flex items-center gap-2">
-                            <Compass className="w-8 h-8 text-[#FF5F00]" />
-                            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF5F00] to-[#E55500]">
+                            <Compass className="w-8 h-8 text-primary" />
+                            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
                                 Explore Marrakesh
                             </span>
                         </div>
@@ -79,8 +79,8 @@ export function Header() {
                                 key={link.href}
                                 href={link.href}
                                 className={cn(
-                                    "text-sm font-medium transition-colors hover:text-[#FF5F00]",
-                                    pathname === link.href ? "text-[#FF5F00]" : "text-gray-700"
+                                    "text-sm font-medium transition-colors hover:text-primary",
+                                    pathname === link.href ? "text-primary" : "text-gray-700"
                                 )}
                             >
                                 {link.label}
@@ -91,7 +91,7 @@ export function Header() {
                     {/* Actions */}
                     <div className="hidden md:flex items-center space-x-4">
                         <Link href="/search">
-                            <Button variant="ghost" size="icon" className="hover:text-[#FF5F00]">
+                            <Button variant="ghost" size="icon" className="hover:text-primary">
                                 <Search className="w-5 h-5" />
                                 <span className="sr-only">Search</span>
                             </Button>
@@ -103,7 +103,7 @@ export function Header() {
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Button variant="outline" className="rounded-full border-gray-200 pl-2 pr-4 bg-white hover:bg-gray-50">
-                                        <div className="w-7 h-7 rounded-full bg-orange-100 flex items-center justify-center mr-2 text-[#FF5F00]">
+                                        <div className="w-7 h-7 rounded-full bg-orange-100 flex items-center justify-center mr-2 text-primary">
                                             <User className="w-4 h-4" />
                                         </div>
                                         <span className="max-w-[100px] truncate">{session.user?.name?.split(' ')[0] || 'User'}</span>
@@ -143,7 +143,7 @@ export function Header() {
                             </DropdownMenu>
                         ) : (
                             <Link href="/login">
-                                <Button className="bg-[#FF5F00] hover:bg-[#E55500] text-white rounded-full font-bold px-6 shadow-md shadow-orange-500/20">
+                                <Button className="bg-primary hover:bg-accent text-white rounded-full font-bold px-6 shadow-md shadow-orange-500/20">
                                     Sign In
                                 </Button>
                             </Link>
@@ -180,7 +180,7 @@ export function Header() {
                                 className={cn(
                                     "text-base font-medium py-4 px-4 rounded-lg transition-colors min-h-[50px] flex items-center",
                                     pathname === link.href
-                                        ? "text-[#FF5F00] bg-orange-50"
+                                        ? "text-primary bg-orange-50"
                                         : "text-gray-900 hover:bg-gray-50"
                                 )}
                             >
@@ -193,7 +193,7 @@ export function Header() {
                         {session ? (
                             <>
                                 <div className="flex items-center gap-3 mb-4 p-4 bg-gray-50 rounded-xl">
-                                    <div className="w-10 h-10 rounded-full bg-[#FF5F00] flex items-center justify-center text-white">
+                                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
                                         <span className="font-bold text-lg">{session.user?.name?.[0]?.toUpperCase()}</span>
                                     </div>
                                     <div className="flex-1 min-w-0">
@@ -233,7 +233,7 @@ export function Header() {
                                     <Button variant="outline" className="w-full h-12 text-base">Log In</Button>
                                 </Link>
                                 <Link href="/register" onClick={() => setIsMobileMenuOpen(false)}>
-                                    <Button className="w-full h-12 bg-[#FF5F00] hover:bg-[#E55500] text-white text-base">Sign Up</Button>
+                                    <Button className="w-full h-12 bg-primary hover:bg-accent text-white text-base">Sign Up</Button>
                                 </Link>
                             </div>
                         )}

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import useSWR, { mutate } from 'swr'
 import Image from 'next/image'
-import { Plus, Pencil, Trash2, MoreHorizontal, Search, Filter, XCircle } from 'lucide-react'
+import { Plus, Pencil, Trash2, MoreHorizontal, Search, Filter, XCircle, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -36,6 +36,7 @@ import {
     SelectValue,
 } from '@/components/ui/select'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { Service } from '@/types/admin'
 import Link from 'next/link'
 
@@ -254,6 +255,8 @@ export default function ServicesPage() {
                                     <TableHead>Title</TableHead>
                                     <TableHead>Category</TableHead>
                                     <TableHead>Price</TableHead>
+                                    <TableHead>Rating</TableHead>
+                                    <TableHead>Bookings</TableHead>
                                     <TableHead className="text-right">Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
@@ -274,8 +277,21 @@ export default function ServicesPage() {
                                             )}
                                         </TableCell>
                                         <TableCell className="font-medium">{service.title}</TableCell>
-                                        <TableCell>{service.category}</TableCell>
-                                        <TableCell>€{Number(service.price).toFixed(2)}</TableCell>
+                                        <TableCell>
+                                            <Badge variant="outline">{service.category}</Badge>
+                                        </TableCell>
+                                        <TableCell className="font-semibold">€{Number(service.price).toFixed(2)}</TableCell>
+                                        <TableCell>
+                                            <div className="flex items-center gap-1">
+                                                <Star className="h-3.5 w-3.5 text-primary fill-primary" />
+                                                <span className="text-sm">{(service.rating || 0).toFixed(1)}</span>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell>
+                                            <span className="text-sm text-muted-foreground">
+                                                {service.reviews || 0} reviews
+                                            </span>
+                                        </TableCell>
                                         <TableCell className="text-right">
                                             <DropdownMenu>
                                                 <DropdownMenuTrigger asChild>
@@ -303,7 +319,7 @@ export default function ServicesPage() {
                                 ))}
                                 {filteredServices?.length === 0 && (
                                     <TableRow>
-                                        <TableCell colSpan={5} className="h-24 text-center">
+                                        <TableCell colSpan={7} className="h-24 text-center">
                                             No services found.
                                         </TableCell>
                                     </TableRow>

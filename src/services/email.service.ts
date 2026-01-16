@@ -91,11 +91,12 @@ export class EmailService {
                 messageId: info.messageId,
                 from: this.fromEmail
             });
-        } catch (error: any) {
-            console.error('❌ Error sending email:', {
-                error: error,
-                message: error?.message,
-                stack: error?.stack,
+        } catch (error: unknown) {
+            const err = error instanceof Error ? error : new Error(String(error));
+            console.error('Γ¥î Error sending email:', {
+                error: err,
+                message: err.message,
+                stack: err.stack,
                 to: options.to,
                 subject: options.subject
             });

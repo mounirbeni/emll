@@ -9,7 +9,6 @@ import { serviceRepository } from '@/repositories/service.repository';
 import { notificationService } from '@/services/notification.service';
 import { generateShortId, ShortIdPrefix } from '@/lib/id-generator';
 import { NotFoundError, BadRequestError } from '@/lib/errors';
-import { createBookingSchema } from '@/lib/validation';
 
 export interface CreateBookingDTO {
     activityId: string;
@@ -163,6 +162,31 @@ export class BookingService {
         // Validate price
         if (data.totalPrice <= 0 || data.totalPrice > 100000) {
             throw new BadRequestError('Invalid price value');
+        }
+
+        // Check for double bookings - prevent overlapping time slots (within 30 minutes)
+        // const bookingDate already defined above
+        const timeWindowStart = new Date(bookingDate);
+        timeWindowStart.setMinutes(timeWindowStart.getMinutes() - 30);
+
+        const timeWindowEnd = new Date(bookingDate);
+        timeWindowEnd.setMinutes(timeWindowEnd.getMinutes() + 30);
+
+        const conflictingBookings = await bookingRepository.findMany({
+            where: {
+                activityId: actualActivityId,
+                date: {
+                    gte: timeWindowStart,
+                    lte: timeWindowEnd
+                },
+                status: {
+                    in: [BookingStatus.PENDING, BookingStatus.CONFIRMED]
+                }
+            }
+        });
+
+        if (conflictingBookings.length > 0) {
+            throw new BadRequestError('This time slot is already booked. Please choose another time.');
         }
 
         // Create booking (use actualActivityId if we found it by title)

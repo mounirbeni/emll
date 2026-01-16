@@ -20,7 +20,7 @@ export interface CreatePaymentDTO {
 export interface ProcessPaymentDTO {
     paymentId: string;
     transactionId?: string;
-    metadata?: Record<string, any>;
+    metadata?: Record<string, unknown>;
 }
 
 export class PaymentService {
@@ -113,7 +113,7 @@ export class PaymentService {
     /**
      * Fail a payment
      */
-    async failPayment(paymentId: string, reason?: string): Promise<Payment> {
+    async failPayment(paymentId: string): Promise<Payment> {
         const payment = await paymentRepository.findById(paymentId);
 
         if (!payment) {

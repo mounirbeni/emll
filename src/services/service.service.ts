@@ -3,7 +3,7 @@
  * Contains all business logic for service/activity operations
  */
 
-import { Service } from '@prisma/client';
+import { Service, Prisma } from '@prisma/client';
 import { serviceRepository } from '@/repositories/service.repository';
 import { generateShortId, ShortIdPrefix } from '@/lib/id-generator';
 import { NotFoundError, BadRequestError } from '@/lib/errors';
@@ -24,7 +24,7 @@ export interface CreateServiceDTO {
     whatToBring: string[];
     highlights: string[];
     tags: string[];
-    itinerary: any;
+    itinerary: Record<string, unknown>[] | Record<string, unknown>;
     host: string;
 }
 
@@ -44,7 +44,7 @@ export interface UpdateServiceDTO {
     whatToBring?: string[];
     highlights?: string[];
     tags?: string[];
-    itinerary?: any;
+    itinerary?: Record<string, unknown>[] | Record<string, unknown>;
     host?: string;
 }
 
@@ -104,7 +104,7 @@ export class ServiceService {
             host: data.host || 'Explore Marrakesh',
             rating: 0,
             reviews: 0
-        } as any);
+        } as Prisma.ServiceCreateInput);
 
 
         return service;
@@ -170,7 +170,7 @@ export class ServiceService {
         }
 
         // Build update data
-        const updateData: any = { ...data };
+        const updateData = { ...data } as Prisma.ServiceUpdateInput;
 
         const service = await serviceRepository.update(id, updateData);
         return service;
@@ -225,7 +225,7 @@ export class ServiceService {
     /**
      * Build orderBy clause for queries
      */
-    private buildOrderBy(sortBy?: string, sortOrder: 'asc' | 'desc' = 'desc'): any {
+    private buildOrderBy(sortBy?: string, sortOrder: 'asc' | 'desc' = 'desc'): Prisma.ServiceOrderByWithRelationInput {
         switch (sortBy) {
             case 'price':
                 return { price: sortOrder };

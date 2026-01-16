@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
-import { auth } from '@/auth'
+import { requireAdmin } from '@/lib/authorization'
+import { errorResponse, successResponse } from '@/lib/api-response'
+import { NotFoundError, BadRequestError, ConflictError } from '@/lib/errors'
 import prisma from '@/lib/prisma'
 
 export const dynamic = 'force-dynamic'
@@ -7,10 +9,7 @@ export const dynamic = 'force-dynamic'
 // GET /api/admin/blog/[id] - get a single blog post
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
-        const session = await auth()
-        if (!session?.user?.role || session.user.role !== 'ADMIN') {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-        }
+        await requireAdmin()
 
         const { id } = await params
 
@@ -24,36 +23,32 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
         })
 
         if (!post) {
-            return NextResponse.json({ error: 'Blog post not found' }, { status: 404 })
+            throw new NotFoundError('Blog post not found')
         }
 
-        return NextResponse.json(post)
+        return successResponse(post)
     } catch (error) {
-        console.error('Failed to fetch blog post', error)
-        return NextResponse.json({ error: 'Failed to fetch blog post' }, { status: 500 })
+        return errorResponse(error)
     }
 }
 
 // PUT /api/admin/blog/[id] - update a blog post
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
-        const session = await auth()
-        if (!session?.user?.role || session.user.role !== 'ADMIN') {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-        }
+        await requireAdmin()
 
         const { id } = await params
         const body = await request.json()
         const { title, slug, content, excerpt, coverImage, category, featured, metaTitle, metaDescription, keywords } = body
 
         if (!title || !slug || !content || !excerpt || !coverImage) {
-            return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+            throw new BadRequestError('Missing required fields')
         }
 
         // Ensure slug is unique (excluding current post)
         const existing = await prisma.blogPost.findFirst({ where: { slug, NOT: { id } } })
         if (existing) {
-            return NextResponse.json({ error: 'Slug already exists' }, { status: 409 })
+            throw new ConflictError('Slug already exists')
         }
 
         const post = await prisma.blogPost.update({
@@ -77,28 +72,23 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
             }
         })
 
-        return NextResponse.json(post)
+        return successResponse(post)
     } catch (error) {
-        console.error('Failed to update blog post', error)
-        return NextResponse.json({ error: 'Failed to update blog post' }, { status: 500 })
+        return errorResponse(error)
     }
 }
 
 // DELETE /api/admin/blog/[id] - delete a blog post
 export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
-        const session = await auth()
-        if (!session?.user?.role || session.user.role !== 'ADMIN') {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-        }
+        await requireAdmin()
 
         const { id } = await params
 
         await prisma.blogPost.delete({ where: { id } })
 
-        return NextResponse.json({ success: true })
+        return successResponse({ success: true })
     } catch (error) {
-        console.error('Failed to delete blog post', error)
-        return NextResponse.json({ error: 'Failed to delete blog post' }, { status: 500 })
+        return errorResponse(error)
     }
 }

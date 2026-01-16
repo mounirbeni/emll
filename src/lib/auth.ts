@@ -65,7 +65,7 @@ export async function verifyJWT(token: string): Promise<UserPayload> {
     try {
         const { payload } = await jwtVerify(token, getEncodedJWTSecret());
         return payload as UserPayload;
-    } catch (error) {
+    } catch {
         throw new Error('Invalid or expired token');
     }
 }

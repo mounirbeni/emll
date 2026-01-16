@@ -102,14 +102,14 @@ export function AdminHeader() {
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="rounded-full pl-0 pr-3 py-1.5 h-auto hover:bg-orange-50 border border-transparent hover:border-orange-100 gap-3 transition-all">
-                            <div className="h-10 w-10 bg-[#FF5F00] rounded-full flex items-center justify-center text-white font-medium shadow-md shadow-orange-500/20 ring-2 ring-white">
+                            <div className="h-10 w-10 bg-primary rounded-full flex items-center justify-center text-white font-medium shadow-md shadow-orange-500/20 ring-2 ring-white">
                                 {session?.user?.name?.[0]?.toUpperCase() || 'A'}
                             </div>
                             <div className="hidden md:flex flex-col items-start">
                                 <span className="text-sm font-medium text-gray-800 leading-none mb-1">
                                     {session?.user?.name?.split(' ')[0] || 'Admin'}
                                 </span>
-                                <span className="text-[10px] text-[#FF5F00] uppercase tracking-wider leading-none">
+                                <span className="text-[10px] text-primary uppercase tracking-wider leading-none">
                                     Admin
                                 </span>
                             </div>
@@ -119,24 +119,24 @@ export function AdminHeader() {
                         <DropdownMenuLabel className="p-4">
                             <div className="flex flex-col space-y-1">
                                 <div className="flex items-center gap-2">
-                                    <Shield className="h-4 w-4 text-[#FF5F00]" />
+                                    <Shield className="h-4 w-4 text-primary" />
                                     <p className="text-sm font-medium leading-none text-gray-900">{session?.user?.name || 'Admin'}</p>
                                 </div>
                                 <p className="text-xs leading-none text-gray-500 font-normal mt-1">{session?.user?.email}</p>
-                                <span className="text-[10px] text-[#FF5F00] uppercase tracking-wider leading-none mt-1">
+                                <span className="text-[10px] text-primary uppercase tracking-wider leading-none mt-1">
                                     {session?.user?.role || 'ADMIN'}
                                 </span>
                             </div>
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator className="bg-gray-100 my-1" />
                         <DropdownMenuItem asChild>
-                            <Link href="/admin/dashboard" className="flex items-center gap-3 p-3 rounded-2xl cursor-pointer hover:bg-orange-50 text-gray-600 hover:text-[#FF5F00] transition-colors font-medium">
+                            <Link href="/admin/dashboard" className="flex items-center gap-3 p-3 rounded-2xl cursor-pointer hover:bg-orange-50 text-gray-600 hover:text-primary transition-colors font-medium">
                                 <User className="h-4 w-4" />
                                 <span>Dashboard</span>
                             </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                            <Link href="/admin/settings" className="flex items-center gap-3 p-3 rounded-2xl cursor-pointer hover:bg-orange-50 text-gray-600 hover:text-[#FF5F00] transition-colors font-medium">
+                            <Link href="/admin/settings" className="flex items-center gap-3 p-3 rounded-2xl cursor-pointer hover:bg-orange-50 text-gray-600 hover:text-primary transition-colors font-medium">
                                 <Settings className="h-4 w-4" />
                                 <span>Settings</span>
                             </Link>

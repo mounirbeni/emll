@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { Download, TrendingUp, TrendingDown, DollarSign, Calendar, Users } from 'lucide-react';
+import { Download, TrendingUp, TrendingDown, DollarSign, Calendar, Users, Package } from 'lucide-react';
 import { format, subDays, startOfDay, endOfDay } from 'date-fns';
 import { toast } from 'sonner';
 
@@ -120,7 +120,7 @@ export default function AnalyticsPage() {
         return (
             <div className="flex items-center justify-center min-h-[400px]">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-[#FF5F00] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                     <p className="text-gray-600">Loading analytics...</p>
                 </div>
             </div>
@@ -228,10 +228,51 @@ export default function AnalyticsPage() {
                 </Card>
             </div>
 
+            {/* Bookings Over Time Chart */}
+            <Card>
+                <CardHeader>
+                    <CardTitle>Bookings Over Time</CardTitle>
+                    <CardDescription>Daily booking trends for the selected period</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <div className="h-64 flex items-end justify-between gap-2">
+                        {data.recentTrends && data.recentTrends.length > 0 ? (
+                            data.recentTrends.map((trend, index) => {
+                                const maxBookings = Math.max(...data.recentTrends.map(t => t.bookings), 1)
+                                const height = (trend.bookings / maxBookings) * 100
+                                return (
+                                    <div key={index} className="flex-1 flex flex-col items-center gap-2">
+                                        <div className="w-full flex flex-col items-center">
+                                            <div
+                                                className="w-full bg-primary rounded-t transition-all hover:bg-primary/80"
+                                                style={{ height: `${height}%`, minHeight: '4px' }}
+                                                title={`${trend.date}: ${trend.bookings} bookings`}
+                                            />
+                                        </div>
+                                        <span className="text-xs text-muted-foreground transform -rotate-45 origin-top-left whitespace-nowrap">
+                                            {new Date(trend.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                                        </span>
+                                    </div>
+                                )
+                            })
+                        ) : (
+                            <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                                <div className="text-center">
+                                    <Calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                                    <p>No booking data available for this period</p>
+                                    <p className="text-sm mt-1">Bookings will appear here as they are created</p>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </CardContent>
+            </Card>
+
             {/* Top Services */}
             <Card>
                 <CardHeader>
                     <CardTitle>Top Performing Services</CardTitle>
+                    <CardDescription>Services ranked by revenue and bookings</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">
@@ -239,24 +280,32 @@ export default function AnalyticsPage() {
                             data.topServices.map((service, index) => (
                                 <div key={service.id} className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-8 h-8 rounded-full bg-[#FF5F00]/10 flex items-center justify-center font-bold text-[#FF5F00]">
+                                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-white ${
+                                            index === 0 ? 'bg-gradient-to-br from-yellow-400 to-yellow-600' :
+                                            index === 1 ? 'bg-gradient-to-br from-gray-300 to-gray-500' :
+                                            index === 2 ? 'bg-gradient-to-br from-orange-400 to-orange-600' :
+                                            'bg-primary/10 text-primary'
+                                        }`}>
                                             {index + 1}
                                         </div>
                                         <div>
                                             <p className="font-medium">{service.title}</p>
                                             <p className="text-sm text-muted-foreground">
-                                                {service.bookings} bookings
+                                                {service.bookings} {service.bookings === 1 ? 'booking' : 'bookings'}
                                             </p>
                                         </div>
                                     </div>
                                     <div className="text-right">
-                                        <p className="font-bold">€{service.revenue.toFixed(2)}</p>
-                                        <p className="text-xs text-muted-foreground">Revenue</p>
+                                        <p className="font-bold text-lg">€{service.revenue.toFixed(2)}</p>
+                                        <p className="text-xs text-muted-foreground">Total Revenue</p>
                                     </div>
                                 </div>
                             ))
                         ) : (
-                            <p className="text-sm text-muted-foreground">No data available</p>
+                            <div className="text-center py-8 text-muted-foreground">
+                                <Package className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                                <p>No service data available</p>
+                            </div>
                         )}
                     </div>
                 </CardContent>

@@ -44,7 +44,7 @@ export class NotificationRepository implements BaseRepository<
      * Find many notifications with options
      */
     async findMany(options?: FindManyOptions<Prisma.NotificationWhereInput>): Promise<Notification[]> {
-        const query: any = {
+        const query: Record<string, unknown> = {
             where: options?.where,
             skip: options?.skip,
             take: options?.take,
@@ -57,7 +57,7 @@ export class NotificationRepository implements BaseRepository<
             query.select = options.select;
         }
 
-        return await prisma.notification.findMany(query);
+        return await prisma.notification.findMany(query as Prisma.NotificationFindManyArgs);
     }
 
     /**

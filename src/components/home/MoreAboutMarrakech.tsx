@@ -68,7 +68,7 @@ export function MoreAboutMarrakech() {
                             <p className="text-gray-600 text-sm leading-relaxed mb-3">
                                 {item.description}
                             </p>
-                            <span className="text-sm font-bold text-[#FF5F00] flex items-center gap-1 group-hover:gap-2 transition-all">
+                            <span className="text-sm font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
                                 Read article <ArrowRight className="w-4 h-4" />
                             </span>
                         </Link>

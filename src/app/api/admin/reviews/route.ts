@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import type { Prisma } from '@prisma/client'
 import { auth } from '@/auth'
 import prisma from '@/lib/prisma'
 
@@ -18,7 +19,7 @@ export async function GET(request: Request) {
         const status = searchParams.get('status') as 'PENDING' | 'APPROVED' | 'HIDDEN' | undefined
         const serviceId = searchParams.get('serviceId') || undefined
 
-        const where: any = {}
+        const where: Prisma.ReviewWhereInput = {}
         if (status) where.status = status
         if (serviceId) where.serviceId = serviceId
 

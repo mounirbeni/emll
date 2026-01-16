@@ -11,8 +11,8 @@ import { mockReviews } from '@/lib/data/mock-reviews'
 import { getTravelerIdentity } from '@/lib/reviews/traveler-identity'
 import Image from 'next/image'
 import { useParams, useRouter } from 'next/navigation'
-import { BookingModal } from '@/components/bookings/BookingModal'
-import { Clock, MapPin, Users, Star, Shield, CheckCircle, ArrowLeft, Calendar } from 'lucide-react'
+import { BookingWizard } from '@/components/bookings/BookingWizard'
+import { Clock, MapPin, Users, Star, Shield, CheckCircle, ArrowLeft, Calendar, ChevronLeft, ChevronRight, Check } from 'lucide-react'
 
 export default function ServiceDetailPage() {
     const params = useParams()
@@ -26,6 +26,9 @@ export default function ServiceDetailPage() {
 
     const [reviews, setReviews] = useState<DisplayReview[]>([])
     const [reviewsLoading, setReviewsLoading] = useState(false)
+
+    // Image carousel state
+    const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
     useEffect(() => {
         const fetchService = async () => {
@@ -45,7 +48,6 @@ export default function ServiceDetailPage() {
                     throw new Error('Failed to fetch service')
                 }
                 const data = await response.json()
-                // Handle both wrapped and unwrapped responses
                 const serviceData = data.data || data
                 setService(serviceData)
             } catch (err) {
@@ -129,12 +131,33 @@ export default function ServiceDetailPage() {
     const handleBookNow = () => {
         if (isGuest) {
             const callbackUrl = encodeURIComponent(`/services/${id}`)
-            router.push(`/auth/login?callbackUrl=${callbackUrl}`)
+            router.push(`/login?callbackUrl=${callbackUrl}`)
             return
         }
-
-        // Authenticated - Open Booking Modal
         setIsBookingModalOpen(true)
+    }
+
+    // Image carousel handlers
+    const images = service?.images || []
+    const nextImage = () => {
+        setCurrentImageIndex((prev) => (prev + 1) % images.length)
+    }
+    const prevImage = () => {
+        setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)
+    }
+    const goToImage = (index: number) => {
+        setCurrentImageIndex(index)
+    }
+
+    // Get map URL for location
+    const getMapUrl = () => {
+        if (service?.latitude && service?.longitude) {
+            return `https://www.google.com/maps?q=${service.latitude},${service.longitude}&output=embed`
+        }
+        if (service?.location) {
+            return `https://www.google.com/maps?q=${encodeURIComponent(service.location)}&output=embed`
+        }
+        return null
     }
 
     if (loading) {
@@ -255,7 +278,7 @@ export default function ServiceDetailPage() {
                 </button>
 
                 {service && (
-                    <BookingModal
+                    <BookingWizard
                         isOpen={isBookingModalOpen}
                         onClose={() => setIsBookingModalOpen(false)}
                         serviceTitle={service.title}
@@ -302,33 +325,95 @@ export default function ServiceDetailPage() {
                             )}
                         </div>
 
-                        {/* Main Image Gallery */}
-                        <div className="relative h-64 sm:h-80 lg:h-[450px] w-full rounded-2xl overflow-hidden mb-6 shadow-lg">
-                            {service?.images && service.images[0] ? (
+                        {/* Hero Image Carousel */}
+                        {images.length > 0 && (
+                            <div className="relative h-64 sm:h-80 lg:h-[500px] w-full rounded-2xl overflow-hidden mb-6 shadow-lg group">
                                 <Image
-                                    src={service.images[0]}
-                                    alt={service.title || 'Experience image'}
+                                    src={images[currentImageIndex]}
+                                    alt={`${service?.title || 'Experience'} - Image ${currentImageIndex + 1}`}
                                     fill
-                                    className="object-cover"
+                                    className="object-cover transition-opacity duration-300"
                                     sizes="(max-width: 1024px) 100vw, 66vw"
-                                    priority
+                                    priority={currentImageIndex === 0}
                                 />
-                            ) : (
-                                <div className="bg-gradient-to-br from-primary/10 to-primary/5 w-full h-full flex items-center justify-center">
-                                    <span className="text-6xl">🏛️</span>
-                                </div>
-                            )}
-                        </div>
 
-                        {/* Image Thumbnails (if multiple images) */}
-                        {service?.images && service.images.length > 1 && (
-                            <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
-                                {service.images.slice(0, 5).map((img, idx) => (
-                                    <div key={idx} className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 border-2 border-transparent hover:border-primary transition-colors cursor-pointer">
-                                        <Image src={img} alt={`View ${idx + 1}`} fill className="object-cover" sizes="80px" />
-                                    </div>
-                                ))}
+                                {/* Navigation Arrows */}
+                                {images.length > 1 && (
+                                    <>
+                                        <button
+                                            onClick={prevImage}
+                                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                                            aria-label="Previous image"
+                                        >
+                                            <ChevronLeft className="w-6 h-6" />
+                                        </button>
+                                        <button
+                                            onClick={nextImage}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                                            aria-label="Next image"
+                                        >
+                                            <ChevronRight className="w-6 h-6" />
+                                        </button>
+
+                                        {/* Image Indicators */}
+                                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                                            {images.map((_, idx) => (
+                                                <button
+                                                    key={idx}
+                                                    onClick={() => goToImage(idx)}
+                                                    className={`h-2 rounded-full transition-all ${idx === currentImageIndex
+                                                            ? 'w-8 bg-white'
+                                                            : 'w-2 bg-white/50 hover:bg-white/75'
+                                                        }`}
+                                                    aria-label={`Go to image ${idx + 1}`}
+                                                />
+                                            ))}
+                                        </div>
+
+                                        {/* Image Counter */}
+                                        <div className="absolute top-4 right-4 bg-black/50 text-white text-sm px-3 py-1 rounded-full">
+                                            {currentImageIndex + 1} / {images.length}
+                                        </div>
+                                    </>
+                                )}
                             </div>
+                        )}
+
+                        {/* Highlights / What's Included */}
+                        {((service?.highlights?.length ?? 0) > 0 || (service?.included?.length ?? 0) > 0) && (
+                            <Card className="mb-6 border-0 shadow-sm">
+                                <CardHeader className="pb-3">
+                                    <CardTitle className="text-xl text-charcoal">Highlights & What's Included</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    {service?.highlights && service.highlights.length > 0 && (
+                                        <div className="mb-6">
+                                            <h3 className="text-sm font-semibold text-charcoal mb-3">Highlights</h3>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                {service.highlights.map((highlight, idx) => (
+                                                    <div key={idx} className="flex items-start gap-2">
+                                                        <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                                                        <span className="text-sm text-medium-gray">{highlight}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {service?.included && service.included.length > 0 && (
+                                        <div>
+                                            <h3 className="text-sm font-semibold text-charcoal mb-3">What's Included</h3>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                {service.included.map((item, idx) => (
+                                                    <div key={idx} className="flex items-start gap-2">
+                                                        <Check className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                                                        <span className="text-sm text-medium-gray">{item}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </CardContent>
+                            </Card>
                         )}
 
                         {/* Description Card */}
@@ -371,8 +456,40 @@ export default function ServiceDetailPage() {
                             </Card>
                         )}
 
+                        {/* Map / Location Section */}
+                        {getMapUrl() && (
+                            <Card className="mb-6 border-0 shadow-sm">
+                                <CardHeader className="pb-3">
+                                    <CardTitle className="text-xl text-charcoal flex items-center gap-2">
+                                        <MapPin className="w-5 h-5 text-primary" />
+                                        Location
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="rounded-lg overflow-hidden h-64 sm:h-80">
+                                        <iframe
+                                            src={getMapUrl() || ''}
+                                            width="100%"
+                                            height="100%"
+                                            style={{ border: 0 }}
+                                            allowFullScreen
+                                            loading="lazy"
+                                            referrerPolicy="no-referrer-when-downgrade"
+                                            className="w-full h-full"
+                                        />
+                                    </div>
+                                    {service?.location && (
+                                        <p className="mt-4 text-sm text-medium-gray flex items-center gap-2">
+                                            <MapPin className="w-4 h-4" />
+                                            {service.location}
+                                        </p>
+                                    )}
+                                </CardContent>
+                            </Card>
+                        )}
+
                         {/* Trust Badges */}
-                        <div className="bg-white rounded-xl p-5 border border-border">
+                        <div className="bg-white rounded-xl p-5 border border-border mb-6">
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 bg-success/10 rounded-full flex items-center justify-center">
@@ -404,6 +521,7 @@ export default function ServiceDetailPage() {
                             </div>
                         </div>
 
+                        {/* Reviews Section */}
                         {hasReviews && (
                             <div className="mt-12">
                                 <ReviewsSection
@@ -415,7 +533,7 @@ export default function ServiceDetailPage() {
                         )}
                     </div>
 
-                    {/* Booking Sidebar (Desktop) */}
+                    {/* Booking Sidebar (Desktop) - Sticky */}
                     <div className="hidden lg:block lg:sticky lg:top-6 lg:h-fit">
                         <Card className="border-0 shadow-xl">
                             <CardContent className="p-6">

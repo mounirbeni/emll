@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { BookingStatus, PaymentStatus, PaymentCurrency, PaymentMethod } from '@prisma/client';
+import { PaymentCurrency, PaymentMethod } from '@prisma/client';
 
 // Helper for JSON/Array fields
 

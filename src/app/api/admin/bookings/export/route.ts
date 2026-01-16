@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import type { Prisma } from '@prisma/client';
 import { requireAdmin } from '@/lib/authorization';
 import { errorResponse, successResponse } from '@/lib/api-response';
 import prisma from '@/lib/prisma';
@@ -13,14 +14,18 @@ export async function GET(request: Request) {
         await requireAdmin();
 
         const { searchParams } = new URL(request.url);
-        const status = searchParams.get('status');
+        const statusParam = searchParams.get('status');
         const startDate = searchParams.get('startDate');
         const endDate = searchParams.get('endDate');
 
         // Build where clause
-        const where: any = {};
-        if (status && status !== 'ALL') {
-            where.status = status;
+        const where: Prisma.BookingWhereInput = {};
+        if (statusParam && statusParam !== 'ALL') {
+            // Cast the status to valid BookingStatus enum value
+            const validStatuses = ['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED'];
+            if (validStatuses.includes(statusParam)) {
+                where.status = statusParam as any;
+            }
         }
         if (startDate || endDate) {
             where.date = {};

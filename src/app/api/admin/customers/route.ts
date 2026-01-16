@@ -1,22 +1,26 @@
-import { NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
+import type { Prisma } from '@prisma/client';
 import prisma from '@/lib/prisma';
 import { requireAdmin } from '@/lib/authorization';
 import { errorResponse, successResponse } from '@/lib/api-response';
+import { getQueryParam, getQueryParamNumber, sanitizeSearchQuery } from '@/lib/sanitize';
+import { getPagination } from '@/lib/api-utils';
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
     try {
         await requireAdmin();
 
-        const { searchParams } = new URL(request.url);
-        const search = searchParams.get('search') || '';
-        const sortBy = searchParams.get('sortBy') || 'createdAt';
-        const sortOrder = searchParams.get('sortOrder') || 'desc';
-        const page = parseInt(searchParams.get('page') || '1');
-        const limit = parseInt(searchParams.get('limit') || '50');
-        const skip = (page - 1) * limit;
+        // Sanitize and validate query parameters
+        const searchRaw = getQueryParam(request, 'search');
+        const search = searchRaw ? sanitizeSearchQuery(searchRaw) : '';
+        const sortBy = getQueryParam(request, 'sortBy') || 'createdAt';
+        const sortOrderParam = getQueryParam(request, 'sortOrder') || 'desc';
+        const sortOrder = (sortOrderParam === 'asc' || sortOrderParam === 'desc' ? sortOrderParam : 'desc') as 'asc' | 'desc';
+        
+        const { page, limit, skip } = getPagination(request, 50, 100);
 
         // Build where clause
-        const where: any = {
+        const where: Prisma.UserWhereInput = {
             role: 'CUSTOMER'
         };
 
@@ -29,7 +33,7 @@ export async function GET(request: Request) {
 
         // Build orderBy - Note: We can't sort by aggregated fields directly in Prisma
         // So we'll sort by createdAt and then sort by the aggregated fields after fetching
-        const orderBy: any = {};
+        const orderBy: Record<string, 'asc' | 'desc'> = {};
         if (sortBy === 'bookings' || sortBy === 'totalSpent') {
             // Sort by createdAt first, then we'll sort by the aggregated field after fetching
             orderBy.createdAt = sortOrder;

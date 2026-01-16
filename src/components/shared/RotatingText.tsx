@@ -51,7 +51,7 @@ export function RotatingText({
         <div className={`flex items-center justify-center gap-2 ${className}`}>
             <span className="text-black font-medium">{staticText}</span>
             <span
-                className="text-[#FF5F00] font-bold transition-opacity duration-300"
+                className="text-primary font-bold transition-opacity duration-300"
                 style={{ opacity: isVisible ? 1 : 0 }}
             >
                 {rotatingWords[currentIndex]}

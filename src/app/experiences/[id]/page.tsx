@@ -362,11 +362,11 @@ export default async function ActivityPage({ params }: PageProps) {
                     </h1>
                     <div className="flex flex-wrap items-center gap-6 text-muted-foreground">
                         <div className="flex items-center gap-1">
-                            <Star className="h-5 w-5 fill-[#FF5F00] text-[#FF5F00]" />
+                            <Star className="h-5 w-5 fill-primary text-primary" />
                             <span className="font-semibold text-foreground">{activity.rating.toFixed(1)}</span>
                             <span>({activity.reviews} reviews)</span>
                         </div>
-                        <div className="flex items-center gap-1 hover:text-[#FF5F00] transition-colors cursor-pointer">
+                        <div className="flex items-center gap-1 hover:text-primary transition-colors cursor-pointer">
                             <MapPin className="h-5 w-5" />
                             <span className="underline underline-offset-4">{activity.location}</span>
                         </div>
@@ -453,14 +453,14 @@ export default async function ActivityPage({ params }: PageProps) {
                         {activity.itinerary && activity.itinerary.length > 0 && (
                             <div className="space-y-4">
                                 <h3 className="text-2xl font-bold text-foreground">Itinerary</h3>
-                                <div className="relative pl-6 border-l-2 border-[#FF5F00]/30 space-y-8">
+                                <div className="relative pl-6 border-l-2 border-primary/30 space-y-8">
                                     {activity.itinerary.map((stop, index) => (
                                         <div key={index} className="relative">
-                                            <div className="absolute -left-[29px] top-1 h-6 w-6 rounded-full border-2 border-[#FF5F00] bg-white flex items-center justify-center">
-                                                <div className="h-2 w-2 rounded-full bg-[#FF5F00]" />
+                                            <div className="absolute -left-[29px] top-1 h-6 w-6 rounded-full border-2 border-primary bg-white flex items-center justify-center">
+                                                <div className="h-2 w-2 rounded-full bg-primary" />
                                             </div>
                                             <div className="space-y-1">
-                                                <span className="text-sm font-semibold text-[#FF5F00]">{stop.time}</span>
+                                                <span className="text-sm font-semibold text-primary">{stop.time}</span>
                                                 <h4 className="text-lg font-semibold text-foreground">{stop.title}</h4>
                                                 <p className="text-muted-foreground">{stop.description}</p>
                                             </div>

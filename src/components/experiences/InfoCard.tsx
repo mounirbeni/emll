@@ -18,8 +18,8 @@ export function InfoCard({ icon: Icon, title, children, className = "" }: InfoCa
     return (
         <div className={`space-y-3 ${className}`}>
             <div className="flex items-center gap-3">
-                <div className="p-2 bg-[#FF5F00]/10 rounded-lg">
-                    <Icon className="h-5 w-5 text-[#FF5F00]" />
+                <div className="p-2 bg-primary/10 rounded-lg">
+                    <Icon className="h-5 w-5 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold text-foreground">{title}</h3>
             </div>

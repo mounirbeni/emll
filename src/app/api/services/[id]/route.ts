@@ -37,7 +37,7 @@ export async function PUT(
 
         const { id } = await params
         const body = await request.json()
-        const data: any = {}
+        const data: Record<string, unknown> = {}
 
         if (body.title !== undefined) data.title = body.title
         if (body.description !== undefined) data.description = body.description

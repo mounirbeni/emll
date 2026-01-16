@@ -57,7 +57,7 @@ export function ReviewsSection({ reviews, averageRating, totalReviews }: Reviews
                             <Star
                                 key={i}
                                 className={`h-5 w-5 ${i < Math.floor(averageRating)
-                                        ? "fill-[#FF5F00] text-[#FF5F00]"
+                                        ? "fill-primary text-primary"
                                         : "text-gray-300"
                                     }`}
                             />
@@ -75,7 +75,7 @@ export function ReviewsSection({ reviews, averageRating, totalReviews }: Reviews
                             <span className="text-sm font-medium w-12">{rating} stars</span>
                             <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
                                 <div
-                                    className="h-full bg-[#FF5F00] transition-all duration-500"
+                                    className="h-full bg-primary transition-all duration-500"
                                     style={{ width: `${percentage}%` }}
                                 />
                             </div>
@@ -119,7 +119,7 @@ export function ReviewsSection({ reviews, averageRating, totalReviews }: Reviews
                                     <Star
                                         key={i}
                                         className={`h-4 w-4 ${i < review.rating
-                                                ? "fill-[#FF5F00] text-[#FF5F00]"
+                                                ? "fill-primary text-primary"
                                                 : "text-gray-300"
                                             }`}
                                     />

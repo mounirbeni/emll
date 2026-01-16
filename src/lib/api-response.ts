@@ -4,14 +4,14 @@
  */
 
 import { NextResponse } from 'next/server';
-import { formatErrorResponse, isAppError } from './errors';
+import { formatErrorResponse } from './errors';
 
 function serializeDecimals(value: unknown): unknown {
     if (value === null || value === undefined) return value;
 
     if (typeof value === 'object') {
-        if (value && 'toNumber' in value && typeof (value as any).toNumber === 'function') {
-            return (value as any).toNumber();
+        if (value && 'toNumber' in value && typeof (value as Record<string, unknown>).toNumber === 'function') {
+            return ((value as Record<string, unknown>).toNumber as () => unknown)();
         }
 
         if (Array.isArray(value)) {
@@ -71,7 +71,7 @@ export function errorResponse(error: unknown) {
 /**
  * Wrap async API handler with error handling
  */
-export function withErrorHandling<T extends (...args: any[]) => Promise<NextResponse>>(
+export function withErrorHandling<T extends (...args: unknown[]) => Promise<NextResponse>>(
     handler: T
 ): T {
     return (async (...args: Parameters<T>) => {

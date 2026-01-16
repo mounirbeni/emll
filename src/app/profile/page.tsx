@@ -55,7 +55,7 @@ export default function ProfilePage() {
     if (isLoading) {
         return (
             <div className="flex min-h-screen items-center justify-center">
-                <Loader2 className="h-8 w-8 animate-spin text-[#FF5F00]" />
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
             </div>
         );
     }
@@ -81,7 +81,7 @@ export default function ProfilePage() {
                         </CardHeader>
                         <CardContent className="space-y-6">
                             <div className="flex items-center gap-4">
-                                <Avatar className="h-20 w-20 border-2 border-[#FF5F00]">
+                                <Avatar className="h-20 w-20 border-2 border-primary">
                                     <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${user.name || user.email}`} />
                                     <AvatarFallback>{user.name?.[0] || user.email[0]}</AvatarFallback>
                                 </Avatar>
@@ -93,7 +93,7 @@ export default function ProfilePage() {
 
                             <div className="space-y-4 pt-4 border-t">
                                 <div className="flex items-center gap-3">
-                                    <Mail className="h-5 w-5 text-[#FF5F00]" />
+                                    <Mail className="h-5 w-5 text-primary" />
                                     <div>
                                         <p className="text-sm text-muted-foreground">Email</p>
                                         <p className="font-medium">{user.email}</p>
@@ -101,7 +101,7 @@ export default function ProfilePage() {
                                 </div>
 
                                 <div className="flex items-center gap-3">
-                                    <User className="h-5 w-5 text-[#FF5F00]" />
+                                    <User className="h-5 w-5 text-primary" />
                                     <div>
                                         <p className="text-sm text-muted-foreground">Full Name</p>
                                         <p className="font-medium">{user.name || "Not set"}</p>
@@ -110,7 +110,7 @@ export default function ProfilePage() {
 
                                 {user.createdAt && (
                                     <div className="flex items-center gap-3">
-                                        <Calendar className="h-5 w-5 text-[#FF5F00]" />
+                                        <Calendar className="h-5 w-5 text-primary" />
                                         <div>
                                             <p className="text-sm text-muted-foreground">Member Since</p>
                                             <p className="font-medium">{new Date(user.createdAt).toLocaleDateString()}</p>

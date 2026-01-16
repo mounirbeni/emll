@@ -48,7 +48,7 @@ export class UserRepository implements BaseRepository<
      * Find many users with options
      */
     async findMany(options?: FindManyOptions<Prisma.UserWhereInput>): Promise<User[]> {
-        const query: any = {
+        const query: Record<string, unknown> = {
             where: options?.where,
             skip: options?.skip,
             take: options?.take,
@@ -60,7 +60,7 @@ export class UserRepository implements BaseRepository<
             query.select = options.select;
         }
 
-        return await prisma.user.findMany(query);
+        return await prisma.user.findMany(query as Prisma.UserFindManyArgs);
     }
 
     /**

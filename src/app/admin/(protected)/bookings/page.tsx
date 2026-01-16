@@ -36,9 +36,29 @@ export default async function AdminBookingsPage() {
                         <p className="text-sm text-muted-foreground mt-0.5">Manage customer reservations</p>
                     </div>
                 </div>
-                <Button className="w-full sm:w-auto rounded-xl gap-2">
+                <Button 
+                    onClick={async () => {
+                        try {
+                            const response = await fetch('/api/admin/bookings/export');
+                            if (!response.ok) throw new Error('Export failed');
+                            const blob = await response.blob();
+                            const url = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = `bookings-${new Date().toISOString().split('T')[0]}.csv`;
+                            document.body.appendChild(a);
+                            a.click();
+                            window.URL.revokeObjectURL(url);
+                            document.body.removeChild(a);
+                        } catch (error) {
+                            console.error('Export error:', error);
+                            alert('Failed to export bookings. Please try again.');
+                        }
+                    }}
+                    className="w-full sm:w-auto rounded-xl gap-2"
+                >
                     <Download className="h-4 w-4" />
-                    Export
+                    Export CSV
                 </Button>
             </div>
 

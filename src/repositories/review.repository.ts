@@ -54,7 +54,7 @@ export class ReviewRepository implements BaseRepository<
      * Find many reviews with options
      */
     async findMany(options?: FindManyOptions<Prisma.ReviewWhereInput>): Promise<Review[]> {
-        const query: any = {
+        const query: Record<string, unknown> = {
             where: options?.where,
             skip: options?.skip,
             take: options?.take,
@@ -67,7 +67,7 @@ export class ReviewRepository implements BaseRepository<
             query.select = options.select;
         }
 
-        return await prisma.review.findMany(query);
+        return await prisma.review.findMany(query as Prisma.ReviewFindManyArgs);
     }
 
     /**

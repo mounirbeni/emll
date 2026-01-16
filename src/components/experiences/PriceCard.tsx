@@ -35,22 +35,22 @@ export function PriceCard({ activity }: PriceCardProps) {
             {/* Quick Info */}
             <div className="space-y-3">
                 <div className="flex items-center gap-3 text-sm">
-                    <Clock className="h-5 w-5 text-[#FF5F00]" />
+                    <Clock className="h-5 w-5 text-primary" />
                     <span className="text-muted-foreground">{activity.duration}</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
-                    <Users className="h-5 w-5 text-[#FF5F00]" />
+                    <Users className="h-5 w-5 text-primary" />
                     <span className="text-muted-foreground">
                         Max {activity.maxGroupSize} guests
                     </span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
-                    <MapPin className="h-5 w-5 text-[#FF5F00]" />
+                    <MapPin className="h-5 w-5 text-primary" />
                     <span className="text-muted-foreground">{activity.location}</span>
                 </div>
                 {activity.languages && activity.languages.length > 0 && (
                     <div className="flex items-center gap-3 text-sm">
-                        <Calendar className="h-5 w-5 text-[#FF5F00]" />
+                        <Calendar className="h-5 w-5 text-primary" />
                         <span className="text-muted-foreground">
                             {activity.languages.join(", ")}
                         </span>
@@ -64,7 +64,7 @@ export function PriceCard({ activity }: PriceCardProps) {
                     // Open WhatsApp for booking inquiries
                     window.open(`https://wa.me/212600000000?text=Hi, I'm interested in booking: ${encodeURIComponent(activity.title)}`, '_blank');
                 }}
-                className="w-full bg-[#FF5F00] hover:bg-[#E55500] text-white font-bold py-6 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all"
+                className="w-full bg-primary hover:bg-accent text-white font-bold py-6 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all"
             >
                 Book Now
             </Button>
@@ -95,7 +95,7 @@ export function PriceCard({ activity }: PriceCardProps) {
             <div className="pt-4 border-t border-border">
                 <p className="text-sm text-muted-foreground text-center">
                     Need help?{" "}
-                    <button className="text-[#FF5F00] hover:underline font-medium">
+                    <button className="text-primary hover:underline font-medium">
                         Contact us
                     </button>
                 </p>

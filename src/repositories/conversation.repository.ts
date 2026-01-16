@@ -53,7 +53,7 @@ export class ConversationRepository implements BaseRepository<
      * Find many conversations with options
      */
     async findMany(options?: FindManyOptions<Prisma.ConversationWhereInput>): Promise<Conversation[]> {
-        const query: any = {
+        const query: Record<string, unknown> = {
             where: options?.where,
             skip: options?.skip,
             take: options?.take,
@@ -66,7 +66,7 @@ export class ConversationRepository implements BaseRepository<
             query.select = options.select;
         }
 
-        return await prisma.conversation.findMany(query);
+        return await prisma.conversation.findMany(query as Prisma.ConversationFindManyArgs);
     }
 
     /**

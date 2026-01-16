@@ -46,18 +46,25 @@ export class ServiceRepository implements BaseRepository<
      * Find many services with options
      */
     async findMany(options?: FindManyOptions<Prisma.ServiceWhereInput>): Promise<Service[]> {
-        const query: any = {
-            where: options?.where,
-            skip: options?.skip,
-            take: options?.take,
-            orderBy: options?.orderBy || { createdAt: 'desc' },
+        const query: Prisma.ServiceFindManyArgs = {
+            orderBy: (options?.orderBy || { createdAt: 'desc' }) as Prisma.ServiceOrderByWithRelationInput,
         };
+
+        if (options?.where) {
+            query.where = options.where;
+        }
+        if (options?.skip !== undefined) {
+            query.skip = options.skip;
+        }
+        if (options?.take !== undefined) {
+            query.take = options.take;
+        }
 
         // Add either include or select, but not both
         if (options?.include) {
-            query.include = options.include;
+            query.include = options.include as Prisma.ServiceInclude;
         } else if (options?.select) {
-            query.select = options.select;
+            query.select = options.select as Prisma.ServiceSelect;
         }
 
         return await prisma.service.findMany(query);

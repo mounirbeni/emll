@@ -101,8 +101,8 @@ export function DashboardSidebar({ className, showLogo = true }: SidebarProps) {
             {showLogo && (
                 <div className="p-6 pb-0">
                     <Link href="/" className="flex items-center gap-2">
-                        <Compass className="w-8 h-8 text-[#FF5F00]" />
-                        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF5F00] to-[#E55500]">
+                        <Compass className="w-8 h-8 text-primary" />
+                        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
                             Explore Marrakesh
                         </span>
                     </Link>
@@ -112,14 +112,14 @@ export function DashboardSidebar({ className, showLogo = true }: SidebarProps) {
                 {/* User Profile Card */}
                 <div className="px-6">
                     <div className="bg-white border border-gray-100 p-5 rounded-3xl flex items-center gap-4 hover:shadow-md transition-all shadow-sm">
-                        <div className="w-12 h-12 rounded-2xl bg-[#FF5F00] flex items-center justify-center text-white shadow-md shadow-orange-500/20 z-10">
+                        <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white shadow-md shadow-orange-500/20 z-10">
                             <span className="font-bold text-xl">{session?.user?.name?.[0]?.toUpperCase() || 'T'}</span>
                         </div>
                         <div className="flex flex-col overflow-hidden z-10">
                             <span className="font-semibold text-sm truncate text-gray-900">{session?.user?.name || 'Traveler'}</span>
                             <div className="flex items-center gap-1 mt-1">
-                                <Sparkles className="w-3 h-3 text-[#FF5F00]" />
-                                <span className="text-[10px] text-[#FF5F00] uppercase tracking-wider font-bold">Premium Member</span>
+                                <Sparkles className="w-3 h-3 text-primary" />
+                                <span className="text-[10px] text-primary uppercase tracking-wider font-bold">Premium Member</span>
                             </div>
                         </div>
                     </div>
@@ -141,20 +141,20 @@ export function DashboardSidebar({ className, showLogo = true }: SidebarProps) {
                                             className={cn(
                                                 "group flex items-center rounded-2xl px-4 py-3.5 text-sm font-medium transition-all duration-200 relative overflow-hidden",
                                                 isActive
-                                                    ? "text-[#FF5F00] bg-orange-50 shadow-sm"
+                                                    ? "text-primary bg-orange-50 shadow-sm"
                                                     : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                                             )}
                                         >
                                             {isActive && (
-                                                <div className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-1 bg-[#FF5F00] rounded-r-full" />
+                                                <div className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-1 bg-primary rounded-r-full" />
                                             )}
                                             <item.icon className={cn(
                                                 "mr-4 h-5 w-5 transition-colors duration-200",
-                                                isActive ? "text-[#FF5F00]" : "text-gray-400 group-hover:text-gray-600"
+                                                isActive ? "text-primary" : "text-gray-400 group-hover:text-gray-600"
                                             )} />
                                             <span className="flex-1 relative z-10">{item.title}</span>
 
-                                            {isActive && <ChevronRight className="ml-2 h-4 w-4 text-[#FF5F00] opacity-100" />}
+                                            {isActive && <ChevronRight className="ml-2 h-4 w-4 text-primary opacity-100" />}
                                         </Link>
                                     );
                                 })}

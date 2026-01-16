@@ -27,8 +27,8 @@ export function Categories() {
                                     href={item.href}
                                     className="group flex flex-col items-center gap-3 min-w-[90px] flex-shrink-0"
                                 >
-                                    <div className="w-16 h-16 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all duration-200 group-hover:border-[#FF5F00] group-hover:shadow-md bg-white active:scale-95">
-                                        <Icon className="w-7 h-7 text-gray-700 group-hover:text-[#FF5F00] transition-colors stroke-[1.5]" />
+                                    <div className="w-16 h-16 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all duration-200 group-hover:border-primary group-hover:shadow-md bg-white active:scale-95">
+                                        <Icon className="w-7 h-7 text-gray-700 group-hover:text-primary transition-colors stroke-[1.5]" />
                                     </div>
                                     <span className="text-xs font-bold text-black text-center leading-tight">
                                         {item.label}
@@ -49,8 +49,8 @@ export function Categories() {
                                 href={item.href}
                                 className="group flex flex-col items-center gap-3 min-w-[100px] cursor-pointer"
                             >
-                                <div className="w-[60px] h-[60px] rounded-full border border-gray-300 flex items-center justify-center transition-all duration-200 group-hover:border-[#FF5F00] group-hover:shadow-md bg-white">
-                                    <Icon className="w-6 h-6 text-gray-700 group-hover:text-[#FF5F00] transition-colors stroke-[1.5]" />
+                                <div className="w-[60px] h-[60px] rounded-full border border-gray-300 flex items-center justify-center transition-all duration-200 group-hover:border-primary group-hover:shadow-md bg-white">
+                                    <Icon className="w-6 h-6 text-gray-700 group-hover:text-primary transition-colors stroke-[1.5]" />
                                 </div>
                                 <span className="text-[12px] font-bold text-black text-center leading-tight">
                                     {item.label}

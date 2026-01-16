@@ -36,9 +36,9 @@ export interface DashboardStats {
         new: number; // last 30 days
     };
     recent: {
-        bookings: any[];
-        reviews: any[];
-        supportRequests: any[];
+        bookings: unknown[];
+        reviews: unknown[];
+        supportRequests: unknown[];
     };
 }
 
@@ -301,7 +301,7 @@ export class AdminService {
             }
         });
 
-        const alerts: any[] = [];
+        const alerts: Array<{id: string; type: string; title: string; time: string; action: string; rawDate: Date}> = [];
 
         unconfirmed.forEach(b => {
             alerts.push({

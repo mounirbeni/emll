@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
-import { auth } from '@/auth'
+import type { Prisma } from '@prisma/client'
+import { requireAdmin } from '@/lib/authorization'
+import { errorResponse, successResponse } from '@/lib/api-response'
 import prisma from '@/lib/prisma'
 
 export const dynamic = 'force-dynamic'
@@ -7,10 +9,7 @@ export const dynamic = 'force-dynamic'
 // GET /api/admin/blog - list all blog posts
 export async function GET(request: Request) {
     try {
-        const session = await auth()
-        if (!session?.user?.role || session.user.role !== 'ADMIN') {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-        }
+        await requireAdmin()
 
         const { searchParams } = new URL(request.url)
         const page = parseInt(searchParams.get('page') || '1', 10)
@@ -19,8 +18,14 @@ export async function GET(request: Request) {
         const category = searchParams.get('category') || undefined
         const featured = searchParams.get('featured') === 'true' ? true : searchParams.get('featured') === 'false' ? false : undefined
 
-        const where: any = {}
-        if (status) where.publishedAt = status === 'published' ? { not: null } : null
+        const where: Prisma.BlogPostWhereInput = {}
+        if (status) {
+            if (status === 'published') {
+                where.publishedAt = { not: undefined }
+            } else if (status === 'unpublished') {
+                where.publishedAt = undefined
+            }
+        }
         if (category) where.category = { contains: category, mode: 'insensitive' }
         if (typeof featured === 'boolean') where.featured = featured
 
@@ -39,7 +44,7 @@ export async function GET(request: Request) {
             prisma.blogPost.count({ where })
         ])
 
-        return NextResponse.json({
+        return successResponse({
             data: posts,
             pagination: {
                 page,
@@ -49,18 +54,14 @@ export async function GET(request: Request) {
             }
         })
     } catch (error) {
-        console.error('Failed to fetch blog posts', error)
-        return NextResponse.json({ error: 'Failed to fetch blog posts' }, { status: 500 })
+        return errorResponse(error)
     }
 }
 
 // POST /api/admin/blog - create a new blog post
 export async function POST(request: Request) {
     try {
-        const session = await auth()
-        if (!session?.user?.role || session.user.role !== 'ADMIN') {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-        }
+        const session = await requireAdmin()
 
         const body = await request.json()
         const { title, slug, content, excerpt, coverImage, category, featured, metaTitle, metaDescription, keywords } = body
@@ -98,7 +99,6 @@ export async function POST(request: Request) {
 
         return NextResponse.json(post, { status: 201 })
     } catch (error) {
-        console.error('Failed to create blog post', error)
-        return NextResponse.json({ error: 'Failed to create blog post' }, { status: 500 })
+        return errorResponse(error)
     }
 }

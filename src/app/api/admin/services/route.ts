@@ -1,18 +1,23 @@
-import { NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { requireAdmin } from '@/lib/authorization';
 import { errorResponse, successResponse, createdResponse } from '@/lib/api-response';
 import { serviceService } from '@/services/service.service';
+import { createServiceSchema } from '@/lib/validation';
+import { getQueryParam, sanitizeSearchQuery } from '@/lib/sanitize';
+import { safeJsonParse, validateBody } from '@/lib/api-utils';
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
     try {
         // Require admin authentication
         await requireAdmin();
 
-        const { searchParams } = new URL(request.url);
-        const category = searchParams.get('category');
+        const category = getQueryParam(request, 'category');
+        const searchRaw = getQueryParam(request, 'search');
+        const search = searchRaw ? sanitizeSearchQuery(searchRaw) : undefined;
 
         const services = await serviceService.getServices({
-            category: category || undefined
+            category: category || undefined,
+            search
         });
 
         return successResponse(services);
@@ -21,34 +26,19 @@ export async function GET(request: Request) {
     }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
         // Require admin authentication
         await requireAdmin();
 
-        const body = await request.json();
+        // Safely parse and validate body
+        const body = await safeJsonParse(request);
+        const data = validateBody(createServiceSchema, body);
 
-        const serviceData = {
-            title: body.title,
-            description: body.description,
-            price: parseFloat(body.price),
-            category: body.category,
-            duration: body.duration,
-            location: body.location,
-            latitude: body.latitude ? parseFloat(body.latitude) : undefined,
-            longitude: body.longitude ? parseFloat(body.longitude) : undefined,
-            images: body.images || [],
-            features: body.features || [],
-            included: body.included || [],
-            excluded: body.excluded || [],
-            whatToBring: body.whatToBring || [],
-            highlights: body.highlights || [],
-            tags: body.tags || [],
-            itinerary: body.itinerary || [],
-            host: body.host || 'Explore Marrakesh'
-        };
-
-        const service = await serviceService.createService(serviceData);
+        const service = await serviceService.createService({
+            ...data,
+            host: data.host || 'Explore Marrakesh'
+        });
 
         return createdResponse(service);
     } catch (error) {

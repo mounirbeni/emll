@@ -22,7 +22,7 @@ export async function GET() {
             }
         });
 
-        // 2. Fetch Booking Stats
+        // 2. Fetch Booking Stats with service images (fixes N+1)
         const bookings = await prisma.booking.findMany({
             where: { userId: userId },
             orderBy: { date: 'asc' }, // Get upcoming first
@@ -31,7 +31,12 @@ export async function GET() {
                 date: true,
                 status: true,
                 activityTitle: true,
-                activityId: true // To fetch image if needed
+                activityId: true,
+                service: {
+                    select: {
+                        images: true
+                    }
+                }
             }
         });
 
@@ -53,18 +58,12 @@ export async function GET() {
             }
         });
 
-        // 4. Get Image for upcoming trip if exists
+        // 4. Extract image from service (already fetched, no additional query)
         let upcomingTripImage = null;
-        if (upcomingTrip) {
-            const service = await prisma.service.findUnique({
-                where: { id: upcomingTrip.activityId },
-                select: { images: true }
-            });
-            if (service?.images) {
-                try {
-                    const images = (service.images as unknown as string[]) || [];
-                    upcomingTripImage = Array.isArray(images) ? images[0] : null;
-                } catch (e) { }
+        if (upcomingTrip?.service?.images) {
+            const images = upcomingTrip.service.images as string[];
+            if (Array.isArray(images) && images.length > 0) {
+                upcomingTripImage = images[0];
             }
         }
 

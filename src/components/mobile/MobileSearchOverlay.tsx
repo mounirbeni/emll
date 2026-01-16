@@ -70,13 +70,13 @@ export function MobileSearchOverlay({ isOpen, onClose }: MobileSearchOverlayProp
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Activities, Tours, Experiences..."
                             autoFocus
-                            className="w-full h-14 pl-12 pr-4 text-base font-medium text-black placeholder:text-gray-400 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-[#FF5F00] focus:bg-white transition-colors"
+                            className="w-full h-14 pl-12 pr-4 text-base font-medium text-black placeholder:text-gray-400 bg-gray-50 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-primary focus:bg-white transition-colors"
                         />
                     </div>
 
                     <Button
                         type="submit"
-                        className="w-full h-14 bg-[#FF5F00] hover:bg-[#E55500] text-white text-base font-bold rounded-2xl shadow-lg"
+                        className="w-full h-14 bg-primary hover:bg-accent text-white text-base font-bold rounded-2xl shadow-lg"
                     >
                         Search
                     </Button>

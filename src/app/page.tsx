@@ -72,7 +72,7 @@ export default function Home() {
             Discover exclusive experiences, connect with local experts, and become part of our growing network of travelers and hosts in Marrakech.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-[#FF5F00] hover:bg-[#E55500] text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg">
+            <button className="bg-primary hover:bg-accent text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg">
               Become a Partner
             </button>
           </div>

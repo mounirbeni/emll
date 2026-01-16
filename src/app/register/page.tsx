@@ -53,9 +53,30 @@ export default function RegisterPage() {
 
             toast.success('Account created successfully! Welcome aboard!');
 
-            // Redirect to dashboard after successful registration
-            router.push('/dashboard');
-            router.refresh();
+            // Auto-sign in after registration
+            try {
+                const signInResult = await signIn('credentials', {
+                    redirect: false,
+                    email,
+                    password,
+                });
+
+                if (signInResult?.error) {
+                    // Registration succeeded but sign-in failed - redirect to login
+                    toast.info('Account created! Please sign in.');
+                    router.push('/login');
+                    return;
+                }
+
+                // Successfully signed in - redirect to client dashboard
+                router.refresh();
+                await new Promise(resolve => setTimeout(resolve, 300));
+                window.location.href = '/client';
+            } catch (err) {
+                // Fallback: redirect to login
+                toast.info('Account created! Please sign in.');
+                router.push('/login');
+            }
 
         } catch (error) {
             toast.error('Something went wrong. Please try again.');
@@ -71,8 +92,8 @@ export default function RegisterPage() {
                 <div className="w-full max-w-md space-y-8">
                     <div className="space-y-2">
                         <Link href="/" className="inline-flex items-center gap-2 mb-8">
-                            <Compass className="w-8 h-8 text-[#FF5F00]" />
-                            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF5F00] to-[#E55500]">
+                            <Compass className="w-8 h-8 text-primary" />
+                            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
                                 Explore Marrakesh
                             </span>
                         </Link>
@@ -177,7 +198,7 @@ export default function RegisterPage() {
                         <Button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full h-11 bg-[#FF5F00] hover:bg-[#E55500] font-bold text-lg shadow-lg shadow-orange-500/20"
+                            className="w-full h-11 bg-primary hover:bg-accent font-bold text-lg shadow-lg shadow-orange-500/20"
                         >
                             {isLoading ? (
                                 <>
@@ -233,7 +254,7 @@ export default function RegisterPage() {
 
                     <p className="text-center text-sm text-muted-foreground">
                         Already have an account?{" "}
-                        <Link href="/login" className="font-semibold text-[#FF5F00] hover:text-[#E55500]">
+                        <Link href="/login" className="font-semibold text-primary hover:text-accent">
                             Sign in
                         </Link>
                     </p>
@@ -267,7 +288,7 @@ export default function RegisterPage() {
                         </p>
                         <div className="flex items-center justify-center gap-2">
                             {[1, 2, 3, 4, 5].map((i) => (
-                                <svg key={i} className="w-6 h-6 text-[#FF5F00] fill-current" viewBox="0 0 20 20">
+                                <svg key={i} className="w-6 h-6 text-primary fill-current" viewBox="0 0 20 20">
                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                 </svg>
                             ))}

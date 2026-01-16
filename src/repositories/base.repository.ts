@@ -3,8 +3,6 @@
  * Defines common CRUD operations for all repositories
  */
 
-import { Prisma } from '@prisma/client';
-
 export interface BaseRepository<T, TCreateInput, TUpdateInput, TWhereInput> {
     create(data: TCreateInput): Promise<T>;
     findById(id: string): Promise<T | null>;
@@ -18,9 +16,9 @@ export interface FindManyOptions<TWhereInput> {
     where?: TWhereInput;
     skip?: number;
     take?: number;
-    orderBy?: any;
-    include?: any;
-    select?: any;
+    orderBy?: Record<string, unknown> | Record<string, unknown>[];
+    include?: Record<string, boolean | object>;
+    select?: Record<string, boolean>;
 }
 
 export interface PaginationOptions {

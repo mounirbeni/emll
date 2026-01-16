@@ -45,7 +45,7 @@ export class PaymentRepository implements BaseRepository<
      * Find many payments with options
      */
     async findMany(options?: FindManyOptions<Prisma.PaymentWhereInput>): Promise<Payment[]> {
-        const query: any = {
+        const query: Record<string, unknown> = {
             where: options?.where,
             skip: options?.skip,
             take: options?.take,
@@ -58,7 +58,7 @@ export class PaymentRepository implements BaseRepository<
             query.select = options.select;
         }
 
-        return await prisma.payment.findMany(query);
+        return await prisma.payment.findMany(query as Prisma.PaymentFindManyArgs);
     }
 
     /**

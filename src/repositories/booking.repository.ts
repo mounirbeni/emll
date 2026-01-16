@@ -46,7 +46,7 @@ export class BookingRepository implements BaseRepository<
      * Find many bookings with options
      */
     async findMany(options?: FindManyOptions<Prisma.BookingWhereInput>): Promise<Booking[]> {
-        const query: any = {
+        const query: Record<string, unknown> = {
             where: options?.where,
             skip: options?.skip,
             take: options?.take,
@@ -60,7 +60,7 @@ export class BookingRepository implements BaseRepository<
             query.select = options.select;
         }
 
-        return await prisma.booking.findMany(query);
+        return await prisma.booking.findMany(query as Prisma.BookingFindManyArgs);
     }
 
     /**

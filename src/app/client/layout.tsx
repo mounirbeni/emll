@@ -72,14 +72,14 @@ export default function ClientLayout({
                     <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
                         {!sidebarCollapsed && (
                             <Link href="/" className="flex items-center gap-2 flex-1">
-                                <span className="text-xl font-bold text-[#FF5F00] whitespace-nowrap">
+                                <span className="text-xl font-bold text-primary whitespace-nowrap">
                                     Explore Marrakesh
                                 </span>
                             </Link>
                         )}
                         {sidebarCollapsed && (
                             <Link href="/" className="flex items-center justify-center w-full">
-                                <span className="text-2xl font-bold text-[#FF5F00]">E</span>
+                                <span className="text-2xl font-bold text-primary">E</span>
                             </Link>
                         )}
                         <div className="flex items-center gap-2">
@@ -106,7 +106,7 @@ export default function ClientLayout({
                     {/* User info */}
                     <div className={`px-4 py-4 border-b border-gray-200 ${sidebarCollapsed ? "px-2" : ""}`}>
                         <div className={`flex items-center gap-3 ${sidebarCollapsed ? "justify-center" : ""}`}>
-                            <div className="w-10 h-10 rounded-full bg-[#FF5F00] flex items-center justify-center text-white font-semibold flex-shrink-0">
+                            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-semibold flex-shrink-0">
                                 {session?.user?.name?.[0]?.toUpperCase() || "U"}
                             </div>
                             {!sidebarCollapsed && (
@@ -135,12 +135,12 @@ export default function ClientLayout({
                                         sidebarCollapsed ? "justify-center px-2" : ""
                                     } ${
                                         isActive
-                                            ? "bg-orange-50 text-[#FF5F00]"
+                                            ? "bg-orange-50 text-primary"
                                             : "text-gray-700 hover:bg-gray-100"
                                     }`}
                                     title={sidebarCollapsed ? item.name : undefined}
                                 >
-                                    <item.icon className={`w-5 h-5 flex-shrink-0 ${isActive ? "text-[#FF5F00]" : ""}`} />
+                                    <item.icon className={`w-5 h-5 flex-shrink-0 ${isActive ? "text-primary" : ""}`} />
                                     {!sidebarCollapsed && (
                                         <span className="whitespace-nowrap">{item.name}</span>
                                     )}

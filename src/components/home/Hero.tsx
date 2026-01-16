@@ -33,7 +33,7 @@ export function Hero() {
             {/* Content */}
             <div className="relative z-10 container mx-auto px-4 flex flex-col items-center">
                 {/* Main Headline */}
-                <h1 className="text-[#FF5F00] text-3xl sm:text-4xl md:text-6xl font-bold mb-3 md:mb-4 text-center drop-shadow-sm leading-tight">
+                <h1 className="text-primary text-3xl sm:text-4xl md:text-6xl font-bold mb-3 md:mb-4 text-center drop-shadow-sm leading-tight">
                     Do more with your trip
                 </h1>
 

@@ -47,7 +47,7 @@ export class MessageRepository implements BaseRepository<
      * Find many messages with options
      */
     async findMany(options?: FindManyOptions<Prisma.MessageWhereInput>): Promise<Message[]> {
-        const query: any = {
+        const query: Record<string, unknown> = {
             where: options?.where,
             skip: options?.skip,
             take: options?.take,
@@ -60,7 +60,7 @@ export class MessageRepository implements BaseRepository<
             query.select = options.select;
         }
 
-        return await prisma.message.findMany(query);
+        return await prisma.message.findMany(query as Prisma.MessageFindManyArgs);
     }
 
     /**

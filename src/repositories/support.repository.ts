@@ -33,7 +33,7 @@ export class SupportRepository implements BaseRepository<
      * Find many support requests with options
      */
     async findMany(options?: FindManyOptions<Prisma.SupportRequestWhereInput>): Promise<SupportRequest[]> {
-        const query: any = {
+        const query: Record<string, unknown> = {
             where: options?.where,
             skip: options?.skip,
             take: options?.take,
@@ -46,7 +46,7 @@ export class SupportRepository implements BaseRepository<
             query.select = options.select;
         }
 
-        return await prisma.supportRequest.findMany(query);
+        return await prisma.supportRequest.findMany(query as Prisma.SupportRequestFindManyArgs);
     }
 
     /**
