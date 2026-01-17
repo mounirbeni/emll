@@ -77,10 +77,10 @@ export async function middleware(request: NextRequest) {
         }
     }
 
-    // 4. Rate Limiting for API routes
-    if (pathname.startsWith('/api')) {
+    // 4. Rate Limiting for API routes (excluding auth routes)
+    if (pathname.startsWith('/api') && !pathname.startsWith('/api/auth')) {
         const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || '127.0.0.1'
-        const limit = pathname.startsWith('/api/auth') ? 5 : 100
+        const limit = 100
         try {
             await limiter.check(limit, ip)
         } catch {
