@@ -1,16 +1,14 @@
 'use server'
 
-import prisma from '@/lib/prisma'
+import { bookingService } from '@/services/booking.service'
 import { BookingStatus } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 
+// Note: getBookings should be accessed via API or Service in Server Components
+// But for Client usage via Server Action, we provide this.
 export async function getBookings() {
     try {
-        const bookings = await prisma.booking.findMany({
-            orderBy: {
-                date: 'desc',
-            },
-        })
+        const bookings = await bookingService.getAllBookings(); // Defaults to admin view
         return { success: true, data: bookings }
     } catch (error) {
         console.error('Failed to fetch bookings:', error)
@@ -20,127 +18,75 @@ export async function getBookings() {
 
 export async function updateBookingStatus(id: string, status: BookingStatus) {
     try {
-        await prisma.booking.update({
-            where: { id },
-            data: { status },
-        })
+        await bookingService.updateBookingStatus(id, status);
         revalidatePath('/admin/bookings')
         revalidatePath('/admin/dashboard')
+        revalidatePath('/client') // Attempt to revalidate client view
+        revalidatePath('/api/bookings') // Revalidate API route cache if any
         return { success: true }
     } catch (error) {
         console.error('Failed to update booking status:', error)
-        throw new Error('Failed to update booking status')
+        // Return error message if extended from Error
+        return { success: false, error: error instanceof Error ? error.message : 'Failed to update booking status' }
     }
 }
 
 export async function confirmBooking(id: string) {
     try {
-        const booking = await prisma.booking.findUnique({
-            where: { id },
-            include: { user: true }
-        });
-
-        if (!booking) {
-            return { success: false, error: 'Booking not found' };
-        }
-
-        await prisma.booking.update({
-            where: { id },
-            data: { status: 'CONFIRMED' },
-        });
-
-        // Send confirmation email
-        try {
-            const { emailService } = await import('@/services/email.service');
-            await emailService.sendBookingConfirmation(
-                booking.email,
-                booking.name,
-                booking.id,
-                booking.activityTitle,
-                booking.date,
-                booking.guests,
-                typeof (booking.totalPrice as any)?.toNumber === 'function'
-                    ? (booking.totalPrice as any).toNumber()
-                    : Number(booking.totalPrice)
-            );
-        } catch (error) {
-            console.error('Failed to send confirmation email:', error);
-        }
-
+        await bookingService.confirmBooking(id); // Handles emails internally
         revalidatePath('/admin/bookings');
         revalidatePath('/admin/dashboard');
+        revalidatePath('/client');
+        revalidatePath('/api/bookings');
         return { success: true };
     } catch (error) {
         console.error('Failed to confirm booking:', error);
-        return { success: false, error: 'Failed to confirm booking' };
+        return { success: false, error: error instanceof Error ? error.message : 'Failed to confirm booking' };
     }
 }
 
 export async function cancelBooking(id: string) {
     try {
-        const booking = await prisma.booking.findUnique({
-            where: { id }
-        });
-
-        if (!booking) {
-            return { success: false, error: 'Booking not found' };
-        }
-
-        await prisma.booking.update({
-            where: { id },
-            data: { status: 'CANCELLED' },
-        });
-
-        // Send cancellation email
-        try {
-            const { emailService } = await import('@/services/email.service');
-            await emailService.sendBookingCancellation(
-                booking.email,
-                booking.name,
-                booking.activityTitle,
-                booking.paymentStatus === 'PAID'
-                    ? (typeof (booking.totalPrice as any)?.toNumber === 'function'
-                        ? (booking.totalPrice as any).toNumber()
-                        : Number(booking.totalPrice))
-                    : undefined
-            );
-        } catch (error) {
-            console.error('Failed to send cancellation email:', error);
-        }
-
+        // Assume Admin is performing this action since it's an Admin Action file usually?
+        // But this action is used by BookingsClient which is used in Admin.
+        // Yes, `cancelBooking` in bookingService has signature (id, userId?, isAdmin?)
+        // If we call it here for Admin, we pass isAdmin=true
+        await bookingService.cancelBooking(id, undefined, true);
         revalidatePath('/admin/bookings');
         revalidatePath('/admin/dashboard');
+        revalidatePath('/client');
+        revalidatePath('/api/bookings');
         return { success: true };
     } catch (error) {
         console.error('Failed to cancel booking:', error);
-        return { success: false, error: 'Failed to cancel booking' };
+        return { success: false, error: error instanceof Error ? error.message : 'Failed to cancel booking' };
     }
 }
 
 export async function processBooking(id: string) {
     try {
-        await prisma.booking.update({
-            where: { id },
-            data: { status: 'COMPLETED' },
-        })
+        await bookingService.completeBooking(id);
         revalidatePath('/admin/bookings')
         revalidatePath('/admin/dashboard')
+        revalidatePath('/client')
+        revalidatePath('/api/bookings');
         return { success: true }
     } catch (error) {
         console.error('Failed to process booking:', error)
-        return { success: false, error: 'Failed to process booking' }
+        return { success: false, error: error instanceof Error ? error.message : 'Failed to process booking' }
     }
 }
 
 export async function deleteBooking(id: string) {
     try {
-        await prisma.booking.delete({
-            where: { id },
-        })
+        await bookingService.deleteBooking(id);
         revalidatePath('/admin/bookings')
+        revalidatePath('/admin/dashboard')
+        revalidatePath('/client')
+        revalidatePath('/api/bookings');
         return { success: true }
     } catch (error) {
         console.error('Failed to delete booking:', error)
-        return { success: false, error: 'Failed to delete booking' }
+        return { success: false, error: error instanceof Error ? error.message : 'Failed to delete booking' }
     }
 }

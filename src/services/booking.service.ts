@@ -3,7 +3,7 @@
  * Contains all business logic for booking operations
  */
 
-import { Booking, BookingStatus, PaymentStatus } from '@prisma/client';
+import { Booking, BookingStatus, PaymentStatus, Prisma } from '@prisma/client';
 import { bookingRepository } from '@/repositories/booking.repository';
 import { serviceRepository } from '@/repositories/service.repository';
 import { notificationService } from '@/services/notification.service';
@@ -43,6 +43,14 @@ export interface BookingStats {
     pending: number;
     totalRevenue: number;
 }
+
+export type BookingWithUser = Booking & {
+    user: {
+        id: string;
+        name: string | null;
+        email: string;
+    } | null;
+};
 
 export class BookingService {
     /**
@@ -159,33 +167,14 @@ export class BookingService {
             throw new BadRequestError('Number of guests must be between 1 and 50');
         }
 
-        // Validate price
         if (data.totalPrice <= 0 || data.totalPrice > 100000) {
             throw new BadRequestError('Invalid price value');
         }
 
-        // Check for double bookings - prevent overlapping time slots (within 30 minutes)
-        // const bookingDate already defined above
-        const timeWindowStart = new Date(bookingDate);
-        timeWindowStart.setMinutes(timeWindowStart.getMinutes() - 30);
+        // Check for double bookings
+        const isAvailable = await this.checkAvailability(actualActivityId, bookingDate);
 
-        const timeWindowEnd = new Date(bookingDate);
-        timeWindowEnd.setMinutes(timeWindowEnd.getMinutes() + 30);
-
-        const conflictingBookings = await bookingRepository.findMany({
-            where: {
-                activityId: actualActivityId,
-                date: {
-                    gte: timeWindowStart,
-                    lte: timeWindowEnd
-                },
-                status: {
-                    in: [BookingStatus.PENDING, BookingStatus.CONFIRMED]
-                }
-            }
-        });
-
-        if (conflictingBookings.length > 0) {
+        if (!isAvailable) {
             throw new BadRequestError('This time slot is already booked. Please choose another time.');
         }
 
@@ -284,8 +273,30 @@ export class BookingService {
     /**
      * Get all bookings (admin only)
      */
-    async getAllBookings(): Promise<Booking[]> {
+    /**
+     * Get all bookings (admin only)
+     */
+
+
+    async getAllBookings(filters?: {
+        status?: BookingStatus;
+        startDate?: Date;
+        endDate?: Date
+    }): Promise<BookingWithUser[]> {
+        const where: Prisma.BookingWhereInput = {};
+
+        if (filters?.status) {
+            where.status = filters.status;
+        }
+
+        if (filters?.startDate || filters?.endDate) {
+            where.date = {};
+            if (filters.startDate) where.date.gte = filters.startDate;
+            if (filters.endDate) where.date.lte = filters.endDate;
+        }
+
         return await bookingRepository.findMany({
+            where,
             orderBy: { createdAt: 'desc' },
             include: {
                 user: {
@@ -296,7 +307,7 @@ export class BookingService {
                     }
                 }
             }
-        });
+        }) as unknown as BookingWithUser[];
     }
 
     /**
@@ -336,15 +347,72 @@ export class BookingService {
     /**
      * Cancel booking
      */
-    async cancelBooking(id: string, userId: string): Promise<Booking> {
+    /**
+     * Confirm booking
+     */
+    async confirmBooking(id: string, userId?: string): Promise<Booking> {
         const booking = await bookingRepository.findById(id);
 
         if (!booking) {
             throw new NotFoundError('Booking', id);
         }
 
-        // Verify ownership
-        if (booking.userId !== userId) {
+        // If userId provided, verify ownership (though usually admins confirm)
+        if (userId && booking.userId !== userId) {
+            // throw new NotFoundError('Booking', id); // Admins can confirm
+        }
+
+        if (booking.status !== BookingStatus.PENDING) {
+            throw new BadRequestError(`Cannot confirm booking with status: ${booking.status}`);
+        }
+
+        const updatedBooking = await this.updateBookingStatus(id, BookingStatus.CONFIRMED);
+
+        // Send confirmation email
+        try {
+            const { emailService } = await import('@/services/email.service');
+            await emailService.sendBookingConfirmation(
+                booking.email,
+                booking.name,
+                booking.id,
+                booking.activityTitle,
+                booking.date,
+                booking.guests,
+                Number(booking.totalPrice)
+            );
+        } catch (error) {
+            console.error('Failed to send confirmation email:', error);
+        }
+
+        return updatedBooking;
+    }
+
+    /**
+     * Complete booking
+     */
+    async completeBooking(id: string): Promise<Booking> {
+        const booking = await bookingRepository.findById(id);
+        if (!booking) throw new NotFoundError('Booking', id);
+
+        if (booking.status !== BookingStatus.CONFIRMED) {
+            throw new BadRequestError(`Cannot complete booking with status: ${booking.status}`);
+        }
+
+        return await this.updateBookingStatus(id, BookingStatus.COMPLETED);
+    }
+
+    /**
+     * Cancel booking
+     */
+    async cancelBooking(id: string, userId?: string, isAdmin: boolean = false): Promise<Booking> {
+        const booking = await bookingRepository.findById(id);
+
+        if (!booking) {
+            throw new NotFoundError('Booking', id);
+        }
+
+        // Verify ownership if not admin
+        if (userId && !isAdmin && booking.userId !== userId) {
             throw new NotFoundError('Booking', id);
         }
 
@@ -353,18 +421,38 @@ export class BookingService {
             throw new BadRequestError(`Cannot cancel booking with status: ${booking.status}`);
         }
 
-        // Check cancellation policy (e.g., 24 hours before)
-        const hoursBefore = 24;
-        const cancellationDeadline = new Date(booking.date);
-        cancellationDeadline.setHours(cancellationDeadline.getHours() - hoursBefore);
+        // Check cancellation policy (e.g., 24 hours before) - Skip for admins
+        if (!isAdmin) {
+            const hoursBefore = 24;
+            const cancellationDeadline = new Date(booking.date);
+            cancellationDeadline.setHours(cancellationDeadline.getHours() - hoursBefore);
 
-        if (new Date() > cancellationDeadline) {
-            throw new BadRequestError(
-                `Bookings can only be cancelled at least ${hoursBefore} hours before the activity`
-            );
+            if (new Date() > cancellationDeadline) {
+                throw new BadRequestError(
+                    `Bookings can only be cancelled at least ${hoursBefore} hours before the activity`
+                );
+            }
         }
 
-        return await this.updateBookingStatus(id, BookingStatus.CANCELLED);
+        const updatedBooking = await this.updateBookingStatus(id, BookingStatus.CANCELLED);
+
+        // Send cancellation email
+        try {
+            const { emailService } = await import('@/services/email.service');
+            // Check if payment was made to determine refund info
+            const refundAmount = booking.paymentStatus === 'PAID' ? Number(booking.totalPrice) : undefined;
+
+            await emailService.sendBookingCancellation(
+                booking.email,
+                booking.name,
+                booking.activityTitle,
+                refundAmount
+            );
+        } catch (error) {
+            console.error('Failed to send cancellation email:', error);
+        }
+
+        return updatedBooking;
     }
 
     /**
@@ -456,6 +544,32 @@ export class BookingService {
         }
 
         await bookingRepository.delete(id);
+    }
+
+    /**
+     * Check if a time slot is available
+     */
+    async checkAvailability(activityId: string, date: Date): Promise<boolean> {
+        const timeWindowStart = new Date(date);
+        timeWindowStart.setMinutes(timeWindowStart.getMinutes() - 30);
+
+        const timeWindowEnd = new Date(date);
+        timeWindowEnd.setMinutes(timeWindowEnd.getMinutes() + 30);
+
+        const conflictingBookings = await bookingRepository.findMany({
+            where: {
+                activityId,
+                date: {
+                    gte: timeWindowStart,
+                    lte: timeWindowEnd
+                },
+                status: {
+                    in: [BookingStatus.PENDING, BookingStatus.CONFIRMED]
+                }
+            }
+        });
+
+        return conflictingBookings.length === 0;
     }
 
     /**

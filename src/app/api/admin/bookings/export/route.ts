@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
-import type { Prisma } from '@prisma/client';
 import { requireAdmin } from '@/lib/authorization';
-import { errorResponse, successResponse } from '@/lib/api-response';
-import prisma from '@/lib/prisma';
+import { errorResponse } from '@/lib/api-response';
 import { format } from 'date-fns';
+import { bookingService } from '@/services/booking.service';
+import { BookingStatus } from '@prisma/client';
+
 export const dynamic = 'force-dynamic';
 
 /**
@@ -18,37 +19,20 @@ export async function GET(request: Request) {
         const startDate = searchParams.get('startDate');
         const endDate = searchParams.get('endDate');
 
-        // Build where clause
-        const where: Prisma.BookingWhereInput = {};
+        // Parse status
+        let status: BookingStatus | undefined;
         if (statusParam && statusParam !== 'ALL') {
-            // Cast the status to valid BookingStatus enum value
             const validStatuses = ['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED'];
             if (validStatuses.includes(statusParam)) {
-                where.status = statusParam as any;
-            }
-        }
-        if (startDate || endDate) {
-            where.date = {};
-            if (startDate) {
-                where.date.gte = new Date(startDate);
-            }
-            if (endDate) {
-                where.date.lte = new Date(endDate);
+                status = statusParam as BookingStatus;
             }
         }
 
-        // Fetch bookings
-        const bookings = await prisma.booking.findMany({
-            where,
-            orderBy: { createdAt: 'desc' },
-            include: {
-                user: {
-                    select: {
-                        name: true,
-                        email: true
-                    }
-                }
-            }
+        // Fetch bookings via service
+        const bookings = await bookingService.getAllBookings({
+            status,
+            startDate: startDate ? new Date(startDate) : undefined,
+            endDate: endDate ? new Date(endDate) : undefined
         });
 
         // Convert to CSV
@@ -76,7 +60,7 @@ export async function GET(request: Request) {
             format(new Date(booking.date), 'yyyy-MM-dd'),
             format(new Date(booking.date), 'HH:mm'),
             booking.guests.toString(),
-            booking.totalPrice.toFixed(2),
+            Number(booking.totalPrice).toFixed(2),
             booking.status,
             booking.paymentStatus,
             format(new Date(booking.createdAt), 'yyyy-MM-dd HH:mm:ss')

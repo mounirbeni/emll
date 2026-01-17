@@ -7,7 +7,7 @@ import { auth } from '@/auth';
 import { UnauthorizedError, ForbiddenError } from './errors';
 import type { Session } from 'next-auth';
 
-export type UserRole = 'CUSTOMER' | 'ADMIN' | 'STAFF';
+export type UserRole = 'CUSTOMER' | 'ADMIN';
 
 /**
  * Get the current authenticated session
@@ -39,32 +39,26 @@ export async function requireAdmin(): Promise<Session> {
 }
 
 /**
- * Require admin or staff role
+ * Require admin or staff role (Now just Admin as Staff role doesn't exist)
  * Throws UnauthorizedError if not logged in
- * Throws ForbiddenError if not admin or staff
+ * Throws ForbiddenError if not admin
  */
 export async function requireAdminOrStaff(): Promise<Session> {
-    const session = await requireAuth();
-
-    if (session.user.role !== 'ADMIN' && session.user.role !== 'STAFF') {
-        throw new ForbiddenError('This action requires administrator or staff privileges');
-    }
-
-    return session;
+    return requireAdmin();
 }
 
 /**
- * Check if user is staff
+ * Check if user is staff (Always false)
  */
 export function isStaff(session: Session): boolean {
-    return session.user.role === 'STAFF';
+    return false;
 }
 
 /**
  * Check if user is admin or staff
  */
 export function isAdminOrStaff(session: Session): boolean {
-    return session.user.role === 'ADMIN' || session.user.role === 'STAFF';
+    return isAdmin(session);
 }
 
 /**

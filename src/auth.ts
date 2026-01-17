@@ -7,6 +7,7 @@ import Credentials from "next-auth/providers/credentials"
 import Google from "next-auth/providers/google"
 import { env } from "@/lib/env"
 import { comparePassword } from "@/lib/auth"
+import { UserRole } from "@prisma/client"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
     adapter: PrismaAdapter(prisma) as Adapter,
@@ -69,22 +70,22 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         })
     ],
     callbacks: {
-        async jwt({ token, user, account, isNewUser }) {
+        async jwt({ token, user, trigger, session }) {
             // Initial sign in
             if (user) {
-                token.id = user.id as string
-                token.role = (user as any).role || 'USER'
+                token.id = user.id
+                token.role = (user as any).role || UserRole.CUSTOMER
                 token.email = user.email
                 token.name = user.name
                 token.iat = Math.floor(Date.now() / 1000)
                 token.exp = Math.floor(Date.now() / 1000) + (30 * 24 * 60 * 60) // 30 days
             }
-            
+
             // Check if token is about to expire (within 1 hour)
             if (token.exp && typeof token.exp === 'number') {
                 const now = Math.floor(Date.now() / 1000)
                 const expiresIn = token.exp - now
-                
+
                 // Refresh token if within 1 hour of expiration
                 if (expiresIn < 3600) {
                     try {
@@ -92,7 +93,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                             where: { id: token.id as string },
                             select: { id: true, email: true, name: true, role: true }
                         })
-                        
+
                         if (freshUser) {
                             token.id = freshUser.id
                             token.email = freshUser.email
@@ -106,7 +107,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     }
                 }
             }
-            
+
+            if (trigger === "update" && session) {
+                token = { ...token, ...session.user };
+            }
+
             return token
         },
         async session({ session, token }) {
@@ -114,8 +119,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 session.user.id = token.id as string
                 session.user.email = token.email as string
                 session.user.name = token.name as string
-                session.user.role = token.role as string
-                (session as any).expiresAt = new Date(token.exp as number * 1000).toISOString()
+                session.user.role = token.role as UserRole
             }
             return session
         },
@@ -131,7 +135,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         async linkAccount({ user }) {
             console.log("Link account event", user.email)
         },
-        async signIn({ user, isNewUser, account }) {
+        async signIn({ user, isNewUser }) {
             console.log("Sign in event", user.email, "Is new:", isNewUser)
             // Update last login timestamp
             if (user.id) {

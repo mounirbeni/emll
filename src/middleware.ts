@@ -50,9 +50,9 @@ export async function middleware(request: NextRequest) {
             return NextResponse.redirect(url)
         }
 
-        // Check if user has admin or staff role
-        if (session?.user?.role !== 'ADMIN' && session?.user?.role !== 'STAFF') {
-            // Redirect to client dashboard if logged in but not admin/staff
+        // Check if user is admin
+        if (session?.user?.role !== 'ADMIN') {
+            // Redirect to client dashboard if logged in but not admin
             return NextResponse.redirect(new URL('/client', request.url))
         }
     }

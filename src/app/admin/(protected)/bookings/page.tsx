@@ -1,22 +1,12 @@
-
-import prisma from "@/lib/prisma";
+import { bookingService } from "@/services/booking.service";
 import BookingsClient from "./bookings-client";
-import { Button } from "@/components/ui/button";
-import { Download, ClipboardList } from "lucide-react";
+import { ClipboardList } from "lucide-react";
+import { ExportBookingsButton } from "./export-button";
 
 export const dynamic = 'force-dynamic';
 
-async function getBookings() {
-    return await prisma.booking.findMany({
-        orderBy: { createdAt: 'desc' },
-        include: {
-            user: true,
-        }
-    });
-}
-
 export default async function AdminBookingsPage() {
-    const bookings = await getBookings();
+    const bookings = await bookingService.getAllBookings();
 
     const formattedBookings = bookings.map(b => ({
         ...b,
@@ -36,30 +26,7 @@ export default async function AdminBookingsPage() {
                         <p className="text-sm text-muted-foreground mt-0.5">Manage customer reservations</p>
                     </div>
                 </div>
-                <Button 
-                    onClick={async () => {
-                        try {
-                            const response = await fetch('/api/admin/bookings/export');
-                            if (!response.ok) throw new Error('Export failed');
-                            const blob = await response.blob();
-                            const url = window.URL.createObjectURL(blob);
-                            const a = document.createElement('a');
-                            a.href = url;
-                            a.download = `bookings-${new Date().toISOString().split('T')[0]}.csv`;
-                            document.body.appendChild(a);
-                            a.click();
-                            window.URL.revokeObjectURL(url);
-                            document.body.removeChild(a);
-                        } catch (error) {
-                            console.error('Export error:', error);
-                            alert('Failed to export bookings. Please try again.');
-                        }
-                    }}
-                    className="w-full sm:w-auto rounded-xl gap-2"
-                >
-                    <Download className="h-4 w-4" />
-                    Export CSV
-                </Button>
+                <ExportBookingsButton />
             </div>
 
             <BookingsClient initialBookings={formattedBookings} />

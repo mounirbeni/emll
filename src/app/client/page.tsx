@@ -49,8 +49,8 @@ export default function ClientDashboard() {
     const fetchDashboardStats = async () => {
         try {
             const [bookingsRes, notificationsRes] = await Promise.all([
-                fetch("/api/bookings"),
-                fetch("/api/notifications"),
+                fetch("/api/bookings", { cache: "no-store" }),
+                fetch("/api/notifications", { cache: "no-store" }),
             ]);
 
             if (!bookingsRes.ok || !notificationsRes.ok) {
@@ -59,20 +59,20 @@ export default function ClientDashboard() {
 
             const bookingsData = await bookingsRes.json();
             const notificationsData = await notificationsRes.json();
-            
+
             // Handle wrapped responses
             const bookings = bookingsData.data || bookingsData;
             const notifications = notificationsData.data || notificationsData;
 
             const now = new Date();
             const upcoming = bookings.filter(
-                (b: any) =>
+                (b: { status: string; date: string | number | Date; }) =>
                     (b.status === "PENDING" || b.status === "CONFIRMED") &&
                     new Date(b.date) > now
             );
-            const completed = bookings.filter((b: any) => b.status === "COMPLETED");
+            const completed = bookings.filter((b: { status: string; }) => b.status === "COMPLETED");
             const cancelled = bookings.filter(
-                (b: any) => b.status === "CANCELLED" || b.status === "REJECTED"
+                (b: { status: string; }) => b.status === "CANCELLED" || b.status === "REJECTED"
             );
 
             const nextBooking = upcoming.length > 0 ? upcoming[0] : null;
@@ -85,7 +85,7 @@ export default function ClientDashboard() {
                     cancelled: cancelled.length,
                 },
                 notifications: {
-                    unread: notifications.filter((n: any) => !n.read).length,
+                    unread: notifications.filter((n: { read: boolean; }) => !n.read).length,
                 },
                 nextBooking,
             });
@@ -124,7 +124,7 @@ export default function ClientDashboard() {
                             Welcome back, {session?.user?.name?.split(" ")[0] || "there"}! 👋
                         </h1>
                         <p className="text-medium-gray mt-1">
-                            Here's what's happening with your Marrakech adventures
+                            Here&apos;s what&apos;s happening with your Marrakech adventures
                         </p>
                     </div>
                     <Link href="/services" className="hidden sm:block">
