@@ -3,7 +3,7 @@
  * Contains all business logic for review operations
  */
 
-import { Review } from '@prisma/client';
+import { Review, ReviewStatus } from '@prisma/client';
 import { reviewRepository } from '@/repositories/review.repository';
 import { bookingRepository } from '@/repositories/booking.repository';
 import { serviceRepository } from '@/repositories/service.repository';
@@ -106,7 +106,7 @@ export class ReviewService {
         const updated = await reviewRepository.update(id, { status });
 
         // Recalculate if visibility changed
-        if (status === ReviewStatus.APPROVED || (review.status === ReviewStatus.APPROVED && status !== ReviewStatus.APPROVED)) {
+        if (status === ReviewStatus.APPROVED || (review.status as any) === ReviewStatus.APPROVED) {
             await this.updateServiceRating(review.serviceId);
         }
         return updated;

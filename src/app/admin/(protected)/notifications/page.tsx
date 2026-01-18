@@ -37,7 +37,7 @@ export default async function NotificationsPage() {
                     </div>
                 </CardHeader>
                 <CardContent>
-                    <NotificationsClient initialNotifications={notifications} userId={session.user.id} />
+                    <NotificationsClient initialNotifications={notifications.map(n => ({ ...n, isRead: n.read }))} userId={session.user.id} />
                 </CardContent>
             </Card>
         </div>

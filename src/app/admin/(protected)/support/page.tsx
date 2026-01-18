@@ -8,10 +8,9 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Mail, MessageSquare, User, AlertCircle } from "lucide-react";
+import { Clock, Mail, MessageSquare, User, AlertCircle, Phone } from "lucide-react";
 import { format } from "date-fns";
 import { supportService } from "@/services/support.service";
-import { SupportClient } from "./support-client";
 
 export const dynamic = 'force-dynamic';
 

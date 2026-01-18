@@ -75,7 +75,7 @@ export function MobileServiceDetails({ service, reviews, onBookNow }: MobileServ
                         <Badge className="bg-orange-50 text-orange-600 border-orange-200">
                             {service.category}
                         </Badge>
-                        {service.featured && (
+                        {(service as any).featured && (
                             <Badge className="bg-blue-50 text-blue-600 border-blue-200">
                                 ⭐ Featured
                             </Badge>
@@ -123,10 +123,10 @@ export function MobileServiceDetails({ service, reviews, onBookNow }: MobileServ
                                 {service.location.split(',')[0]}
                             </span>
                         )}
-                        {service.maxGuests && (
+                        {(service as any).maxGuests && (
                             <span className="flex items-center gap-1.5">
                                 <Users className="w-4 h-4" />
-                                Up to {service.maxGuests} guests
+                                Up to {(service as any).maxGuests} guests
                             </span>
                         )}
                     </div>
@@ -199,13 +199,13 @@ export function MobileServiceDetails({ service, reviews, onBookNow }: MobileServ
                     )}
 
                     {/* Meeting Point Section */}
-                    {service.meetingPoint && (
+                    {(service as any).meetingPoint && (
                         <AccordionSection
                             title="Meeting Point"
                             isExpanded={expandedSection === "meeting"}
                             onToggle={() => toggleSection("meeting")}
                         >
-                            <p className="text-gray-700">{service.meetingPoint}</p>
+                            <p className="text-gray-700">{(service as any).meetingPoint}</p>
                         </AccordionSection>
                     )}
 

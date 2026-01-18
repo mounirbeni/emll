@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { confirmBooking, updateBookingStatus } from "@/app/actions/booking-actions";
+import { confirmBooking, updateBooking } from "@/app/actions/admin-actions";
 
 export function BookingActions({ bookingId, status }: { bookingId: string, status: BookingStatus }) {
     const router = useRouter();
@@ -23,7 +23,7 @@ export function BookingActions({ bookingId, status }: { bookingId: string, statu
     const updateStatus = async (newStatus: BookingStatus) => {
         setLoading(true);
         try {
-            await updateBookingStatus(bookingId, newStatus);
+            await updateBooking(bookingId, { status: newStatus });
             toast.success(`Booking ${newStatus.toLowerCase()} successfully`);
             router.refresh();
         } catch (error) {

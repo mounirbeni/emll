@@ -1,0 +1,20 @@
+src/app/admin/(protected)/notifications/page.tsx(40,42): error TS2322: Type '{ id: string; userId: string; title: string; message: string; type: NotificationType; read: boolean; createdAt: Date; link: string | null; }[]' is not assignable to type 'Notification[]'.
+  Property 'isRead' is missing in type '{ id: string; userId: string; title: string; message: string; type: NotificationType; read: boolean; createdAt: Date; link: string | null; }' but required in type 'Notification'.
+src/app/admin/(protected)/services/[id]/page.tsx(54,9): error TS2322: Type 'JsonArray' is not assignable to type 'ItineraryItem[]'.
+  Type 'JsonValue' is not assignable to type 'ItineraryItem'.
+    Type 'null' is not assignable to type 'ItineraryItem'.
+src/app/admin/(protected)/support/page.tsx(14,31): error TS2307: Cannot find module './support-client' or its corresponding type declarations.
+src/app/admin/(protected)/support/page.tsx(61,54): error TS2304: Cannot find name 'Phone'.
+src/components/admin/BlogPostEditor.tsx(114,52): error TS2304: Cannot find name 'dto'.
+src/components/admin/BlogPostEditor.tsx(116,61): error TS2304: Cannot find name 'dto'.
+src/components/admin/BookingActions.tsx(17,53): error TS2307: Cannot find module '@/app/actions/booking-actions' or its corresponding type declarations.
+src/components/mobile/MobileServiceDetails.tsx(78,34): error TS2551: Property 'featured' does not exist on type 'Service'. Did you mean 'features'?
+src/components/mobile/MobileServiceDetails.tsx(126,34): error TS2339: Property 'maxGuests' does not exist on type 'Service'.
+src/components/mobile/MobileServiceDetails.tsx(129,48): error TS2339: Property 'maxGuests' does not exist on type 'Service'.
+src/components/mobile/MobileServiceDetails.tsx(202,30): error TS2339: Property 'meetingPoint' does not exist on type 'Service'.
+src/components/mobile/MobileServiceDetails.tsx(208,67): error TS2339: Property 'meetingPoint' does not exist on type 'Service'.
+src/repositories/blog.repository.ts(34,25): error TS2353: Object literal may only specify known properties, and 'image' does not exist in type 'UserSelect<DefaultArgs>'.
+src/services/review.service.ts(102,44): error TS2304: Cannot find name 'ReviewStatus'.
+src/services/review.service.ts(109,24): error TS2304: Cannot find name 'ReviewStatus'.
+src/services/review.service.ts(109,68): error TS2304: Cannot find name 'ReviewStatus'.
+src/services/review.service.ts(109,104): error TS2304: Cannot find name 'ReviewStatus'.

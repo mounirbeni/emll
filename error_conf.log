@@ -1,0 +1,29 @@
+▲ Next.js 16.1.3 (Turbopack)
+- Environments: .env.local, .env
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+✓ Compiled successfully in 34.3s
+  Running TypeScript ...
+  Collecting page data using 7 workers ...
+⚠ Using edge runtime on a page currently disables static generation for that page
+Error: Failed to collect configuration for /admin/settings
+    at ignore-listed frames {
+  [cause]: Error: A "use server" file can only export async functions, found object.
+  Read more: https://nextjs.org/docs/messages/invalid-use-server-value
+      at module evaluation (C:\Users\mouni\Desktop\marrakech\.next\server\chunks\ssr\src_app_actions_admin-actions_ts_bec19f65._.js:1:9209)
+      at instantiateModule (C:\Users\mouni\Desktop\marrakech\.next\server\chunks\ssr\[turbopack]_runtime.js:740:9)
+      at getOrInstantiateModuleFromParent (C:\Users\mouni\Desktop\marrakech\.next\server\chunks\ssr\[turbopack]_runtime.js:763:12)
+      at Context.esmImport [as i] (C:\Users\mouni\Desktop\marrakech\.next\server\chunks\ssr\[turbopack]_runtime.js:228:20)
+      at module evaluation (C:\Users\mouni\Desktop\marrakech\.next\server\chunks\ssr\[root-of-the-server]__f5f23583._.js:1:2502)
+      at instantiateModule (C:\Users\mouni\Desktop\marrakech\.next\server\chunks\ssr\[turbopack]_runtime.js:740:9)
+      at getOrInstantiateModuleFromParent (C:\Users\mouni\Desktop\marrakech\.next\server\chunks\ssr\[turbopack]_runtime.js:763:12)
+      at Context.esmImport [as i] (C:\Users\mouni\Desktop\marrakech\.next\server\chunks\ssr\[turbopack]_runtime.js:228:20)
+      at module evaluation (C:\Users\mouni\Desktop\marrakech\.next\server\chunks\ssr\_8fb56195._.js:1:32)
+}
+
+> Build error occurred
+Error: Failed to collect page data for /admin/settings
+    at ignore-listed frames {
+  type: 'Error'
+}

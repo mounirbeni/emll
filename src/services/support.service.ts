@@ -3,7 +3,7 @@
  * Contains all business logic for support request operations
  */
 
-import { SupportRequest, SupportStatus } from '@prisma/client';
+import { SupportRequest } from '@prisma/client';
 import { supportRepository } from '@/repositories/support.repository';
 import { NotFoundError, BadRequestError } from '@/lib/errors';
 
@@ -12,13 +12,10 @@ export interface CreateSupportRequestDTO {
     email: string;
     subject: string;
     message: string;
-    userId?: string;
 }
 
 export interface UpdateSupportRequestDTO {
-    status?: SupportStatus;
-    adminResponse?: string;
-    assignedTo?: string;
+    status?: string;
 }
 
 export class SupportService {
@@ -35,8 +32,7 @@ export class SupportService {
             email: data.email,
             subject: data.subject,
             message: data.message,
-            userId: data.userId || null,
-            status: SupportStatus.PENDING
+            status: 'PENDING'
         });
     }
 
@@ -72,29 +68,14 @@ export class SupportService {
     /**
      * Update support request status (admin only)
      */
-    async updateRequestStatus(id: string, status: SupportStatus, adminResponse?: string): Promise<SupportRequest> {
+    async updateRequestStatus(id: string, status: string): Promise<SupportRequest> {
         const exists = await supportRepository.exists(id);
         if (!exists) {
             throw new NotFoundError('Support request', id);
         }
 
         return await supportRepository.update(id, {
-            status,
-            adminResponse: adminResponse || undefined
-        });
-    }
-
-    /**
-     * Assign request to admin
-     */
-    async assignRequest(id: string, adminId: string): Promise<SupportRequest> {
-        const exists = await supportRepository.exists(id);
-        if (!exists) {
-            throw new NotFoundError('Support request', id);
-        }
-
-        return await supportRepository.update(id, {
-            assignedTo: adminId
+            status
         });
     }
 
@@ -108,7 +89,7 @@ export class SupportService {
     /**
      * Get requests by status
      */
-    async getRequestsByStatus(status: SupportStatus): Promise<SupportRequest[]> {
+    async getRequestsByStatus(status: string): Promise<SupportRequest[]> {
         return await supportRepository.findMany({
             where: { status },
             orderBy: { createdAt: 'desc' }

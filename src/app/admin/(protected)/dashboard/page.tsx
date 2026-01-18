@@ -32,7 +32,7 @@ export default async function AdminDashboard() {
             subtitle: `${b.name} • ${format(new Date(b.createdAt), 'MMM d, HH:mm')}`,
             date: new Date(b.createdAt),
             status: b.status,
-            amount: b.totalPrice
+            amount: Number(b.totalPrice)
         })),
         ...stats.recent.reviews.map((r: any) => ({
             id: r.id,
@@ -40,7 +40,8 @@ export default async function AdminDashboard() {
             title: `New review for ${r.service?.title || 'a service'}`,
             subtitle: `${r.rating} stars • ${format(new Date(r.createdAt), 'MMM d, HH:mm')}`,
             date: new Date(r.createdAt),
-            status: r.status
+            status: r.status,
+            amount: undefined
         }))
     ].sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 10);
 

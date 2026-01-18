@@ -111,9 +111,9 @@ export function BlogPostEditor({ isNew, post }: BlogPostEditorProps) {
         try {
             let result;
             if (isNew) {
-                result = await createBlogPost({ ...dto, publishedAt: publish ? new Date() : undefined, authorId: '' }); // authorId handled in action
+                result = await createBlogPost({ ...formData, publishedAt: publish ? new Date() : undefined, authorId: '' }); // authorId handled in action
             } else {
-                result = await updateBlogPost(post.id, { ...dto, publishedAt: publish ? new Date() : undefined });
+                result = await updateBlogPost(post.id, { ...formData, publishedAt: publish ? new Date() : undefined });
             }
 
             if (result.success) {

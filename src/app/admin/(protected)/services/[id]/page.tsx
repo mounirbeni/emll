@@ -51,7 +51,8 @@ export default async function EditExperiencePage({ params }: { params: { id: str
         highlights: toArray((service as any).highlights), // Optional in some schemas
         tags: toArray(service.tags),
 
-        itinerary: Array.isArray(service.itinerary) ? service.itinerary : [],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        itinerary: Array.isArray(service.itinerary) ? service.itinerary as any : [],
 
         rating: service.rating,
         reviews: 0, // Placeholder

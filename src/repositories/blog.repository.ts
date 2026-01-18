@@ -30,8 +30,7 @@ export class BlogRepository implements BaseRepository<
                 author: {
                     select: {
                         name: true,
-                        email: true,
-                        image: true
+                        email: true
                     }
                 }
             }
