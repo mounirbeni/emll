@@ -2,13 +2,27 @@
 
 import { ActivityCard } from "@/components/shared/ActivityCard";
 import { activitiesData } from "@/lib/data/activities-data";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 
-export function FeaturedExperiences() {
+export function FeaturedExperiences({ isMobile = false }: { isMobile?: boolean }) {
     // Flatten and take top items
-    const allActivities = Object.values(activitiesData).flat().filter(activity => activity.id).slice(0, 8); // Just take 8 items for the grid
+    const allActivities = Object.values(activitiesData).flat().filter(activity => activity.id).slice(0, 8);
 
+    if (isMobile) {
+        // Mobile: Horizontal scroll
+        return (
+            <div className="overflow-x-auto -mx-4 px-4 pb-2">
+                <div className="flex gap-4 w-max">
+                    {allActivities.slice(0, 6).map((activity) => (
+                        <div key={activity.id} className="w-72">
+                            <ActivityCard activity={activity} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
+
+    // Desktop: Grid layout (unchanged)
     return (
         <section className="py-12 bg-white">
             <div className="container mx-auto px-4 max-w-[1400px]">

@@ -6,6 +6,7 @@ import { WishlistProvider } from "@/lib/contexts/WishlistContext";
 import { ThemeProvider } from "@/components/theme-provider";
 import AuthProvider from "@/components/providers/AuthProvider";
 import { Toaster } from "sonner";
+import { MobileBottomNav } from "@/components/mobile/MobileBottomNav";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
       {
         url: "/opengraph-image",
         width: 1200,
-        height: 630,
+        height: 1200,
         alt: "Explore Marrakech like local",
       },
     ],
@@ -88,8 +89,10 @@ export const viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
+  userScalable: true,
+  viewportFit: 'cover', // Critical for iOS safe areas
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: light)', color: '#FDF8F3' },
     { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
   ],
 };
@@ -113,7 +116,9 @@ export default function RootLayout({
               <PublicLayout>
                 {children}
               </PublicLayout>
-              <Toaster 
+              {/* Mobile Bottom Navigation - Only on mobile, not on admin */}
+              <MobileBottomNav />
+              <Toaster
                 richColors
                 position="top-center"
                 toastOptions={{
