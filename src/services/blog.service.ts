@@ -3,9 +3,20 @@
  * Contains all business logic for blog operations
  */
 
-import { BlogPost } from '@prisma/client';
+import { BlogPost, Prisma } from '@prisma/client';
 import { blogRepository } from '@/repositories/blog.repository';
 import { NotFoundError, BadRequestError } from '@/lib/errors';
+
+export type BlogPostWithAuthor = Prisma.BlogPostGetPayload<{
+    include: {
+        author: {
+            select: {
+                name: true;
+                email: true;
+            }
+        }
+    }
+}>;
 
 export interface CreateBlogPostDTO {
     title: string;
@@ -73,7 +84,7 @@ export class BlogService {
         category?: string,
         featured?: boolean,
         search?: string
-    }): Promise<BlogPost[]> {
+    }): Promise<BlogPostWithAuthor[]> {
         const where: any = {};
 
         if (params?.status === 'published') {
@@ -100,10 +111,12 @@ export class BlogService {
             ];
         }
 
-        return await blogRepository.findMany({
+        const result = await blogRepository.findMany({
             where,
             orderBy: { publishedAt: 'desc' }
         });
+
+        return result as unknown as BlogPostWithAuthor[];
     }
 
     /**
