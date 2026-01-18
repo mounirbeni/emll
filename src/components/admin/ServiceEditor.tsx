@@ -12,6 +12,7 @@ import { X, Plus, Save, ArrowLeft, Upload, Loader2, GripVertical } from 'lucide-
 import { Service } from '@/types/admin';
 import Link from 'next/link';
 import { toast } from 'sonner';
+import { createExperience, updateExperience, generateCloudinarySignature } from '@/app/actions/admin-actions'; // Import Actions
 
 interface ServiceEditorProps {
     initialData?: Service | null;
@@ -37,7 +38,7 @@ export function ServiceEditor({ initialData, isNew = false }: ServiceEditorProps
         whatToBring: [],
         highlights: [],
         tags: [],
-        itinerary: [], // TODO: Complex itinerary builder later
+        itinerary: [],
         ...initialData
     });
 
@@ -54,22 +55,45 @@ export function ServiceEditor({ initialData, isNew = false }: ServiceEditorProps
         e.preventDefault();
         setLoading(true);
         try {
-            const url = isNew ? '/api/admin/services' : `/api/admin/services/${initialData?.id}`;
-            const method = isNew ? 'POST' : 'PATCH';
+            // Prepare data strictly according to schema (although Partial<Service> is mostly compatible)
+            // Zod schema expects strings, numbers, arrays.
+            // Ensure types are correct.
+            const payload: any = {
+                title: formData.title || '',
+                description: formData.description || '',
+                price: Number(formData.price) || 0,
+                category: formData.category || '',
+                duration: formData.duration || '',
+                location: formData.location || '',
+                images: formData.images || [],
+                features: formData.features || [],
+                included: formData.included || [],
+                excluded: formData.excluded || [],
+                whatToBring: formData.whatToBring || [],
+                highlights: formData.highlights || [],
+                tags: formData.tags || [],
+                itinerary: formData.itinerary || [],
+                // host: optional
+            };
 
-            const res = await fetch(url, {
-                method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
+            let res;
+            if (isNew) {
+                res = await createExperience(payload);
+            } else {
+                if (!initialData?.id) throw new Error("Missing ID for update");
+                res = await updateExperience(initialData.id, payload);
+            }
 
-            if (!res.ok) throw new Error('Failed to save');
+            if (!res.success) {
+                throw new Error(res.error || 'Failed to save');
+            }
 
+            toast.success(isNew ? 'Service created successfully' : 'Service updated successfully');
             router.push('/admin/services');
             router.refresh();
         } catch (error) {
             console.error(error);
-            toast.error('Failed to save service');
+            toast.error(error instanceof Error ? error.message : 'Failed to save service');
         } finally {
             setLoading(false);
         }
@@ -78,14 +102,13 @@ export function ServiceEditor({ initialData, isNew = false }: ServiceEditorProps
     const handleUploadImage = async (file: File) => {
         setIsUploading(true);
         try {
-            const signRes = await fetch('/api/admin/cloudinary/signature', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ folder: 'services' }),
-            });
+            // Use Server Action for signature
+            const signRes = await generateCloudinarySignature('services');
+            if (!signRes.success || !signRes.data) {
+                throw new Error(signRes.error || 'Failed to get upload signature');
+            }
 
-            if (!signRes.ok) throw new Error('Failed to get upload signature');
-            const sign = await signRes.json();
+            const sign = signRes.data;
 
             const uploadUrl = `https://api.cloudinary.com/v1_1/${sign.cloudName}/image/upload`;
             const data = new FormData();

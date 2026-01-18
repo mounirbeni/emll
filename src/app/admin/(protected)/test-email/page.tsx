@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, CheckCircle2, XCircle, Loader2, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
+import { checkEmailStatus, sendTestEmailAction } from '@/app/actions/admin-actions';
 
 interface EmailStatus {
     configured: boolean;
@@ -21,34 +22,22 @@ export default function TestEmailPage() {
     const [status, setStatus] = useState<EmailStatus | null>(null);
 
     useEffect(() => {
-        checkEmailStatus();
+        fetchStatus();
     }, []);
 
-    const checkEmailStatus = async () => {
+    const fetchStatus = async () => {
+        setCheckingStatus(true);
         try {
-            setCheckingStatus(true);
-            const res = await fetch('/api/admin/test-email');
-
-            if (!res.ok) {
-                const errorData = await res.json().catch(() => ({}));
-                throw new Error(errorData.error || errorData.message || 'Failed to check email status');
-            }
-
-            const data = await res.json();
-
-            // Handle both response formats for compatibility
-            if (data.data) {
-                setStatus(data.data);
-            } else if (data.configured !== undefined) {
-                setStatus(data);
+            const result = await checkEmailStatus();
+            if (result.success && result.data) {
+                setStatus(result.data);
             } else {
-                throw new Error('Unexpected response format');
+                toast.error(result.error || 'Failed to check status');
+                setStatus({ configured: false, fromEmail: '', message: result.error || 'Failed to check status' });
             }
         } catch (error) {
             console.error('Error checking email status:', error);
-            const errorMessage = error instanceof Error ? error.message : 'Failed to check email status';
-            toast.error(errorMessage);
-            setStatus(null);
+            toast.error('Failed to check email status');
         } finally {
             setCheckingStatus(false);
         }
@@ -64,23 +53,13 @@ export default function TestEmailPage() {
 
         try {
             setLoading(true);
-            const res = await fetch('/api/admin/test-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email }),
-            });
+            const result = await sendTestEmailAction(email);
 
-            const data = await res.json();
-
-            if (res.ok && data.data?.success) {
-                toast.success(`Test email sent successfully to ${email}! Check your inbox (and spam folder).`);
+            if (result.success) {
+                toast.success(`Test email sent successfully to ${email}! Check your inbox.`);
                 setEmail('');
             } else {
-                const errorMsg = data.error || data.message || 'Failed to send test email';
-                toast.error(errorMsg);
-                console.error('Email sending failed:', data);
+                toast.error(result.error || 'Failed to send test email');
             }
         } catch (error) {
             console.error('Error sending test email:', error);
@@ -92,7 +71,7 @@ export default function TestEmailPage() {
     };
 
     return (
-        <div className="flex-1 space-y-6 p-8 pt-6">
+        <div className="flex-1 space-y-6 pt-6">
             <div>
                 <h1 className="text-3xl font-bold tracking-tight">Test Email Service</h1>
                 <p className="text-muted-foreground mt-2">
@@ -160,7 +139,7 @@ export default function TestEmailPage() {
 
                             <Button
                                 variant="outline"
-                                onClick={checkEmailStatus}
+                                onClick={fetchStatus}
                                 className="w-full sm:w-auto"
                             >
                                 Refresh Status
@@ -262,4 +241,3 @@ GMAIL_APP_PASSWORD=your_app_password_here`}
         </div>
     );
 }
-

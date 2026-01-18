@@ -1,38 +1,48 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CalendarDays, CreditCard, TrendingUp, Users, ArrowUpRight, ArrowDownRight, Sparkles } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { CalendarDays, CreditCard, TrendingUp, Users, ArrowUpRight, ArrowDownRight, Sparkles, Clock, CheckCircle2, RotateCcw, AlertCircle, PlusCircle } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { BookingStatusBadge } from "@/components/ui/status-badge";
-import { format } from "date-fns";
+import { format, formatDistanceToNow } from "date-fns";
 import { adminService } from "@/services/admin.service";
 
 export const dynamic = 'force-dynamic';
 
-interface RecentBooking {
-    id: string;
-    name: string;
-    activityTitle: string;
-    totalPrice: number | { toNumber(): number };
-    status: string;
-    user?: { name: string | null; email: string } | null;
-}
-
 async function getData() {
-    const stats = await adminService.getDashboardStats();
+    const [stats, dailyStats] = await Promise.all([
+        adminService.getDashboardStats(),
+        adminService.getDailyStats()
+    ]);
 
     return {
-        stats: {
-            bookingsCount: stats.overview.totalBookings,
-            usersCount: stats.users.total,
-            servicesCount: stats.overview.totalServices,
-            totalRevenue: stats.revenue.total
-        },
-        recentBookings: (stats.recent.bookings as RecentBooking[])
+        stats,
+        dailyStats
     };
 }
 
 export default async function AdminDashboard() {
-    const { stats, recentBookings } = await getData();
+    const { stats, dailyStats } = await getData();
+
+    // Timeline merging
+    const timeline = [
+        ...stats.recent.bookings.map((b: any) => ({
+            id: b.id,
+            type: 'BOOKING',
+            title: `New booking: ${b.activityTitle}`,
+            subtitle: `${b.name} • ${format(new Date(b.createdAt), 'MMM d, HH:mm')}`,
+            date: new Date(b.createdAt),
+            status: b.status,
+            amount: b.totalPrice
+        })),
+        ...stats.recent.reviews.map((r: any) => ({
+            id: r.id,
+            type: 'REVIEW',
+            title: `New review for ${r.service?.title || 'a service'}`,
+            subtitle: `${r.rating} stars • ${format(new Date(r.createdAt), 'MMM d, HH:mm')}`,
+            date: new Date(r.createdAt),
+            status: r.status
+        }))
+    ].sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 10);
 
     return (
         <div className="space-y-8">
@@ -40,84 +50,115 @@ export default async function AdminDashboard() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Dashboard</h1>
-                    <p className="text-muted-foreground text-sm sm:text-base">Welcome back! Here's your platform overview.</p>
+                    <p className="text-muted-foreground text-sm sm:text-base">Platform overview & real-time statistics.</p>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 px-3 py-1.5 rounded-full">
                     <Sparkles className="h-4 w-4 text-primary" />
-                    <span>Live data</span>
+                    <span>Real-time Data</span>
                 </div>
             </div>
 
-            {/* Stats Grid */}
+            {/* Primary Stats */}
             <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
                 <StatsCard
                     title="Total Revenue"
-                    value={`€${stats.totalRevenue.toLocaleString()}`}
+                    value={`€${stats.revenue.total.toLocaleString()}`}
                     icon={CreditCard}
-                    description="Lifetime volume"
-                    trend={{ value: 12.5, isPositive: true }}
+                    description="Lifetime generated"
+                    trend={{ value: stats.revenue.growth, isPositive: stats.revenue.growth >= 0 }}
                     gradient="from-emerald-500 to-teal-600"
                 />
                 <StatsCard
                     title="Total Bookings"
-                    value={stats.bookingsCount.toString()}
+                    value={stats.overview.totalBookings.toString()}
                     icon={CalendarDays}
                     description="All time"
-                    trend={{ value: 8.2, isPositive: true }}
-                    gradient="from-primary to-accent"
-                />
-                <StatsCard
-                    title="Total Users"
-                    value={stats.usersCount.toString()}
-                    icon={Users}
-                    description="Registered accounts"
-                    trend={{ value: 5.1, isPositive: true }}
                     gradient="from-blue-500 to-indigo-600"
                 />
                 <StatsCard
-                    title="Experiences"
-                    value={stats.servicesCount.toString()}
-                    icon={TrendingUp}
-                    description="Active listings"
+                    title="Today's Bookings"
+                    value={dailyStats.bookingsToday.toString()}
+                    icon={Clock}
+                    description={`Approx. €${dailyStats.revenueToday.toLocaleString()} today`}
+                    gradient="from-orange-500 to-red-600"
+                    highlight
+                />
+                <StatsCard
+                    title="Active Customers"
+                    value={stats.users.active.toString()}
+                    icon={Users}
+                    description={`+${stats.users.new} new this month`}
                     gradient="from-purple-500 to-pink-600"
                 />
             </div>
 
-            {/* Recent Bookings and Activity */}
+            {/* Booking Breakdown */}
+            <div className="grid gap-4 md:grid-cols-4">
+                <StatusCard
+                    title="Pending"
+                    value={stats.bookings.pending}
+                    icon={Clock}
+                    color="text-amber-500"
+                    bg="bg-amber-500/10"
+                    href="/admin/bookings?status=PENDING"
+                />
+                <StatusCard
+                    title="Confirmed"
+                    value={stats.bookings.confirmed}
+                    icon={CheckCircle2}
+                    color="text-emerald-500"
+                    bg="bg-emerald-500/10"
+                    href="/admin/bookings?status=CONFIRMED"
+                />
+                <StatusCard
+                    title="Completed"
+                    value={stats.bookings.completed}
+                    icon={CheckCircle2}
+                    color="text-blue-500"
+                    bg="bg-blue-500/10"
+                    href="/admin/bookings?status=COMPLETED"
+                />
+                <StatusCard
+                    title="Cancelled"
+                    value={stats.bookings.cancelled}
+                    icon={RotateCcw}
+                    color="text-red-500"
+                    bg="bg-red-500/10"
+                    href="/admin/bookings?status=CANCELLED"
+                />
+            </div>
+
+            {/* Recent Activity Timeline */}
             <div className="grid gap-6 lg:grid-cols-7">
-                <Card className="lg:col-span-4 rounded-xl border-border shadow-sm hover:shadow-md transition-shadow">
+                <Card className="lg:col-span-4 rounded-xl border-border shadow-sm">
                     <CardHeader className="flex flex-row items-center justify-between">
-                        <CardTitle className="text-lg font-semibold">Recent Bookings</CardTitle>
-                        <Link href="/admin/bookings" className="text-sm text-primary hover:underline font-medium">
-                            View all →
+                        <div>
+                            <CardTitle className="text-lg font-semibold">Recent Activity</CardTitle>
+                            <CardDescription>Latest system events and updates</CardDescription>
+                        </div>
+                        <Link href="/admin/bookings" className="text-xs font-medium px-2 py-1 bg-primary/10 text-primary rounded-md hover:bg-primary/20 transition-colors">
+                            View Bookings
                         </Link>
                     </CardHeader>
                     <CardContent>
-                        <div className="space-y-3">
-                            {recentBookings.length === 0 ? (
-                                <div className="text-center py-8">
-                                    <CalendarDays className="h-12 w-12 text-muted-foreground/30 mx-auto mb-3" />
-                                    <p className="text-sm text-muted-foreground">No bookings yet</p>
-                                </div>
+                        <div className="relative border-l border-muted ml-3 space-y-6">
+                            {timeline.length === 0 ? (
+                                <div className="text-center py-8 text-muted-foreground text-sm ml-4">No recent activity</div>
                             ) : (
-                                recentBookings.map((booking) => (
-                                    <div key={booking.id} className="flex items-center justify-between p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
-                                        <div className="flex items-center gap-3 min-w-0">
-                                            <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                                                <CalendarDays className="h-5 w-5 text-primary" />
+                                timeline.map((item, index) => (
+                                    <div key={`${item.type}-${item.id}`} className="mb-8 ml-6 relative">
+                                        <span className={`absolute -left-[31px] flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-background ${item.type === 'BOOKING' ? 'bg-blue-100 text-blue-600' : 'bg-orange-100 text-orange-600'
+                                            }`}>
+                                            {item.type === 'BOOKING' ? <CalendarDays className="h-3 w-3" /> : <TrendingUp className="h-3 w-3" />}
+                                        </span>
+                                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                                            <div>
+                                                <h3 className="text-sm font-semibold text-foreground">{item.title}</h3>
+                                                <p className="text-xs text-muted-foreground">{item.subtitle}</p>
                                             </div>
-                                            <div className="min-w-0">
-                                                <p className="text-sm font-medium text-foreground truncate">
-                                                    {booking.user?.name || booking.name}
-                                                </p>
-                                                <p className="text-xs text-muted-foreground truncate">{booking.activityTitle}</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center gap-3 shrink-0">
-                                            <div className="text-right hidden sm:block">
-                                                <p className="font-semibold text-foreground">€{typeof booking.totalPrice === 'number' ? booking.totalPrice.toFixed(2) : booking.totalPrice.toNumber().toFixed(2)}</p>
-                                            </div>
-                                            <BookingStatusBadge status={booking.status} />
+                                            {item.amount && (
+                                                <span className="text-sm font-medium">€{Number(item.amount).toFixed(2)}</span>
+                                            )}
                                         </div>
                                     </div>
                                 ))
@@ -126,21 +167,58 @@ export default async function AdminDashboard() {
                     </CardContent>
                 </Card>
 
-                <Card className="lg:col-span-3 rounded-xl border-border shadow-sm">
-                    <CardHeader>
-                        <CardTitle className="text-lg font-semibold">System Health</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="space-y-4">
-                            <HealthItem status="operational" title="Database" description="Connected & responsive" />
-                            <HealthItem status="operational" title="API Gateway" description="All endpoints active" />
-                            <HealthItem status="operational" title="Email Service" description="Sending normally" />
-                            <HealthItem status="operational" title="Payment System" description="Ready for transactions" />
-                        </div>
-                    </CardContent>
-                </Card>
+                {/* Quick Actions & Health */}
+                <div className="lg:col-span-3 space-y-6">
+                    <Card className="rounded-xl border-border shadow-sm">
+                        <CardHeader>
+                            <CardTitle className="text-lg font-semibold">System Health</CardTitle>
+                            <CardDescription>Operational status</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="space-y-4">
+                                <HealthItem status="operational" title="Database" description="Connected" />
+                                <HealthItem status="operational" title="Server Actions" description="Unified Mutations Active" />
+                                <HealthItem status="operational" title="Cache" description="Revalidation Enabled" />
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    <Card className="rounded-xl border-border shadow-sm">
+                        <CardHeader>
+                            <CardTitle className="text-lg font-semibold">Quick Actions</CardTitle>
+                        </CardHeader>
+                        <CardContent className="grid grid-cols-2 gap-3">
+                            <Link href="/admin/experiences/new" className="flex flex-col items-center justify-center gap-2 p-4 rounded-lg border border-dashed hover:border-primary hover:bg-primary/5 transition-all text-center">
+                                <PlusCircle className="h-6 w-6 text-primary" />
+                                <span className="text-xs font-medium">New Experience</span>
+                            </Link>
+                            <Link href="/admin/notifications" className="flex flex-col items-center justify-center gap-2 p-4 rounded-lg border border-dashed hover:border-primary hover:bg-primary/5 transition-all text-center">
+                                <AlertCircle className="h-6 w-6 text-primary" />
+                                <span className="text-xs font-medium">Send Alert</span>
+                            </Link>
+                        </CardContent>
+                    </Card>
+                </div>
             </div>
         </div>
+    );
+}
+
+function StatusCard({ title, value, icon: Icon, color, bg, href }: any) {
+    return (
+        <Link href={href}>
+            <Card className="rounded-xl border-border hover:shadow-md transition-all cursor-pointer hover:border-primary/50">
+                <CardContent className="p-4 flex items-center justify-between">
+                    <div>
+                        <p className="text-xs font-medium text-muted-foreground uppercase">{title}</p>
+                        <p className="text-2xl font-bold mt-1">{value}</p>
+                    </div>
+                    <div className={`h-10 w-10 rounded-full ${bg} flex items-center justify-center`}>
+                        <Icon className={`h-5 w-5 ${color}`} />
+                    </div>
+                </CardContent>
+            </Card>
+        </Link>
     );
 }
 
@@ -155,7 +233,6 @@ function HealthItem({ status, title, description }: { status: 'operational' | 'd
         <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors">
             <div className="relative">
                 <div className={`h-2.5 w-2.5 rounded-full ${statusStyles[status]}`} />
-                <div className={`absolute inset-0 h-2.5 w-2.5 rounded-full ${statusStyles[status]} animate-ping opacity-75`} />
             </div>
             <div className="flex-1">
                 <p className="text-sm font-medium text-foreground">{title}</p>
@@ -165,27 +242,17 @@ function HealthItem({ status, title, description }: { status: 'operational' | 'd
     );
 }
 
-interface StatsCardProps {
-    title: string;
-    value: string;
-    icon: React.ComponentType<{ className?: string }>;
-    description: string;
-    trend?: { value: number; isPositive: boolean };
-    gradient: string;
-}
-
-function StatsCard({ title, value, icon: Icon, description, trend, gradient }: StatsCardProps) {
+function StatsCard({ title, value, icon: Icon, description, trend, gradient, highlight }: any) {
     return (
-        <Card className="relative overflow-hidden rounded-xl border-border hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+        <Card className={`relative overflow-hidden rounded-xl border-border hover:shadow-lg transition-all duration-300 ${highlight ? 'ring-2 ring-primary/20' : ''}`}>
             <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${gradient} opacity-10 rounded-bl-full`} />
             <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
                 <div className={`h-10 w-10 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-lg`}>
                     <Icon className="h-5 w-5 text-white" />
                 </div>
                 {trend && (
-                    <div className={`flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full ${
-                        trend.isPositive ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'
-                    }`}>
+                    <div className={`flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full ${trend.isPositive ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'
+                        }`}>
                         {trend.isPositive ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
                         {trend.value}%
                     </div>

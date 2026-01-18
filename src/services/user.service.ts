@@ -162,7 +162,7 @@ export class UserService {
     /**
      * Get user with bookings
      */
-    async getUserWithBookings(id: string): Promise<User | null> {
+    async getUserWithBookings(id: string) {
         return await userRepository.findByIdWithBookings(id);
     }
 

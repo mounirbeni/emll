@@ -1,4 +1,3 @@
-
 import {
     Table,
     TableBody,
@@ -7,20 +6,20 @@ import {
     TableHeader,
     TableRow
 } from "@/components/ui/table";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import prisma from "@/lib/prisma";
+import { Clock, Mail, MessageSquare, User, AlertCircle } from "lucide-react";
 import { format } from "date-fns";
-import { MessageSquare, Mail, Phone } from "lucide-react";
+import { supportService } from "@/services/support.service";
+import { SupportClient } from "./support-client";
 
 export const dynamic = 'force-dynamic';
 
 async function getSupportRequests() {
-    return await prisma.supportRequest.findMany({
-        orderBy: { createdAt: 'desc' }
-    });
+    return await supportService.getAllRequests();
 }
 
-export default async function AdminSupportPage() {
+export default async function SupportPage() {
     const requests = await getSupportRequests();
 
     return (

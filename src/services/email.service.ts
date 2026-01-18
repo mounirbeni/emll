@@ -559,6 +559,35 @@ export class EmailService {
             html
         });
     }
+
+    /**
+     * Check configuration
+     */
+    async checkConfiguration(): Promise<{ configured: boolean; fromEmail: string; message: string }> {
+        const user = process.env.GMAIL_USER;
+        const pass = process.env.GMAIL_APP_PASSWORD;
+
+        if (user && pass) {
+            return { configured: true, fromEmail: this.fromEmail, message: 'Gmail service is configured via Nodemailer.' };
+        }
+        return { configured: false, fromEmail: '', message: 'Missing GMAIL_USER or GMAIL_APP_PASSWORD.' };
+    }
+
+    /**
+     * Send test email
+     */
+    async sendTestEmail(to: string): Promise<void> {
+        const title = 'Test Email from Admin Panel';
+        const html = this.renderEmailTemplate({
+            title,
+            preheader: 'This is a test email to verify your configuration.',
+            messageHtml: '<div>If you are reading this, your email service is working correctly!</div>',
+            ctaLabel: 'Visit Website',
+            ctaUrl: this.getAppBaseUrl()
+        });
+
+        await this.sendEmail({ to, subject: title, html });
+    }
 }
 
 // Export singleton instance

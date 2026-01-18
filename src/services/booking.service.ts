@@ -50,6 +50,9 @@ export type BookingWithUser = Booking & {
         name: string | null;
         email: string;
     } | null;
+    service?: {
+        title: string;
+    } | null;
 };
 
 export class BookingService {
@@ -304,6 +307,11 @@ export class BookingService {
                         id: true,
                         name: true,
                         email: true,
+                    }
+                },
+                service: {
+                    select: {
+                        title: true
                     }
                 }
             }

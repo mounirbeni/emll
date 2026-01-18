@@ -3,7 +3,7 @@
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { Booking } from '@prisma/client'
-import { confirmBooking, cancelBooking, processBooking, deleteBooking } from '@/app/actions/booking-actions'
+import { confirmBooking, cancelBooking, completeBooking, deleteBooking } from '@/app/actions/admin-actions'
 import { toast } from 'sonner'
 import { format } from 'date-fns'
 import {
@@ -18,7 +18,6 @@ import {
     Mail,
     Users,
     Filter,
-    MoreHorizontal,
     Eye
 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
@@ -27,12 +26,12 @@ import { BookingStatusBadge, PaymentStatusBadge } from '@/components/ui/status-b
 import { EmptyState } from '@/components/ui/empty-state'
 
 interface BookingsClientProps {
-    initialBookings: (Booking & { service?: { title: string } })[]
+    initialBookings: (Booking & { service?: { title: string } } & { user?: { name: string | null } | null })[]
 }
 
 export default function BookingsClient({ initialBookings }: BookingsClientProps) {
     const router = useRouter()
-    const [bookings, setBookings] = useState<(Booking & { service?: { title: string } })[]>(initialBookings)
+    const [bookings, setBookings] = useState(initialBookings)
     const [searchQuery, setSearchQuery] = useState('')
     const [statusFilter, setStatusFilter] = useState<string>('ALL')
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
@@ -51,7 +50,8 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
             return (
                 (booking.name || '').toLowerCase().includes(query) ||
                 (booking.email || '').toLowerCase().includes(query) ||
-                (booking.service?.title || booking.activityTitle || '').toLowerCase().includes(query)
+                (booking.service?.title || booking.activityTitle || '').toLowerCase().includes(query) ||
+                (booking.id.toLowerCase().includes(query))
             )
         })
         .sort((a, b) => {
@@ -65,11 +65,16 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
             const result = await confirmBooking(id)
             if (result.success) {
                 toast.success('Booking confirmed successfully')
+                // Optimistic update or wait for revalidation (router.refresh() happens automatically via server action?)
+                // Actually server actions with revalidatePath usually don't trigger client component state reset unless we rely on props.
+                // Best practice: update local state optimistically or based on success.
+                // We'll update local state status.
                 setBookings((prev) =>
                     prev.map((b) => b.id === id ? { ...b, status: 'CONFIRMED' } : b)
                 )
+                router.refresh()
             } else {
-                toast.error('Failed to confirm booking')
+                toast.error(result.error || 'Failed to confirm booking')
             }
         })
     }
@@ -84,24 +89,26 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                 setBookings((prev) =>
                     prev.map((b) => b.id === id ? { ...b, status: 'CANCELLED' } : b)
                 )
+                router.refresh()
             } else {
-                toast.error('Failed to cancel booking')
+                toast.error(result.error || 'Failed to cancel booking')
             }
         })
     }
 
-    const handleProcess = async (id: string) => {
+    const handleComplete = async (id: string) => {
         if (!confirm('Mark this booking as completed? This action cannot be undone.')) return
 
         startTransition(async () => {
-            const result = await processBooking(id)
+            const result = await completeBooking(id)
             if (result.success) {
                 toast.success('Booking marked as completed')
                 setBookings((prev) =>
                     prev.map((b) => b.id === id ? { ...b, status: 'COMPLETED' } : b)
                 )
+                router.refresh()
             } else {
-                toast.error('Failed to process booking')
+                toast.error(result.error || 'Failed to process booking')
             }
         })
     }
@@ -114,8 +121,9 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
             if (result.success) {
                 toast.success('Booking deleted successfully')
                 setBookings((prev) => prev.filter((b) => b.id !== id))
+                router.refresh()
             } else {
-                toast.error('Failed to delete booking')
+                toast.error(result.error || 'Failed to delete booking')
             }
         })
     }
@@ -125,7 +133,7 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
     }
 
     const handleViewDetails = (booking: Booking & { service?: { title: string } }) => {
-        // Navigate to client booking details page (admin can view client bookings)
+        // Navigate to client booking details page (admin generally proxies client or has own view. Client view is fine.)
         router.push(`/client/bookings/${booking.id}`)
     }
 
@@ -166,8 +174,8 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                             key={status}
                             onClick={() => setStatusFilter(status)}
                             className={`px-3 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 ${statusFilter === status
-                                    ? 'bg-primary text-white shadow-md shadow-primary/25'
-                                    : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
+                                ? 'bg-primary text-white shadow-md shadow-primary/25'
+                                : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
                                 }`}
                         >
                             {status === 'ALL' ? 'All' : status.charAt(0) + status.slice(1).toLowerCase()}
@@ -183,12 +191,11 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                         <Card key={booking.id} className="overflow-hidden rounded-xl border-border hover:shadow-md transition-all duration-200">
                             <CardContent className="p-0 flex h-full">
                                 {/* Left Side - Date & Status */}
-                                <div className={`w-20 flex-shrink-0 flex flex-col items-center justify-center p-3 text-white ${
-                                    booking.status === 'CONFIRMED' ? 'bg-gradient-to-b from-emerald-500 to-emerald-600' :
-                                    booking.status === 'CANCELLED' ? 'bg-gradient-to-b from-red-500 to-red-600' :
-                                    booking.status === 'COMPLETED' ? 'bg-gradient-to-b from-blue-500 to-blue-600' : 
-                                    'bg-gradient-to-b from-amber-500 to-amber-600'
-                                }`}>
+                                <div className={`w-20 flex-shrink-0 flex flex-col items-center justify-center p-3 text-white ${booking.status === 'CONFIRMED' ? 'bg-gradient-to-b from-emerald-500 to-emerald-600' :
+                                        booking.status === 'CANCELLED' ? 'bg-gradient-to-b from-red-500 to-red-600' :
+                                            booking.status === 'COMPLETED' ? 'bg-gradient-to-b from-blue-500 to-blue-600' :
+                                                'bg-gradient-to-b from-amber-500 to-amber-600'
+                                    }`}>
                                     <div className="text-center">
                                         <div className="font-bold text-2xl">{new Date(booking.date).getDate()}</div>
                                         <div className="text-xs uppercase font-medium opacity-90">{format(new Date(booking.date), 'MMM')}</div>
@@ -208,7 +215,7 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                                             <p className="text-xs text-muted-foreground truncate mt-0.5">{booking.name}</p>
                                         </div>
                                         <div className="flex flex-col items-end shrink-0">
-                                            <span className="font-bold text-primary text-base">€{booking.totalPrice.toFixed(0)}</span>
+                                            <span className="font-bold text-primary text-base">€{Number(booking.totalPrice).toFixed(0)}</span>
                                             <PaymentStatusBadge status={booking.paymentStatus} />
                                         </div>
                                     </div>
@@ -219,11 +226,6 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                                                 <Users className="h-3 w-3" />
                                                 <span>{booking.guests}</span>
                                             </div>
-                                            {booking.phone && (
-                                                <div className="flex items-center gap-1.5 text-xs text-muted-foreground bg-muted px-2 py-1 rounded-md">
-                                                    <Phone className="h-3 w-3" />
-                                                </div>
-                                            )}
                                         </div>
 
                                         <div className="flex gap-1.5">
@@ -326,7 +328,7 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                                         </td>
                                         <td className="px-5 py-4">
                                             <div className="font-bold text-foreground text-base">
-                                                €{booking.totalPrice.toFixed(0)}
+                                                €{Number(booking.totalPrice).toFixed(0)}
                                             </div>
                                             <PaymentStatusBadge status={booking.paymentStatus} />
                                         </td>
@@ -365,7 +367,7 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                                                     <Button
                                                         size="icon"
                                                         variant="ghost"
-                                                        onClick={() => handleProcess(booking.id)}
+                                                        onClick={() => handleComplete(booking.id)}
                                                         disabled={isPending}
                                                         className="h-8 w-8 rounded-lg text-blue-600 hover:bg-blue-50 hover:text-blue-700"
                                                         title="Mark as Completed"

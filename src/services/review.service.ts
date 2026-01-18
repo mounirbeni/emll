@@ -71,7 +71,8 @@ export class ReviewService {
             service: { connect: { id: data.serviceId } },
             user: { connect: { id: data.userId } },
             rating: data.rating,
-            comment: data.comment.trim()
+            comment: data.comment.trim(),
+            status: 'PENDING' // Default status for new reviews
         });
 
         // Update service rating
@@ -92,6 +93,23 @@ export class ReviewService {
             Math.round(averageRating * 10) / 10, // Round to 1 decimal
             reviewCount
         );
+    }
+
+
+    /**
+     * Update review status (Admin only)
+     */
+    async updateStatus(id: string, status: ReviewStatus): Promise<Review> {
+        const review = await reviewRepository.findById(id);
+        if (!review) throw new NotFoundError('Review', id);
+
+        const updated = await reviewRepository.update(id, { status });
+
+        // Recalculate if visibility changed
+        if (status === ReviewStatus.APPROVED || (review.status === ReviewStatus.APPROVED && status !== ReviewStatus.APPROVED)) {
+            await this.updateServiceRating(review.serviceId);
+        }
+        return updated;
     }
 
     /**
