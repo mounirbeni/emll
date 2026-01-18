@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Service } from '@/types/admin'
 import { Button } from '@/components/ui/button'
 import { useSession } from 'next-auth/react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ReviewsSection, type Review as DisplayReview } from '@/components/experiences/ReviewsSection'
 import { mockReviews } from '@/lib/data/mock-reviews'
@@ -27,7 +27,7 @@ export default function ServiceDetailPage() {
     const [notFound, setNotFound] = useState(false)
 
     const [reviews, setReviews] = useState<DisplayReview[]>([])
-    const [reviewsLoading, setReviewsLoading] = useState(false)
+
 
     // Image carousel state
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -66,13 +66,14 @@ export default function ServiceDetailPage() {
     useEffect(() => {
         const fetchReviews = async () => {
             if (!id) return
-            setReviewsLoading(true)
+
             try {
                 const res = await fetch(`/api/reviews?serviceId=${encodeURIComponent(id)}&limit=10`)
                 if (!res.ok) throw new Error('Failed to fetch reviews')
                 const data = await res.json()
 
                 const mapped: DisplayReview[] = Array.isArray(data)
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     ? data.map((r: any) => {
                         const rawName = (r?.user as { name?: string | null } | null)?.name
                         const identity = rawName && rawName.trim().length > 0
@@ -98,10 +99,8 @@ export default function ServiceDetailPage() {
                     : []
 
                 setReviews(mapped)
-            } catch (e) {
+            } catch {
                 setReviews([])
-            } finally {
-                setReviewsLoading(false)
             }
         }
 
@@ -123,7 +122,7 @@ export default function ServiceDetailPage() {
         }
     }
 
-    const [bookingLoading, setBookingLoading] = useState(false)
+    const [bookingLoading] = useState(false)
     const [bookingSuccess, setBookingSuccess] = useState(false)
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
 
@@ -242,7 +241,7 @@ export default function ServiceDetailPage() {
                         Your reservation for <span className="font-semibold text-charcoal">{service?.title}</span> has been placed successfully.
                     </p>
                     <div className="bg-cream-dark rounded-xl p-4 mb-6">
-                        <p className="text-sm text-medium-gray">What's next?</p>
+                        <p className="text-sm text-medium-gray">What&apos;s next?</p>
                         <p className="text-sm text-charcoal">Check your email for confirmation details and prepare for an amazing experience!</p>
                     </div>
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -272,7 +271,7 @@ export default function ServiceDetailPage() {
             {/* Mobile Layout */}
             <div className="md:hidden">
                 <MobileServiceDetails
-                    service={service}
+                    service={service!}
                     reviews={reviews}
                     onBookNow={handleBookNow}
                 />
@@ -408,7 +407,7 @@ export default function ServiceDetailPage() {
                             {((service?.highlights?.length ?? 0) > 0 || (service?.included?.length ?? 0) > 0) && (
                                 <Card className="mb-6 border-0 shadow-sm">
                                     <CardHeader className="pb-3">
-                                        <CardTitle className="text-xl text-charcoal">Highlights & What's Included</CardTitle>
+                                        <CardTitle className="text-xl text-charcoal">Highlights & What&apos;s Included</CardTitle>
                                     </CardHeader>
                                     <CardContent>
                                         {service?.highlights && service.highlights.length > 0 && (
@@ -426,7 +425,7 @@ export default function ServiceDetailPage() {
                                         )}
                                         {service?.included && service.included.length > 0 && (
                                             <div>
-                                                <h3 className="text-sm font-semibold text-charcoal mb-3">What's Included</h3>
+                                                <h3 className="text-sm font-semibold text-charcoal mb-3">What&apos;s Included</h3>
                                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                                     {service.included.map((item, idx) => (
                                                         <div key={idx} className="flex items-start gap-2">
@@ -459,7 +458,7 @@ export default function ServiceDetailPage() {
                                     </CardHeader>
                                     <CardContent>
                                         <div className="space-y-4">
-                                            {service.itinerary.map((item: any, index: number) => (
+                                            {service.itinerary.map((item, index: number) => (
                                                 <div key={index} className="flex gap-4">
                                                     <div className="flex flex-col items-center">
                                                         <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-sm">
@@ -581,7 +580,7 @@ export default function ServiceDetailPage() {
                                         {isGuest ? 'Login to Book' : (bookingLoading ? 'Checking...' : 'Book Now')}
                                     </Button>
 
-                                    <p className="text-center text-xs text-medium-gray mb-6">You won't be charged yet</p>
+                                    <p className="text-center text-xs text-medium-gray mb-6">You won&apos;t be charged yet</p>
 
                                     {/* Details */}
                                     <div className="border-t border-border pt-4 space-y-3">
@@ -635,7 +634,6 @@ export default function ServiceDetailPage() {
                     </Button>
                 </div>
             </div>
-        </div >
         </>
     );
 }

@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/select'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MapPin, Clock, Star, Users, Search, Filter, X, SlidersHorizontal } from 'lucide-react'
+import { MapPin, Clock, Star, Search, Filter, X, SlidersHorizontal } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { MobileServicesLayout } from '@/components/mobile/MobileServicesLayout'
 
@@ -163,7 +163,7 @@ export default function ServicesPage() {
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
                     sortBy={sortBy}
-                    setSortBy={setSortBy}
+                    setSortBy={(val) => setSortBy(val as SortOption)}
                     priceRange={priceRange}
                     setPriceRange={setPriceRange}
                     appliedFilters={appliedFilters}
@@ -432,7 +432,6 @@ export default function ServicesPage() {
                     )}
                 </div>
             </div>
-        </div >
         </>
     )
 }
