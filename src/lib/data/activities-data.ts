@@ -7,8 +7,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Rooftop Sunrise Yoga & Wellness",
             subtitle: "Begin your day with serenity and breathtaking views over the ancient Medina",
             price: 20,
-            rating: 4.8,
-            reviews: 0,
             category: "Health Services",
             image: "/Rooftop Sunrise Yoga & Wellness in Marrakech.jpg",
             images: [
@@ -85,8 +83,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Royal Moroccan Hammam & Spa Ritual",
             subtitle: "Indulge in the centuries-old tradition of Moroccan wellness with premium organic treatments",
             price: 45,
-            rating: 4.8,
-            reviews: 0,
             category: "Health Services",
             image: "/Royal Moroccan Hammam & Spa Ritual.jpg",
             images: [
@@ -214,8 +210,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Hidden Gems of the Medina: Walking Tour",
             subtitle: "Uncover the secret treasures and ancient stories of Marrakech's UNESCO World Heritage medina",
             price: 25,
-            rating: 4.8,
-            reviews: 0,
             category: "City Roaming",
             image: "/Hidden Gems of the Medina Walking Tour.jpg",
             images: [
@@ -318,8 +312,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Vintage Sidecar Adventure",
             subtitle: "Experience Marrakech in ultimate style with a restored 1960s Vespa sidecar through the city's most photogenic districts",
             price: 110,
-            rating: 4.8,
-            reviews: 0,
             category: "City Roaming",
             image: "/Vintage Sidecar Adventure.jpg",
             images: [
@@ -423,8 +415,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Ultimate Street Food Tasting Trail",
             subtitle: "An epicurean journey through the flavors of Marrakech with 12+ authentic tastings led by passionate local food experts",
             price: 35,
-            rating: 4.8,
-            reviews: 0,
             category: "City Roaming",
             image: "/Ultimate Street Food Tasting Trail.jpg",
             images: [
@@ -529,8 +519,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Yves Saint Laurent & Majorelle Garden VIP",
             subtitle: "An exclusive artistic journey through Yves Saint Laurent's muse and Morocco's most enchanting botanical sanctuary",
             price: 40,
-            rating: 4.8,
-            reviews: 0,
             category: "City Roaming",
             image: "/Yves Saint Laurent & Majorelle Garden VIP.jpg",
             images: [
@@ -638,8 +626,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Agafay Desert: Sunset, Camel & Dinner Show",
             subtitle: "An enchanting escape to Morocco's mystical 'Stone Desert' with luxury camel rides, gourmet Berber cuisine, and mesmerizing traditional performances",
             price: 55,
-            rating: 4.8,
-            reviews: 0,
             category: "City Trips & Excursions",
             image: "/Agafay Desert Sunset, Camel & Dinner Show show something luxury.jpg",
             images: [
@@ -750,8 +736,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Atlas Mountains & Ourika Valley Day Trip",
             subtitle: "A breathtaking journey through Morocco's highest mountain range with cascading waterfalls, traditional Berber villages, and authentic cultural immersion",
             price: 30,
-            rating: 4.8,
-            reviews: 0,
             category: "City Trips & Excursions",
             image: "/Atlas Mountains & Ourika Valley Day Trip.jpg",
             images: [
@@ -861,8 +845,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Essaouira Coastal Escape",
             subtitle: "Discover Morocco's most charming coastal gem with UNESCO medina, windsurfing beaches, and the world's finest argan oil production",
             price: 35,
-            rating: 4.8,
-            reviews: 0,
             category: "City Trips & Excursions",
             image: "/Essaouira Coastal Escape.jpg",
             images: [
@@ -975,8 +957,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Ouzoud Waterfalls: Nature Hike & Boat Ride",
             subtitle: "Experience North Africa's most spectacular waterfall cascade with hiking trails, traditional boat rides, and encounters with wild Barbary macaques",
             price: 30,
-            rating: 4.8,
-            reviews: 0,
             category: "City Trips & Excursions",
             image: "/Ouzoud Waterfalls Nature Hike & Boat Ride.jpg",
             images: [
@@ -1093,8 +1073,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Quad Biking Adrenaline Rush",
             subtitle: "Conquer the rugged landscapes of Palmeraie and Agafay Desert with high-performance quads, expert guidance, and authentic Berber hospitality",
             price: 45,
-            rating: 4.8,
-            reviews: 0,
             category: "City Trips & Excursions",
             image: "/Quad Biking Adrenaline Rush.jpg",
             images: [
@@ -1205,8 +1183,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Hot Air Balloon: Sunrise Over Atlas",
             subtitle: "Experience the magic of floating above Morocco's breathtaking landscapes at sunrise with a luxury balloon ride and gourmet Berber breakfast",
             price: 160,
-            rating: 4.8,
-            reviews: 0,
             category: "City Trips & Excursions",
             image: "/Hot Air Balloon Sunrise Over Atlas.jpg",
             images: [
@@ -1314,8 +1290,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "3-Day Desert Expedition: Merzouga Dunes",
             subtitle: "The ultimate Moroccan odyssey through the High Atlas, UNESCO sites, and the majestic Sahara Desert with luxury camping beneath star-filled skies",
             price: 180,
-            rating: 4.8,
-            reviews: 0,
             category: "City Trips & Excursions",
             image: "/3-Day Desert Expedition Merzouga.jpg",
             images: [
@@ -1429,8 +1403,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Master the Tagine: Cooking Class",
             subtitle: "Learn the ancient art of Moroccan cuisine from a master chef with market sourcing, hands-on cooking, and indulgent feast of your creations",
             price: 45,
-            rating: 4.8,
-            reviews: 0,
             category: "Workshops",
             image: "/Master the Tagine Cooking Class.jpg",
             images: [
@@ -1537,8 +1509,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Perfume Making Workshop",
             subtitle: "Unlock the ancient secrets of Moroccan perfumery with a master craftsman to create your exclusive signature fragrance using precious essential oils",
             price: 50,
-            rating: 4.8,
-            reviews: 0,
             category: "Workshops",
             image: "/Perfume Making Workshop.jpg",
             images: [
@@ -1645,8 +1615,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Pottery & Zellige Workshop",
             subtitle: "Master the ancient Moroccan crafts of pottery and zellige mosaic with master artisans in a traditional workshop setting",
             price: 35,
-            rating: 4.8,
-            reviews: 0,
             category: "Workshops",
             image: "/Pottery & Zellige Workshop.jpg",
             images: [
@@ -1756,8 +1724,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Chez Ali Fantasia Dinner Show",
             subtitle: "Experience the thundering hooves and vibrant colors of traditional Moroccan fantasia with an authentic Berber dinner under the stars",
             price: 45,
-            rating: 4.8,
-            reviews: 0,
             category: "Entertainment",
             image: "/Chez Ali Fantasia Dinner Show.jpg",
             images: [
@@ -1866,8 +1832,6 @@ export const activitiesData: Record<string, Activity[]> = {
             title: "Private Airport Transfer",
             subtitle: "Seamless luxury transfer service between Marrakech Menara Airport and your accommodation with professional chauffeur and premium vehicle",
             price: 25,
-            rating: 4.8,
-            reviews: 0,
             category: "Transfers",
             image: "/Private Airport Transfer.jpg",
             images: [
