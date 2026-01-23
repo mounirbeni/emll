@@ -43,7 +43,7 @@ export default function SupportPage() {
                 </UserHubSection>
 
                 <div className="mt-6 text-center">
-                    <p className="text-xs text-gray-400">App Version 12.0.0</p>
+                    <p className="text-xs text-gray-400">App Version 12.0.0 (Beta)</p>
                 </div>
             </div>
         </MobileAppContainer>
