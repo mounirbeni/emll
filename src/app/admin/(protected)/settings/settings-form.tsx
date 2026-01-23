@@ -7,14 +7,23 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { updateSettings } from "@/app/actions/admin-actions";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
-export function SettingsForm({ initialData }: { initialData: any }) {
+interface SettingsData {
+    businessName?: string;
+    contactEmail?: string;
+    contactPhone?: string;
+    address?: string;
+    cancellationPolicy?: string;
+    socialFacebook?: string;
+    socialInstagram?: string;
+}
+
+export function SettingsForm({ initialData }: { initialData: SettingsData }) {
     const [formData, setFormData] = useState({
         businessName: initialData?.businessName || 'Marrakech Activities',
-        contactEmail: initialData?.contactEmail || 'contact@example.com',
-        contactPhone: initialData?.contactPhone || '+212 600 000 000',
+        contactEmail: initialData?.contactEmail || 'infoexploremarrakesh@gmail.com',
+        contactPhone: initialData?.contactPhone || '+212 601 439 975',
         address: initialData?.address || 'Marrakech, Morocco',
         cancellationPolicy: initialData?.cancellationPolicy || 'Free cancellation up to 24 hours before the experience.',
         socialFacebook: initialData?.socialFacebook || '',
@@ -22,7 +31,7 @@ export function SettingsForm({ initialData }: { initialData: any }) {
     });
 
     const [isPending, startTransition] = useTransition();
-    const router = useRouter();
+    // Router removed as it was unused
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -30,7 +39,6 @@ export function SettingsForm({ initialData }: { initialData: any }) {
             const res = await updateSettings(formData);
             if (res.success) {
                 toast.success("Settings saved successfully");
-                // router.refresh(); // Not useful if simulate, but good practice
             } else {
                 toast.error("Failed to save settings");
             }

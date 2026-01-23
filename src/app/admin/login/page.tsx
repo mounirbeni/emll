@@ -86,7 +86,7 @@ export default function AdminLoginPage() {
                             <Input
                                 id="email"
                                 type="email"
-                                placeholder="admin@exploremarrakesh.com"
+                                placeholder="infoexploremarrakesh@gmail.com"
                                 className="h-11 bg-white/50 focus:bg-white transition-all"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}

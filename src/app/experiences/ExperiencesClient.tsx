@@ -106,7 +106,7 @@ export default function ExperiencesClient({ initialActivities }: ExperiencesClie
             </div>
 
             {/* -- Desktop Header (Title Only) -- */}
-            <div className="hidden lg:block bg-white pt-28 pb-8 px-8">
+            <div className="hidden lg:block bg-white pt-20 pb-6 px-8">
                 <div className="max-w-[1400px] mx-auto flex items-end justify-between">
                     <div>
                         <h1 className="text-4xl font-black text-gray-900 mb-2 tracking-tight">

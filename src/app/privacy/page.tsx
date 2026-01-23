@@ -115,7 +115,7 @@ export default function PrivacyPage() {
                             If you have questions about this Privacy Policy or how we handle your information, please contact us:
                         </p>
                         <ul className="list-disc list-inside text-muted-foreground space-y-2">
-                            <li>Email: privacy@marrakechluxe.com</li>
+                            <li>Email: infoexploremarrakesh@gmail.com</li>
                             <li>Phone: +212 601 439 975</li>
                             <li>Address: Marrakech Medina, Morocco 40000</li>
                         </ul>

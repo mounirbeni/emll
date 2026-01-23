@@ -70,3 +70,17 @@ export interface Activity {
     accessibility?: string; // Accessibility information
     seasonalNotes?: string; // Best time to book, seasonal considerations
 }
+
+export interface BlogPost {
+    id: string;
+    slug: string;
+    title: string;
+    excerpt: string;
+    content: string;
+    image: string;
+    category: string;
+    author: string;
+    publishedAt: string;
+    readTime: string;
+    featured?: boolean;
+}

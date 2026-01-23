@@ -168,7 +168,7 @@ export default function TestEmailPage() {
                             <Input
                                 id="email"
                                 type="email"
-                                placeholder="your-email@example.com"
+                                placeholder="infoexploremarrakesh@gmail.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
@@ -219,7 +219,7 @@ export default function TestEmailPage() {
                                 Make sure your <code className="px-1.5 py-0.5 bg-muted rounded">.env</code> file contains:
                             </p>
                             <pre className="mt-2 p-3 bg-muted rounded-lg text-xs overflow-x-auto">
-                                {`GMAIL_USER=your-email@gmail.com
+                                {`GMAIL_USER=infoexploremarrakesh@gmail.com
 GMAIL_APP_PASSWORD=your_app_password_here`}
                             </pre>
                         </div>

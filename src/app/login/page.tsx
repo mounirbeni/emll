@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Eye, EyeOff, Lock, Mail, ArrowRight, Loader2, Compass } from 'lucide-react';
@@ -70,18 +70,18 @@ export default function LoginPage() {
             }
 
             toast.success('Welcome back!');
-            
+
             // Use router.refresh() to update session, then redirect
             router.refresh();
-            
+
             // Wait a moment for session to update
             await new Promise(resolve => setTimeout(resolve, 300));
-            
+
             // Fetch session to check role and determine redirect
             try {
                 const sessionRes = await fetch('/api/auth/me', { cache: 'no-store' });
                 const sessionData = await sessionRes.json();
-                
+
                 if (!sessionData?.authenticated) {
                     // Session might still be updating, try redirect anyway
                     // Middleware will handle redirect if needed
@@ -104,7 +104,7 @@ export default function LoginPage() {
                     }
                     window.location.href = finalUrl;
                 }
-            } catch (err) {
+            } catch {
                 // Fallback: redirect to client dashboard
                 window.location.href = '/client';
             }
@@ -153,7 +153,7 @@ export default function LoginPage() {
                                     <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                                     <Input
                                         id="email"
-                                        placeholder="name@example.com"
+                                        placeholder="infoexploremarrakesh@gmail.com"
                                         type="email"
                                         autoCapitalize="none"
                                         autoComplete="email"
@@ -277,7 +277,7 @@ export default function LoginPage() {
                     </Button>
 
                     <p className="text-center text-sm text-muted-foreground">
-                        Don't have an account?{" "}
+                        Don&apos;t have an account?{" "}
                         <Link href="/register" className="font-semibold text-primary hover:text-accent">
                             Sign up
                         </Link>
@@ -299,7 +299,7 @@ export default function LoginPage() {
                             Experience the Magic of Marrakech
                         </h2>
                         <p className="text-lg text-gray-700">
-                            "The sheer variety of experiences available made our trip unforgettable. Highly recommended!"
+                            &quot;The sheer variety of experiences available made our trip unforgettable. Highly recommended!&quot;
                         </p>
                         <div className="flex items-center justify-center gap-2">
                             {[1, 2, 3, 4, 5].map((i) => (

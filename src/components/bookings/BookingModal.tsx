@@ -27,7 +27,7 @@ interface BookingModalProps {
     servicePrice: number
     serviceId: string
     onBookingSuccess: () => void
-    user?: any
+    user?: { name?: string | null; email?: string | null }
 }
 
 export function BookingModal({
@@ -119,7 +119,7 @@ export function BookingModal({
 
                 // If validation error, append details
                 if (data.error?.code === 'VALIDATION_ERROR' && Array.isArray(data.error.details)) {
-                    const details = data.error.details.map((issue: any) => {
+                    const details = data.error.details.map((issue: { path?: string[]; message: string }) => {
                         const path = issue.path?.join('.') || 'field';
                         return `${path}: ${issue.message}`;
                     }).join(', ');
@@ -137,8 +137,12 @@ export function BookingModal({
             toast.success("Thank you! We have received your booking request. We will review it and get back to you as soon as possible.")
             onBookingSuccess()
             onClose()
-        } catch (err: any) {
-            setError(err.message || "Something went wrong")
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message)
+            } else {
+                setError("Something went wrong")
+            }
         } finally {
             setLoading(false)
         }
@@ -218,7 +222,7 @@ export function BookingModal({
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="your@email.com"
+                            placeholder="infoexploremarrakesh@gmail.com"
                             required
                             disabled={!!user?.email}
                         />
@@ -228,7 +232,7 @@ export function BookingModal({
                         <Input
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
-                            placeholder="+1 234 567 890"
+                            placeholder="+212 601 439 975"
                         />
                     </div>
 

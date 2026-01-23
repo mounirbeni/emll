@@ -159,13 +159,13 @@ export default function SupportPage() {
                                         </div>
                                         <div className="space-y-2">
                                             <Label htmlFor="email">Email Address</Label>
-                                            <Input id="email" name="email" type="email" placeholder="john@example.com" required className="h-12" />
+                                            <Input id="email" name="email" type="email" placeholder="infoexploremarrakesh@gmail.com" required className="h-12" />
                                         </div>
                                     </div>
 
                                     <div className="space-y-2">
                                         <Label htmlFor="phone">Phone Number (Optional)</Label>
-                                        <Input id="phone" name="phone" type="tel" placeholder="+1 234 567 890" className="h-12" />
+                                        <Input id="phone" name="phone" type="tel" placeholder="+212 601 439 975" className="h-12" />
                                     </div>
 
                                     <div className="space-y-2">

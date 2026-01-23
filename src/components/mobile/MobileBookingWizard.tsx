@@ -336,7 +336,7 @@ export function MobileBookingWizard({
                                         type="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        placeholder="john@example.com"
+                                        placeholder="infoexploremarrakesh@gmail.com"
                                         className="pl-10 h-14 rounded-2xl border-gray-200"
                                     />
                                 </div>
@@ -353,7 +353,7 @@ export function MobileBookingWizard({
                                         type="tel"
                                         value={phone}
                                         onChange={(e) => setPhone(e.target.value)}
-                                        placeholder="+212 600 000000"
+                                        placeholder="+212 601 439 975"
                                         className="pl-10 h-14 rounded-2xl border-gray-200"
                                     />
                                 </div>

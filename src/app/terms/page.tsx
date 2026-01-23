@@ -92,7 +92,7 @@ export default function TermsPage() {
                             For questions about these Terms & Conditions, please contact us:
                         </p>
                         <ul className="list-disc list-inside text-muted-foreground mt-3 space-y-2">
-                            <li>Email: info@marrakechluxe.com</li>
+                            <li>Email: infoexploremarrakesh@gmail.com</li>
                             <li>Phone/WhatsApp: +212 601 439 975</li>
                             <li>Address: Marrakech Medina, Morocco 40000</li>
                         </ul>

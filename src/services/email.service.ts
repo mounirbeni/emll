@@ -22,7 +22,7 @@ export class EmailService {
         // In Next.js, environment variables need to be accessed at runtime, not in constructor
         // We'll initialize Nodemailer lazily when sending emails
         const gmailUser = process.env.GMAIL_USER;
-        this.fromEmail = gmailUser ? `Explore Marrakesh <${gmailUser}>` : 'Explore Marrakesh <no-reply@example.com>';
+        this.fromEmail = gmailUser ? `Explore Marrakesh <${gmailUser}>` : 'Explore Marrakesh <infoexploremarrakesh@gmail.com>';
         this.adminEmail = gmailUser || null;
     }
 

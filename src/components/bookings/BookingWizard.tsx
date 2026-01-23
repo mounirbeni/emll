@@ -15,9 +15,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Calendar } from "@/components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { format } from "date-fns"
-import { CalendarIcon, Loader2, Users, Clock, User, Mail, Phone, ChevronLeft, ChevronRight, CheckCircle2, AlertCircle } from "lucide-react"
+import { Loader2, Users, Clock, User, Mail, Phone, ChevronLeft, ChevronRight, CheckCircle2, AlertCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -53,7 +52,7 @@ export function BookingWizard({
     const [currentStep, setCurrentStep] = useState<Step>('date')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
-    
+
     // Form data
     const [date, setDate] = useState<Date>()
     const [time, setTime] = useState<string>('')
@@ -111,7 +110,7 @@ export function BookingWizard({
 
             // Check if this time slot is already booked
             const response = await fetch(`/api/bookings/availability?serviceId=${serviceId}&date=${bookingDateTime.toISOString()}`)
-            
+
             if (!response.ok) {
                 const data = await response.json()
                 if (data.error?.code === 'CONFLICT') {
@@ -166,13 +165,13 @@ export function BookingWizard({
                     today.setHours(0, 0, 0, 0)
                     const selectedDate = new Date(date)
                     selectedDate.setHours(0, 0, 0, 0)
-                    
+
                     if (selectedDate.getTime() === today.getTime()) {
                         const [hours, minutes] = time.split(':').map(Number)
                         const bookingTime = new Date()
                         bookingTime.setHours(hours, minutes, 0, 0)
                         const oneHourFromNow = new Date(Date.now() + 60 * 60 * 1000)
-                        
+
                         if (bookingTime <= oneHourFromNow) {
                             setError('Booking must be at least 1 hour in advance')
                             return false
@@ -271,7 +270,7 @@ export function BookingWizard({
                 let errorMessage = data.error?.message || (typeof data.error === 'string' ? data.error : 'Failed to create booking')
 
                 if (data.error?.code === 'VALIDATION_ERROR' && Array.isArray(data.error.details)) {
-                    const details = data.error.details.map((issue: any) => {
+                    const details = data.error.details.map((issue: { path?: string[]; message: string }) => {
                         const path = issue.path?.join('.') || 'field'
                         return `${path}: ${issue.message}`
                     }).join(', ')
@@ -290,8 +289,12 @@ export function BookingWizard({
             setCurrentStep('success')
             toast.success("Booking confirmed! We'll send you a confirmation email shortly.")
             onBookingSuccess()
-        } catch (err: any) {
-            setError(err.message || "Something went wrong")
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                setError(err.message)
+            } else {
+                setError("Something went wrong")
+            }
         } finally {
             setLoading(false)
         }
@@ -338,7 +341,7 @@ export function BookingWizard({
                                     const slotTime = date ? new Date(date) : new Date()
                                     slotTime.setHours(hours, minutes, 0, 0)
                                     const isPast = date && new Date(date).toDateString() === new Date().toDateString() && slotTime <= new Date(Date.now() + 60 * 60 * 1000)
-                                    
+
                                     return (
                                         <button
                                             key={slot}
@@ -444,7 +447,7 @@ export function BookingWizard({
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="your@email.com"
+                                    placeholder="infoexploremarrakesh@gmail.com"
                                     required
                                     disabled={!!user?.email}
                                 />
@@ -458,7 +461,7 @@ export function BookingWizard({
                                     type="tel"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
-                                    placeholder="+1 234 567 890"
+                                    placeholder="+212 601 439 975"
                                 />
                             </div>
                             <div>
