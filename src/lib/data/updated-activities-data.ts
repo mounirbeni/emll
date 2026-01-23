@@ -17,9 +17,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["Wellness", "Yoga", "Sunrise", "Meditation"],
             images: [
                 "/Rooftop Sunrise Yoga & Wellness in Marrakech.jpg",
-                "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1545389336-cf090694435e?q=80&w=1500&auto=format&fit=crop"
+              
             ],
             host: {
                 name: "Yoga Marrakech",
@@ -123,9 +121,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["Wellness", "Spa", "Traditional", "Relaxation"],
             images: [
                 "/Royal Moroccan Hammam & Spa Ritual.jpg",
-                "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1583416750470-965b2707b355?q=80&w=1500&auto=format&fit=crop"
+                
             ],
             host: {
                 name: "Rooftop Bliss Riad Spa",
@@ -227,8 +223,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["City Tours", "Culture", "History"],
             images: [
                 "/Hidden Gems of the Medina Walking Tour.jpg",
-                "https://images.unsplash.com/photo-1569796018080-05fc8c90e4be?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1597212618419-e6c36ced-ab1b-4af9-a15d-8d5f66150fa9?q=80&w=1500&auto=format&fit=crop"
+               
             ],
             host: {
                 name: "Heritage Guides Marrakech",
@@ -307,8 +302,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["City Tours", "Adventures", "Unique"],
             images: [
                 "/Vintage Sidecar Adventure.jpg",
-                "https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=1500&auto=format&fit=crop"
+                
             ],
             host: {
                 name: "Marrakech Insiders",
@@ -384,8 +378,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["City Tours", "Food & Drink", "Culture"],
             images: [
                 "/Ultimate Street Food Tasting Trail.jpg",
-                "https://images.unsplash.com/photo-1536766768598-e09213fdcfaa?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1500&auto=format&fit=crop"
+               
             ],
             host: {
                 name: "Taste of Morocco Food Tours",
@@ -462,8 +455,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["City Tours", "Culture", "Art"],
             images: [
                 "/Yves Saint Laurent & Majorelle Garden VIP.jpg",
-                "https://images.unsplash.com/photo-1591825944056-4cc375fb060f?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1500&auto=format&fit=crop"
+               
             ],
             host: {
                 name: "City Highlights Marrakech",
@@ -540,8 +532,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["Adventures", "Excursions", "Dinner Show"],
             images: [
                 "/Agafay Desert Sunset, Camel & Dinner Show show something luxury.jpg",
-                "https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?q=80&w=1500&auto=format&fit=crop"
+                
             ],
             host: {
                 name: "Desert Magic Tours",
@@ -619,8 +610,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["Adventures", "Excursions", "Nature"],
             images: [
                 "/Atlas Mountains & Ourika Valley Day Trip.jpg",
-                "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1500&auto=format&fit=crop"
+                
             ],
             host: {
                 name: "Atlas Trekking Adventures",
@@ -696,8 +686,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["Excursions", "Beach", "Culture"],
             images: [
                 "/Essaouira Coastal Escape.jpg",
-                "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1601024445121-e02b51a552a1?q=80&w=1500&auto=format&fit=crop"
+                
             ],
             host: {
                 name: "Coastal Vibes Morocco",
@@ -774,8 +763,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["Adventures", "Excursions", "Nature"],
             images: [
                 "/Ouzoud Waterfalls Nature Hike & Boat Ride.jpg",
-                "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=1500&auto=format&fit=crop"
+               
             ],
             host: {
                 name: "Nature Tours Morocco",
@@ -854,8 +842,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["Adventures", "Adrenaline"],
             images: [
                 "/Quad Biking Adrenaline Rush.jpg",
-                "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?q=80&w=1500&auto=format&fit=crop"
+                
             ],
             host: {
                 name: "Quad Masters Marrakech",
@@ -934,8 +921,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["Adventures", "Bucket List"],
             images: [
                 "/Hot Air Balloon Sunrise Over Atlas.jpg",
-                "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1507034589631-9433cc6bc453?q=80&w=1500&auto=format&fit=crop"
+                
             ],
             host: {
                 name: "Ciel de Marrakech",
@@ -1015,8 +1001,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["Adventures", "Excursions", "Bucket List"],
             images: [
                 "/3-Day Desert Expedition Merzouga.jpg",
-                "https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1473654729523-203e25dfda10?q=80&w=1500&auto=format&fit=crop"
+                
             ],
             host: {
                 name: "Sahara Experts Morocco",
@@ -1098,8 +1083,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["Food & Drink", "Culture", "Hands-on"],
             images: [
                 "/Master the Tagine Cooking Class.jpg",
-                "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=1500&auto=format&fit=crop"
+                
             ],
             host: {
                 name: "Chef Fatema",
@@ -1178,8 +1162,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["Culture", "Creative"],
             images: [
                 "/Perfume Making Workshop.jpg",
-                "https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1588405748879-acb4f5b2d0e4?q=80&w=1500&auto=format&fit=crop"
+                
             ],
             host: {
                 name: "Aroma Atelier Marrakech",
@@ -1256,8 +1239,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["Culture", "Family-Friendly"],
             images: [
                 "/Pottery & Zellige Workshop.jpg",
-                "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=1500&auto=format&fit=crop"
+                
             ],
             host: {
                 name: "Crafts Collective Marrakech",
@@ -1418,8 +1400,7 @@ export const activitiesData: Record<string, Activity[]> = {
             tags: ["Transport"],
             images: [
                 "/Private Airport Transfer.jpg",
-                "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1500&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?q=80&w=1500&auto=format&fit=crop"
+              
             ],
             host: {
                 name: "Marrakech Shuttle Services",
