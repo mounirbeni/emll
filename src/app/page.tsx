@@ -23,21 +23,21 @@ export default function Home() {
             <MobileCard className="text-center py-4" noPadding>
               <div className="flex flex-col items-center gap-1">
                 <Star className="w-5 h-5 text-primary fill-primary" />
-                <p className="text-lg font-bold text-charcoal">4.9</p>
+                <p className="text-lg font-bold text-charcoal">N/A</p>
                 <p className="text-xs text-gray-500">Rating</p>
               </div>
             </MobileCard>
             <MobileCard className="text-center py-4" noPadding>
               <div className="flex flex-col items-center gap-1">
                 <Users className="w-5 h-5 text-primary" />
-                <p className="text-lg font-bold text-charcoal">12K+</p>
+                <p className="text-lg font-bold text-charcoal">N/A</p>
                 <p className="text-xs text-gray-500">Travelers</p>
               </div>
             </MobileCard>
             <MobileCard className="text-center py-4" noPadding>
               <div className="flex flex-col items-center gap-1">
                 <TrendingUp className="w-5 h-5 text-primary" />
-                <p className="text-lg font-bold text-charcoal">200+</p>
+                <p className="text-lg font-bold text-charcoal">10+</p>
                 <p className="text-xs text-gray-500">Tours</p>
               </div>
             </MobileCard>
