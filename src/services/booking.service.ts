@@ -398,6 +398,9 @@ export class BookingService {
     /**
      * Complete booking
      */
+    /**
+     * Complete booking
+     */
     async completeBooking(id: string): Promise<Booking> {
         const booking = await bookingRepository.findById(id);
         if (!booking) throw new NotFoundError('Booking', id);
@@ -406,7 +409,34 @@ export class BookingService {
             throw new BadRequestError(`Cannot complete booking with status: ${booking.status}`);
         }
 
-        return await this.updateBookingStatus(id, BookingStatus.COMPLETED);
+        const updatedBooking = await this.updateBookingStatus(id, BookingStatus.COMPLETED);
+
+        // Rule 2: Completed Experience Bonus (+100 points)
+        if (booking.userId) {
+            try {
+                // We need to use raw prisma client here to access other models
+                // Ideally this should be in a user/points service, but keeping it simple for now
+                const { default: prisma } = await import('@/lib/prisma');
+
+                await prisma.user.update({
+                    where: { id: booking.userId },
+                    data: {
+                        loyaltyPoints: { increment: 100 },
+                        pointsHistory: {
+                            create: {
+                                points: 100,
+                                reason: 'Completed experience',
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Failed to award points for completed booking:', error);
+                // Don't fail the completion itself
+            }
+        }
+
+        return updatedBooking;
     }
 
     /**

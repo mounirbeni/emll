@@ -82,9 +82,21 @@ model User {
   messages           Message[]
   notifications      Notification[]
   reviews            Review[]
+  pointsHistory      PointsHistory[]
 
   @@index([email])
   @@index([role])
+}
+
+model PointsHistory {
+  id        String   @id @default(uuid())
+  userId    String
+  points    Int
+  reason    String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model Account {

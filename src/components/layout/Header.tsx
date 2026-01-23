@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
 import {
-    Menu, X, Search, User, LogOut, LayoutDashboard,
+    Search, User, LogOut, LayoutDashboard,
     Heart, ShoppingBag, ChevronDown, Compass
 } from "lucide-react";
 
@@ -19,7 +19,6 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Logo } from "@/components/shared/Logo";
 
 const navLinks = [
     { href: "/search", label: "Experiences" },
@@ -30,7 +29,6 @@ const navLinks = [
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
     const { data: session, status } = useSession();
     const isLoading = status === "loading";
@@ -43,11 +41,6 @@ export function Header() {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
-
-    // Close mobile menu on route change
-    useEffect(() => {
-        setIsMobileMenuOpen(false);
-    }, [pathname]);
 
     return (
         <header
@@ -150,18 +143,13 @@ export function Header() {
                         )}
                     </div>
 
-                    {/* Mobile Menu Toggle */}
-                    <button
-                        className="md:hidden relative z-50 p-2 text-gray-800"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    >
-                        {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                    </button>
+                    {/* Mobile Menu Toggle - REMOVED for v12.0 User Hub */}
+                    {/* Mobile menu removed - users now access settings via Profile tab in bottom nav */}
                 </div>
             </div>
 
-            {/* Mobile Menu Overlay */}
-            {isMobileMenuOpen && (
+            {/* Mobile Menu Overlay - REMOVED for v12.0 User Hub */}
+            {false && isMobileMenuOpen && (
                 <div className="fixed inset-0 z-40 bg-white md:hidden pt-20 px-4 pb-6 flex flex-col overflow-y-auto">
                     {/* Mobile Search Bar */}
                     <div className="mb-6">

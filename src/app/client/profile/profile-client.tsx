@@ -1,200 +1,183 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { User, Mail, Phone, Calendar, Award } from 'lucide-react';
-import { toast } from 'sonner';
-import { updateProfile } from '@/app/client/actions';
+import { useSession, signOut } from 'next-auth/react';
+import {
+    User,
+    Settings,
+    LogOut,
+    CreditCard,
+    MessageSquare,
+    Shield,
+    HelpCircle,
+    Sparkles,
+    Wallet,
+    Globe,
+    Lock,
+    Smartphone,
+    Mail,
+    Bell
+} from 'lucide-react';
+import Image from 'next/image';
+import { MobileAppContainer } from '@/components/mobile/MobileAppContainer';
+import { UserHubRow } from '@/components/mobile/UserHubRow';
+import { UserHubSection } from '@/components/mobile/UserHubSection';
 
 interface ProfileClientProps {
-    user: {
-        id: string;
-        name: string | null;
-        email: string;
-        phone: string | null;
-        createdAt: Date;
-        loyaltyPoints: number;
-    };
+    user: any; // Using any to avoid type complexity with Prisma types on client, but practically it matches
 }
 
-export function ProfileClient({ user }: ProfileClientProps) {
-    const router = useRouter();
-    const [isEditing, setIsEditing] = useState(false);
-    const [isSaving, setIsSaving] = useState(false);
-    const [formData, setFormData] = useState({
-        name: user.name || '',
-        phone: user.phone || '',
-    });
+export default function ProfileClient({ user }: ProfileClientProps) {
+    const { data: session } = useSession(); // Optimistic update support
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsSaving(true);
+    // Use session data if available (for immediate updates), otherwise fallback to server data
+    const displayName = session?.user?.name || user?.name || 'Valued Guest';
+    const displayEmail = session?.user?.email || user?.email || '';
+    const displayImage = session?.user?.image || user?.image;
+    // Format member since date
+    const memberSince = user?.createdAt ? new Date(user.createdAt).getFullYear() : '2024';
+    const loyaltyPoints = user?.loyaltyPoints || 0;
 
-        try {
-            const formDataObj = new FormData();
-            formDataObj.append('name', formData.name);
-            formDataObj.append('phone', formData.phone);
-
-            const result = await updateProfile(formDataObj);
-
-            if (result.success) {
-                toast.success('Profile updated successfully');
-                setIsEditing(false);
-                router.refresh(); // Immediate UI refresh
-            } else {
-                toast.error(result.error);
-            }
-        } catch (error) {
-            toast.error('Failed to update profile');
-        } finally {
-            setIsSaving(false);
-        }
-    };
-
-    const handleCancel = () => {
-        setFormData({
-            name: user.name || '',
-            phone: user.phone || '',
-        });
-        setIsEditing(false);
-    };
+    // Simple tier logic
+    const tier = loyaltyPoints >= 1000 ? 'Gold' : loyaltyPoints >= 500 ? 'Silver' : 'Bronze';
 
     return (
-        <div className="space-y-6 pb-20">
-            <div>
-                <h1 className="text-3xl font-bold text-gray-900">Profile</h1>
-                <p className="text-gray-600 mt-1">
-                    Manage your account information
-                </p>
-            </div>
+        <MobileAppContainer className="bg-[#FDF8F3] pb-24">
+            {/* Header Area */}
+            <div className="px-6 pt-12 pb-6">
+                <h1 className="text-3xl font-bold text-charcoal mb-6">Account</h1>
 
-            {/* Profile Info Card */}
-            <Card className="border-none shadow-sm bg-white rounded-3xl">
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                        <User className="w-5 h-5 text-gray-400" />
-                        Personal Information
-                    </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="name">Full Name</Label>
-                            <Input
-                                id="name"
-                                type="text"
-                                value={formData.name}
-                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                disabled={!isEditing}
-                                className="rounded-xl"
-                                required
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <Label htmlFor="email">Email</Label>
-                            <div className="relative">
-                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    value={user.email}
-                                    disabled
-                                    className="pl-10 rounded-xl bg-gray-50"
+                <div className="flex items-center gap-4 mb-2">
+                    <div className="relative">
+                        <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200 border-2 border-white shadow-md">
+                            {displayImage ? (
+                                <Image
+                                    src={displayImage}
+                                    alt={displayName}
+                                    fill
+                                    className="object-cover"
                                 />
-                            </div>
-                            <p className="text-xs text-gray-500">Email cannot be changed</p>
-                        </div>
-
-                        <div className="space-y-2">
-                            <Label htmlFor="phone">Phone Number</Label>
-                            <div className="relative">
-                                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                                <Input
-                                    id="phone"
-                                    type="tel"
-                                    value={formData.phone}
-                                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                    disabled={!isEditing}
-                                    className="pl-10 rounded-xl"
-                                    placeholder="+212 XXX XXX XXX"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="flex gap-3 pt-4">
-                            {!isEditing ? (
-                                <Button
-                                    type="button"
-                                    onClick={() => setIsEditing(true)}
-                                    className="w-full rounded-xl bg-[#FF5F00] hover:bg-[#E55500]"
-                                >
-                                    Edit Profile
-                                </Button>
                             ) : (
-                                <>
-                                    <Button
-                                        type="button"
-                                        variant="outline"
-                                        onClick={handleCancel}
-                                        className="w-full rounded-xl"
-                                        disabled={isSaving}
-                                    >
-                                        Cancel
-                                    </Button>
-                                    <Button
-                                        type="submit"
-                                        className="w-full rounded-xl bg-[#FF5F00] hover:bg-[#E55500]"
-                                        disabled={isSaving}
-                                    >
-                                        {isSaving ? 'Saving...' : 'Save Changes'}
-                                    </Button>
-                                </>
+                                <div className="w-full h-full flex items-center justify-center bg-primary text-white text-xl font-bold">
+                                    {displayName.charAt(0)}
+                                </div>
                             )}
                         </div>
-                    </form>
-                </CardContent>
-            </Card>
+                        {/* Online Status Indicator */}
+                        <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+                    </div>
 
-            {/* Account Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Card className="border-none shadow-sm bg-white rounded-3xl">
-                    <CardContent className="p-6">
-                        <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center">
-                                <Calendar className="w-6 h-6 text-blue-600" />
-                            </div>
-                            <div>
-                                <p className="text-xs text-gray-500 font-medium uppercase">Member Since</p>
-                                <p className="font-semibold text-gray-900">
-                                    {new Date(user.createdAt).toLocaleDateString('en-US', {
-                                        month: 'long',
-                                        year: 'numeric',
-                                    })}
-                                </p>
-                            </div>
-                        </div>
-                    </CardContent>
-                </Card>
+                    <div>
+                        <h2 className="text-xl font-bold text-charcoal leading-tight">{displayName}</h2>
+                        <p className="text-sm text-gray-500">{displayEmail}</p>
+                    </div>
+                </div>
 
-                <Card className="border-none shadow-sm bg-white rounded-3xl">
-                    <CardContent className="p-6">
-                        <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center">
-                                <Award className="w-6 h-6 text-[#FF5F00]" />
-                            </div>
-                            <div>
-                                <p className="text-xs text-gray-500 font-medium uppercase">Loyalty Points</p>
-                                <p className="font-semibold text-gray-900">{user.loyaltyPoints} Points</p>
-                            </div>
-                        </div>
-                    </CardContent>
-                </Card>
+                {/* Mini Stats / Badges */}
+                <div className="flex gap-3 mt-4">
+                    <div className="bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-gray-100 flex items-center gap-2 shadow-sm">
+                        <Sparkles className="w-3.5 h-3.5 text-primary" />
+                        <span className="text-xs font-semibold text-charcoal">{loyaltyPoints} Points</span>
+                    </div>
+                    <div className="bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-gray-100 flex items-center gap-2 shadow-sm">
+                        <User className="w-3.5 h-3.5 text-gray-400" />
+                        <span className="text-xs font-medium text-gray-500">Member since {memberSince}</span>
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <div className="px-4 space-y-6">
+                {/* Section 1: My Account */}
+                <UserHubSection title="My Account">
+                    <UserHubRow
+                        icon={User}
+                        title="Personal Information"
+                        subtitle="Edit your profile details"
+                        href="/client/profile/edit"
+                    />
+                    <UserHubRow
+                        icon={Wallet}
+                        title="Wallet & Credits"
+                        subtitle="Manage your balance"
+                        href="/client/wallet"
+                    />
+                    <UserHubRow
+                        icon={Sparkles}
+                        title="Member Benefits"
+                        subtitle={`${tier} Tier • ${loyaltyPoints} pts`}
+                        href="/client/membership"
+                        highlight
+                    />
+                    <UserHubRow
+                        icon={CreditCard}
+                        title="Payments & Payouts"
+                        href="/client/payments"
+                    />
+                </UserHubSection>
+
+                {/* Section 2: Communication */}
+                <UserHubSection title="Communication">
+                    <UserHubRow
+                        icon={MessageSquare}
+                        title="Messages"
+                        subtitle="Chat with support & hosts"
+                        href="/client/messages"
+                    />
+                    <UserHubRow
+                        icon={Bell}
+                        title="Notifications"
+                        href="/client/settings"
+                    />
+                </UserHubSection>
+
+                {/* Section 3: App Settings */}
+                <UserHubSection title="App Settings">
+                    <UserHubRow
+                        icon={Globe}
+                        title="Language"
+                        subtitle="English (US)"
+                        href="/client/settings/language"
+                    />
+                    <UserHubRow
+                        icon={Settings}
+                        title="General"
+                        href="/client/settings"
+                    />
+                    <UserHubRow
+                        icon={HelpCircle}
+                        title="Help & Support"
+                        href="/client/support"
+                    />
+                </UserHubSection>
+
+                {/* Section 4: Security */}
+                <UserHubSection title="Security">
+                    <UserHubRow
+                        icon={Lock}
+                        title="Change Password"
+                        href="/client/security/password"
+                    />
+                    <UserHubRow
+                        icon={Smartphone}
+                        title="Two-Factor Auth"
+                        href="/client/security/2fa"
+                    />
+                </UserHubSection>
+
+                {/* Sign Out Button */}
+                <div className="mt-8 mb-4 px-2">
+                    <button
+                        onClick={() => signOut({ callbackUrl: '/' })}
+                        className="w-full bg-white border border-gray-200 text-red-500 font-semibold py-3.5 rounded-xl shadow-sm active:scale-[0.99] transition-transform flex items-center justify-center gap-2"
+                    >
+                        <LogOut className="w-4 h-4" />
+                        Sign Out
+                    </button>
+
+                    <p className="text-center text-xs text-gray-300 mt-6 font-mono">
+                        Version 12.0.0 (Build 2024.10)
+                    </p>
+                </div>
+            </div>
+        </MobileAppContainer>
     );
 }

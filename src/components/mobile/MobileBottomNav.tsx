@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import { Home, Compass, Calendar, Bell, User } from "lucide-react"
 import { useSession } from "next-auth/react"
 import { cn } from "@/lib/utils"
+import { motion } from "framer-motion"
 
 export function MobileBottomNav() {
     const pathname = usePathname()
@@ -28,25 +29,74 @@ export function MobileBottomNav() {
     ]
 
     return (
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 safe-bottom">
-            <div className="flex items-center justify-around h-16">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-100 z-50 safe-bottom shadow-lg">
+            <div className="flex items-center justify-around h-[58px] px-2">
                 {navItems.map((item) => {
                     const Icon = item.icon
-                    const isActive = pathname === item.href
+                    const isActive = pathname === item.href ||
+                        (item.href !== "/" && pathname?.startsWith(item.href))
 
                     return (
                         <Link
                             key={item.href}
                             href={item.href}
                             className={cn(
-                                "flex flex-col items-center justify-center flex-1 h-full gap-1 transition-colors",
+                                "relative flex flex-col items-center justify-center flex-1 h-full gap-0.5 transition-all duration-200",
+                                "min-w-[60px] rounded-xl",
                                 isActive
-                                    ? "text-orange-500"
-                                    : "text-gray-500 active:text-orange-400"
+                                    ? "text-primary"
+                                    : "text-gray-500 active:text-primary active:scale-95"
                             )}
                         >
-                            <Icon className={cn("h-5 w-5", isActive && "fill-orange-100")} />
-                            <span className="text-[10px] font-medium">{item.label}</span>
+                            {/* Active indicator */}
+                            {isActive && (
+                                <motion.div
+                                    layoutId="activeTab"
+                                    className="absolute inset-0 bg-primary/5 rounded-xl"
+                                    initial={false}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 500,
+                                        damping: 30
+                                    }}
+                                />
+                            )}
+
+                            {/* Icon with animation */}
+                            <motion.div
+                                animate={{
+                                    scale: isActive ? 1.1 : 1,
+                                    y: isActive ? -2 : 0
+                                }}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 400,
+                                    damping: 17
+                                }}
+                                className="relative z-10"
+                            >
+                                <Icon
+                                    className={cn(
+                                        "h-[22px] w-[22px] transition-all duration-200",
+                                        isActive && "fill-primary/10"
+                                    )}
+                                />
+                            </motion.div>
+
+                            {/* Label */}
+                            <span
+                                className={cn(
+                                    "text-[10px] font-medium relative z-10 transition-all duration-200",
+                                    isActive ? "font-semibold" : "font-normal"
+                                )}
+                            >
+                                {item.label}
+                            </span>
+
+                            {/* Notification badge (example for Alerts tab) */}
+                            {item.label === "Alerts" && session && (
+                                <div className="absolute top-2 right-1/4 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white" />
+                            )}
                         </Link>
                     )
                 })}

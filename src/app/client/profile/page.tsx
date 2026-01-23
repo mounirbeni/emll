@@ -1,7 +1,7 @@
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import prisma from '@/lib/prisma';
-import { ProfileClient } from './profile-client';
+import ProfileClient from './profile-client';
 
 export const dynamic = 'force-dynamic';
 

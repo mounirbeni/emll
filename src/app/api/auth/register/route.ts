@@ -36,6 +36,14 @@ export async function POST(request: Request) {
                 password: hashedPassword,
                 name: name || email.split('@')[0],
                 role: 'CUSTOMER',
+                // Rule 1: New User Bonus
+                loyaltyPoints: 300,
+                pointsHistory: {
+                    create: {
+                        points: 300,
+                        reason: 'Welcome bonus for joining',
+                    }
+                }
             },
         });
 

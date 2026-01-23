@@ -17,7 +17,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { MobileNav } from "@/components/mobile-nav";
 
 const navigation = [
     { name: "Dashboard", href: "/client", icon: LayoutDashboard },
@@ -162,7 +161,7 @@ export default function ClientLayout({
                 </main>
 
                 {/* Mobile Bottom Navigation */}
-                <MobileNav />
+                {/* <MobileNav /> // Removed for v12.0 - Profile tab in bottom nav leads to User Hub */}
             </div>
         </div>
     );

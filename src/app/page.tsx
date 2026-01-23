@@ -4,44 +4,135 @@ import { Hero } from "@/components/home/Hero";
 import { Categories } from "@/components/home/Categories";
 import { FeaturedExperiences } from "@/components/home/FeaturedExperiences";
 import { MoreAboutMarrakech } from "@/components/home/MoreAboutMarrakech";
-import { Shield, Award, CreditCard } from "lucide-react";
+import { Shield, Award, CreditCard, Star, TrendingUp, Users } from "lucide-react";
+import { MobileCard } from "@/components/mobile/MobileCard";
+import { MobileButton } from "@/components/mobile/MobileButton";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <>
-      {/* Mobile Layout */}
+      {/* Mobile App Layout */}
       <div className="md:hidden min-h-screen bg-beige-50">
+        {/* Fullscreen Hero */}
         <Hero />
 
-        {/* Mobile Featured Experiences - Horizontal Scroll */}
-        <section className="py-6 bg-beige-50">
-          <div className="px-4">
-            <h2 className="text-xl font-bold text-charcoal mb-4">
-              Top Experiences
-            </h2>
-            <FeaturedExperiences isMobile />
+        {/* Quick Stats Section */}
+        <section className="px-4 py-6 -mt-8 relative z-10">
+          <div className="grid grid-cols-3 gap-3">
+            <MobileCard className="text-center py-4" noPadding>
+              <div className="flex flex-col items-center gap-1">
+                <Star className="w-5 h-5 text-primary fill-primary" />
+                <p className="text-lg font-bold text-charcoal">4.9</p>
+                <p className="text-xs text-gray-500">Rating</p>
+              </div>
+            </MobileCard>
+            <MobileCard className="text-center py-4" noPadding>
+              <div className="flex flex-col items-center gap-1">
+                <Users className="w-5 h-5 text-primary" />
+                <p className="text-lg font-bold text-charcoal">12K+</p>
+                <p className="text-xs text-gray-500">Travelers</p>
+              </div>
+            </MobileCard>
+            <MobileCard className="text-center py-4" noPadding>
+              <div className="flex flex-col items-center gap-1">
+                <TrendingUp className="w-5 h-5 text-primary" />
+                <p className="text-lg font-bold text-charcoal">200+</p>
+                <p className="text-xs text-gray-500">Tours</p>
+              </div>
+            </MobileCard>
           </div>
         </section>
 
-        {/* Mobile Trust Section - Compact */}
-        <section className="py-8 px-4">
-          <div className="space-y-4">
+        {/* Featured Experiences - Horizontal Scroll */}
+        <section className="py-6">
+          <div className="px-4 mb-4 flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-bold text-charcoal">
+                Top Experiences
+              </h2>
+              <p className="text-sm text-gray-500">Handpicked for you</p>
+            </div>
+            <Link href="/services">
+              <button className="text-sm font-semibold text-primary">
+                See All →
+              </button>
+            </Link>
+          </div>
+          <div className="overflow-x-auto hide-scrollbar scroll-snap-x">
+            <div className="flex gap-4 px-4 pb-2">
+              <FeaturedExperiences isMobile />
+            </div>
+          </div>
+        </section>
+
+        {/* Why Book With Us - App Style Cards */}
+        <section className="px-4 py-6">
+          <h2 className="text-xl font-bold text-charcoal mb-4">
+            Why Book With Us
+          </h2>
+          <div className="space-y-3">
             <TrustCard
-              icon={<Shield className="w-5 h-5 text-orange-500" />}
-              title="Best Price"
+              icon={<Shield className="w-5 h-5 text-primary" />}
+              title="Best Price Guarantee"
               description="We match any lower price"
             />
             <TrustCard
-              icon={<Award className="w-5 h-5 text-orange-500" />}
+              icon={<Award className="w-5 h-5 text-primary" />}
               title="Local Experts"
               description="Certified local guides"
             />
             <TrustCard
-              icon={<CreditCard className="w-5 h-5 text-orange-500" />}
+              icon={<CreditCard className="w-5 h-5 text-primary" />}
               title="Secure Booking"
               description="Free cancellation 24h before"
             />
           </div>
+        </section>
+
+        {/* Quick Actions */}
+        <section className="px-4 py-6">
+          <div className="grid grid-cols-2 gap-3">
+            <Link href="/services">
+              <MobileCard className="text-center py-6 cursor-pointer">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <span className="text-2xl">🏛️</span>
+                  </div>
+                  <p className="font-semibold text-charcoal">Explore Tours</p>
+                </div>
+              </MobileCard>
+            </Link>
+            <Link href="/become-supplier">
+              <MobileCard className="text-center py-6 cursor-pointer">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <span className="text-2xl">🤝</span>
+                  </div>
+                  <p className="font-semibold text-charcoal">Become Partner</p>
+                </div>
+              </MobileCard>
+            </Link>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="px-4 py-8 mb-6">
+          <MobileCard className="bg-gradient-to-br from-primary to-accent text-white p-6">
+            <h3 className="text-xl font-bold mb-2">Ready to Explore?</h3>
+            <p className="text-white/90 mb-4 text-sm">
+              Discover authentic Marrakech with local experts
+            </p>
+            <Link href="/services">
+              <MobileButton
+                variant="secondary"
+                fullWidth
+                className="bg-white text-primary hover:bg-gray-50"
+              >
+                Browse Experiences
+              </MobileButton>
+            </Link>
+          </MobileCard>
         </section>
       </div>
 
@@ -70,7 +161,7 @@ export default function Home() {
                 </div>
                 <h3 className="font-bold text-lg text-black mb-2">Best Price Guarantee</h3>
                 <p className="text-sm text-text-secondary">
-                  Found a lower price? We'll match it and give you 10% off
+                  Found a lower price? We&apos;ll match it and give you 10% off
                 </p>
               </div>
 
@@ -124,8 +215,8 @@ export default function Home() {
 // Mobile Trust Card Component
 function TrustCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
   return (
-    <div className="flex items-start gap-3 bg-white p-4 rounded-2xl shadow-sm">
-      <div className="flex-shrink-0 w-10 h-10 bg-orange-50 rounded-full flex items-center justify-center">
+    <div className="flex items-start gap-3 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+      <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
         {icon}
       </div>
       <div className="flex-1 min-w-0">

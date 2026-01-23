@@ -396,6 +396,237 @@
       min-width: 44px;
     }
   }
+
+  /* Mobile App Page Transitions */
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-out-left {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-30%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .page-enter {
+    animation: slide-in-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .page-exit {
+    animation: slide-out-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .modal-enter {
+    animation: slide-up 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .fade-in-up {
+    animation: fade-in-up 0.4s ease-out;
+  }
+
+  /* Mobile App Card Styles */
+  .mobile-card {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 2px 12px rgba(45, 45, 45, 0.08);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-card:active {
+    transform: scale(0.98);
+  }
+
+  .mobile-card-elevated {
+    box-shadow: 0 4px 20px rgba(45, 45, 45, 0.12);
+  }
+
+  /* Mobile Bottom Sheet */
+  .bottom-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 24px 24px 0 0;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .bottom-sheet.open {
+    transform: translateY(0);
+  }
+
+  /* Pull to Refresh */
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .pull-to-refresh {
+    animation: rotate 1s linear infinite;
+  }
+
+  /* Mobile Sticky Elements */
+  .sticky-mobile-top {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: white;
+    backdrop-filter: blur(10px);
+  }
+
+  .sticky-mobile-bottom {
+    position: sticky;
+    bottom: 0;
+    z-index: 30;
+    background: white;
+    backdrop-filter: blur(10px);
+  }
+
+  /* Touch Feedback */
+  .touch-feedback {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .touch-feedback::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 95, 0, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+
+  .touch-feedback:active::after {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Mobile Input Styles */
+  .mobile-input {
+    height: 56px;
+    font-size: 16px;
+    border-radius: 16px;
+    padding: 0 16px;
+    border: 2px solid var(--border);
+    transition: all 0.2s ease;
+  }
+
+  .mobile-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(255, 95, 0, 0.1);
+  }
+
+  /* Horizontal Scroll Snap */
+  .scroll-snap-x {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scroll-snap-x > * {
+    scroll-snap-align: start;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Mobile Skeleton Loading */
+  .mobile-skeleton {
+    background: linear-gradient(
+      90deg,
+      #f0f0f0 25%,
+      #e0e0e0 50%,
+      #f0f0f0 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 12px;
+  }
+
+  /* Backdrop Blur */
+  .backdrop-blur-mobile {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Mobile FAB (Floating Action Button) */
+  .mobile-fab {
+    position: fixed;
+    bottom: 80px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 8px 24px rgba(255, 95, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-fab:active {
+    transform: scale(0.9);
+  }
+
+  /* Beige background variants for mobile */
+  .bg-beige-50 {
+    background-color: #FDF8F3;
+  }
+
+  .bg-beige-100 {
+    background-color: #F5EDE4;
+  }
 }
 
 /* Base Styles - Enhanced */
