@@ -12,6 +12,7 @@ interface UserHubRowProps {
     onClick?: () => void
     badge?: string | number
     className?: string
+    highlight?: boolean
 }
 
 /**
@@ -30,13 +31,20 @@ export function UserHubRow({
     href,
     onClick,
     badge,
-    className
+    className,
+    highlight
 }: UserHubRowProps) {
     const content = (
-        <div className="flex items-center gap-4 py-3 px-5 transition-colors duration-150 active:bg-gray-50 hover:bg-gray-50/50">
+        <div className={cn(
+            "flex items-center gap-4 py-3 px-5 transition-colors duration-150 active:scale-[0.99]",
+            highlight ? "bg-orange-50/80 hover:bg-orange-50" : "hover:bg-gray-50/50 active:bg-gray-50"
+        )}>
             {/* Icon */}
-            <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                <Icon className="w-[20px] h-[20px] text-primary" />
+            <div className={cn(
+                "flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center",
+                highlight ? "bg-orange-100 text-orange-600" : "bg-primary/10 text-primary"
+            )}>
+                <Icon className="w-[20px] h-[20px] fill-current" />
             </div>
 
             {/* Text Content */}
