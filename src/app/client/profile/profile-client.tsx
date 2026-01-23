@@ -174,7 +174,7 @@ export default function ProfileClient({ user }: ProfileClientProps) {
                     </button>
 
                     <p className="text-center text-xs text-gray-300 mt-6 font-mono">
-                        Version 12.0.0 (Build 2024.10)
+                        Version 12.0.0 (Build 2024 Beta)
                     </p>
                 </div>
             </div>
