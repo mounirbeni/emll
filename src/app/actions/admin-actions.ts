@@ -256,19 +256,29 @@ export async function clearAllNotifications(): Promise<ActionResponse> {
 // This is a valid use of "existing services" to store arbitrary data if necessary.
 const SETTINGS_ID = "SETTINGS_GLOBAL_CONFIG_V1"
 
-export async function getSettings(): Promise<unknown> {
+export interface SettingsData {
+    businessName?: string;
+    contactEmail?: string;
+    contactPhone?: string;
+    address?: string;
+    cancellationPolicy?: string;
+    socialFacebook?: string;
+    socialInstagram?: string;
+}
+
+export async function getSettings(): Promise<SettingsData> {
     try {
         try {
             const service = await serviceService.getServiceById(SETTINGS_ID)
-            return service.itinerary || {}
+            return (service.itinerary || {}) as SettingsData
         } catch {
             // Create if not exists
             // We can't easily create with specific ID via serviceService because it generates ID.
             // But we can try to find by title "SYSTEM_SETTINGS".
-            return {}
+            return {} as SettingsData
         }
     } catch {
-        return {}
+        return {} as SettingsData
     }
 }
 
