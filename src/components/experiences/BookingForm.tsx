@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
-import { CalendarIcon, MessageCircle, Clock, Users, User, Mail, Phone, MapPin, FileText, ChevronRight, Shield, Star, Check } from "lucide-react";
+import { CalendarIcon, MessageCircle, Clock, Users, User, Mail, Phone, MapPin, FileText, Shield, Star, Check } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -76,6 +76,7 @@ export function BookingForm({ activity }: BookingFormProps) {
             setSelectedPackageName(getFirstPackageName());
             // Also reset other state if needed, but for now just package
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activity, prevActivityId]);
 
     const selectedPackage = findPackage(selectedPackageName);
@@ -91,7 +92,7 @@ export function BookingForm({ activity }: BookingFormProps) {
     return (
         <Card className="border-border shadow-2xl sticky top-28 rounded-2xl overflow-hidden">
             {/* Premium Header with Gradient */}
-            <div className="bg-gradient-to-r from-primary to-accent p-4 text-white">
+            <div className="bg-primary p-4 text-white">
                 <div className="flex items-center justify-between">
                     <div>
                         <p className="text-white/80 text-sm font-medium">From</p>
@@ -345,7 +346,7 @@ export function BookingForm({ activity }: BookingFormProps) {
 
                 <div className="pt-2">
                     <Button
-                        className="w-full text-base font-bold py-6 h-auto min-h-[56px] rounded-xl bg-gradient-to-r from-primary to-accent hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5"
+                        className="w-full text-base font-bold py-6 h-auto min-h-[56px] rounded-xl bg-primary hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5"
                         onClick={() => {
                             if (isGuest) {
                                 const callbackUrl = typeof window !== 'undefined'
@@ -420,7 +421,7 @@ export function BookingForm({ activity }: BookingFormProps) {
 
                                     // If validation error, append details
                                     if (data.error?.code === 'VALIDATION_ERROR' && Array.isArray(data.error.details)) {
-                                        const details = data.error.details.map((issue: any) => `${issue.path.join('.')}: ${issue.message}`).join(', ');
+                                        const details = data.error.details.map((issue: { path: string[], message: string }) => `${issue.path.join('.')}: ${issue.message}`).join(', ');
                                         errorMessage += ` (${details})`;
                                     }
 
@@ -431,7 +432,7 @@ export function BookingForm({ activity }: BookingFormProps) {
 
                             toast.promise(promise, {
                                 loading: 'Processing your booking request...',
-                                success: (data) => {
+                                success: () => {
                                     // Reset form
                                     setName("");
                                     setEmail("");

@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, CheckCheck, Check } from "lucide-react";
+import { Bell, CheckCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,

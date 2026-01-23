@@ -65,7 +65,7 @@ export function Footer() {
                         <h4 className="font-bold text-lg text-foreground">Quick Links</h4>
                         <ul className="space-y-3">
                             <li>
-                                <Link href="/search" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                                <Link href="/experiences" className="text-muted-foreground hover:text-primary text-sm transition-colors">
                                     All Things to do
                                 </Link>
                             </li>
@@ -97,27 +97,27 @@ export function Footer() {
                         <h4 className="font-bold text-lg text-foreground">Categories</h4>
                         <ul className="space-y-3">
                             <li>
-                                <Link href="/search?category=Adventures" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                                <Link href="/experiences?category=Adventures" className="text-muted-foreground hover:text-primary text-sm transition-colors">
                                     Adventures
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/search?category=City+Tours" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                                <Link href="/experiences?category=City+Tours" className="text-muted-foreground hover:text-primary text-sm transition-colors">
                                     City Tours
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/search?category=Food+%26+Drink" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                                <Link href="/experiences?category=Food+%26+Drink" className="text-muted-foreground hover:text-primary text-sm transition-colors">
                                     Food & Drink
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/search?category=Wellness" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                                <Link href="/experiences?category=Wellness" className="text-muted-foreground hover:text-primary text-sm transition-colors">
                                     Wellness
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/search?category=Excursions" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                                <Link href="/experiences?category=Excursions" className="text-muted-foreground hover:text-primary text-sm transition-colors">
                                     Excursions
                                 </Link>
                             </li>

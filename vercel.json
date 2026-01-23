@@ -4,8 +4,27 @@
     "installCommand": "npm install",
     "framework": "nextjs",
     "outputDirectory": ".next",
-    "regions": ["iad1"],
+    "regions": [
+        "iad1"
+    ],
     "env": {
         "PRISMA_GENERATE_DATAPROXY": "false"
-    }
+    },
+    "redirects": [
+        {
+            "source": "/services",
+            "destination": "/experiences",
+            "permanent": true
+        },
+        {
+            "source": "/services/:id",
+            "destination": "/experiences/:id",
+            "permanent": true
+        },
+        {
+            "source": "/search",
+            "destination": "/",
+            "permanent": true
+        }
+    ]
 }

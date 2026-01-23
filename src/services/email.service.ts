@@ -159,7 +159,7 @@ export class EmailService {
         accentColorDark?: string;
     }): string {
         const accentColor = options.accentColor || '#FF5F00';
-        const accentColorDark = options.accentColorDark || '#E55500';
+
         const greetingName = options.greetingName ? this.escapeHtml(options.greetingName) : '';
         const detailsTitle = options.detailsTitle ? this.escapeHtml(options.detailsTitle) : '';
         const ctaUrl = options.ctaUrl ? this.escapeHtml(options.ctaUrl) : '';
@@ -229,7 +229,7 @@ export class EmailService {
                         <td align="center" style="padding: 28px 12px;">
                             <table role="presentation" class="container" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 600px; background: #FFFFFF; border-radius: 16px; overflow: hidden; box-shadow: 0 18px 50px rgba(17, 24, 39, 0.10);">
                                 <tr>
-                                    <td style="background: linear-gradient(135deg, ${accentColor} 0%, ${accentColorDark} 100%);" class="px">
+                                    <td style="background: ${accentColor};" class="px">
                                         <div style="padding: 22px 0 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;">
                                             <div style="font-size: 18px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.02em;">Explore Marrakesh</div>
                                             <div style="font-size: 12px; color: rgba(255, 255, 255, 0.92); margin-top: 4px;">Your trusted partner for authentic experiences</div>
@@ -357,6 +357,8 @@ export class EmailService {
                 { label: 'Activity', value: activityTitle },
                 { label: 'Date & Time', value: formattedDate },
                 { label: 'Guests', value: String(guests) },
+                { label: 'Guests', value: String(guests) },
+                { label: 'Total', value: `€${totalPrice.toFixed(2)}` },
                 { label: 'Booking ID', value: bookingId },
             ],
             ctaLabel: 'View my bookings',

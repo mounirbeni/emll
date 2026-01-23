@@ -151,7 +151,7 @@
 
   /* Premium Button Styles - Explore Marrakesh */
   .btn-primary {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    background: var(--primary);
     color: var(--primary-foreground);
     font-weight: 600;
     border-radius: var(--radius-xl);
@@ -241,7 +241,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+    background: var(--primary);
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -260,7 +260,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    background: var(--primary);
     color: white;
     border-radius: 50%;
     font-weight: 700;
@@ -308,10 +308,7 @@
 
   /* Skeleton loading with shimmer */
   .skeleton {
-    background: linear-gradient(90deg,
-        var(--muted) 25%,
-        var(--border) 50%,
-        var(--muted) 75%);
+    background: #f0f0f0;
     background-size: 1000px 100%;
     animation: shimmer 2s infinite;
     border-radius: var(--radius-md);
@@ -344,7 +341,7 @@
 
   /* Premium Price Badge */
   .price-badge {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    background: var(--primary);
     color: white;
     font-weight: 700;
     padding: 6px 14px;
@@ -360,9 +357,8 @@
 
   /* Gradient text */
   .gradient-text {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: var(--primary);
+    -webkit-text-fill-color: var(--primary);
     background-clip: text;
   }
 
@@ -581,12 +577,7 @@
 
   /* Mobile Skeleton Loading */
   .mobile-skeleton {
-    background: linear-gradient(
-      90deg,
-      #f0f0f0 25%,
-      #e0e0e0 50%,
-      #f0f0f0 75%
-    );
+    background: #f0f0f0;
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
     border-radius: 12px;

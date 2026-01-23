@@ -1,16 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { Tent, Utensils, Car, CloudSun, Droplets, Map, ChevronLeft, ChevronRight } from "lucide-react";
+import { Tent, Utensils, Car, CloudSun, Droplets, Map } from "lucide-react";
 
 export function Categories() {
     const categories = [
-        { label: "Desert Tours", icon: Tent, href: "/search?q=desert" },
-        { label: "Food & Drink", icon: Utensils, href: "/search?q=food" },
-        { label: "Quad/Buggy", icon: Car, href: "/search?q=quad" },
-        { label: "Hot Air Balloon", icon: CloudSun, href: "/search?q=balloon" },
-        { label: "Hammams", icon: Droplets, href: "/search?q=hammam" },
-        { label: "Day Trips", icon: Map, href: "/search?q=trips" },
+        { label: "Desert Tours", icon: Tent, href: "/experiences?category=desert" },
+        { label: "Food & Drink", icon: Utensils, href: "/experiences?category=food" },
+        { label: "Quad/Buggy", icon: Car, href: "/experiences?category=quad" },
+        { label: "Hot Air Balloon", icon: CloudSun, href: "/experiences?category=balloon" },
+        { label: "Hammams", icon: Droplets, href: "/experiences?category=hammam" },
+        { label: "Day Trips", icon: Map, href: "/experiences?category=trips" },
     ];
 
     return (

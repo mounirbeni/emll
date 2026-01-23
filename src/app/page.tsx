@@ -53,7 +53,7 @@ export default function Home() {
               </h2>
               <p className="text-sm text-gray-500">Handpicked for you</p>
             </div>
-            <Link href="/services">
+            <Link href="/experiences">
               <button className="text-sm font-semibold text-primary">
                 See All →
               </button>
@@ -93,7 +93,7 @@ export default function Home() {
         {/* Quick Actions */}
         <section className="px-4 py-6">
           <div className="grid grid-cols-2 gap-3">
-            <Link href="/services">
+            <Link href="/experiences">
               <MobileCard className="text-center py-6 cursor-pointer">
                 <div className="flex flex-col items-center gap-2">
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
@@ -123,7 +123,7 @@ export default function Home() {
             <p className="text-white/90 mb-4 text-sm">
               Discover authentic Marrakech with local experts
             </p>
-            <Link href="/services">
+            <Link href="/experiences">
               <MobileButton
                 variant="secondary"
                 fullWidth

@@ -18,13 +18,13 @@ export function MobileBottomNav() {
 
     const navItems = session ? [
         { href: "/", icon: Home, label: "Home" },
-        { href: "/services", icon: Compass, label: "Explore" },
+        { href: "/experiences", icon: Compass, label: "Explore" },
         { href: "/client/bookings", icon: Calendar, label: "Trips" },
         { href: "/client/notifications", icon: Bell, label: "Alerts" },
         { href: "/client/profile", icon: User, label: "Profile" },
     ] : [
         { href: "/", icon: Home, label: "Home" },
-        { href: "/services", icon: Compass, label: "Explore" },
+        { href: "/experiences", icon: Compass, label: "Explore" },
         { href: "/login", icon: User, label: "Login" },
     ]
 

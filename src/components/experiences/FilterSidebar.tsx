@@ -59,7 +59,7 @@ export function FilterSidebar({
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <Card className="sticky top-24 h-fit border-border/50 shadow-sm">
+        <Card className="sticky top-24 h-fit border-border shadow-sm rounded-2xl overflow-hidden">
             <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 cursor-pointer lg:cursor-default" onClick={() => setIsOpen(!isOpen)}>
@@ -157,6 +157,6 @@ export function FilterSidebar({
                 </div>
 
             </CardContent>
-        </Card>  
+        </Card>
     );
 }

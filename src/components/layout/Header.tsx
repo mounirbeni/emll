@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const navLinks = [
-    { href: "/search", label: "Experiences" },
+    { href: "/experiences", label: "Experiences" },
     { href: "/about", label: "About Us" },
     { href: "/how-it-works", label: "How It Works" },
     { href: "/support", label: "Support" },
@@ -59,7 +59,7 @@ export function Header() {
                  but sticking to simple link wrapper if Logo text is internal */}
                         <div className="flex items-center gap-2">
                             <Compass className="w-8 h-8 text-primary" />
-                            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+                            <span className="text-2xl font-bold text-primary">
                                 Explore Marrakesh
                             </span>
                         </div>
@@ -83,7 +83,7 @@ export function Header() {
 
                     {/* Actions */}
                     <div className="hidden md:flex items-center space-x-4">
-                        <Link href="/search">
+                        <Link href="/experiences">
                             <Button variant="ghost" size="icon" className="hover:text-primary">
                                 <Search className="w-5 h-5" />
                                 <span className="sr-only">Search</span>

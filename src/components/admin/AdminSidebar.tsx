@@ -87,7 +87,7 @@ export function AdminSidebar({ onClose }: AdminSidebarProps) {
             {/* Premium Header with Gradient */}
             <div className="p-4 border-b border-border">
                 <Link href="/admin" className="flex items-center gap-3 group">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent text-white shadow-lg shadow-primary/25 transition-transform group-hover:scale-105">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white shadow-lg shadow-primary/25 transition-transform group-hover:scale-105">
                         <Compass className="h-5 w-5" />
                     </div>
                     <div>
@@ -101,7 +101,7 @@ export function AdminSidebar({ onClose }: AdminSidebarProps) {
             <div className="flex-1 overflow-y-auto py-4 px-3">
                 <nav className="space-y-1">
                     {sidebarItems.map((item) => {
-                        const isActive = pathname === item.href || 
+                        const isActive = pathname === item.href ||
                             (item.href !== '/admin' && pathname?.startsWith(item.href))
                         return (
                             <Link key={item.href} href={item.href} onClick={onClose}>
@@ -109,14 +109,14 @@ export function AdminSidebar({ onClose }: AdminSidebarProps) {
                                     className={cn(
                                         'group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all duration-200',
                                         isActive
-                                            ? 'bg-gradient-to-r from-primary/10 to-primary/5 text-primary shadow-sm'
+                                            ? 'bg-primary/10 text-primary shadow-sm'
                                             : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                                     )}
                                 >
                                     <div className={cn(
                                         "flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-200",
-                                        isActive 
-                                            ? "bg-primary text-white shadow-md shadow-primary/30" 
+                                        isActive
+                                            ? "bg-primary text-white shadow-md shadow-primary/30"
                                             : "bg-muted/80 text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary"
                                     )}>
                                         <item.icon className="h-4 w-4" />
@@ -141,7 +141,7 @@ export function AdminSidebar({ onClose }: AdminSidebarProps) {
 
             {/* Footer */}
             <div className="border-t border-border p-3 space-y-2">
-                <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl p-3 mb-2">
+                <div className="bg-primary/10 rounded-xl p-3 mb-2">
                     <div className="flex items-center gap-2">
                         <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center">
                             <Shield className="h-4 w-4 text-primary" />
