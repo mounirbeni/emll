@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import AuthProvider from "@/components/providers/AuthProvider";
 import { Toaster } from "sonner";
 import { MobileBottomNav } from "@/components/mobile/MobileBottomNav";
-import { Analytics } from "@vercel/analytics/next";
+import { VercelAnalytics } from "@/components/analytics/VercelAnalytics";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -136,7 +136,7 @@ export default function RootLayout({
             </ThemeProvider>
           </WishlistProvider>
         </AuthProvider>
-        <Analytics />
+        <VercelAnalytics />
       </body>
     </html>
   );
