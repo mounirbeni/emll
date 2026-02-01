@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { Star } from 'lucide-react';
 import StarRating from './StarRating';
 import ReviewCard from './ReviewCard';
+import { MobileReviewsSheet } from '@/components/mobile/MobileReviewsSheet';
+import { Button } from '@/components/ui/button';
 import {
     Select,
     SelectContent,
@@ -34,6 +36,7 @@ export default function ReviewsList({ experienceId }: ReviewsListProps) {
     const [loading, setLoading] = useState(true);
     const [sort, setSort] = useState<SortOption>('newest');
     const [summary, setSummary] = useState({ avgRating: 0, reviewCount: 0 });
+    const [isSheetOpen, setIsSheetOpen] = useState(false);
 
     useEffect(() => {
         const fetchReviews = async () => {
@@ -59,10 +62,24 @@ export default function ReviewsList({ experienceId }: ReviewsListProps) {
 
     if (loading) {
         return (
-            <div className="animate-pulse space-y-4">
-                <div className="h-8 bg-gray-200 rounded w-1/3" />
-                <div className="h-24 bg-gray-200 rounded" />
-                <div className="h-24 bg-gray-200 rounded" />
+            <div className="mb-12 border-t border-gray-100 pt-10">
+                <div className="h-8 bg-gray-100 rounded-lg w-1/3 mb-6 animate-pulse" />
+                <div className="flex gap-4 mb-8">
+                    <div className="h-32 w-1/3 bg-gray-100 rounded-xl animate-pulse" />
+                    <div className="h-32 w-2/3 bg-gray-100 rounded-xl animate-pulse" />
+                </div>
+                <div className="space-y-6">
+                    {[1, 2, 3].map((i) => (
+                        <div key={i} className="space-y-3">
+                            <div className="flex justify-between">
+                                <div className="h-6 w-1/3 bg-gray-100 rounded animate-pulse" />
+                                <div className="h-6 w-20 bg-gray-100 rounded animate-pulse" />
+                            </div>
+                            <div className="h-4 w-1/4 bg-gray-100 rounded animate-pulse" />
+                            <div className="h-16 w-full bg-gray-100 rounded animate-pulse" />
+                        </div>
+                    ))}
+                </div>
             </div>
         );
     }
@@ -154,10 +171,34 @@ export default function ReviewsList({ experienceId }: ReviewsListProps) {
 
             {/* Reviews List */}
             <div className="divide-y divide-gray-100">
-                {reviews.map((review) => (
-                    <ReviewCard key={review.id} review={review} />
-                ))}
+                {/* Desktop: Show all */}
+                <div className="hidden md:block space-y-6">
+                    {reviews.map((review) => (
+                        <ReviewCard key={review.id} review={review} />
+                    ))}
+                </div>
+
+                {/* Mobile: Show first 2 + View All Button */}
+                <div className="md:hidden space-y-6">
+                    {reviews.slice(0, 2).map((review) => (
+                        <ReviewCard key={review.id} review={review} />
+                    ))}
+                    <Button
+                        variant="outline"
+                        className="w-full rounded-xl border-gray-200 py-6 text-gray-900 font-bold"
+                        onClick={() => setIsSheetOpen(true)}
+                    >
+                        Read all {summary.reviewCount} reviews
+                    </Button>
+                </div>
             </div>
+
+            <MobileReviewsSheet
+                isOpen={isSheetOpen}
+                onClose={() => setIsSheetOpen(false)}
+                reviews={reviews}
+                summary={summary}
+            />
         </section>
     );
 }

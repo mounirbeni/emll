@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Calendar, Bell, User } from "lucide-react"
+import { Home, Calendar, User, Compass } from "lucide-react"
 import { useSession } from "next-auth/react"
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
@@ -18,16 +18,17 @@ export function MobileBottomNav() {
 
     const navItems = session ? [
         { href: "/", icon: Home, label: "Home" },
+        { href: "/experiences", icon: Compass, label: "Experiences" },
         { href: "/client/bookings", icon: Calendar, label: "Trips" },
-        { href: "/client/notifications", icon: Bell, label: "Alerts" },
         { href: "/client/profile", icon: User, label: "Profile" },
     ] : [
         { href: "/", icon: Home, label: "Home" },
+        { href: "/experiences", icon: Compass, label: "Experiences" },
         { href: "/login", icon: User, label: "Login" },
     ]
 
     return (
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-100 z-50 safe-bottom shadow-lg">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-100 z-50 safe-area-bottom shadow-lg">
             <div className="flex items-center justify-around h-[58px] px-2">
                 {navItems.map((item) => {
                     const Icon = item.icon

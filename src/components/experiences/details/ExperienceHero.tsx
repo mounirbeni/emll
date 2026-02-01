@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { MapPin, Clock, Star, Share2, Heart, ShieldCheck, Globe, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { MobileImageGallery } from '@/components/mobile/MobileImageGallery';
 
 interface ExperienceHeroProps {
     title: string;
@@ -33,6 +34,7 @@ export default function ExperienceHero({
     const displayImages = validImages.length > 0 ? validImages : ['/images/placeholder-experience.svg'];
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
     const nextImage = () => {
         setCurrentImageIndex((prev) => (prev + 1) % displayImages.length);
@@ -105,7 +107,7 @@ export default function ExperienceHero({
             </div>
 
             {/* Mobile Carousel / Desktop Hidden (Desktop usually uses Grid Gallery below) */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden md:hidden">
+            <div className="relative aspect-[4/3] w-full overflow-hidden md:hidden" onClick={() => setIsGalleryOpen(true)}>
                 <Image
                     src={displayImages[currentImageIndex] || '/images/placeholder-experience.svg'}
                     alt={title}
@@ -114,24 +116,24 @@ export default function ExperienceHero({
                     priority
                 />
 
-                {/* Navigation Arrows */}
-                <div className="absolute inset-0 flex items-center justify-between p-4">
+                {/* Navigation Arrows (Stop propagation to prevent opening gallery when clicking arrows) */}
+                <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
                     <button
-                        onClick={prevImage}
-                        className="rounded-full bg-white/80 p-2 shadow-sm backdrop-blur-sm transition-all hover:bg-white"
+                        onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                        className="pointer-events-auto rounded-full bg-white/80 p-2 shadow-sm backdrop-blur-sm transition-all hover:bg-white"
                     >
                         <ChevronLeft className="h-5 w-5 text-gray-900" />
                     </button>
                     <button
-                        onClick={nextImage}
-                        className="rounded-full bg-white/80 p-2 shadow-sm backdrop-blur-sm transition-all hover:bg-white"
+                        onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                        className="pointer-events-auto rounded-full bg-white/80 p-2 shadow-sm backdrop-blur-sm transition-all hover:bg-white"
                     >
                         <ChevronRight className="h-5 w-5 text-gray-900" />
                     </button>
                 </div>
 
                 {/* Dots */}
-                <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
+                <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2 pointer-events-none">
                     {images.slice(0, 5).map((_, idx) => (
                         <div
                             key={idx}
@@ -140,7 +142,19 @@ export default function ExperienceHero({
                         />
                     ))}
                 </div>
+
+                {/* Full screen hint icon */}
+                <div className="absolute top-4 right-4 bg-black/30 backdrop-blur-md rounded-full p-2 pointer-events-none">
+                    <Share2 className="h-4 w-4 text-white" />
+                </div>
             </div>
+
+            <MobileImageGallery
+                images={displayImages}
+                isOpen={isGalleryOpen}
+                onClose={() => setIsGalleryOpen(false)}
+                initialIndex={currentImageIndex}
+            />
         </div>
     );
 }

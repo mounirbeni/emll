@@ -95,21 +95,40 @@ export default async function ExperienceDetailsPage({ params }: { params: Promis
                         {/* 4. Highlights */}
                         <ExperienceHighlights highlights={experience.highlights} />
 
-                        {/* 5. Inclusions */}
-                        <ExperienceInclusions
-                            included={experience.included}
-                            notIncluded={experience.notIncluded}
-                        />
+                        <Accordion type="single" collapsible className="w-full mb-10" defaultValue="itinerary">
+                            {/* 5. Inclusions */}
+                            <AccordionItem value="inclusions" className="border-gray-200">
+                                <AccordionTrigger className="text-xl font-bold text-gray-900 pb-4">What&apos;s Included</AccordionTrigger>
+                                <AccordionContent>
+                                    <ExperienceInclusions
+                                        included={experience.included}
+                                        notIncluded={experience.notIncluded}
+                                    />
+                                </AccordionContent>
+                            </AccordionItem>
 
-                        {/* 6. Itinerary */}
-                        <ExperienceItinerary itinerary={itinerary} />
+                            {/* 6. Itinerary */}
+                            {itinerary.length > 0 && (
+                                <AccordionItem value="itinerary" className="border-gray-200">
+                                    <AccordionTrigger className="text-xl font-bold text-gray-900 pb-4">Itinerary</AccordionTrigger>
+                                    <AccordionContent>
+                                        <ExperienceItinerary itinerary={itinerary} />
+                                    </AccordionContent>
+                                </AccordionItem>
+                            )}
 
-                        {/* 7. Meeting Point */}
-                        <ExperienceMeetingPoint
-                            address={experience.meetingPoint}
-                            pickupAvailable={experience.pickupAvailable}
-                            description={(experience as any).meetingPointDescription || undefined}
-                        />
+                            {/* 7. Meeting Point */}
+                            <AccordionItem value="meeting-point" className="border-gray-200">
+                                <AccordionTrigger className="text-xl font-bold text-gray-900 pb-4">Meeting Point</AccordionTrigger>
+                                <AccordionContent>
+                                    <ExperienceMeetingPoint
+                                        address={experience.meetingPoint}
+                                        pickupAvailable={experience.pickupAvailable}
+                                        description={(experience as any).meetingPointDescription || undefined}
+                                    />
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
 
                         {/* 8. FAQs */}
                         {faqs.length > 0 && (

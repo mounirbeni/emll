@@ -42,7 +42,7 @@ function ExperienceCardComponent({ experience }: ExperienceCardProps) {
     return (
         <Link
             href={`/experiences/${id}`}
-            className="group relative flex flex-col h-full overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ring-1 ring-black/5"
+            className="group relative flex flex-col h-full overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ring-1 ring-black/5 active:scale-[0.98]"
         >
             {/* Image Container - 16:9 Aspect Ratio */}
             <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100">
@@ -69,7 +69,7 @@ function ExperienceCardComponent({ experience }: ExperienceCardProps) {
             </div>
 
             {/* Content Container */}
-            <div className="flex flex-1 flex-col p-5">
+            <div className="flex flex-1 flex-col p-4 md:p-5">
 
                 {/* Meta Info: Duration & Location */}
                 <div className="mb-3 flex items-center justify-between text-xs font-medium text-gray-500">
