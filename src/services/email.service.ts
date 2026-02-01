@@ -357,7 +357,6 @@ export class EmailService {
                 { label: 'Activity', value: activityTitle },
                 { label: 'Date & Time', value: formattedDate },
                 { label: 'Guests', value: String(guests) },
-                { label: 'Guests', value: String(guests) },
                 { label: 'Total', value: `€${totalPrice.toFixed(2)}` },
                 { label: 'Booking ID', value: bookingId },
             ],

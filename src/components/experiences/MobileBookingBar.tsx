@@ -23,7 +23,12 @@ export default function MobileBookingBar({
     return (
         <>
             {/* Fixed Bottom Bar - Mobile Only */}
-            <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-200 bg-white px-4 py-3 shadow-2xl shadow-gray-900/20 lg:hidden safe-area-bottom">
+            <div
+                className="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-200 bg-white px-4 py-3 shadow-2xl shadow-gray-900/20 lg:hidden"
+                style={{
+                    paddingBottom: 'calc(12px + env(safe-area-inset-bottom))',
+                }}
+            >
                 <div className="flex items-center justify-between gap-4">
                     <div>
                         <p className="text-xs text-gray-500">From</p>

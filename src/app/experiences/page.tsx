@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import ExperienceCard from '@/components/experiences/ExperienceCard';
 import ExperienceFilterBar from '@/components/experiences/ExperienceFilterBar';
 import { prisma } from '@/lib/prisma';
-import { Search, MapPin, Calendar, ArrowRight } from 'lucide-react';
+import { Search, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 // Force dynamic rendering as search params change
@@ -91,7 +91,7 @@ export default async function ExperiencesPage({
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 -mt-10 relative z-20 pb-20">
+            <div className="container mx-auto px-4 -mt-10 relative z-20 pb-24 md:pb-20">
 
                 {/* Filter Bar */}
                 <ExperienceFilterBar />
