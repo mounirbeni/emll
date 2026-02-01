@@ -10,7 +10,7 @@ export default function WalletPage() {
 
             <div className="p-4 space-y-6">
                 {/* Balance Card */}
-                <div className="bg-gray-900 rounded-3xl p-6 text-white shadow-xl">
+                <div className="bg-primary rounded-3xl p-6 text-white shadow-md">
                     <p className="text-gray-400 text-sm mb-1">Current Balance</p>
                     <h1 className="text-4xl font-bold mb-6">€0.00</h1>
 

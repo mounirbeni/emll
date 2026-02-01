@@ -76,7 +76,7 @@ function Counter({ target, suffix }: { target: number; suffix: string }) {
     }, [hasStarted, target]);
 
     return (
-        <div ref={ref} className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-secondary)] mb-2">
+        <div ref={ref} className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-2">
             {target === 4.9 ? count.toFixed(1) : count.toLocaleString()}{suffix}
         </div>
     );
@@ -84,10 +84,10 @@ function Counter({ target, suffix }: { target: number; suffix: string }) {
 
 export function Stats() {
     return (
-        <section className="py-20 md:py-32 gradient-warm dark:gradient-dark relative overflow-hidden">
+        <section className="py-20 md:py-32 bg-accent relative overflow-hidden">
             {/* Decorative Elements */}
-            <div className="absolute top-10 right-10 w-32 h-32 rounded-full bg-white/10 animate-float" />
-            <div className="absolute bottom-20 left-10 w-24 h-24 rounded-full bg-white/10 animate-float" style={{ animationDelay: '1s' }} />
+            <div className="absolute top-10 right-10 w-32 h-32 rounded-full bg-primary/5 animate-float" />
+            <div className="absolute bottom-20 left-10 w-24 h-24 rounded-full bg-primary/5 animate-float" style={{ animationDelay: '1s' }} />
 
             <div className="container mx-auto px-8 max-w-7xl relative z-10">
                 <motion.div
@@ -100,7 +100,7 @@ export function Stats() {
                     <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-4 tracking-tight">
                         Trusted by Thousands
                     </h2>
-                    <p className="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto font-light">
+                    <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto font-light">
                         Join the community of travelers who discovered Marrakech with us
                     </p>
                 </motion.div>
@@ -115,11 +115,11 @@ export function Stats() {
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             className="text-center group"
                         >
-                            <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 dark:bg-white/10 mb-6 group-hover:bg-white/30 dark:group-hover:bg-white/20 transition-colors duration-300">
-                                <stat.icon className="w-8 h-8 md:w-10 md:h-10 text-foreground" />
+                            <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-white mb-6 shadow-sm transition-transform duration-300 group-hover:scale-110">
+                                <stat.icon className="w-8 h-8 md:w-10 md:h-10 text-primary" />
                             </div>
                             <Counter target={stat.value} suffix={stat.suffix} />
-                            <p className="text-text-secondary dark:text-text-muted font-medium text-base md:text-lg">
+                            <p className="text-muted-foreground font-medium text-base md:text-lg">
                                 {stat.label}
                             </p>
                         </motion.div>

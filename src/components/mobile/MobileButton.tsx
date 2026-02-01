@@ -132,7 +132,7 @@ export function MobileFAB({
                 "fixed bottom-20 right-4 z-40",
                 "w-[52px] h-[52px] rounded-full",
                 "bg-primary hover:bg-accent text-white",
-                "shadow-2xl shadow-primary/30",
+                "shadow-lg shadow-primary/30",
                 "flex items-center justify-center",
                 "transition-all duration-200 active:scale-[0.97]",
                 "safe-bottom",

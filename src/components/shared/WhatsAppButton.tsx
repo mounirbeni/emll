@@ -17,7 +17,7 @@ export function WhatsAppButton() {
             onClick={handleClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="fixed bottom-6 right-6 z-50 h-14 px-4 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl hover:shadow-green-500/50 transition-all duration-300 flex items-center gap-2 group"
+            className="fixed bottom-6 right-6 z-50 h-14 px-4 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full shadow-lg transition-all duration-300 flex items-center gap-2 group"
             aria-label="Contact us on WhatsApp"
         >
             <MessageCircle className="h-6 w-6 group-hover:scale-110 transition-transform" />

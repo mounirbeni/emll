@@ -56,8 +56,8 @@ export function WhyBookWithUs() {
                             transition={{ duration: 0.5, delay: index * 0.2 }}
                             className="flex flex-col items-center text-center group p-8 rounded-2xl bg-card border border-border elevation-2 hover-glow"
                         >
-                            <div className="h-20 w-20 md:h-24 md:w-24 rounded-full gradient-primary flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 animate-float">
-                                <feature.icon className="h-10 w-10 md:h-12 md:w-12 text-white" />
+                            <div className="h-20 w-20 md:h-24 md:w-24 rounded-full bg-primary/10 flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 animate-float">
+                                <feature.icon className="h-10 w-10 md:h-12 md:w-12 text-primary" />
                             </div>
                             <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3 font-serif">
                                 {feature.title}

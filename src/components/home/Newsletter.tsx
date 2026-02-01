@@ -25,10 +25,10 @@ export function Newsletter() {
     };
 
     return (
-        <section className="py-20 md:py-32 gradient-secondary dark:gradient-dark relative overflow-hidden">
+        <section className="py-20 md:py-32 bg-primary relative overflow-hidden">
             {/* Decorative Elements */}
-            <div className="absolute top-1/4 right-10 w-40 h-40 rounded-full bg-white/5 animate-float" />
-            <div className="absolute bottom-1/4 left-10 w-32 h-32 rounded-full bg-white/5 animate-float" style={{ animationDelay: '1s' }} />
+            <div className="absolute top-1/4 right-10 w-40 h-40 rounded-full bg-white/10 animate-float" />
+            <div className="absolute bottom-1/4 left-10 w-32 h-32 rounded-full bg-white/10 animate-float" style={{ animationDelay: '1s' }} />
 
             <div className="container mx-auto px-8 max-w-4xl relative z-10">
                 <motion.div
@@ -38,14 +38,14 @@ export function Newsletter() {
                     transition={{ duration: 0.6 }}
                     className="text-center"
                 >
-                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 mb-6">
+                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/20 mb-6 backdrop-blur-sm">
                         <Mail className="w-10 h-10 text-white" />
                     </div>
 
                     <h2 className="text-4xl md:text-5xl font-serif text-white mb-4 tracking-tight">
                         Get Travel Inspiration
                     </h2>
-                    <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                    <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed">
                         Subscribe to our newsletter for exclusive deals, insider tips, and curated Marrakech experiences delivered to your inbox
                     </p>
 
@@ -58,13 +58,13 @@ export function Newsletter() {
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="Enter your email address"
                                     required
-                                    className="w-full h-14 px-6 rounded-full bg-white dark:bg-surface-elevated text-foreground placeholder:text-muted-foreground font-medium focus:outline-none focus:ring-2 focus:ring-primary border border-transparent dark:border-border"
+                                    className="w-full h-14 px-6 rounded-full bg-white text-foreground placeholder:text-muted-foreground font-medium focus:outline-none focus:ring-2 focus:ring-accent border-transparent"
                                 />
                             </div>
                             <Button
                                 type="submit"
                                 disabled={isSubmitting || isSuccess}
-                                className="h-14 px-8 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-all duration-300 hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed elevation-3"
+                                className="h-14 px-8 rounded-full bg-charcoal hover:bg-black text-white font-medium transition-all duration-300 hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg"
                             >
                                 {isSubmitting ? (
                                     <span className="flex items-center gap-2">
@@ -83,7 +83,7 @@ export function Newsletter() {
                                 )}
                             </Button>
                         </div>
-                        <p className="text-white/60 text-sm">
+                        <p className="text-white/70 text-sm">
                             Join 10,000+ travelers. Unsubscribe anytime.
                         </p>
                     </form>

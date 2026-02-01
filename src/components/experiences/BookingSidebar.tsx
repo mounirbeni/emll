@@ -128,7 +128,7 @@ export default function BookingSidebar({
     // Success State
     if (bookingState === 'success' && bookingResult) {
         return (
-            <div className="sticky top-24 overflow-hidden rounded-2xl border border-green-200 bg-white shadow-xl shadow-green-100/50">
+            <div className="sticky top-24 overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
                 <div className="bg-gray-50 p-8 text-center rounded-b-xl border-t border-gray-100">
                     <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
                         <CheckCircle className="h-8 w-8 text-green-600" />

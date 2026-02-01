@@ -20,7 +20,7 @@ function CardPremium({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-premium"
       className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border border-primary/20 py-6 shadow-md relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1",
+        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border border-border py-6 shadow-sm relative overflow-hidden transition-all duration-300 hover:shadow-md hover:-translate-y-1",
         "before:absolute before:top-0 before:left-0 before:right-0 before:h-1 before:bg-primary before:opacity-100",
         className
       )}

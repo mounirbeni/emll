@@ -3,95 +3,95 @@
 
 
 @theme {
-  /* Explore Marrakesh Brand Color Palette - FLAT ORANGE */
-  --color-primary: #FFA500;
-  --color-primary-dark: #FF8c00;
-  --color-primary-light: #FFB733;
+  /* Marrakesh Brand Identity - FLAT ORANGE */
+  --color-primary: #ff6900;
   --color-primary-foreground: #FFFFFF;
 
-  /* Deep Charcoal for text - High Contrast */
-  --color-black: #000000;
-  --color-dark-gray: #1A1A1A;
-  --color-charcoal: #2D2D2D;
-  --color-medium-gray: #666666;
-
-  /* Soft Backgrounds - Clean & Modern */
+  /* Neutrals */
   --color-background: #FFFFFF;
-  --color-surface: #F9FAFB;
-  --color-surface-hover: #F3F4F6;
+  --color-foreground: #000000;
+  --color-charcoal: #2D2D2D;
 
-  --color-border: #E5E7EB;
-  --color-border-dark: #D1D5DB;
+  --color-muted: #F5F5F5;
+  --color-muted-foreground: #666666;
 
-  /* Status colors */
+  --color-card: #FFFFFF;
+  --color-card-foreground: #000000;
+
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #000000;
+
+  --color-border: #E5E5E5;
+  --color-input: #E5E5E5;
+  --color-ring: #ff6900;
+
+  /* Status Colors */
   --color-success: #10B981;
-  --color-success-dark: #059669;
   --color-warning: #F59E0B;
   --color-error: #EF4444;
   --color-info: #3B82F6;
 
+  /* Typography */
   --font-sans: var(--font-outfit), -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   --font-serif: var(--font-playfair), Georgia, serif;
 
-  /* Consistent border radius */
-  --radius-sm: 6px;
+  /* Spacing System (4px base) */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
-  --radius-2xl: 24px;
   --radius-full: 9999px;
 
-  /* Spacing */
-  --spacing-section: 64px;
-  --spacing-card: 20px;
-
-  /* Semantic colors for utility classes */
-  --color-foreground: #1A1A1A;
-  --color-background: #FFFFFF;
-  --color-border: #E5E7EB;
+  /* Shadows (Subtle/Clean) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
 }
 
-/* Enhanced Light Mode - Explore Marrakesh */
+/* Enhanced Light Mode - Flat & Clean */
 :root {
   color-scheme: light;
+
   --background: #FFFFFF;
-  --foreground: #1A1A1A;
+  --foreground: #000000;
 
   --card: #FFFFFF;
-  --card-foreground: #1A1A1A;
+  --card-foreground: #000000;
 
   --popover: #FFFFFF;
-  --popover-foreground: #1A1A1A;
+  --popover-foreground: #000000;
 
-  --primary: #FFA500;
+  --primary: #ff6900;
   --primary-foreground: #FFFFFF;
 
-  --secondary: #F3F4F6;
-  --secondary-foreground: #1A1A1A;
+  --secondary: #F5F5F5;
+  --secondary-foreground: #000000;
 
-  --muted: #F3F4F6;
-  --muted-foreground: #6B7280;
+  --muted: #F5F5F5;
+  --muted-foreground: #666666;
 
-  --accent: #FFF7ED;
-  --accent-foreground: #FFA500;
+  --accent: #FFF0E6;
+  /* Light orange tint for hovers */
+  --accent-foreground: #ff6900;
 
   --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
 
-  --border: #E5E7EB;
-  --input: #E5E7EB;
-  --ring: #FFA500;
+  --border: #E5E5E5;
+  --input: #E5E5E5;
+  --ring: #ff6900;
 
-  /* Status colors */
-  --success: #10B981;
-  --warning: #F59E0B;
-  --info: #3B82F6;
-
-  /* Clean Shadows - No heavy blurs */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  --radius: 0.5rem;
 }
 
 @layer utilities {

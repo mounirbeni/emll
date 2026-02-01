@@ -92,8 +92,8 @@ export const viewport = {
   userScalable: true,
   viewportFit: 'cover', // Critical for iOS safe areas
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FDF8F3' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+    { media: '(prefers-color-scheme: light)', color: '#FFFFFF' },
+    { media: '(prefers-color-scheme: dark)', color: '#FFFFFF' },
   ],
 };
 

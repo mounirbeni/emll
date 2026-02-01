@@ -83,7 +83,7 @@ export function Hero() {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search attractions, experiences, food..."
-                            className="w-full px-6 py-4 pl-14 rounded-full shadow-xl border-0 bg-white text-gray-800 placeholder:text-gray-400 focus:ring-4 focus:ring-primary/10 outline-none text-lg transition-all hover:shadow-2xl"
+                            className="w-full px-6 py-4 pl-14 rounded-full shadow-lg border border-border/50 bg-white text-foreground placeholder:text-muted-foreground focus:ring-4 focus:ring-primary/10 outline-none text-lg transition-all"
                         />
                         <button type="submit" className="absolute left-4 top-1/2 -translate-y-1/2 p-2 text-primary hover:scale-110 transition-transform duration-200">
                             <Search className="w-6 h-6" />
