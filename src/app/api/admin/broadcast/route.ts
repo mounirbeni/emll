@@ -19,7 +19,7 @@ export async function POST(req: Request) {
         const result = broadcastSchema.safeParse(body);
 
         if (!result.success) {
-            return NextResponse.json({ error: 'Invalid input', details: result.error.errors }, { status: 400 });
+            return NextResponse.json({ error: 'Invalid input', details: result.error.issues }, { status: 400 });
         }
 
         const { subject, message, ctaText, ctaLink, targetRole } = result.data;
