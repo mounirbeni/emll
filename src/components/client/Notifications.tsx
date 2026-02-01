@@ -94,7 +94,7 @@ export function Notifications() {
             case "ERROR":
                 return "bg-red-100 text-red-600";
             case "WARNING":
-                return "bg-yellow-100 text-yellow-600";
+                return "bg-[#F5EADB] text-[#FF6900]";
             default:
                 return "bg-gray-100 text-gray-600";
         }

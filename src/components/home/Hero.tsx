@@ -24,7 +24,7 @@ export function Hero() {
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
                 style={{
-                    backgroundImage: 'url("/images/hero-marrakech.jpg")', // Placeholder, needs actual image asset
+                    backgroundImage: 'url("/images/homepage.jpg")',
                     backgroundPosition: 'center',
                 }}
             >

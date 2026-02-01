@@ -122,14 +122,14 @@ export default function TestEmailPage() {
                             )}
 
                             {!status.configured && (
-                                <div className="rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 p-4">
+                                <div className="rounded-lg bg-[#F5EADB] dark:bg-[#FF6900]/10 border border-[#FF6900]/30 dark:border-[#FF6900]/30 p-4">
                                     <div className="flex items-start gap-2">
-                                        <AlertCircle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5" />
+                                        <AlertCircle className="h-5 w-5 text-[#FF6900] dark:text-[#FF6900] mt-0.5" />
                                         <div className="space-y-1">
-                                            <p className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
+                                            <p className="text-sm font-medium text-[#FF6900] dark:text-[#FF6900]">
                                                 Configuration Required
                                             </p>
-                                            <p className="text-sm text-yellow-700 dark:text-yellow-300">
+                                            <p className="text-sm text-[#FF6900]/80 dark:text-[#FF6900]/80">
                                                 Make sure GMAIL_USER and GMAIL_APP_PASSWORD are set in your .env file and restart the server.
                                             </p>
                                         </div>

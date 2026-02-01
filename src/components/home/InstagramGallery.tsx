@@ -1,33 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+
 import { Instagram } from "lucide-react";
 import Link from "next/link";
 
 const galleryImages = [
     {
-        src: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?q=80&w=800&auto=format&fit=crop",
+        src: "/images/placeholder-experience.svg",
         alt: "Marrakech Medina at sunset"
     },
     {
-        src: "https://images.unsplash.com/photo-1597211661960-e1423301dc50?q=80&w=800&auto=format&fit=crop",
+        src: "/images/placeholder-experience.svg",
         alt: "Desert landscape in Agafay"
     },
     {
-        src: "https://images.unsplash.com/photo-1549141013-17b5f935047b?q=80&w=800&auto=format&fit=crop",
+        src: "/images/placeholder-experience.svg",
         alt: "Atlas Mountains vista"
     },
     {
-        src: "https://images.unsplash.com/photo-1512413348185-ed762c2941fa?q=80&w=800&auto=format&fit=crop",
+        src: "/images/placeholder-experience.svg",
         alt: "Traditional Moroccan cuisine"
     },
     {
-        src: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800&auto=format&fit=crop",
+        src: "/images/placeholder-experience.svg",
         alt: "Hammam spa experience"
     },
     {
-        src: "https://images.unsplash.com/photo-1531758532450-4baeca54cde2?q=80&w=800&auto=format&fit=crop",
+        src: "/images/placeholder-experience.svg",
         alt: "Quad adventure in desert"
     }
 ];

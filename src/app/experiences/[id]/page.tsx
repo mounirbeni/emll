@@ -10,6 +10,7 @@ import ExperienceItinerary from '@/components/experiences/details/ExperienceItin
 import ExperienceInclusions from '@/components/experiences/details/ExperienceInclusions';
 import ExperienceMeetingPoint from '@/components/experiences/details/ExperienceMeetingPoint';
 import RelatedExperiences from '@/components/experiences/details/RelatedExperiences';
+import ReviewsList from '@/components/experiences/reviews/ReviewsList';
 
 import BookingSidebar from '@/components/experiences/BookingSidebar';
 import MobileBookingBar from '@/components/experiences/MobileBookingBar';
@@ -63,8 +64,8 @@ export default async function ExperienceDetailsPage({ params }: { params: Promis
                 category={experience.category}
                 location={experience.location}
                 duration={experience.duration}
-                rating={(experience as any).rating || 4.8}
-                reviews={(experience as any).reviews || 128}
+                rating={(experience as any).avgRating || 0}
+                reviews={(experience as any).reviewCount || 0}
                 pickupAvailable={experience.pickupAvailable}
                 languages={languages}
                 images={experience.gallery}
@@ -129,7 +130,10 @@ export default async function ExperienceDetailsPage({ params }: { params: Promis
                             </section>
                         )}
 
-                        {/* 9. Related Experiences */}
+                        {/* 9. Reviews Section */}
+                        <ReviewsList experienceId={experience.id} />
+
+                        {/* 10. Related Experiences */}
                         <RelatedExperiences currentId={experience.id} category={experience.category} />
 
                     </div>

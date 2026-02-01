@@ -36,7 +36,7 @@ export function CalendarClient({ bookings }: { bookings: CalendarBooking[] }) {
             case 'CONFIRMED': return 'bg-green-500 hover:bg-green-600'
             case 'COMPLETED': return 'bg-primary hover:bg-primary/90'
             case 'CANCELLED': return 'bg-red-500 hover:bg-red-600'
-            default: return 'bg-yellow-500 hover:bg-yellow-600'
+            default: return 'bg-[#FF6900] hover:bg-[#FF6900]/90'
         }
     }
 

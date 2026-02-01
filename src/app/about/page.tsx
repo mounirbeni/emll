@@ -22,7 +22,7 @@ export default function AboutPage() {
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0">
                     <Image
-                        src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?q=80&w=2000&auto=format&fit=crop"
+                        src="/images/placeholder-experience.svg"
                         alt="Marrakech Desert"
                         fill
                         className="object-cover"
@@ -55,7 +55,7 @@ export default function AboutPage() {
                         </div>
                         <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
                             <Image
-                                src="https://images.unsplash.com/photo-1597212618440-806262de4f6b?q=80&w=2000&auto=format&fit=crop"
+                                src="/images/placeholder-experience.svg"
                                 alt="Marrakech Architecture"
                                 fill
                                 className="object-cover"
@@ -70,7 +70,7 @@ export default function AboutPage() {
                 <div className="container mx-auto max-w-4xl text-center">
                     <div className="relative w-32 h-32 mx-auto mb-8 rounded-full overflow-hidden border-4 border-primary shadow-xl">
                         <Image
-                            src="/mounir banni.jpeg"
+                            src="/images/mounir-banni.jpeg"
                             alt="Mounir Banni"
                             fill
                             className="object-cover"

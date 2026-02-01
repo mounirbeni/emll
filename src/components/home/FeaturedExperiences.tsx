@@ -1,5 +1,4 @@
-"use client";
-
+import Image from "next/image";
 import Link from "next/link";
 import { Star, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,7 +8,7 @@ const experiences = [
     {
         id: 1,
         title: "Marrakech Medina Guided Walking Tour",
-        image: "/images/medina-tour.jpg",
+        image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
         price: 45,
         rating: 4.9,
         reviews: 128,
@@ -19,7 +18,7 @@ const experiences = [
     {
         id: 2,
         title: "Agafay Desert Sunset & Dinner",
-        image: "/images/agafay-desert.jpg",
+        image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
         price: 85,
         rating: 4.8,
         reviews: 94,
@@ -29,7 +28,7 @@ const experiences = [
     {
         id: 3,
         title: "Atlas Mountains Day Trip",
-        image: "/images/atlas-mountains.jpg",
+        image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
         price: 60,
         rating: 4.7,
         reviews: 210,
@@ -39,7 +38,7 @@ const experiences = [
     {
         id: 4,
         title: "Traditional Moroccan Cooking Class",
-        image: "/images/cooking-class.jpg",
+        image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
         price: 55,
         rating: 5.0,
         reviews: 75,
@@ -69,12 +68,13 @@ export function FeaturedExperiences() {
                         <div key={exp.id} className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
                             {/* Image */}
                             <div className="relative h-56 w-full bg-gray-200">
-                                {/* Next/Image would be used here with actual assets */}
-                                {/* <Image src={exp.image} alt={exp.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" /> */}
-                                <div className="absolute inset-0 flex items-center justify-center text-gray-400 text-sm">
-                                    [Image: {exp.title}]
-                                </div>
-                                <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-semibold text-gray-800">
+                                <Image
+                                    src={exp.image === "IMAGE_PLACEHOLDER_PENDING_UPLOAD" ? "/images/placeholder-experience.svg" : exp.image}
+                                    alt={exp.title}
+                                    fill
+                                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                />
+                                <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-semibold text-gray-800 z-10">
                                     {exp.category}
                                 </div>
                             </div>

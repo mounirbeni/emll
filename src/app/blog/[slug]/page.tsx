@@ -26,7 +26,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             {/* Hero Image */}
             <div className="relative w-full h-[50vh] md:h-[60vh] bg-gray-900">
                 <Image
-                    src={post.image}
+                    src={post.image === "IMAGE_PLACEHOLDER_PENDING_UPLOAD" ? "/images/placeholder-blog.svg" : post.image}
                     alt={post.title}
                     fill
                     className="object-cover opacity-60"
@@ -53,14 +53,9 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                         </h1>
                         <div className="flex flex-wrap items-center gap-6 text-white/90 text-sm md:text-base">
                             <div className="flex items-center gap-2">
-                                <Image
-                                    src={`https://ui-avatars.com/api/?name=${post.author}&background=random`}
-                                    alt={post.author}
-                                    width={40}
-                                    height={40}
-                                    className="rounded-full border-2 border-white/20"
-                                    unoptimized
-                                />
+                                <div className="w-10 h-10 rounded-full border-2 border-white/20 bg-primary flex items-center justify-center text-white font-bold text-sm">
+                                    {post.author.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                                </div>
                                 <span className="font-bold">{post.author}</span>
                             </div>
                             <div className="flex items-center gap-2">

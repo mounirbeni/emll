@@ -72,7 +72,7 @@ export default function BookingActions({ bookingId }: BookingActionsProps) {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                     <DropdownMenuItem onClick={() => updateStatus('PENDING')}>
-                        <Clock className="mr-2 h-4 w-4 text-yellow-500" /> Pending
+                        <Clock className="mr-2 h-4 w-4 text-[#FF6900]" /> Pending
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => updateStatus('CONFIRMED')}>
                         <CheckCircle className="mr-2 h-4 w-4 text-green-500" /> Confirmed

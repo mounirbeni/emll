@@ -48,6 +48,12 @@ export async function PUT(
 
         const { status, notes } = result.data;
 
+        // Get current booking state to check for status change
+        const currentBooking = await prisma.booking.findUnique({
+            where: { id },
+            select: { status: true, userId: true, experienceId: true },
+        });
+
         const booking = await prisma.booking.update({
             where: { id },
             data: {
@@ -59,16 +65,22 @@ export async function PUT(
             } as any // eslint-disable-line @typescript-eslint/no-explicit-any
         });
 
-        // If status changed to CONFIRMED, maybe send another email?
-        // For now, keeping it simple as per requirements (notification on status update mentioned in reqs)
-
-        // Req 7: If status is updated -> Send email to customer.
-        // I need to import sendEmail and template here. 
-        // I'll leave a TODO or implement if I can easily import.
-        // I will modify this file in a moment if I can't do it now, but wait, I can just import it.
+        // If status changed to COMPLETED and user is registered, send review notification
+        if (status === 'COMPLETED' && currentBooking?.status !== 'COMPLETED' && booking.userId) {
+            // Create notification for user to leave a review
+            await prisma.notification.create({
+                data: {
+                    userId: booking.userId,
+                    title: 'How was your experience?',
+                    message: `We hope you enjoyed "${(booking as any).experience?.title}". Share your review to help other travelers!`,
+                    type: 'REVIEW',
+                    link: `/experiences/${booking.experienceId}/review`,
+                },
+            });
+        }
 
         return NextResponse.json(booking);
-    } catch (error) {  
+    } catch (error) {
         console.error("Error updating booking:", error);
         return NextResponse.json({ error: 'Failed to update booking' }, { status: 500 });
     }

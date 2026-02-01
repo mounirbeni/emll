@@ -210,7 +210,7 @@ export function BlogClient({ posts }: BlogClientProps) {
                                             <div className="flex-1 min-w-0">
                                                 <div className="flex items-center gap-2">
                                                     <p className="font-medium text-charcoal truncate max-w-[200px]" title={post.title}>{post.title}</p>
-                                                    {post.featured && <Star className="h-4 w-4 text-yellow-500 fill-current" />}
+                                                    {post.featured && <Star className="h-4 w-4 text-[#FF6900] fill-current" />}
                                                 </div>
                                                 <p className="text-sm text-medium-gray truncate max-w-[250px]">{post.excerpt}</p>
                                             </div>

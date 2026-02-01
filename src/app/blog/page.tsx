@@ -103,7 +103,9 @@ export default function BlogPage() {
                                             {featuredPost.excerpt}
                                         </p>
                                         <div className="flex items-center gap-4 mt-auto">
-                                            <Image src={`https://ui-avatars.com/api/?name=${featuredPost.author}&background=random`} alt={featuredPost.author} width={40} height={40} className="rounded-full" unoptimized />
+                                            <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-primary font-bold text-sm">
+                                                {featuredPost.author.charAt(0)}
+                                            </div>
                                             <div className="text-sm">
                                                 <p className="font-bold text-gray-900">{featuredPost.author}</p>
                                                 <p className="text-gray-400">{featuredPost.readTime} • {new Date(featuredPost.publishedAt).toLocaleDateString()}</p>

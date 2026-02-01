@@ -89,9 +89,9 @@ export default async function BookingDetailPage({ params }: { params: Promise<{ 
                     </div>
 
                     {booking.notes && (
-                        <div className="bg-yellow-50 p-6 rounded-xl border border-yellow-200 shadow-sm">
-                            <h2 className="text-lg font-semibold mb-2 text-yellow-800">Special Requests / Notes</h2>
-                            <p className="text-yellow-800">{booking.notes}</p>
+                        <div className="bg-[#F5EADB] p-6 rounded-xl border border-[#FF6900]/20 shadow-sm">
+                            <h2 className="text-lg font-semibold mb-2 text-[#FF6900]">Special Requests / Notes</h2>
+                            <p className="text-[#FF6900]/80">{booking.notes}</p>
                         </div>
                     )}
                 </div>

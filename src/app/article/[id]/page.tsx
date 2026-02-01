@@ -12,9 +12,9 @@ export default function ArticlePage() {
 
     // This would typically come from a CMS or database
     const images = [
-        "https://images.unsplash.com/photo-1597211684694-8f6398918803?q=80&w=2574&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1512413348185-ed762c2941fa?q=80&w=2070&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?q=80&w=2070&auto=format&fit=crop"
+        "/images/placeholder-experience.svg",
+        "/images/placeholder-experience.svg",
+        "/images/placeholder-experience.svg"
     ];
 
     return (
@@ -55,7 +55,7 @@ export default function ArticlePage() {
                     </p>
                     <div className="relative h-[400px] w-full my-8 rounded-2xl overflow-hidden">
                         <Image
-                            src="https://images.unsplash.com/photo-1549141013-17b5f935047b?q=80&w=2070&auto=format&fit=crop"
+                            src="/images/placeholder-experience.svg"
                             alt="Market scene"
                             fill
                             className="object-cover"

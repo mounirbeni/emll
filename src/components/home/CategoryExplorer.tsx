@@ -26,7 +26,7 @@ const categories = [
         icon: <Tent className="w-8 h-8" />,
         title: "Desert Trips",
         href: "/experiences?category=desert",
-        color: "bg-yellow-100 text-yellow-600"
+        color: "bg-[#F5EADB] text-[#FF6900]"
     },
     {
         icon: <Utensils className="w-8 h-8" />,

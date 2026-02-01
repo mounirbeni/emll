@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Loader2, User, Mail, Calendar, LogOut } from "lucide-react";
 import { toast } from "sonner";
 
@@ -82,8 +82,7 @@ export default function ProfilePage() {
                         <CardContent className="space-y-6">
                             <div className="flex items-center gap-4">
                                 <Avatar className="h-20 w-20 border-2 border-primary">
-                                    <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${user.name || user.email}`} />
-                                    <AvatarFallback>{user.name?.[0] || user.email[0]}</AvatarFallback>
+                                    <AvatarFallback className="bg-primary text-white text-2xl font-bold">{user.name?.[0] || user.email[0]}</AvatarFallback>
                                 </Avatar>
                                 <div>
                                     <h3 className="text-2xl font-bold text-foreground">{user.name || "User"}</h3>

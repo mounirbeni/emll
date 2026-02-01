@@ -95,7 +95,7 @@ export function ComplaintsClient({ initialRequests }: ComplaintsClientProps) {
     const getStatusBadge = (status: string) => {
         switch (status) {
             case "PENDING":
-                return <Badge variant="outline" className="bg-yellow-50 text-yellow-700 border-yellow-200"><Clock className="w-3 h-3 mr-1" /> Pending</Badge>;
+                return <Badge variant="outline" className="bg-[#F5EADB] text-[#FF6900] border-[#F5EADB]"><Clock className="w-3 h-3 mr-1" /> Pending</Badge>;
             case "RESOLVED":
                 return <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200"><CheckCircle className="w-3 h-3 mr-1" /> Resolved</Badge>;
             case "CLOSED":

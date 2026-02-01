@@ -103,7 +103,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "medina-hidden-gems-walking-tour"
+    "slug": "medina-hidden-gems-walking-tour",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Vintage Sidecar Adventure: The Insider's Ride",
@@ -211,7 +212,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "vintage-sidecar-tour"
+    "slug": "vintage-sidecar-tour",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Evening Jemaa El Fna: Mythic Square & Souk Tasting",
@@ -317,7 +319,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "evening-jemaa-el-fna-tasting"
+    "slug": "evening-jemaa-el-fna-tasting",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Marrakech Photography Tour: Light & Shadow",
@@ -423,7 +426,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "marrakech-photography-tour"
+    "slug": "marrakech-photography-tour",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Architectural Masterpieces: Bahia Palace & Ben Youssef",
@@ -525,7 +529,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "bahia-palace-ben-youssef"
+    "slug": "bahia-palace-ben-youssef",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Jewish Heritage Tour: The Mellah & Synagogues",
@@ -627,7 +632,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "jewish-quarter-mellah-heritage"
+    "slug": "jewish-quarter-mellah-heritage",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Agafay Desert: Sunset Camel Trek & Dinner Show",
@@ -734,7 +740,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "agafay-sunset-camel-dinner"
+    "slug": "agafay-sunset-camel-dinner",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Quad Biking Adrenaline in Agafay Desert",
@@ -841,7 +848,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "quad-biking-agafay"
+    "slug": "quad-biking-agafay",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Dune Buggy 1000cc: Ultimate Desert Drive",
@@ -943,7 +951,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "dune-buggy-adventure"
+    "slug": "dune-buggy-adventure",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Astronomy & Stargazing: Universe in the Desert",
@@ -1036,7 +1045,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "astronomy-stargazing-desert"
+    "slug": "astronomy-stargazing-desert",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Sunrise Hot Air Balloon: Flight Over the Atlas",
@@ -1132,7 +1142,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "hot-air-balloon-flight"
+    "slug": "hot-air-balloon-flight",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Glamping: Luxury Desert Camp Overnight",
@@ -1225,7 +1236,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "luxury-desert-camp-overnight"
+    "slug": "luxury-desert-camp-overnight",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "3-Day Merzouga Sahara Expedition: The Real Dunes",
@@ -1313,7 +1325,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "merzouga-sahara-expedition"
+    "slug": "merzouga-sahara-expedition",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Atlas Mountains & Ourika Valley Day Trip",
@@ -1404,7 +1417,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "atlas-mountains-ourika-valley"
+    "slug": "atlas-mountains-ourika-valley",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Essaouira Coastal Escape: The Windy City",
@@ -1492,7 +1506,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "essaouira-coastal-escape"
+    "slug": "essaouira-coastal-escape",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Ouzoud Waterfalls: Nature's Majesty",
@@ -1582,7 +1597,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "ouzoud-waterfalls-trip"
+    "slug": "ouzoud-waterfalls-trip",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Imlil Village: Hiking the High Atlas",
@@ -1676,7 +1692,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "imlil-village-trek"
+    "slug": "imlil-village-trek",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Ait Benhaddou & Ouarzazate: The Hollywood of Africa",
@@ -1764,7 +1781,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "ait-benhaddou-cinema-tour"
+    "slug": "ait-benhaddou-cinema-tour",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Ultimate Medina Street Food Tour",
@@ -1852,7 +1870,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "ultimate-street-food-tour"
+    "slug": "ultimate-street-food-tour",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Market to Table: Traditional Cooking Class in a Riad",
@@ -1939,7 +1958,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "cooking-class-market-shop"
+    "slug": "cooking-class-market-shop",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "The Art of Tea: Ceremony & Pastry Workshop",
@@ -2020,7 +2040,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "tea-ceremony-pastry-workshop"
+    "slug": "tea-ceremony-pastry-workshop",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Dinner with a Local Family: Authentic Home Dining",
@@ -2104,7 +2125,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "dinner-with-local-family"
+    "slug": "dinner-with-local-family",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Daily Bread: Traditional Baking Workshop",
@@ -2182,7 +2204,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "bread-baking-workshop"
+    "slug": "bread-baking-workshop",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Fantasia Dinner Show - 1001 Nights",
@@ -2267,7 +2290,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "fantasia-dinner-show"
+    "slug": "fantasia-dinner-show",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Golfing at the Foot of the Atlas",
@@ -2348,7 +2372,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "golfing-atlas-foot"
+    "slug": "golfing-atlas-foot",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Wakeboarding at Waky Marrakech",
@@ -2428,7 +2453,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "wakeboarding-waky"
+    "slug": "wakeboarding-waky",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Horse Riding: Royal Equestrian Club & Forest",
@@ -2507,7 +2533,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "horse-riding-royal-club"
+    "slug": "horse-riding-royal-club",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "VIP Marrakech Airport Arrival Transfer",
@@ -2580,7 +2607,8 @@
     "gallery": [
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "airport-arrival-transfer"
+    "slug": "airport-arrival-transfer",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Stress-Free Airport Departure Transfer",
@@ -2602,7 +2630,8 @@
     "gallery": [
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "airport-departure-transfer"
+    "slug": "airport-departure-transfer",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Private Intercity Transfer: Marrakech to Casablanca",
@@ -2652,7 +2681,8 @@
     "gallery": [
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "intercity-transfer-casablanca"
+    "slug": "intercity-transfer-casablanca",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Sunrise Yoga on a Panoramic Medina Rooftop",
@@ -2709,7 +2739,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "sunrise-yoga-medina-rooftop"
+    "slug": "sunrise-yoga-medina-rooftop",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "The Authentic Ritual: Traditional Hammam & Spa",
@@ -2769,7 +2800,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "traditional-hammam-spa-ritual"
+    "slug": "traditional-hammam-spa-ritual",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Luxury Spa Day & Signature Massage",
@@ -2793,7 +2825,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "luxury-spa-day-massage"
+    "slug": "luxury-spa-day-massage",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Traditional Henna Art & Tea Ceremony",
@@ -2817,7 +2850,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "henna-art-tea-ceremony"
+    "slug": "henna-art-tea-ceremony",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Clay & Color: Pottery and Zellige Workshop",
@@ -2841,7 +2875,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "pottery-zellige-workshop"
+    "slug": "pottery-zellige-workshop",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "Scent of Morocco: Perfume Creation Workshop",
@@ -2891,7 +2926,8 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "perfume-creation-workshop"
+    "slug": "perfume-creation-workshop",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   },
   {
     "title": "The Sacred Script: Arabic Calligraphy Workshop",
@@ -2915,6 +2951,7 @@
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
       "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
-    "slug": "arabic-calligraphy-introduction"
+    "slug": "arabic-calligraphy-introduction",
+    "image": "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
   }
 ]

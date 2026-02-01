@@ -34,7 +34,8 @@ function ExperienceCardComponent({ experience }: ExperienceCardProps) {
         price,
         currency,
         gallery,
-        reviews = Math.floor(Math.random() * 500) + 50,
+        // Use a deterministic fallback for reviews to avoid hydration mismatch
+        reviews = experience.reviews || (id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % 300) + 50,
         rating = 4.8,
     } = experience;
 
