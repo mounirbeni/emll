@@ -4,7 +4,7 @@
 
 @theme {
   /* Marrakesh Brand Identity - FLAT ORANGE */
-  --color-primary: #ff6900;
+  --color-primary: #FFA500;
   --color-primary-foreground: #FFFFFF;
 
   /* Neutrals */
@@ -23,7 +23,7 @@
 
   --color-border: #E5E5E5;
   --color-input: #E5E5E5;
-  --color-ring: #ff6900;
+  --color-ring: #FFA500;
 
   /* Status Colors */
   --color-success: #10B981;
@@ -71,7 +71,7 @@
   --popover: #FFFFFF;
   --popover-foreground: #000000;
 
-  --primary: #ff6900;
+  --primary: #FFA500;
   --primary-foreground: #FFFFFF;
 
   --secondary: #F5F5F5;
@@ -82,14 +82,14 @@
 
   --accent: #FFF0E6;
   /* Light orange tint for hovers */
-  --accent-foreground: #ff6900;
+  --accent-foreground: #FFA500;
 
   --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
 
   --border: #E5E5E5;
   --input: #E5E5E5;
-  --ring: #ff6900;
+  --ring: #FFA500;
 
   --radius: 0.5rem;
 }

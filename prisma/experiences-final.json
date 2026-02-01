@@ -100,8 +100,8 @@
     ],
     "pickupAvailable": false,
     "gallery": [
-      "/images/experiences/walking-tour-1.jpg",
-      "/images/experiences/walking-tour-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "medina-hidden-gems-walking-tour"
   },
@@ -208,8 +208,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/sidecar-1.jpg",
-      "/images/experiences/sidecar-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "vintage-sidecar-tour"
   },
@@ -314,8 +314,8 @@
     ],
     "pickupAvailable": false,
     "gallery": [
-      "/images/experiences/jemaa-night-1.jpg",
-      "/images/experiences/jemaa-night-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "evening-jemaa-el-fna-tasting"
   },
@@ -420,8 +420,8 @@
     ],
     "pickupAvailable": false,
     "gallery": [
-      "/images/experiences/photo-tour-1.jpg",
-      "/images/experiences/photo-tour-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "marrakech-photography-tour"
   },
@@ -522,8 +522,8 @@
     ],
     "pickupAvailable": false,
     "gallery": [
-      "/images/experiences/bahia-1.jpg",
-      "/images/experiences/ben-youssef-1.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "bahia-palace-ben-youssef"
   },
@@ -624,8 +624,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/mellah-1.jpg",
-      "/images/experiences/mellah-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "jewish-quarter-mellah-heritage"
   },
@@ -731,8 +731,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/agafay-sunset-1.jpg",
-      "/images/experiences/agafay-sunset-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "agafay-sunset-camel-dinner"
   },
@@ -838,8 +838,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/agafay-sunset-1.jpg",
-      "/images/experiences/agafay-sunset-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "quad-biking-agafay"
   },
@@ -940,8 +940,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/buggy-1.jpg",
-      "/images/experiences/buggy-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "dune-buggy-adventure"
   },
@@ -1033,8 +1033,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/stargazing-1.jpg",
-      "/images/experiences/stargazing-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "astronomy-stargazing-desert"
   },
@@ -1129,8 +1129,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/balloon-1.jpg",
-      "/images/experiences/balloon-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "hot-air-balloon-flight"
   },
@@ -1222,8 +1222,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/camp-1.jpg",
-      "/images/experiences/camp-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "luxury-desert-camp-overnight"
   },
@@ -1310,8 +1310,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/merzouga-1.jpg",
-      "/images/experiences/merzouga-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "merzouga-sahara-expedition"
   },
@@ -1401,8 +1401,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/ourika-1.jpg",
-      "/images/experiences/ourika-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "atlas-mountains-ourika-valley"
   },
@@ -1489,8 +1489,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/essaouira-1.jpg",
-      "/images/experiences/essaouira-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "essaouira-coastal-escape"
   },
@@ -1579,8 +1579,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/ouzoud-1.jpg",
-      "/images/experiences/ouzoud-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "ouzoud-waterfalls-trip"
   },
@@ -1673,8 +1673,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/imlil-1.jpg",
-      "/images/experiences/imlil-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "imlil-village-trek"
   },
@@ -1761,8 +1761,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/ait-benhaddou-1.jpg",
-      "/images/experiences/ait-benhaddou-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "ait-benhaddou-cinema-tour"
   },
@@ -1849,8 +1849,8 @@
     ],
     "pickupAvailable": false,
     "gallery": [
-      "/images/experiences/food-tour-1.jpg",
-      "/images/experiences/food-tour-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "ultimate-street-food-tour"
   },
@@ -1936,8 +1936,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/cooking-1.jpg",
-      "/images/experiences/cooking-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "cooking-class-market-shop"
   },
@@ -2017,8 +2017,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/tea-1.jpg",
-      "/images/experiences/tea-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "tea-ceremony-pastry-workshop"
   },
@@ -2101,8 +2101,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/family-dinner-1.jpg",
-      "/images/experiences/family-dinner-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "dinner-with-local-family"
   },
@@ -2179,8 +2179,8 @@
     ],
     "pickupAvailable": false,
     "gallery": [
-      "/images/experiences/bread-1.jpg",
-      "/images/experiences/bread-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "bread-baking-workshop"
   },
@@ -2264,8 +2264,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/fantasia-1.jpg",
-      "/images/experiences/fantasia-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "fantasia-dinner-show"
   },
@@ -2345,8 +2345,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/golf-1.jpg",
-      "/images/experiences/golf-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "golfing-atlas-foot"
   },
@@ -2425,8 +2425,8 @@
     ],
     "pickupAvailable": false,
     "gallery": [
-      "/images/experiences/wake-1.jpg",
-      "/images/experiences/wake-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "wakeboarding-waky"
   },
@@ -2504,8 +2504,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/horse-1.jpg",
-      "/images/experiences/horse-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "horse-riding-royal-club"
   },
@@ -2578,7 +2578,7 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/transfer-arrival-1.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "airport-arrival-transfer"
   },
@@ -2600,7 +2600,7 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/transfer-depart-1.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "airport-departure-transfer"
   },
@@ -2650,7 +2650,7 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/transfer-arrival-1.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "intercity-transfer-casablanca"
   },
@@ -2706,8 +2706,8 @@
     ],
     "pickupAvailable": false,
     "gallery": [
-      "/images/experiences/yoga-1.jpg",
-      "/images/experiences/yoga-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "sunrise-yoga-medina-rooftop"
   },
@@ -2766,8 +2766,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/hammam-1.jpg",
-      "/images/experiences/hammam-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "traditional-hammam-spa-ritual"
   },
@@ -2790,8 +2790,8 @@
     ],
     "pickupAvailable": true,
     "gallery": [
-      "/images/experiences/luxury-spa-1.jpg",
-      "/images/experiences/luxury-spa-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "luxury-spa-day-massage"
   },
@@ -2814,8 +2814,8 @@
     ],
     "pickupAvailable": false,
     "gallery": [
-      "/images/experiences/henna-1.jpg",
-      "/images/experiences/henna-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "henna-art-tea-ceremony"
   },
@@ -2838,8 +2838,8 @@
     ],
     "pickupAvailable": false,
     "gallery": [
-      "/images/experiences/pottery-1.jpg",
-      "/images/experiences/pottery-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "pottery-zellige-workshop"
   },
@@ -2888,8 +2888,8 @@
     ],
     "pickupAvailable": false,
     "gallery": [
-      "/images/experiences/perfume-1.jpg",
-      "/images/experiences/perfume-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "perfume-creation-workshop"
   },
@@ -2912,8 +2912,8 @@
     ],
     "pickupAvailable": false,
     "gallery": [
-      "/images/experiences/calligraphy-1.jpg",
-      "/images/experiences/calligraphy-2.jpg"
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
+      "IMAGE_PLACEHOLDER_PENDING_UPLOAD"
     ],
     "slug": "arabic-calligraphy-introduction"
   }

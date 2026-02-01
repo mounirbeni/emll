@@ -27,7 +27,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
             <p>Remember to dress modestly out of respect for the local culture, especially when exploring the traditional quarters. Enjoy the chaos, the colors, and the incredible energy of the Medina.</p>
         `,
-        image: "https://images.unsplash.com/photo-1597212720196-174775d7870d?q=80&w=1200",
+        image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
         category: "Travel Guide",
         author: "Sarah Jenkins",
         publishedAt: "2025-10-15",
@@ -59,7 +59,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
             <p><strong>Tip:</strong> Always book your table in advance, especially for the golden hour!</p>
         `,
-        image: "https://images.unsplash.com/photo-1550505166-5b326bd6353d?q=80&w=1200",
+        image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
         category: "Food & Drink",
         author: "Karim Alami",
         publishedAt: "2025-11-02",
@@ -88,7 +88,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
             <p>Stay alert, be polite but firm, and you will have a wonderful and safe trip!</p>
         `,
-        image: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?q=80&w=1200",
+        image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
         category: "Travel Tips",
         author: "Emma Wilson",
         publishedAt: "2025-09-20",
@@ -118,7 +118,7 @@ export const BLOG_POSTS: BlogPost[] = [
                 <li>Sunscreen and water</li>
             </ul>
         `,
-        image: "https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?q=80&w=1200",
+        image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
         category: "Excursions",
         author: "Youssef Benali",
         publishedAt: "2025-10-28",
@@ -145,7 +145,7 @@ export const BLOG_POSTS: BlogPost[] = [
             <h3>Transport</h3>
             <p>Taxis are cheap if you use the meter ("compteur"). If they refuse, agree on a price before getting in (usually 20-30 dirhams for a short city trip). Buses are even cheaper but can be crowded.</p>
         `,
-        image: "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1200",
+        image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
         category: "Budget Travel",
         author: "Sarah Jenkins",
         publishedAt: "2025-11-10",

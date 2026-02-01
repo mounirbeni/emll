@@ -18,7 +18,7 @@ function BlogCardComponent({ post }: BlogCardProps) {
                 {/* Image */}
                 <div className="relative w-full aspect-[16/9] overflow-hidden bg-gray-50">
                     <Image
-                        src={post.image}
+                        src={post.image === "IMAGE_PLACEHOLDER_PENDING_UPLOAD" ? "/images/placeholder-blog.svg" : post.image}
                         alt={post.title}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
