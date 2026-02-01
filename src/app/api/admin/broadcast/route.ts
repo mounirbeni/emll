@@ -4,6 +4,8 @@ import { sendEmail } from '@/lib/email-client';
 import { getEmailTemplate } from '@/lib/email-templates';
 import { z } from 'zod';
 
+import { UserRole, Prisma } from '@prisma/client';
+
 // Schema for broadcast request
 const broadcastSchema = z.object({
     subject: z.string().min(1),
@@ -19,16 +21,22 @@ export async function POST(req: Request) {
         const result = broadcastSchema.safeParse(body);
 
         if (!result.success) {
-            return NextResponse.json({ error: 'Invalid input', details: result.error.issues }, { status: 400 });
+            return NextResponse.json({
+                error: 'Invalid input',
+                details: result.error.flatten()
+            }, { status: 400 });
         }
 
         const { subject, message, ctaText, ctaLink, targetRole } = result.data;
 
         // Fetch users based on target
-        const whereClause = targetRole === 'ALL' ? {} : { role: targetRole };
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const whereClause: Prisma.UserWhereInput =
+            targetRole === 'ALL'
+                ? {}
+                : { role: targetRole as UserRole };
+
         const consumers = await prisma.user.findMany({
-            where: whereClause as any,
+            where: whereClause,
             select: { id: true, email: true, name: true }
         });
 
