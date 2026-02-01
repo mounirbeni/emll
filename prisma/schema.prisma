@@ -236,6 +236,7 @@ enum BookingStatus {
   CONFIRMED
   CANCELLED
   COMPLETED
+  NEEDS_UPDATE
 }
 
 enum PaymentStatus {
@@ -334,4 +335,17 @@ model Review {
 
   @@index([experienceId])
   @@index([userId])
+}
+
+model EmailLog {
+  id       String   @id @default(uuid())
+  userId   String?
+  type     String
+  status   String // SENT, FAILED
+  sentAt   DateTime @default(now())
+  metadata Json? // Store extra info like error message or recipient
+
+  @@index([userId])
+  @@index([type])
+  @@index([sentAt])
 }

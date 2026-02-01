@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #F8F5F2; margin: 0; padding: 0; color: #333333; }
+    .wrapper { width: 100%; background-color: #F8F5F2; padding: 40px 0; }
+    .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .header { text-align: center; margin-bottom: 30px; }
+    .logo { max-width: 150px; height: auto; }
+    .content { line-height: 1.6; font-size: 16px; }
+    .button-container { text-align: center; margin: 30px 0; }
+    .button { display: inline-block; background-color: #FF6900; color: #ffffff !important; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 16px; }
+    .footer { margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px; font-size: 12px; color: #999999; text-align: center; }
+    h1 { color: #1a1a1a; margin-top: 0; text-align: center; font-size: 24px; }
+    p { margin-bottom: 16px; }
+    .highlight { color: #FF6900; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <div class="header">
+        <img src="https://marrakech-experiences.com/logo.png" alt="Explore Marrakech" class="logo">
+      </div>
+      <div class="content">
+        <h1>Welcome to Explore Marrakech!</h1>
+        <p>Hi {{name}},</p>
+        <p>We're thrilled to have you join our community of travelers.</p>
+        <p>As a welcome gift, we credit your account with <span class="highlight">300 free points</span> which you can use for discounts on your next adventure.</p>
+        <p>Explore our curated selection of authentic experiences, from desert tours to cooking classes.</p>
+        
+        <div class="button-container">
+          <a href="{{appUrl}}/experiences" class="button">Start Exploring Experiences</a>
+        </div>
+      </div>
+      <div class="footer">
+        <p>&copy; {{year}} Explore Marrakech. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

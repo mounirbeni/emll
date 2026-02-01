@@ -2,9 +2,11 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
+import { sendEmail } from '@/lib/email-client';
+import { getEmailTemplate } from '@/lib/email-templates';
 
 const updateBookingSchema = z.object({
-    status: z.enum(['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED']).optional(),
+    status: z.enum(['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED', 'NEEDS_UPDATE']).optional(),
     notes: z.string().optional(),
 });
 
@@ -65,6 +67,65 @@ export async function PUT(
             } as any // eslint-disable-line @typescript-eslint/no-explicit-any
         });
 
+        // Send Status Change Emails
+        if (status && status !== currentBooking?.status) {
+            try {
+                const b = booking as any;
+                const commonData = {
+                    name: b.userName,
+                    experienceTitle: b.experience.title,
+                    date: new Date(b.date).toLocaleDateString(),
+                    guests: b.numberOfPeople,
+                    bookingId: b.id,
+                    appUrl: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+                };
+
+                let templateName = '';
+                let subject = '';
+                let extraData = {};
+
+                if (status === 'CONFIRMED') {
+                    templateName = 'booking-confirmed';
+                    subject = `Booking Confirmed: ${b.experience.title}`;
+                    extraData = {
+                        meetingPoint: b.experience.meetingPoint || 'Central Square',
+                        contactInfo: '+212 555 123 456'
+                    };
+                } else if (status === 'CANCELLED') {
+                    templateName = 'booking-rejected';
+                    subject = `Update regarding your booking request`;
+                    extraData = {
+                        rejectionReason: notes || 'Due to availability issues, we cannot confirm this booking.'
+                    };
+                } else if (status === 'NEEDS_UPDATE') {
+                    templateName = 'booking-modified';
+                    subject = `Action Required: Your booking request`;
+                    extraData = {
+                        modificationReason: notes || 'We need to discuss some changes to your booking.'
+                    };
+                }
+
+                if (templateName) {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    const html = await getEmailTemplate(templateName as any, {
+                        ...commonData,
+                        ...extraData
+                    });
+
+                    await sendEmail({
+                        to: b.userEmail,
+                        subject,
+                        html,
+                        userId: b.userId || undefined,
+                        type: `BOOKING_${status}`
+                    });
+                }
+
+            } catch (error) {
+                console.error('Failed to send status email:', error);
+            }
+        }
+
         // If status changed to COMPLETED and user is registered, send review notification
         if (status === 'COMPLETED' && currentBooking?.status !== 'COMPLETED' && booking.userId) {
             // Create notification for user to leave a review
@@ -72,6 +133,7 @@ export async function PUT(
                 data: {
                     userId: booking.userId,
                     title: 'How was your experience?',
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     message: `We hope you enjoyed "${(booking as any).experience?.title}". Share your review to help other travelers!`,
                     type: 'REVIEW',
                     link: `/experiences/${booking.experienceId}/review`,

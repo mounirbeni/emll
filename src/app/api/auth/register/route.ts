@@ -2,6 +2,8 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { hashPassword } from '@/lib/auth';
+import { sendEmail } from '@/lib/email-client';
+import { getEmailTemplate } from '@/lib/email-templates';
 
 export async function POST(request: Request) {
     // Artificial delay to mitigate brute force attacks
@@ -54,7 +56,25 @@ export async function POST(request: Request) {
             data: { userId: user.id }
         });
 
+
         // Note: Client should handle sign in after registration using NextAuth signIn()
+
+        // Send Welcome Email
+        try {
+            const html = await getEmailTemplate('welcome', {
+                name: name || email.split('@')[0],
+            });
+            await sendEmail({
+                to: email,
+                subject: 'Welcome to Explore Marrakech! + 300 Free Points',
+                html,
+                userId: user.id,
+                type: 'WELCOME'
+            });
+        } catch (emailError) {
+            console.error('Failed to send welcome email:', emailError);
+            // Continue execution, don't fail registration
+        }
 
         return NextResponse.json({
             user: { id: user.id, email: user.email, name: user.name, role: user.role }

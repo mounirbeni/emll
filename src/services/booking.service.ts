@@ -3,10 +3,11 @@
  * Contains all business logic for booking operations
  */
 
-import { Booking, BookingStatus, Prisma } from '@prisma/client';
+import { BookingStatus } from '@prisma/client';
+import type { Booking, Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { bookingRepository } from '@/repositories/booking.repository';
-import { notificationService } from '@/services/notification.service';
+// import { notificationService } from '@/services/notification.service';
 import { adminNotificationService } from '@/services/admin-notification.service';
 import { NotFoundError, BadRequestError } from '@/lib/errors';
 
@@ -56,7 +57,7 @@ export type DetailedBooking = Booking & {
         name: string | null;
         email: string;
     } | null;
-    payments: any[];
+    payments: unknown[];
     experience: {
         title: string;
     };
@@ -379,10 +380,11 @@ export class BookingService {
      */
     private validateStatusTransition(currentStatus: BookingStatus, newStatus: BookingStatus): void {
         const validTransitions: Record<BookingStatus, BookingStatus[]> = {
-            [BookingStatus.PENDING]: [BookingStatus.CONFIRMED, BookingStatus.CANCELLED],
-            [BookingStatus.CONFIRMED]: [BookingStatus.COMPLETED, BookingStatus.CANCELLED],
+            [BookingStatus.PENDING]: [BookingStatus.CONFIRMED, BookingStatus.CANCELLED, BookingStatus.NEEDS_UPDATE],
+            [BookingStatus.CONFIRMED]: [BookingStatus.COMPLETED, BookingStatus.CANCELLED, BookingStatus.NEEDS_UPDATE],
             [BookingStatus.COMPLETED]: [], // Cannot change from completed
-            [BookingStatus.CANCELLED]: []  // Cannot change from cancelled
+            [BookingStatus.CANCELLED]: [],  // Cannot change from cancelled
+            [BookingStatus.NEEDS_UPDATE]: [BookingStatus.PENDING, BookingStatus.CONFIRMED, BookingStatus.CANCELLED]
         };
 
         const allowedStatuses = validTransitions[currentStatus] || [];
