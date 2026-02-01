@@ -1,0 +1,239 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+
+@theme {
+  /* Explore Marrakesh Brand Color Palette - FLAT ORANGE */
+  --color-primary: #FFA500;
+  --color-primary-dark: #FF8c00;
+  --color-primary-light: #FFB733;
+  --color-primary-foreground: #FFFFFF;
+
+  /* Deep Charcoal for text - High Contrast */
+  --color-black: #000000;
+  --color-dark-gray: #1A1A1A;
+  --color-charcoal: #2D2D2D;
+  --color-medium-gray: #666666;
+
+  /* Soft Backgrounds - Clean & Modern */
+  --color-background: #FFFFFF;
+  --color-surface: #F9FAFB;
+  --color-surface-hover: #F3F4F6;
+
+  --color-border: #E5E7EB;
+  --color-border-dark: #D1D5DB;
+
+  /* Status colors */
+  --color-success: #10B981;
+  --color-success-dark: #059669;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+
+  --font-sans: var(--font-outfit), -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+
+  /* Consistent border radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --spacing-section: 64px;
+  --spacing-card: 20px;
+
+  /* Semantic colors for utility classes */
+  --color-foreground: #1A1A1A;
+  --color-background: #FFFFFF;
+  --color-border: #E5E7EB;
+}
+
+/* Enhanced Light Mode - Explore Marrakesh */
+:root {
+  color-scheme: light;
+  --background: #FFFFFF;
+  --foreground: #1A1A1A;
+
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A1A;
+
+  --primary: #FFA500;
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #F3F4F6;
+  --secondary-foreground: #1A1A1A;
+
+  --muted: #F3F4F6;
+  --muted-foreground: #6B7280;
+
+  --accent: #FFF7ED;
+  --accent-foreground: #FFA500;
+
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #E5E7EB;
+  --input: #E5E7EB;
+  --ring: #FFA500;
+
+  /* Status colors */
+  --success: #10B981;
+  --warning: #F59E0B;
+  --info: #3B82F6;
+
+  /* Clean Shadows - No heavy blurs */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Premium Button Styles - Flat & Clean */
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl bg-[var(--primary)] px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+    box-shadow: 0 4px 6px -1px rgba(255, 165, 0, 0.2);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-900 transition-colors hover:bg-gray-50 hover:border-gray-300 active:bg-gray-100;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-xl border-2 border-[var(--primary)] bg-transparent px-6 py-3 text-sm font-bold text-[var(--primary)] transition-colors hover:bg-[var(--accent)];
+  }
+
+  /* GetYourGuide Style Cards */
+  .card-experience {
+    @apply relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  /* Badge Styles */
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  .badge-primary {
+    @apply border-transparent bg-[var(--primary)] text-white shadow hover:bg-[var(--primary)]/80;
+  }
+
+  .badge-secondary {
+    @apply border-transparent bg-gray-100 text-gray-900 hover:bg-gray-200;
+  }
+
+  .badge-outline {
+    @apply text-foreground;
+  }
+
+  /* Mobile Optimizations */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply tracking-tight text-[var(--color-dark-gray)];
+  }
+
+  /* Typography Hierarchy */
+  .h1 {
+    @apply text-4xl font-bold md:text-5xl lg:text-6xl;
+  }
+
+  .h2 {
+    @apply text-3xl font-bold md:text-4xl;
+  }
+
+  .h3 {
+    @apply text-2xl font-bold md:text-3xl;
+  }
+
+  .h4 {
+    @apply text-xl font-bold md:text-2xl;
+  }
+
+  .subtitle {
+    @apply text-lg text-gray-600 md:text-xl;
+  }
+
+  .body-lead {
+    @apply text-lg text-gray-700;
+  }
+
+  .body-text {
+    @apply text-base text-gray-600;
+  }
+
+  .caption {
+    @apply text-sm text-gray-500;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}

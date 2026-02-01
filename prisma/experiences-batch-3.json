@@ -1,0 +1,618 @@
+[
+    {
+        "id": "tea-ceremony-pastry-workshop",
+        "title": "The Art of Tea: Ceremony & Pastry Workshop",
+        "summary": "Master the ancient ritual of Moroccan Mint Tea and learn to bake delicate 'Cornes de Gazelle' pastries with a local expert.",
+        "highlights": [
+            "Learn the history and significance of Moroccan Mint Tea",
+            "Master the 'pour' (creating the foam)",
+            "Bake traditional pastries: Gazelle Horns or Briouates",
+            "Hosted in a private, serene Riad setting",
+            "Taste your creations with the host",
+            "Take home recipes and a small gift",
+            "Small group for personal attention"
+        ],
+        "description": "In Morocco, tea is not just a drink; it is a symbol of hospitality, friendship, and tradition. The phrase 'Atay Billah' (Tea by God) reflects its importance. In this hands-on workshop, you will go beyond the surface and learn the true art of the tea ceremony.\n\nHosted in a beautiful Riad, your instructor will explain the different types of mint (Spearmint, Absinthe, Pennyroyal) and how they change with the seasons. watch the ritual washing of the tea, the boiling, and the theatrical high pour—essential for aerating the tea and creating the 'Riza' (foam) crown.\n\nWhile the tea steeps, you will get your hands floury making Moroccan pastries. Learn the delicate technique of rolling almond paste into 'Cornes de Gazelle' (Gazelle Horns) or folding honey-soaked Briouates. Sit down to enjoy your tea and warm pastries, discussing life in the Medina with your host.",
+        "itinerary": [
+            {
+                "title": "Welcome",
+                "description": "Arrive at the Riad. Introduction to the ingredients."
+            },
+            {
+                "title": "Pastry Making",
+                "description": "Prepare the almond filling and dough. Shape and bake the cookies."
+            },
+            {
+                "title": "The Tea Ritual",
+                "description": "Step-by-step demonstration and practice of the tea ceremony."
+            },
+            {
+                "title": "Degustation",
+                "description": "Enjoy the tea and pastries together."
+            },
+            {
+                "title": "Conclusion",
+                "description": "Receive your recipe card and departure."
+            }
+        ],
+        "included": [
+            "2-hour Workshop",
+            "All ingredients",
+            "Tea and Pastries to eat",
+            "Box of pastries to take away"
+        ],
+        "notIncluded": [
+            "Hotel transfer",
+            "Meals"
+        ],
+        "meetingPoint": "Riad Star or similar (exact location provided on booking).",
+        "importantInfo": [
+            "Contains nuts (almonds) and gluten.",
+            "Suitable for children.",
+            "A relaxing, low-intensity activity perfect for a hot afternoon."
+        ],
+        "faqs": [
+            {
+                "q": "Is it vegan?",
+                "a": "The tea is vegan. Pastries often use honey or egg wash, but vegan options can be arranged."
+            }
+        ],
+        "relatedExperiences": [
+            "Traditional Moroccan Bread Baking Workshop",
+            "Moroccan Perfume Creation Experience",
+            "Traditional Henna Art & Tea Ceremony"
+        ],
+        "imageConcepts": [
+            "Silver teapot pouring tea from a great height into a glass",
+            "Close up of hands shaping an almond pastry",
+            "Fresh bunch of mint leaves on a tray",
+            "Steam rising from a hot glass of tea",
+            "Tray of golden baked pastries"
+        ]
+    },
+    {
+        "id": "dinner-with-local-family",
+        "title": "Dinner with a Local Family: Authentic Home Dining",
+        "summary": "Step inside a real Marrakech home for a shared meal, bridging the cultural gap and experiencing true Moroccan hospitality.",
+        "highlights": [
+            "Exclusive invitation to a family home (not a restaurant)",
+            "Traditional home-cooked meal (recipes passed down generations)",
+            "Learn dining etiquette and customs",
+            "Open conversation about culture, religion, and family life",
+            "Support a local family directly",
+            "Warm, unpretentious atmosphere",
+            "Vegetarian options available"
+        ],
+        "description": "The best food in Morocco isn't found in 5-star restaurants; it's found in the home. However, as a traveler, it's hard to get invited inside. This experience opens that door.\n\nYou will be welcomed into the home of a local family in the Medina. This is not a cooking class (though you can help in the kitchen if you like); it is a dinner party. You will sit in the family salon, wash your hands with rose water, and learn to eat with your right hand using bread as a utensil—the traditional way.\n\nThe menu changes daily but expect hearty dishes like Rfissa (chicken with lentils and fenugreek), 7-Vegetable Couscous, or a family-style Tagine. The real value, however, is the conversation. Ask about their lives, traditions, and views. It is a moment of genuine human connection that transcends the tourist bubble.",
+        "itinerary": [
+            {
+                "title": "Meet & Walk",
+                "description": "Meet a family member at a main square and walk together to the house."
+            },
+            {
+                "title": "Tea Welcome",
+                "description": "Traditional welcome with tea and dates."
+            },
+            {
+                "title": "The Meal",
+                "description": "Share a large communal platter of food. Learn the etiquette."
+            },
+            {
+                "title": "Dessert & Talk",
+                "description": "Fruit and conversation to end the evening."
+            },
+            {
+                "title": "Farewell",
+                "description": "Escort back to the main street/taxi point."
+            }
+        ],
+        "included": [
+            "3-course Dinner",
+            "Tea/Water/Juice",
+            "Translation help (Family speaks French/English)"
+        ],
+        "notIncluded": [
+            "Alcohol (Moroccan families generally do not drink alcohol)",
+            "Transfers"
+        ],
+        "meetingPoint": "Dar El Bacha (or nearest accessible point to the home).",
+        "importantInfo": [
+            "Please remove shoes upon entering the house.",
+            "Bring a small gift (chocolates or flowers) is a nice gesture but not mandatory.",
+            "Dress conservatively out of respect for the family."
+        ],
+        "faqs": [
+            {
+                "q": "Will I be safe?",
+                "a": "Yes, our host families are carefully vetted and experienced with travelers."
+            },
+            {
+                "q": "Can I eat with a fork?",
+                "a": "Yes, cutlery is always available for guests!"
+            }
+        ],
+        "relatedExperiences": [
+            "Ultimate Medina Street Food Tour",
+            "Traditional Cooking Class & Souk Market Shop",
+            "Jewish Quarter (Mellah) & Heritage Tour"
+        ],
+        "imageConcepts": [
+            "Family and guests sitting on floor cushions around a low round table",
+            "Close up of hand dipping bread into a tagine",
+            "Host pouring water from a silver ewer to wash hands",
+            "Laughter and conversation in a colorful salon",
+            "Platter of couscous with vegetables arranged in a pattern"
+        ]
+    },
+    {
+        "id": "bread-baking-workshop",
+        "title": "Daily Bread: Traditional Baking Workshop",
+        "summary": "Join the rhythm of the Medina by making your own bread, taking it to the communal oven (Farrane), and tasting it fresh.",
+        "highlights": [
+            "Knead and shape 3 types of Moroccan bread (Khobz, Batbout, Msemmen)",
+            "Visit the community 'Farrane' to bake your loaf",
+            "Learn the cultural significance of bread in Islam",
+            "Enjoy a 'Goûter' (afternoon snack) with your fresh bread, honey, and cheese",
+            "Hands-on activity suitable for all ages",
+            "Interactive and educational"
+        ],
+        "description": "In Morocco, bread is sacred. It is never thrown away; if fallen, it is kissed and placed aside. Every neighborhood has a detailed system centered around the 'Farrane' (communal oven), where families bring their dough twice a day.\n\nIn this workshop, you become part of that cycle. In a local kitchen, you'll learn to mix semolina and flour to create the perfect dough. You'll master the technique of shaping the round 'Khobz', layering the flaky 'Msemmen' (pancakes), and pan-frying 'Batbout' (Moroccan pita).\n\nThe highlight is the walk to the Farrane. You'll carry your tray of dough, hand it to the master baker, and watch him work his magic with the wood fire. The smell of your own bread baking is unforgettable. We finish by eating it hot, dipped in local olive oil, honey, and amlou (almond butter).",
+        "itinerary": [
+            {
+                "title": "Dough Prep",
+                "description": "Mixing and kneading techniques in the kitchen."
+            },
+            {
+                "title": "Shaping",
+                "description": "Create the different forms of bread."
+            },
+            {
+                "title": "The Walk",
+                "description": "Walk to the Farrane with the dough tray."
+            },
+            {
+                "title": "Baking",
+                "description": "Watch the baking process."
+            },
+            {
+                "title": "Feast",
+                "description": "Eat the bread with traditional accompaniments."
+            }
+        ],
+        "included": [
+            "Baking class",
+            "Farrane visit",
+            "Afternoon tea/snack",
+            "Bread to take home"
+        ],
+        "notIncluded": [
+            "Transfers"
+        ],
+        "meetingPoint": "Riad entrance.",
+        "importantInfo": [
+            "Not suitable for gluten-intolerant travelers.",
+            "Fun for kids who like to play with dough."
+        ],
+        "faqs": [
+            {
+                "q": "Is the oven clean?",
+                "a": "The fires are hot enough to sterilize everything! It is a centuries-old tradition."
+            }
+        ],
+        "relatedExperiences": [
+            "Tea Ceremony & Moroccan Pastry Workshop",
+            "Medina Hidden Gems Walking Tour",
+            "Traditional Cooking Class & Souk Market Shop"
+        ],
+        "imageConcepts": [
+            "Hands kneading dough in a large earthenware dish (Gsaa)",
+            "Baker sliding the wooden peel into the dark oven",
+            "Stack of hot, steaming flatbreads",
+            "Close up of honey dripping onto a pancake",
+            "Child with flour on face smiling"
+        ]
+    },
+    {
+        "id": "fantasia-dinner-show",
+        "title": "Fantasia Dinner Show - 1001 Nights",
+        "summary": "Step into a folklore legend with this dinner show featuring horsemen charges, belly dancers, and traditional music under a caidal tent.",
+        "highlights": [
+            "Spectacular 'Tbourida' Horse Charge (UNESCO Heritage)",
+            "Dinner in a lavish Caidal Tent",
+            "Performances by Gnaoua, belly dancers, and acrobats",
+            "Flying Carpet ride (magical illusion show)",
+            "Traditional Moroccan Feast",
+            "Grand finale with fireworks (weather permitting)",
+            "Family-friendly entertainment"
+        ],
+        "description": "Experience the pomp and pageantry of Moroccan history at the Chez Ali Fantasia complex. This is a large-scale dinner show that recreates the festive celebrations of the past. As you arrive, you are welcomed by tribesmen on horseback, musicians, and dancers lining the path to the tents.\n\nYou will dine in a traditional tent on a feast of Harira soup, roast lamb (Mechoui), Seven-vegetable Couscous, and dessert. Throughout the meal, different folklore groups from across Morocco pass by your table to perform.\n\nThe real show happens in the central arena. The 'Fantasia' or 'Tbourida' is a synchronized charge of Arab-Berber horsemen who fire their muskets into the air simultaneously—a display of power and coordination. It’s loud, colorful, and unlike anything else. The night ends with a belly dancing performance and a flying carpet illusion.",
+        "itinerary": [
+            {
+                "title": "Pickup",
+                "description": "Hotel pickup 7:30 PM. Drive to the Palmeraie complex."
+            },
+            {
+                "title": "Welcome",
+                "description": "Walk the 'red carpet' with musicians greeting you."
+            },
+            {
+                "title": "Dinner",
+                "description": "Seated dinner in the tent with table-side performances."
+            },
+            {
+                "title": "The Show",
+                "description": "Move to the arena seating for the Fantasia horse show."
+            },
+            {
+                "title": "Return",
+                "description": "Transfer back to hotel approx 11:30 PM."
+            }
+        ],
+        "included": [
+            "Transport",
+            "Full Dinner",
+            "Show ticket",
+            "Drinks (Water/Soda)"
+        ],
+        "notIncluded": [
+            "Alcohol (available to buy)",
+            "Photos with performers (expect a tip)"
+        ],
+        "meetingPoint": "Hotel Pickup.",
+        "importantInfo": [
+            "This is a large, tourist-oriented venue, not an intimate experience. It is great for families and groups wanting a party atmosphere.",
+            "The muskets are LOUD. Ear protection recommended for sensitive children.",
+            "In winter, the tents are heated but bringing a jacket is wise."
+        ],
+        "faqs": [
+            {
+                "q": "Is the food good?",
+                "a": "It is mass-catered but traditional and tasty. The lamb is the highlight."
+            },
+            {
+                "q": "Is it cheesy?",
+                "a": "It is definitely a 'show', but the horsemanship is genuine and impressive."
+            }
+        ],
+        "relatedExperiences": [
+            "Evening Jemaa El Fna & Souk Tasting Tour",
+            "Agafay Desert Sunset Camel Ride & Dinner Show",
+            "Horse Riding in the Royal Club"
+        ],
+        "imageConcepts": [
+            "Horsemen charging with muskets raised",
+            "Smoke and dust from the gunshot",
+            "Belly dancer with candelabra on head",
+            "Roast lamb platter on table",
+            "Night shot of the illuminated fortress venue"
+        ]
+    },
+    {
+        "id": "golfing-atlas-foot",
+        "title": "Golfing at the Foot of the Atlas",
+        "summary": "Tee off on world-class greens with the snow-capped Atlas Mountains as your backdrop. A premium golfing experience including transfers and green fees.",
+        "highlights": [
+            "18 Holes at a top course (e.g., Royal Golf, Assoufid, Al Maaden)",
+            "Stunning scenery contrasting green fairways and red earth",
+            "Caddy or Buggy included (depending on course)",
+            "Private transfers for hassle-free logistics",
+            "Club rental available",
+            "Year-round sunshine"
+        ],
+        "description": "Marrakech is voted one of the world's best emerging golf destinations. The contrast of the emerald green sculpted fairways against the arid red earth and the white peaks of the Atlas Mountains is visually arresting. \n\nWe organize your tee time at one of the city's prestigious courses. Choose from the historic Royal Golf (played by Churchill and Eisenhower), the modern sculpture-park style of Al Maaden, or the desert-style award-winning Assoufid. \n\nWe handle the logistics: a private driver picks you up, takes you to the clubhouse, waits while you play your round, and brings you back. Whether you are a scratch golfer or a weekend warrior, playing here is a unique pleasure.",
+        "itinerary": [
+            {
+                "title": "Pickup",
+                "description": "Driver picks you up 45 mins before tee time."
+            },
+            {
+                "title": "Check-in",
+                "description": "Arrive at course. Get scorecard and buggy/caddy."
+            },
+            {
+                "title": "The Round",
+                "description": "Play 18 holes (approx 4 hours)."
+            },
+            {
+                "title": "19th Hole",
+                "description": "Drink at the clubhouse (optional)."
+            },
+            {
+                "title": "Return",
+                "description": "Transfer back to hotel."
+            }
+        ],
+        "included": [
+            "Private return transfers",
+            "Green Fees (18 Holes)",
+            "Booking service"
+        ],
+        "notIncluded": [
+            "Caddy fee (mandatory on some courses, approx 150 MAD)",
+            "Buggy rental",
+            "Club rental",
+            "Tips"
+        ],
+        "meetingPoint": "Hotel Pickup.",
+        "importantInfo": [
+            "Handicap card usually required for top courses.",
+            "Dress code applies (Collared shirts, soft spikes).",
+            "Morning tee times are best to avoid afternoon heat."
+        ],
+        "faqs": [
+            {
+                "q": "Which course is best?",
+                "a": "Assoufid for desert views, Royal for history, Amelkis for difficulty. We can advise."
+            }
+        ],
+        "relatedExperiences": [
+            "Luxury Spa Day & Signature Massage",
+            "Vintage Sidecar Tour: The Insider's Ride",
+            "Wakeboarding at Waky Marrakech"
+        ],
+        "imageConcepts": [
+            "Golfer swinging with snowy mountains in background",
+            "Ball on tee with palm tree shadow",
+            "Perfectly manicured green fairway",
+            "Clubhouse terrace with view",
+            "Caddy handing a club to player"
+        ]
+    },
+    {
+        "id": "wakeboarding-waky",
+        "title": "Wakeboarding at Waky Marrakech",
+        "summary": "Cool off and catch some air at this world-class cable park set on an artificial lake with Atlas views.",
+        "highlights": [
+            "1-hour or Day Pass cable wakeboarding",
+            "Course suitable for beginners (kneeboard) and pros",
+            "Obstacles and jumps for advanced riders",
+            "Equipment included (Board, Vest, Helmet)",
+            "Pool and chill-out area access",
+            "Restaurant/Bar on site",
+            "Resort atmosphere"
+        ],
+        "description": "Surfing in the desert? Yes, it's possible. Waky Marrakech is a state-of-the-art cable park located in the Jardins de l'Atlas resort. A motorized cable pulls you around the purpose-built lake, eliminating the need for a boat and making it easy to learn or perfect your tricks.\n\nNever tried it? Start with a kneeboard to get the feel of the water. Once confident, strap on the wakeboard. The consistent pull of the cable makes learning faster than behind a boat. For pros, the park features kickers, sliders, and rails to test your skills.\n\nEven if you don't ride, the vibe is great. Relax by the infinity pool, order a burger and a cocktail, and watch the riders crash and fly. It’s the coolest place to be on a hot Marrakech day.",
+        "itinerary": [
+            {
+                "title": "Arrival",
+                "description": "Transfer to Waky (approx 20 mins from city)."
+            },
+            {
+                "title": "Gear Up",
+                "description": "Get wetsuit (if needed), vest, and board. Safety briefing."
+            },
+            {
+                "title": "Ride",
+                "description": "Hit the water! Ride the main cable."
+            },
+            {
+                "title": "Chill",
+                "description": "Relax by the pool."
+            },
+            {
+                "title": "Return",
+                "description": "Transfer back."
+            }
+        ],
+        "included": [
+            "Wakeboard Pass",
+            "Gear Rental",
+            "Pool Access",
+            "Transfers"
+        ],
+        "notIncluded": [
+            "Food and Drinks",
+            "Towel (bring your own)"
+        ],
+        "meetingPoint": "Hotel Pickup.",
+        "importantInfo": [
+            "Must be able to swim.",
+            "Children from 7 years old can participate (during slow speed hours usually)."
+        ],
+        "faqs": [
+            {
+                "q": "Is the water clean?",
+                "a": "Yes, it is filtered and treated."
+            }
+        ],
+        "relatedExperiences": [
+            "Quad Biking Adrenaline in Agafay",
+            "Ouzoud Waterfalls Full-Day Trip",
+            "Dune Buggy 1000cc Adventure"
+        ],
+        "imageConcepts": [
+            "Wakeboarder jumping off a kicker with water spray",
+            "Rider carving a turn on the blue lake",
+            "People lounging on beanbags watching the action",
+            "Palm trees reflecting in the water",
+            "Close up of wakeboard bindings"
+        ]
+    },
+    {
+        "id": "horse-riding-royal-club",
+        "title": "Horse Riding: Royal Equestrian Club & Forest",
+        "summary": "Ride elegant Arabian-Barb horses through the eucalyptus forests or the Royal Club grounds.",
+        "highlights": [
+            "1 or 2-hour Horse Ride",
+            "Well-trained Arabian and Barb stallions/mares",
+            "Scenic trails in the countryside",
+            "Expert Equestrian Guide",
+            "Safety helmet included",
+            "Suitable for all levels (Walk, Trot, Gallop)",
+            "Morning or Sunset options"
+        ],
+        "description": "Morocco has a deep equestrian tradition. Experience the grace of the Barb horse (the ancestor of the Thoroughbred) on a ride just outside the city walls. We partner with reputable stables that prioritize animal welfare.\n\nBeginners will enjoy a gentle walk through the eucalyptus and olive groves, enjoying the birdsong and the scent of the forest. Experienced riders can pick up the pace, enjoying long canters along the sandy tracks. The horses are responsive and spirited yet safe. It’s a noble way to connect with nature.",
+        "itinerary": [
+            {
+                "title": "Pickup",
+                "description": "Drive to the stables."
+            },
+            {
+                "title": "Matching",
+                "description": "Meet your horse, matched to your ability."
+            },
+            {
+                "title": "The Ride",
+                "description": "Guided trail ride."
+            },
+            {
+                "title": "Grooming",
+                "description": "Help unsaddle and feed a carrot (optional)."
+            },
+            {
+                "title": "Return",
+                "description": "Transfer back."
+            }
+        ],
+        "included": [
+            "Horse Rental",
+            "Guide",
+            "Helmet",
+            "Transfers"
+        ],
+        "notIncluded": [
+            "Long boots/chaps"
+        ],
+        "meetingPoint": "Hotel Pickup.",
+        "importantInfo": [
+            "Wear long trousers and closed shoes (boots with small heel ideal).",
+            "Max weight limit 90kg."
+        ],
+        "faqs": [
+            {
+                "q": "I've never ridden, is it okay?",
+                "a": "Yes, we have calm horses for first-timers."
+            }
+        ],
+        "relatedExperiences": [
+            "Fantasia Dinner Show - 1001 Nights",
+            "Vintage Sidecar Tour: The Insider's Ride",
+            "Agafay Desert Sunset Camel Ride & Dinner Show"
+        ],
+        "imageConcepts": [
+            "Horse galloping on a dirt track",
+            "Rider patting the neck of a horse",
+            "Sunlight filtering through eucalyptus trees",
+            "Silhouette of horse and rider",
+            "Close up of leather saddle"
+        ]
+    },
+    {
+        "id": "airport-arrival-transfer",
+        "title": "VIP Marrakech Airport Arrival Transfer",
+        "summary": "Start your trip stress-free with a private driver waiting for you at arrivals, helping with luggage, and driving you directly to your Riad/Hotel.",
+        "highlights": [
+            "Meet & Greet inside the airport terminal",
+            "Sign with your name",
+            "Flight tracking (we wait if you are delayed)",
+            "Private AC Vehicle (Van or Sedan)",
+            "Help with luggage",
+            "Door-to-door service (or as close as cars can get in Medina)",
+            "Handover to Riad staff if needed"
+        ],
+        "description": "Marrakech Menara Airport can be chaotic. Avoid the hassle of negotiating with taxi drivers or getting lost in the heat. Our private transfer service ensures a smooth start to your holiday.\n\nYour driver will be waiting in the arrivals hall holding a clear sign with your name. They will assist with your bags and escort you to a clean, air-conditioned vehicle. During the drive, they can answer initial questions about the city. \n\nIf you are staying in the Medina (car-free zone), the driver will take you to the nearest drop-off point and, if needed, call your Riad to send a porter (carossa) for your bags. No stress, no haggling, just service.",
+        "itinerary": [
+            {
+                "title": "Arrival",
+                "description": "Land and pass customs."
+            },
+            {
+                "title": "Meet",
+                "description": "Driver waiting at exit gate with sign."
+            },
+            {
+                "title": "Drive",
+                "description": "20-30 min drive to city center."
+            },
+            {
+                "title": "Drop-off",
+                "description": "Hotel door or Medina meeting point."
+            }
+        ],
+        "included": [
+            "Private Vehicle",
+            "Driver",
+            "Fuel",
+            "Airport Parking fees"
+        ],
+        "notIncluded": [
+            "Porter tips"
+        ],
+        "meetingPoint": "Arrival Hall, Marrakech Menara Airport (RAK).",
+        "importantInfo": [
+            "Provide flight number and arrival time.",
+            "Free waiting time up to 90 mins after landing."
+        ],
+        "faqs": [
+            {
+                "q": "Can you take me to the Medina?",
+                "a": "Cars cannot enter deep Medina. We drop you at the closest gate/square."
+            }
+        ],
+        "relatedExperiences": [
+            "Marrakech Airport Departure Transfer",
+            "Intercity Transfer: Marrakech to Casablanca"
+        ],
+        "imageConcepts": [
+            "Driver holding a sign in a modern airport terminal",
+            "Black Mercedes van parked",
+            "Luggage being loaded into trunk",
+            "Smiling driver opening door",
+            "Highway view of Koutoubia mosque approaching"
+        ]
+    },
+    {
+        "id": "airport-departure-transfer",
+        "title": "Stress-Free Airport Departure Transfer",
+        "summary": "End your trip smoothly. We pick you up from your hotel and ensure you reach the airport with plenty of time for your flight.",
+        "highlights": [
+            "Reliable pickup time",
+            "Assistance with luggage",
+            "Comfortable AC vehicle",
+            "Fixed price (no meter anxiety)",
+            " Avoid last-minute taxi stress"
+        ],
+        "description": "Don't leave your departure to chance. Book your ride back to Marrakech Menara Airport (RAK) in advance. We recommend a pickup time 3 hours before your flight departure (or 3.5 hours for busy periods).\n\nYour driver will meet you at your hotel reception or the nearest accessible point for your Riad. Sit back and relax for the final ride through the Red City."
+    },
+    {
+        "id": "intercity-transfer-casablanca",
+        "title": "Private Intercity Transfer: Marrakech to Casablanca",
+        "summary": "Travel in comfort between Morocco's two major cities in a private vehicle with a professional driver.",
+        "highlights": [
+            "Door-to-door service",
+            "Highway toll fees included",
+            "Comfortable wide vehicle",
+            "Stop for coffee/rest break",
+            "2.5 to 3 hours travel time",
+            "Available for Airport (CMN) or City Centre"
+        ],
+        "description": "Need to get to Casablanca? Skip the train schedule and the crowded taxis. Our private intercity transfer offers the flexibility to leave when you want.\n\nThe journey takes approximately 2.5 to 3 hours via the smooth highway. We use comfortable vehicles with plenty of legroom and trunk space. You can request a stop halfway for a coffee or restroom break. We can drop you off at a hotel in Casablanca city center or directly at Mohammed V International Airport (CMN) for your connecting flight.",
+        "itinerary": [
+            {
+                "title": "Pickup",
+                "description": "Marrakech Hotel."
+            },
+            {
+                "title": "Drive",
+                "description": "Highway drive."
+            },
+            {
+                "title": "Drop-off",
+                "description": "Casablanca location."
+            }
+        ],
+        "included": [
+            "Private Vehicle",
+            "Tolls",
+            "Driver"
+        ],
+        "importantInfo": [
+            "Distance is approx 240km.",
+            "Please specify if you have excess luggage."
+        ],
+        "relatedExperiences": [
+            "Marrakech Airport Arrival Transfer",
+            "Essaouira Coastal Escape"
+        ]
+    }
+]

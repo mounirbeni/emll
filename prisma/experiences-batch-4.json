@@ -1,0 +1,195 @@
+[
+    {
+        "id": "sunrise-yoga-medina-rooftop",
+        "title": "Sunrise Yoga on a Panoramic Medina Rooftop",
+        "summary": "Greet the sun as it rises over the Atlas Mountains with a rejuvenating yoga session on a peaceful rooftop high above the waking city.",
+        "highlights": [
+            "1-hour Yoga session (Hatha/Vinyasa flow)",
+            "Certified Yoga Instructor",
+            "Panoramic views of Koutoubia and Atlas Mountains",
+            "Healthy Berber Breakfast included",
+            "Mat and props provided",
+            "Small intimate group",
+            "Suitable for all levels"
+        ],
+        "description": "Marrakech is a city of energy, but also of deep spiritual calm. This experience invites you to find your center before the hustle of the day begins. \n\nWe meet at a hidden Riad in the heart of the Medina. Ascend to the highest terrace as the call to prayer echoes softly across the rooftops. Your instructor leads you through a gentle yet energizing flow, synchronizing your breath with the rising sun. \n\nThe view is unmatched: storks nesting on minarets, the pink light hitting the city walls, and the snowy peaks of the Atlas in the distance. After Savasana, stay for a nutritious breakfast of fresh juice, fruit, yogurt, and Moroccan pancakes, sharing the morning peace with fellow travelers.",
+        "itinerary": [
+            {
+                "title": "Arrival",
+                "description": "Meet at the Riad door."
+            },
+            {
+                "title": "Practice",
+                "description": "60-minute Yoga flow."
+            },
+            {
+                "title": "Breakfast",
+                "description": "Communal breakfast on the terrace."
+            }
+        ],
+        "included": [
+            "Yoga Class",
+            "Instructor",
+            "Breakfast",
+            "Equipment"
+        ],
+        "notIncluded": [
+            "Transfers"
+        ],
+        "meetingPoint": "Riad (Location provided).",
+        "importantInfo": [
+            "Wear comfortable clothing.",
+            "In winter, wear layers as mornings are crisp."
+        ],
+        "relatedExperiences": [
+            "Luxury Spa Day & Signature Massage",
+            "Tea Ceremony & Moroccan Pastry Workshop"
+        ]
+    },
+    {
+        "id": "traditional-hammam-spa-ritual",
+        "title": "The Authentic Ritual: Traditional Hammam & Spa",
+        "summary": "Surrender to the steam and scrub of the Moroccan Hammam, a centuries-old purification ritual that leaves your skin glowing and spirit renewed.",
+        "highlights": [
+            "Private Hammam room (warm steam)",
+            "Traditional Black Soap (Savon Beldi) application",
+            "Exfoliation with Kessa glove",
+            "Ghassoul (clay) body mask",
+            "Relaxing massage (optional add-on)",
+            "Tea relaxation room",
+            "Authentic Riad Spa setting"
+        ],
+        "description": "You cannot visit Morocco without experiencing the Hammam. It is more than a bath; it is a social and spiritual necessity. In our selected boutique spa, you get the authenticity of the ritual with the privacy and hygiene of a luxury establishment.\n\nThe process is a journey. First, the steam opens your pores in the warm room. Your attendant applies 'Savon Beldi', a gel-like soap made from black olives. Then comes the vigorous scrub with the 'Kessa' glove—you will be amazed at how much dead skin comes off! Finally, a coating of mineral-rich Ghassoul clay softens the skin before a warm rinse. You emerge feeling lighter, cleaner, and incredibly relaxed.",
+        "itinerary": [
+            {
+                "title": "Welcome",
+                "description": "Herbal tea and consultation."
+            },
+            {
+                "title": "Steam",
+                "description": "Relax in the hot room."
+            },
+            {
+                "title": "The Scrub",
+                "description": "Full body exfoliation."
+            },
+            {
+                "title": "Mask",
+                "description": "Body wrap."
+            },
+            {
+                "title": "Relax",
+                "description": "Nap in the lounge."
+            }
+        ],
+        "included": [
+            "Hammam Ritual (45-60 mins)",
+            "Towel/Robe/Slippers",
+            "Tea"
+        ],
+        "importantInfo": [
+            "Men and Women have separate sections or times, or private couples rooms.",
+            "You wear disposable underwear or swimsuit bottoms."
+        ],
+        "relatedExperiences": [
+            "Luxury Spa Day & Signature Massage",
+            "Sunrise Yoga on a Panoramic Medina Rooftop"
+        ]
+    },
+    {
+        "id": "luxury-spa-day-massage",
+        "title": "Luxury Spa Day & Signature Massage",
+        "summary": "Indulge in pure pampering with a full package of treatments including hammam, massage, and facial in a 5-star spa sanctuary.",
+        "highlights": [
+            "3-hour Spa Package",
+            "Luxury Hammam Ritual",
+            "1-hour Argan Oil Relaxing Massage",
+            "Express Facial treatment",
+            "Access to spa pool/jacuzzi (where available)",
+            "Premium products (Les Sens de Marrakech etc.)"
+        ],
+        "description": "Escape the chaos of the souks into a haven of silence and scent. This is the upgrade your holiday deserves. We partner with the city's most elegant spas to offer a complete restoration package.\n\nStart with the purifying Hammam to prep your skin. Move on to a 60-minute signature massage using warm organic Argan oil, scented with verbena or orange blossom. Expert hands work out the tension of travel. Finish with a facial to hydrate your sun-kissed skin. It is half a day of bliss that leaves you floating."
+    },
+    {
+        "id": "henna-art-tea-ceremony",
+        "title": "Traditional Henna Art & Tea Ceremony",
+        "summary": "Adorn your hands with intricate, natural Henna designs applied by a 'Nakacha' artist, while learning the symbols of Berber culture.",
+        "highlights": [
+            "Natural premium Henna (Green/Red)",
+            "Design of your choice (Simple or Intricate)",
+            "Learn the meanings of the symbols (protection, fertility, luck)",
+            "Tea and sweets included",
+            "Avoid the unsafe 'Black Henna' of the street",
+            "Beautiful setting"
+        ],
+        "description": "Henna is the makeup of celebration in Morocco. Worn by brides and guests at festivals, the patterns tell stories. In this safe and relaxed workshop, you sit with a professional 'Nakacha' (Henna artist).\n\nBrowse a book of traditional Amazigh (Berber) and Fassi (Fes style) designs. As she paints the cool paste onto your skin with a syringe-like applicator, learn what the diamond, the eye, and the fibula represent. Relax with tea while it dries, leaving a temporary tattoo that will travel home with you, lasting 1-2 weeks."
+    },
+    {
+        "id": "pottery-zellige-workshop",
+        "title": "Clay & Color: Pottery and Zellige Workshop",
+        "summary": "Get your hands dirty at the potter's wheel or learn the incredible geometry of Zellige mosaic cutting with a master artisan.",
+        "highlights": [
+            "Choose: Potter's Wheel OR Zellige (Mosaic) cutting",
+            "Taught by a Maâlem (Master Craftsman)",
+            "Create your own bowl, cup, or tile pattern",
+            "Learn the geometry of Islamic art",
+            "Take your fired piece home (or pick up later)",
+            "Hands-on cultural immersion"
+        ],
+        "description": "Marrakech is famous for its Zellige—the colorful mosaic tilework that covers palaces and fountains. In this workshop, you realize the immense skill required to create it. \n\nOpt for Zellige and you will learn to chip glazed clay tiles into precise shapes using a sharp 'Menqach' hammer, then assemble them face-down into a geometric star pattern. It is a puzzle of logic and art. \n\nAlternatively, sit at the traditional potter’s kick-wheel. Feel the wet red clay of Safi spinning between your fingers as you coax it into a bowl or tagine. It is meditative, grounding, and harder than it looks!"
+    },
+    {
+        "id": "perfume-creation-workshop",
+        "title": "Scent of Morocco: Perfume Creation Workshop",
+        "summary": "Design your own signature fragrance using the essential oils of Morocco—Rose, Jasmine, Cedar, and Oud—guided by a perfumer.",
+        "highlights": [
+            "Introduction to the Olfactory Pyramid (Top, Heart, Base notes)",
+            "Smell and select from 30+ essences",
+            "Create your unique formula",
+            "Compose a 30ml bottle of Eau de Parfum to take home",
+            "Personalized label",
+            "Certificate of creation"
+        ],
+        "description": "Smell is the strongest trigger for memory. Capture the essence of your Moroccan trip in a bottle. Morocco is a major producer of perfume ingredients, from the Roses of Kelâat M'Gouna to the Cedar of the Atlas.\n\nIn this sophisticated workshop, a 'Nose' (perfume expert) guides you through the organ of scents. You'll learn to balance fresh citrus top notes with floral hearts and deep woody bases. Will your scent be a spicy oriental or a fresh floral? You decide, mix, and bottle it, naming your creation. A truly unique souvenir.",
+        "itinerary": [
+            {
+                "title": "Theory",
+                "description": "Basics of perfumery."
+            },
+            {
+                "title": "Selection",
+                "description": "Choosing your notes."
+            },
+            {
+                "title": "Creation",
+                "description": "Pipetting and mixing."
+            },
+            {
+                "title": "Bottling",
+                "description": "Filtering and sealing your bottle."
+            }
+        ],
+        "included": [
+            "Workshop",
+            "30ml Perfume",
+            "Guide"
+        ],
+        "importantInfo": [
+            "Perfume needs 2 weeks to macerate (mature) before it smells its best."
+        ]
+    },
+    {
+        "id": "arabic-calligraphy-introduction",
+        "title": "The Sacred Script: Arabic Calligraphy Workshop",
+        "summary": "Learn the bamboo quill techniques of the beautiful Maghrebi script, writing your name and ancient proverbs.",
+        "highlights": [
+            "Learn to sharpen and hold the 'Qalam' (bamboo pen)",
+            "Practice the basic strokes and curves",
+            "Write your name in Arabic calligraphy",
+            "Create a final artwork on parchment paper",
+            "Meditative and artistic experience",
+            "Taught by a Calligraphy Master"
+        ],
+        "description": "In Islamic culture, where figurative art was traditionally discouraged, calligraphy became the ultimate visual expression of the divine. The sweeping curves of the Arabic script are everywhere in Marrakech.\n\nSit with a master calligrapher and learn the discipline of the ink and the reed. You will practice the 'Maghrebi' script, distinct to North Africa with its rounded, flowing forms. It demands patience and breath control. By the end of the session, you will have written a proverb or your name, creating a piece of art that bridges language and image."
+    }
+]

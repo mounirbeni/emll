@@ -1,0 +1,2920 @@
+[
+  {
+    "title": "Marrakech Medina Hidden Gems: Insider Walking Tour",
+    "category": "City Tours",
+    "location": "Marrakech Medina",
+    "duration": "3 hours",
+    "price": 30,
+    "currency": "EUR",
+    "shortDescription": "Go beyond the guidebooks on this immersive walking tour through the secret alleys, exploring ancient ovens, authentic artisan workshops, and the real life of the Medina.",
+    "fullDescription": "Marrakech’s Medina is a sprawling labyrinth of history, a sensory overload that can be overwhelming to the uninitiated. While most visitors stick to the main souks, the true soul of the Red City lies hidden in its quiet residential neighborhoods and dusty artisan quarters. This 'Hidden Gems' walking tour is your key to unlocking those secrets.\n\nLed by a local guide who calls these streets home, you will leave the chaos of Jemaa el-Fnaa behind and venture into the labyrinth. You won't just see the city; you will feel its pulse. Smell the aroma of freshly baked bread as we enter a 'Farrane', where families still bring their dough to be baked in wood-fired ovens. Feel the heat of the 'Hammam' furnace that heats the neighborhood bathhouse, an ancient system unchanged for centuries.\n\nWe will navigate to a restored 'Foundouk'—formerly a caravanserai for traveling merchants, now a hub of creativity where woodturners, leatherworkers, and blacksmiths practice their crafts with incredible precision. This is not a shopping trip; it is a cultural immersion into the dignity of manual labor. Through stories and interactions, you will learn how the community functions, the significance of the intricate door knockers, and the hidden meaning behind the architecture. The experience concludes high above the bustle, on a private terrace, sipping mint tea and looking out over the tapestry of rooftops to the Atlas Mountains.",
+    "highlights": [
+      "Access exclusive non-touristy residential quarters",
+      "Witness a traditional 'Farrane' community bakery in action",
+      "Step inside a centuries-old artisan Foundouk",
+      "Meet master craftsmen in their authentic workshops",
+      "Understand the 'Five Pillars' of neighborhood life",
+      "Enjoy a private tea ceremony on a hidden rooftop",
+      "Small group limit (Max 8 travelers)",
+      "Guaranteed no shopping pressure or commission stops"
+    ],
+    "itinerary": [
+      {
+        "title": "Meeting & Introduction",
+        "description": "Meet your local insider at the foot of the Koutoubia Minaret. After a brief historical orientation and safety briefing, we dive into the Medina."
+      },
+      {
+        "title": "The Community Oven",
+        "description": "Step inside a working 'Farrane'. Watch the baker slide loaves into the deep wood-fired oven and taste a piece of fresh, hot bread."
+      },
+      {
+        "title": "The Hammam Furnace",
+        "description": "Descend to the 'Farnatchi', the hidden furnace room that powers the local steam bath, and meet the keeper of the fire."
+      },
+      {
+        "title": "Artisan Encounters",
+        "description": "Walk through the specialized quarters of the souk. Stop to chat with a woodturner or metalworker and see them creating art from raw materials."
+      },
+      {
+        "title": "Foundouk Exploration",
+        "description": "Visit a 17th-century Foundouk. Admire the architecture of this former trading inn and see how it holds the artisan community today."
+      },
+      {
+        "title": "Rooftop Tea Finale",
+        "description": "Ascend to a hidden rooftop terrace for a glass of traditional mint tea. Discussion and Q&A session with your guide before finding your way back."
+      }
+    ],
+    "included": [
+      "Expert English-speaking Local Guide",
+      "Bread tasting at community bakery",
+      "Mint tea or coffee on a rooftop",
+      "Bottled water",
+      "Map of the Medina"
+    ],
+    "notIncluded": [
+      "Gratuities for the guide",
+      "Personal shopping expenses",
+      "Hotel pickup/drop-off"
+    ],
+    "meetingPoint": "Koutoubia Mosque Gardens, directly in front of the main Minaret tower. Look for the guide holding a sign that says 'Hidden Gems'.",
+    "importantInfo": [
+      "This is a walking tour covering approx 3km; comfortable flat shoes are essential.",
+      "Modest dress is appreciated in residential areas (shoulders and knees covered).",
+      "The terrain is uneven and not suitable for wheelchairs or heavy strollers.",
+      "Photography is allowed, but please always ask permission before taking close-up portraits of people."
+    ],
+    "faqs": [
+      {
+        "q": "Will we be pressured to buy carpets?",
+        "a": "Absolutely not. We have a strict 'no commission' policy. We visit artisans to watch them work, not to buy."
+      },
+      {
+        "q": "Is it safe for solo female travelers?",
+        "a": "Yes, completely. You are with a respected local guide who ensures a hassle-free experience."
+      },
+      {
+        "q": "How many people are in the group?",
+        "a": "We keep groups small, maximum 8 people, to ensure an intimate atmosphere."
+      },
+      {
+        "q": "Is it suitable for children?",
+        "a": "Children aged 10+ tend to enjoy the cultural aspects. Younger kids might find the walking tiring."
+      },
+      {
+        "q": "Does the tour handle dietary restrictions?",
+        "a": "The bread tasting contains gluten. Please advise if you are Celiac."
+      }
+    ],
+    "relatedExperiences": [
+      "Ultimate Medina Street Food Tour",
+      "Bahia Palace & Ben Youssef Madrasa Masterpieces",
+      "Traditional Moroccan Bread Baking Workshop",
+      "Marrakech Photography Tour: Light & Shadow"
+    ],
+    "imageConcepts": [
+      "Guide gesturing down a narrow sunlit alleyway",
+      "Baker using a long wooden paddle at the oven",
+      "Close up of artisan hands carving wood",
+      "Group silhouette walking through a keyhole arch",
+      "Tea setup on a tiled table with rooftop view"
+    ],
+    "pickupAvailable": false,
+    "gallery": [
+      "/images/experiences/walking-tour-1.jpg",
+      "/images/experiences/walking-tour-2.jpg"
+    ],
+    "slug": "medina-hidden-gems-walking-tour"
+  },
+  {
+    "title": "Vintage Sidecar Adventure: The Insider's Ride",
+    "category": "City Tours",
+    "location": "Marrakech City",
+    "duration": "1.5 hours",
+    "price": 90,
+    "currency": "EUR",
+    "shortDescription": "Feel the freedom of the open road on a stylish, private sidecar tour, zipping through Medina alleys and palm groves where cars cannot go.",
+    "fullDescription": "Forget the tour bus—this is the most stylish way to see Marrakech. Hop into the sidecar of a classic vintage motorcycle and let the wind rush past as you explore the Red City from a completely new perspective. This experience is equal parts thrill, style, and sightseeing.\n\nYour driver is an 'insider', a local expert who knows the city's rhythm. Because the sidecar is compact and agile, you can go where others can't. We’ll thread through the ancient ramparts, ducking into narrow Medina streets to see the old city wake up, before accelerating out to the lush tranquility of the Palmeraie. You might cruise through the Art Deco avenues of Gueliz to feel the modern pulse of the city or skirt the city walls at golden hour.\n\nIt’s an open-air sensory experience: the smell of spices, the sound of the call to prayer, the warmth of the sun. More than a transfer, it’s a journey with a friend who knows the coolest spots. We stop whenever you want—for a photo, a story, or a quick espresso at a retro cafe. Perfect for couples, friends, or anyone who wants to feel like the star of their own movie.",
+    "highlights": [
+      "Ride in a restored vintage sidecar motorcycle",
+      "Access narrow Medina lanes and vast Palm Grove tracks",
+      "360-degree unobstructed views of the city",
+      "Tailor-made circular route based on your interests",
+      "Hosted by an expat or local 'insider' driver",
+      " Stylish helmets and hygiene gear provided",
+      "Unique 'urber-cool' photo opportunities",
+      "Discover the Art Deco district of Gueliz"
+    ],
+    "itinerary": [
+      {
+        "title": "Pickup & Gear Up",
+        "description": "Your driver arrives at your hotel or a central point. Fitting of retro helmets and vintage goggles. Safety briefing."
+      },
+      {
+        "title": "The Medina Maze",
+        "description": "Zip through the quieter streets of the Kasbah and Mellah, getting up close to the ancient walls."
+      },
+      {
+        "title": "City Walls Run",
+        "description": "Pick up speed along the 12th-century ramparts, with the Atlas Mountains as your backdrop."
+      },
+      {
+        "title": "Palmeraie or Gueliz",
+        "description": "Depending on your preference: Cruise the palm paths of the oasis or the chic boulevards of the new city."
+      },
+      {
+        "title": "Insider Stop",
+        "description": "A quick pause at a hidden spot known only to locals for a unique photo or quick refreshment."
+      },
+      {
+        "title": "Drop-off",
+        "description": "Return to your hotel with wind-swept hair and a story to tell."
+      }
+    ],
+    "included": [
+      "Private Vintage Sidecar (Max 2 passengers)",
+      "Professional Driver/Guide",
+      "Helmet and Goggles usage",
+      "Sanitary hair nets",
+      "Water bottle",
+      "Insurance"
+    ],
+    "notIncluded": [
+      "Food and drinks (unless specified)",
+      "Gratuities",
+      "Entrance fees to monuments (we generally don't enter)"
+    ],
+    "meetingPoint": "Grand Cafe de la Poste, Gueliz (a historic landmark). Central and easy to find. Hotel pickup available for selected zones.",
+    "importantInfo": [
+      "Each sidecar fits 2 passengers: one in the 'bucket' and one on the bike behind the driver.",
+      "Please wear closed-toe shoes and sunglasses.",
+      "Not recommended for pregnant women or children under 5 years old.",
+      "Max weight per passenger is approx 100kg.",
+      "Tours run in light rain (ponchos provided) but reschedule in storms."
+    ],
+    "faqs": [
+      {
+        "q": "Can I drive the bike?",
+        "a": "No, for safety and insurance reasons, our professional drivers are always at the helm."
+      },
+      {
+        "q": "Is it safe in traffic?",
+        "a": "Yes, we drive defensively and at moderate sightseeing speeds. The sidecar is very stable."
+      },
+      {
+        "q": "We are a group of 3, what do we do?",
+        "a": "You will need to book 2 sidecars. It’s even more fun riding in a convoy!"
+      },
+      {
+        "q": "Is it comfortable?",
+        "a": "The sidecar seat is padded and comfortable. The pillion seat is standard motorcycle style."
+      },
+      {
+        "q": "Can we customize the route?",
+        "a": "Absolutely. Tell your driver if you prefer architecture, nature, or street life."
+      }
+    ],
+    "relatedExperiences": [
+      "Marrakech Photography Tour: Light & Shadow",
+      "Sunrise Hot Air Balloon Flight",
+      "Quad Biking Adrenaline in Agafay",
+      "Intercity Transfer: Marrakech to Casablanca"
+    ],
+    "imageConcepts": [
+      "Action shot of sidecar banking around a palm tree",
+      "Passenger laughing with goggles on, wind in hair",
+      "Sidecar parked in front of a giant wooden Medina door",
+      "Driver pointing out a landmark to passengers",
+      "Sunset reflection in the chrome of the headlight"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/sidecar-1.jpg",
+      "/images/experiences/sidecar-2.jpg"
+    ],
+    "slug": "vintage-sidecar-tour"
+  },
+  {
+    "title": "Evening Jemaa El Fna: Mythic Square & Souk Tasting",
+    "category": "City Tours",
+    "location": "Jemaa el-Fnaa",
+    "duration": "2.5 hours",
+    "price": 35,
+    "currency": "EUR",
+    "shortDescription": "Experience the magic of Marrakech at night, tasting local street food and navigating the storytellers of the UNESCO-listed square.",
+    "fullDescription": "As the sun sets, Jemaa el-Fnaa transforms. The day's juice stalls give way to a rising smoke of a hundred grills, and the air fills with the rhythm of Gnawa drums. This is the heartbeat of Marrakech, a UNESCO Masterpiece of the Oral and Intangible Heritage of Humanity. Exploring it alone can be intimidating; exploring it with us is an adventure.\n\nWe begin above the fray, on a rooftop terrace, watching the spectacle of the lights flicking on across the square. Then, we descend into the energy. Your guide will steer you through the 'Halqa' (circles) of performers—snake charmers, acrobats, and storytellers—decoding the cultural significance of this nightly theatre. \n\nThis is also a tasting journey. We move beyond the tourist traps to the stalls where locals eat. Sip a warming bowl of Harira (lentil and chickpea soup) with a sticky sweet Chebakia. Try the famous spiced tea with 'Khoudenjal'. For the brave, there are snails in herbaceous broth; for the hungry, fresh grilled meats or Maakouda. We wind through the night markets of the souk, now mysterious in the shadows, before ending with a full belly and a deep appreciation for this living theater.",
+    "highlights": [
+      "Sunset view from a panoramic rooftop terrace",
+      "Guided immersion into the UNESCO Masterpiece 'Jemaa el-Fnaa'",
+      "Taste 5+ authentic street food snacks (Harira, Dates, Snails)",
+      "Decipher the circles of storytellers, musicians, and performers",
+      "Visit the spice market at its most atmospheric hour",
+      "Learn the history of the 'Square of the Dead'",
+      "Safe, guided navigation of the night crowds",
+      "Sit-down tasting at a trusted local food stall"
+    ],
+    "itinerary": [
+      {
+        "title": "Sunset & Scope",
+        "description": "Meet and head immediately to a rooftop vantage point. Watch the square transform from day to night market while the Muezzin calls to prayer."
+      },
+      {
+        "title": "The Circle Walk",
+        "description": "Walk among the performers. Your guide explains the distinct groups: the Gnaoua, the healers, the boxers, and the cross-dressing dancers."
+      },
+      {
+        "title": "Soup & Dates",
+        "description": "Stop at a soup stand to slurp traditional Harira and eat dates, the Ramadan breaker of fast."
+      },
+      {
+        "title": "The Snail Dare",
+        "description": "Visit a snail cart. Try the broth (excellent for digestion) or eat a snail if you dare!"
+      },
+      {
+        "title": "Main Tasting",
+        "description": "Sit at a numbered stall for a tasting of grilled delights, salads, and fresh bread."
+      },
+      {
+        "title": "Spice & Tea",
+        "description": "A short walk to the spice square for a digestive herbal tea blend."
+      }
+    ],
+    "included": [
+      "Local Cultural Guide",
+      "All food tastings (equivalent to a light dinner)",
+      "Mineral water",
+      "One rooftop drink (tea or soda)",
+      "Tips for 1-2 performer groups"
+    ],
+    "notIncluded": [
+      "Alcoholic beverages",
+      "Hotel drop-off",
+      "Personal shopping"
+    ],
+    "meetingPoint": "Post Office (Barid Al Maghrib), Jemaa el-Fnaa. On the main steps facing the square.",
+    "importantInfo": [
+      "Crowds can be very dense and loud. Keep your valuables secure.",
+      "Vegetarians can be accommodated (plenty of soup, salad, potato options).",
+      "We strictly avoid snake charmers and monkey handlers that exploit animals.",
+      "Bring some small change (Dirhams) if you wish to tip individual performers."
+    ],
+    "faqs": [
+      {
+        "q": "Is the street food safe?",
+        "a": "Yes. We only visit high-turnover stalls with proven hygiene records. We eat there ourselves!"
+      },
+      {
+        "q": "Is it scary at night?",
+        "a": "The square is chaotic but generally safe. With a guide, you avoid the hassle of touts."
+      },
+      {
+        "q": "Can I take photos of the performers?",
+        "a": "Performers expect payment for photos (10-20 MAD). Ask your guide to negotiate first."
+      },
+      {
+        "q": "Is this suitable for children?",
+        "a": "Kids usually love the energy, but keep them close. Strollers are difficult in the crowd."
+      },
+      {
+        "q": "Is dinner included?",
+        "a": "Yes, the cumulative tastings make up a satisfying meal."
+      }
+    ],
+    "relatedExperiences": [
+      "Ultimate Medina Street Food Tour",
+      "Fantasia Dinner Show - 1001 Nights",
+      "Marrakech Photography Tour: Light & Shadow",
+      "Tea Ceremony & Moroccan Pastry Workshop"
+    ],
+    "imageConcepts": [
+      "Long exposure of the square at night with motion blur",
+      "Steam rising from a bowl of Harira soup",
+      "Musician playing the Guembri instrument",
+      "Cook grilling skewers with flames rising",
+      "Group toasting with tea glasses in the market"
+    ],
+    "pickupAvailable": false,
+    "gallery": [
+      "/images/experiences/jemaa-night-1.jpg",
+      "/images/experiences/jemaa-night-2.jpg"
+    ],
+    "slug": "evening-jemaa-el-fna-tasting"
+  },
+  {
+    "title": "Marrakech Photography Tour: Light & Shadow",
+    "category": "City Tours",
+    "location": "Marrakech Medina",
+    "duration": "3 hours",
+    "price": 50,
+    "currency": "EUR",
+    "shortDescription": "Capture the soul of the Red City with a professional photographer guide who teaches you composition, lighting, and cultural etiquette.",
+    "fullDescription": "Marrakech is a photographer's dream: a riot of ochre walls, vibrant textiles, sharp shadows, and ancient faces. But it is also a challenging environment to shoot in. The light can be blindingly bright or frustratingly dark, and the local culture regarding privacy requires sensitivity. This tour is designed to bridge that gap.\n\nLed by a pro photographer living in Marrakech, this is an 'on-the-street' workshop. We focus on 'seeing' the image before you click. We will explore the interplay of light and shadow in the arches of the Ben Youssef area, the explosion of color in the Dyer’s Souk, and the timeless geometry of Zellige tiles. \n\nMore than technical settings, you will learn the 'Soft Approach'—how to interact with locals, how to ask for portraits respectfully, and how to become invisible when capturing candid moments. Whether you are carrying a full-frame Canon or an iPhone 15, you will leave with a stunning portfolio and a new way of looking at the world.",
+    "highlights": [
+      "Guided by a professional photographer",
+      "Discover hidden photogenic corners of the Medina",
+      "Learn how to manage harsh contrast and low light",
+      "Master the etiquette of street photography in Morocco",
+      "Visit vibrant souks, architectural gems, and quiet courtyards",
+      "Get constructive feedback on your shots",
+      "Suitable for DSLR, Mirrorless, and Smartphone shooters",
+      "Small group (Max 6) for personal mentoring"
+    ],
+    "itinerary": [
+      {
+        "title": "Briefing & Coffee",
+        "description": "Meet at a cafe to check your gear/settings and discuss your goals for the session."
+      },
+      {
+        "title": "Architecture & Geometry",
+        "description": "Visit a Madrasa or historic gateway to practice symmetry, patterns, and framing."
+      },
+      {
+        "title": "The Souk Walk",
+        "description": "Dive into the markets. Practice capturing motion blur, isolation of subjects, and color theory."
+      },
+      {
+        "title": "Light Chasing",
+        "description": "Depending on the time (morning rays or golden hour), we hunt for the dramatic beams of light piercing the roofed alleys."
+      },
+      {
+        "title": "Portraiture (Optional)",
+        "description": "Learn the respectful way to approach an artisan for a photo."
+      },
+      {
+        "title": "Review",
+        "description": "End the tour with a quick review of your best shots and editing tips."
+      }
+    ],
+    "included": [
+      "Professional Photographer Guide",
+      "Coffee or mint tea",
+      "Route map of photo spots",
+      "Critique of images"
+    ],
+    "notIncluded": [
+      "Camera equipment (bring your own)",
+      "Entrance fees to monuments (if we decide to enter)",
+      "Tips for models (artisans)",
+      "Transport"
+    ],
+    "meetingPoint": "Cafe des Epices, Medina. A central landmark. Guide will have a camera strap visible.",
+    "importantInfo": [
+      "Bring fully charged batteries and empty memory cards.",
+      "Wear comfortable walking shoes.",
+      "Respect is our lens: Never photograph people without permission. Your guide will handle negotiations.",
+      "Morning slots (9am) are best for soft light; Afternoon (3-4pm) for golden hour."
+    ],
+    "faqs": [
+      {
+        "q": "I only use my phone. Is that okay?",
+        "a": "Absolutely. The best camera is the one you have with you. We teach composition which applies to all devices."
+      },
+      {
+        "q": "Do you maximize technical settings?",
+        "a": "We tailor the teaching to your level—from 'what is aperture?' to advanced exposure compensation."
+      },
+      {
+        "q": "Can I bring a tripod?",
+        "a": "Monopods are better. Tripods are cumbersome in the crowded souks and can be a tripping hazard."
+      },
+      {
+        "q": "Will people get angry if I take photos?",
+        "a": "Some might. We teach you how to read the room and avoid conflict."
+      },
+      {
+        "q": "Is this a workshop or a tour?",
+        "a": "It's a walking tour with embedded instruction. You learn by doing."
+      }
+    ],
+    "relatedExperiences": [
+      "Medina Hidden Gems Walking Tour",
+      "Bahia Palace & Ben Youssef Madrasa Masterpieces",
+      "Sunrise Hot Air Balloon Flight",
+      "Vintage Sidecar Tour: The Insider's Ride"
+    ],
+    "imageConcepts": [
+      "Dramatic shaft of light hitting a pile of spices",
+      "Photographer crouching low to get a reflection in a puddle",
+      "Symmetry of a mosaic fountain",
+      "Silhouette of a figure walking through an archway",
+      "Hands of a craftsman working on leather"
+    ],
+    "pickupAvailable": false,
+    "gallery": [
+      "/images/experiences/photo-tour-1.jpg",
+      "/images/experiences/photo-tour-2.jpg"
+    ],
+    "slug": "marrakech-photography-tour"
+  },
+  {
+    "title": "Architectural Masterpieces: Bahia Palace & Ben Youssef",
+    "category": "City Tours",
+    "location": "Medina",
+    "duration": "3 hours",
+    "price": 40,
+    "currency": "EUR",
+    "shortDescription": "Explore the two crown jewels of Marrakech architecture with a historian guide, deciphering the stories behind the tiles and the stucco.",
+    "fullDescription": "Marrakech is a city written in stone, wood, and tile. To truly read it, you need a guide who speaks the language of architecture. This tour focuses on the two most significant monuments in the city, artifacts of the Saadian and Alawite dynasties.\n\nWe start at the Bahia Palace, a sprawling masterpiece of 19th-century luxury. Built for the Grand Vizier, it is a maze of painted cedar ceilings, marble courtyards, and lush gardens. Your guide will transport you back to the days of the Harem, explaining the politics and intrigues of the Vizier's court.\n\nFrom there, we navigate the winding streets to the Ben Youssef Madrasa. Once the largest Islamic college in North Africa, it is a jewel of Marinid architecture. Having recently undergone a massive restoration, its walls sing with intricate 'Gebs' (stucco) and 'Zellige' (mosaic) work. Stand in the silent central courtyard and imagine the lives of the 900 students who once studied scripture here. This is an intellectual and visual feast for anyone who loves design and history.",
+    "highlights": [
+      "Skip-the-line assistance (where possible)",
+      "In-depth guided tour of the 19th-century Bahia Palace",
+      "Visit the 14th-century Ben Youssef Madrasa (ancient college)",
+      "Expert Historian Guide to explain Islamic symbolism",
+      "Walk through the oldest residential quarters of the Medina",
+      "Learn about the Grand Vizier and his Harem",
+      "Quiet corners for photography",
+      "Small group experience"
+    ],
+    "itinerary": [
+      {
+        "title": "Meeting at Bahia",
+        "description": "Meet outside the Bahia Palace. Introduction to the Alawite dynasty."
+      },
+      {
+        "title": "Bahia Palace Tour",
+        "description": "Explore the Grand Riad, the Petit Riad, and the Harem quarters. Decode the painted ceilings."
+      },
+      {
+        "title": "The Medina Walk",
+        "description": "A focused walk connecting the two sites, passing through the Mellah and Souk Semmarine."
+      },
+      {
+        "title": "Ben Youssef Madrasa",
+        "description": "Enter the ancient college. Visit the prayer hall, the reflection pool, and the student dormitories upstairs."
+      },
+      {
+        "title": "Conclusion",
+        "description": "End near the Marrakech Museum, perfect for continuing your own exploration."
+      }
+    ],
+    "included": [
+      "Certified History Guide",
+      "Guided tour of Bahia Palace",
+      "Guided tour of Ben Youssef Madrasa"
+    ],
+    "notIncluded": [
+      "Entrance Tickets (approx 70 MAD/7 EUR per monument - pay on site)",
+      "Transportation",
+      "Food and drinks",
+      "Tips"
+    ],
+    "meetingPoint": "Main Gate of Bahia Palace. Look for the guide holding a 'Marrakech History' sign.",
+    "importantInfo": [
+      "Entrance fees are NOT included in the tour price. Please bring cash (Dirhams) to pay at the gate (approx 140 MAD total).",
+      "We recommend early morning starts to beat the crowds at Ben Youssef.",
+      "Modest dress is required out of respect for the religious history.",
+      "Wear comfortable shoes; there is significant walking between the two sites.",
+      "Not wheelchair accessible due to stairs in the Madrasa."
+    ],
+    "faqs": [
+      {
+        "q": "Why aren't tickets included?",
+        "a": "The monuments require individual purchase on-site. The guide assists, but you pay the ticket office directly."
+      },
+      {
+        "q": "How far is the walk between them?",
+        "a": "It's about a 20-25 minute walk through interesting parts of the souk."
+      },
+      {
+        "q": "Is it suitable for young kids?",
+        "a": "It can be history-heavy. We recommend it for older children/teens interested in culture."
+      },
+      {
+        "q": "Are there toilets?",
+        "a": "Yes, both monuments have facilities."
+      },
+      {
+        "q": "Is there AC?",
+        "a": "No, these are historic buildings. They stay relatively cool, but summers are hot."
+      }
+    ],
+    "relatedExperiences": [
+      "Jewish Quarter (Mellah) & Heritage Tour",
+      "Arabic Calligraphy Introduction",
+      "Pottery & Zellige (Mosaic) Artisan Workshop",
+      "Medina Hidden Gems Walking Tour"
+    ],
+    "imageConcepts": [
+      "Wide angle symmetry of Ben Youssef reflection pool",
+      "Close up of intricate stucco calligraphy",
+      "Sunlight filtering through cedar lattice screens",
+      "Guide pointing at a painted ceiling detail",
+      "Looking down from the student dorm window into the courtyard"
+    ],
+    "pickupAvailable": false,
+    "gallery": [
+      "/images/experiences/bahia-1.jpg",
+      "/images/experiences/ben-youssef-1.jpg"
+    ],
+    "slug": "bahia-palace-ben-youssef"
+  },
+  {
+    "title": "Jewish Heritage Tour: The Mellah & Synagogues",
+    "category": "City Tours",
+    "location": "Mellah District",
+    "duration": "2 hours",
+    "price": 35,
+    "currency": "EUR",
+    "shortDescription": "Walk through history in the Mellah district, visiting ancient synagogues and the cemetery to understand the legacy of coexistence in Marrakech.",
+    "fullDescription": "Marrakech holds a profound history of coexistence. For centuries, Muslims and Jews lived side by side, influencing each other’s crafts, cuisine, and culture. The Mellah, established in 1558, is the physical memory of this relationship. \n\nOn this heritage tour, we peel back the layers of the city. Starting at the Place des Ferblantiers (Tin Smiths Square), we enter the Mellah, immediately noticing the difference in architecture—wooden balconies overlooking the street, unlike the inward-facing Muslim homes. We visit the Slat Al Azama Synagogue, founded by exiles from Spain in 1492, a beautiful blue-and-white courtyard that is still an active place of worship. \n\nA short walk away lies the Miaara Jewish Cemetery, the largest in Morocco. Walking among the whitewashed tombs is a moving experience of peace and endurance. Your guide will share stories of the 'Tsadikim' (Saints) revered by both faiths and the current revival of Jewish heritage in the kingdom. We end with a stroll through the Mellah's spice souk, historically the center of the spice trade.",
+    "highlights": [
+      "Visit the Slat Al Azama Synagogue (1492)",
+      "Walk the silence of the Miaara Jewish Cemetery",
+      "Explore the historic Mellah (Jewish Quarter)",
+      "See the distinct balconied architecture",
+      "Visit the Spice Market of the Mellah",
+      "Learn about the history of Jews in Morocco",
+      "Stories of coexistence and shared traditions",
+      "Small group tour"
+    ],
+    "itinerary": [
+      {
+        "title": "The Gate of the Mellah",
+        "description": "Meet at Place des Ferblantiers. Introduction to the history of the walls and the creation of the quarter."
+      },
+      {
+        "title": "Souk of Spices",
+        "description": "Walk through the aromatic spice market, ancient trading ground of Jewish merchants."
+      },
+      {
+        "title": "Slat Al Azama",
+        "description": "Tour the synagogue, the Talmudic school, and the small museum of Jewish life."
+      },
+      {
+        "title": "Miaara Cemetery",
+        "description": "Enter the vast walled cemetery. A quiet walk to pay respects and see the tombs of the Rabbis."
+      },
+      {
+        "title": "Modern coexistence",
+        "description": "Walk back through the bustling residential streets, seeing how the neighborhood has evolved today."
+      }
+    ],
+    "included": [
+      "Specialized Heritage Guide",
+      "Entry donation to Slat Al Azama Synagogue",
+      "Entry donation to Miaara Cemetery",
+      "Bottled water"
+    ],
+    "notIncluded": [
+      "Gratuities",
+      "Personal purchases in the spice market",
+      "Transport (walking tour)"
+    ],
+    "meetingPoint": "Place des Ferblantiers, under the large archway near 'Kosybar' restaurant.",
+    "importantInfo": [
+      "The Synagogue and Cemetery are CLOSED on Saturdays (Shabbat) and Jewish Holidays.",
+      "They also close early on Fridays (around 3pm).",
+      "Men may be asked to wear a head covering (Kippah/Cap) in the Synagogue and Cemetery (usually provided).",
+      "Modest dress is required.",
+      "Photography is allowed but please be respectful in the cemetery."
+    ],
+    "faqs": [
+      {
+        "q": "Is this tour available on Saturday?",
+        "a": "No, due to Shabbat, the sites are closed. Best days are Mon-Thu or Sun."
+      },
+      {
+        "q": "Is it a religious tour?",
+        "a": "It is a cultural and historical tour, welcoming to people of all faiths."
+      },
+      {
+        "q": "Is it wheelchair accessible?",
+        "a": "The Mellah is flat, but the cemetery has rough, uneven ground."
+      },
+      {
+        "q": "Can we buy spices?",
+        "a": "Yes, but there is no obligation. The Mellah has some of the best spice shops in the city."
+      },
+      {
+        "q": "Are the sites safe?",
+        "a": "Yes, the Mellah is a very safe and friendly neighborhood."
+      }
+    ],
+    "relatedExperiences": [
+      "Bahia Palace & Ben Youssef Madrasa Masterpieces",
+      "Essaouira Coastal Escape",
+      "Dinner with a Local Family (Home Experience)",
+      "Marrakech Medina Hidden Gems: Insider Walking Tour"
+    ],
+    "imageConcepts": [
+      "Blue and white courtyard of the Synagogue",
+      "Endless rows of white tombs in the cemetery",
+      "Detail of a wooden balcony in the Mellah",
+      "Colorful cones of spices in the market",
+      "Old photo held up against a modern building"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/mellah-1.jpg",
+      "/images/experiences/mellah-2.jpg"
+    ],
+    "slug": "jewish-quarter-mellah-heritage"
+  },
+  {
+    "title": "Agafay Desert: Sunset Camel Trek & Dinner Show",
+    "category": "Desert Experiences",
+    "location": "Agafay Desert",
+    "duration": "6 hours",
+    "price": 70,
+    "currency": "EUR",
+    "shortDescription": "Escape the city for a magical evening in the stone desert, featuring a sunset camel ride, a Berber feast, and live music under the stars.",
+    "fullDescription": "You don't need to travel all the way to the Sahara to feel the magic of the desert. Just 45 minutes from Marrakech lies the Agafay Desert, a dramatic landscape of rolling stone dunes that looks like the moon. This evening experience is the perfect micro-adventure.\n\nWe pick you up in the late afternoon and drive south as the light softens. At the desert base, you'll be greeted by your camel team. Dress the part in a blue indigo nomad robe and headscarf (great for photos and sun protection) and mount your gentle camel. The 1-hour ride takes you to a ridge line exactly as the sun sets, painting the Atlas Mountains in violet and gold.\n\nBack at the camp, twilight turns to a star-filled night. Relax around a campfire with mint tea before sitting down in a Khaima (tent) or under the open sky for dinner. Feast on Harira soup, tagine, and couscous while Gnawa musicians play the hypnotic rhythm of the desert. A fire show caps off the night before we whisk you back to the city.",
+    "highlights": [
+      "1-hour Sunset Camel Trek across stone dunes",
+      "Traditional 'Gandora' and 'Chech' (scarf) outfit provided",
+      "Spectacular golden hour views of the High Atlas",
+      "Welcome mint tea at a desert camp",
+      "3-course traditional Moroccan Dinner",
+      "Live Gnawa music and fire spinner show",
+      "Campfire atmosphere",
+      "Hassle-free hotel pickup and drop-off"
+    ],
+    "itinerary": [
+      {
+        "title": "Pickup",
+        "description": "Pickup from your hotel (approx 4:00 PM Winter, 5:30 PM Summer). 45-min drive."
+      },
+      {
+        "title": "The Transformation",
+        "description": "Arrive at the camel station. Put on traditional nomadic clothing (optional but fun)."
+      },
+      {
+        "title": "Caravan of Lights",
+        "description": "Depart on camels. Ride for approx 1 hour, pausing for sunset photos."
+      },
+      {
+        "title": "Camp Welcome",
+        "description": "Arrive at the dinner camp. Welcome tea and pastries."
+      },
+      {
+        "title": "The Feast & Show",
+        "description": "Dinner is served (Soup, Salad, Tagine, Fruit) accompanied by live music and performance."
+      },
+      {
+        "title": "Return",
+        "description": "Drive back to Marrakech, dropping off around 10:30-11:00 PM."
+      }
+    ],
+    "included": [
+      "Hotel Pickup and Drop-off",
+      "Camel ride (1 hour)",
+      "Use of traditional scarf/robe",
+      "Full Dinner (Vegetarian options available)",
+      "Mineral water",
+      "Live Entertainment"
+    ],
+    "notIncluded": [
+      "Soda and Alcoholic drinks (available for purchase)",
+      "Tips for the camel guide",
+      "Photos taken by professional camp photographer"
+    ],
+    "meetingPoint": "Your Hotel Reception. Please provide hotel name.",
+    "importantInfo": [
+      "The desert gets COLD at night, even in summer. Bring a warm jacket.",
+      "Wear comfortable pants (for riding) and closed shoes.",
+      "The camel ride is suitable for beginners and children (aged 5+). Younger kids can ride with an adult.",
+      "Agafay is a stone desert (Reg), not sand dunes (Erg). It is rugged and beautiful."
+    ],
+    "faqs": [
+      {
+        "q": "I have back problems, can I skip the camel?",
+        "a": "Yes, you can go directly to the camp by car and enjoy the sunset with tea."
+      },
+      {
+        "q": "Is there alcohol?",
+        "a": "Yes, the camp has a bar serving wine and beer (extra charge)."
+      },
+      {
+        "q": "Is the food good?",
+        "a": "It is freshly prepared traditional fare. We can cater to vegetarian/vegan/gluten-free needs."
+      },
+      {
+        "q": "Is it private?",
+        "a": "This is a small group tour. The camel ride is a caravan, and dinner is at private tables."
+      },
+      {
+        "q": "Are there toilets?",
+        "a": "Yes, the camp has clean restroom facilities."
+      }
+    ],
+    "relatedExperiences": [
+      "Quad Biking Adrenaline in Agafay",
+      "Astronomy & Stargazing in the Desert",
+      "Sunrise Hot Air Balloon Flight",
+      "Fantasia Dinner Show - 1001 Nights"
+    ],
+    "imageConcepts": [
+      "Silhouette of camel caravan against an orange sunset",
+      "Close up of tagine pot with steam",
+      "Campfire sparks rising into the night sky",
+      "Musician playing castanets (krakebs)",
+      "Couple in blue turbans smiling on camel"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/agafay-sunset-1.jpg",
+      "/images/experiences/agafay-sunset-2.jpg"
+    ],
+    "slug": "agafay-sunset-camel-dinner"
+  },
+  {
+    "title": "Quad Biking Adrenaline in Agafay Desert",
+    "category": "Desert Experiences",
+    "location": "Agafay Desert",
+    "duration": "6 hours",
+    "price": 70,
+    "currency": "EUR",
+    "shortDescription": "Rev your engines for a thrilling off-road adventure, tearing across the rocky plains of Agafay on powerful Yamaha quads.",
+    "fullDescription": "Satisfy your need for speed. Far from the congested streets of the Medina, the Agafay Desert offers an endless playground of dry riverbeds, steep rocky hills, and open plains. This is not a slow scenic drive; this is an adventure.\n\nAfter a pickup from your hotel, you'll arrive at our base for a safety briefing and gear fitting. We use well-maintained, powerful quad bikes that are automatic and easy to handle. Follow your expert guide on a route designed to challenge and excite. You'll zoom across the 'Reg' (stone desert), navigate technical rocky climbs, and splash through seasonal mud puddles.\n\nWe stop at a high vantage point for a breathtaking view of the snow-capped High Atlas Mountains reflecting in the Lalla Takerkoust Lake. Halfway through, we cut the engines for a pause at a local Berber house or tent. Enjoy a glass of sweet mint tea and Moroccan pancakes (Msemen) in the silence of the desert before roaring back to base.",
+    "highlights": [
+      "2 hours of actual riding time",
+      "High-quality Quad Bikes (Yamaha/Kymco 300cc+)",
+      "Safety gear included (Helmet, Goggles, Gloves)",
+      "Tea break in a traditional Berber village",
+      "Panoramic views of Atlas Mountains and Lake Takerkoust",
+      "Small group with professional guide",
+      "No driving license required",
+      "Transfers included"
+    ],
+    "itinerary": [
+      {
+        "title": "Pickup & Transfer",
+        "description": "Pickup from your hotel. 45-min drive south to the quad base."
+      },
+      {
+        "title": "Gear & Briefing",
+        "description": "Put on helmets and goggles. 10-minute instructions and test drive to get comfortable."
+      },
+      {
+        "title": "Ride Part 1",
+        "description": "1 hour of riding through diverse terrain—wadis, hills, and plains."
+      },
+      {
+        "title": "Tea Break",
+        "description": "Stop at a local dwelling for tea, bread, and olive oil. Meet the locals."
+      },
+      {
+        "title": "Ride Part 2",
+        "description": "Return to base via a different, scenic route (approx 45 mins)."
+      },
+      {
+        "title": "Clean up & Return",
+        "description": "Dust off (air compressor available) and transfer back to Marrakech."
+      }
+    ],
+    "included": [
+      "Quad Bike rental (Driver)",
+      "Fuel",
+      "Professional Guide",
+      "Helmet, Goggles, Hairnet",
+      "Tea and snacks",
+      "Hotel transfers"
+    ],
+    "notIncluded": [
+      "Gratuities",
+      "Photos (professional photographer often available on site)"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "Drivers must be 16+ years old.",
+      "Children under 16 can ride as passengers behind an adult.",
+      "Pregnant women are not permitted to participate due to vibrations.",
+      "Wear long pants and closed shoes (sneakers). The engine gets hot.",
+      "You WILL get dusty! Don't wear your best white clothes."
+    ],
+    "faqs": [
+      {
+        "q": "Is it difficult to drive?",
+        "a": "No, the quads are automatic (gas and brake only). If you can ride a bike, you can ride this."
+      },
+      {
+        "q": "Can we ride double?",
+        "a": "Yes, you can share a quad (Driver + Passenger) for a lower total price. It's fun but less freedom for the driver."
+      },
+      {
+        "q": "Do I need a driving license?",
+        "a": "No, not for these off-road tracks."
+      },
+      {
+        "q": "Is it safe?",
+        "a": "Safety is our priority. We ride in a line, and racing/overtaking is not allowed. Our guides are first-aid trained."
+      },
+      {
+        "q": "Do I need insurance?",
+        "a": "Civil liability insurance is included in the price."
+      }
+    ],
+    "relatedExperiences": [
+      "Dune Buggy 1000cc Adventure",
+      "Agafay Desert Sunset Camel Ride & Dinner Show",
+      "Vintage Sidecar Tour: The Insider's Ride",
+      "Wakeboarding at Waky Marrakech"
+    ],
+    "imageConcepts": [
+      "Quad bike flying through a dust cloud (action shot)",
+      "Rider with helmet looking out over the lake",
+      "Line of quads parked on a ridge at sunset",
+      "Hands holding a tea glass in a Berber tent",
+      "Close up of quad tire on rocky ground"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/agafay-sunset-1.jpg",
+      "/images/experiences/agafay-sunset-2.jpg"
+    ],
+    "slug": "quad-biking-agafay"
+  },
+  {
+    "title": "Dune Buggy 1000cc: Ultimate Desert Drive",
+    "category": "Desert Experiences",
+    "location": "Agafay Desert",
+    "duration": "4 hours",
+    "price": 90,
+    "currency": "EUR",
+    "shortDescription": "Experience the ultimate off-road power and comfort in a high-performance Dune Buggy, tackling terrain that quads can't reach.",
+    "fullDescription": "If you want the thrill of off-roading but with more power, comfort, and safety than a quad bike, the Buggy is the answer. These machines—often 800cc to 1000cc monsters—are built for the rally track. With a roll cage, seatbelts, and superior suspension, they eat up the rocky Agafay terrain.\n\nThe side-by-side seating arrangement makes this a shared adventure. You can talk to your passenger as you climb steep dunes and drift around dusty corners. We take you deeper into the desert than the standard tours, finding hidden canyons and panoramic lookouts that feel completely isolated.\n\nMid-ride, we pause for mint tea and photos, letting the engines cool down while you soak up the silence. It’s a mix of Mad Max adrenaline and luxury adventure.",
+    "highlights": [
+      "Drive a premium Buggy (Polaris RZR / Can-Am / Yamaha)",
+      "Side-by-side seating (ideal for couples/friends)",
+      "Roll cage and bucket seat safety",
+      "Access to extreme rocky terrain and steep dunes",
+      "Professional Guide leading the convoy",
+      "Tea break in the wilderness",
+      "Transfers included"
+    ],
+    "itinerary": [
+      {
+        "title": "Transfer",
+        "description": "Pickup and drive to the buggy base camp (approx 45 mins)."
+      },
+      {
+        "title": "Orientation",
+        "description": "Gear up (helmets, goggles) and briefing on vehicle controls (steering, pedals)."
+      },
+      {
+        "title": "The Drive",
+        "description": "2 hours of driving. The route includes technical climbs, fast flats, and riverbeds."
+      },
+      {
+        "title": "Break",
+        "description": "Rest stop for tea and driver switch (if desired)."
+      },
+      {
+        "title": "Return Leg",
+        "description": "Drive back to base."
+      },
+      {
+        "title": "Hotel Drop-off",
+        "description": "Transfer back to Marrakech."
+      }
+    ],
+    "included": [
+      "Buggy Rental (Price per buggy, typically 2 pax)",
+      "Fuel and Insurance",
+      "Safety Gear (Helmet, Goggles)",
+      "Guide",
+      "Tea break",
+      "Transfers"
+    ],
+    "notIncluded": [
+      "Lunch (unless requested)",
+      "Tips",
+      "Bandanas/Scarves (bring your own or buy on site)"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "Driver must have a valid car driving license (B) and be 18+.",
+      "Passenger minimum age is 6.",
+      "Dress for dust! Sunglasses and a scarf are recommended.",
+      "Prices are usually quoted PER BUGGY (2 people). Solo drivers pay the full buggy price."
+    ],
+    "faqs": [
+      {
+        "q": "Is it faster than a quad?",
+        "a": "Yes, buggies have higher top speeds and better suspension, allowing for a faster pace on rough ground."
+      },
+      {
+        "q": "Can we swap drivers?",
+        "a": "Yes, if both passengers have licenses, you can switch halfway."
+      },
+      {
+        "q": "Is it manual or automatic?",
+        "a": "Fully automatic. Just gas and brake."
+      },
+      {
+        "q": "What if I crash?",
+        "a": "You sign a liability waiver. Any damage due to reckless driving is your responsibility. Drive safely!"
+      }
+    ],
+    "relatedExperiences": [
+      "Quad Biking Adrenaline in Agafay",
+      "Glamping: Luxury Desert Camp Overnight",
+      "Sunrise Hot Air Balloon Flight",
+      "Wakeboarding at Waky Marrakech"
+    ],
+    "imageConcepts": [
+      "Buggy kicking up dust on a turn",
+      "Couple high-fiving inside the roll cage",
+      "Detail of the suspension and mud tires",
+      "Convoy of buggies in a desert canyon",
+      "View from inside the cockpit looking at the trail"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/buggy-1.jpg",
+      "/images/experiences/buggy-2.jpg"
+    ],
+    "slug": "dune-buggy-adventure"
+  },
+  {
+    "title": "Astronomy & Stargazing: Universe in the Desert",
+    "category": "Desert Experiences",
+    "location": "Agafay Desert",
+    "duration": "5 hours",
+    "price": 80,
+    "currency": "EUR",
+    "shortDescription": "Leave the city lights behind and explore the cosmos with a professional astronomer and powerful telescopes in the Agafay Desert.",
+    "fullDescription": "The desert has always been a place for looking up. With no city lights to obscure the view, the Agafay night sky is a velvet canvas studded with diamonds. This experience combines a delicious dinner with a journey through the universe.\n\nYou arrive at the camp for a traditional dinner as the sun sets. Once darkness falls, the 'show' begins. Your guide is a passionate astronomer equipped with high-tech computerized telescopes and laser pointers. He will take you on a tour of the constellations, explaining how the ancient Berbers used the stars to navigate the Sahara.\n\nThen, look through the lens. Depending on the time of year, you might see the jagged craters of the Moon, the rings of Saturn, the bands of Jupiter, or deep-sky nebulae. It is a humbling, philosophical, and visually stunning experience. Sit around the fire, sip tea, and ask all the questions you've ever had about space.",
+    "highlights": [
+      "Use of professional large-aperture telescope (e.g., 200mm+)",
+      "Guided by an Expert Astronomer",
+      "Lecture on Berber navigation and sky lore",
+      "Delicious Moroccan Dinner included",
+      "Atmospheric campfire setting",
+      "Observation of Moon craters, Saturn's rings, Jupiter (season dependent)",
+      "Astrophotography assistance for your phone",
+      "Small group educational experience"
+    ],
+    "itinerary": [
+      {
+        "title": "Transfer",
+        "description": "Depart Marrakech in late afternoon."
+      },
+      {
+        "title": "Dinner",
+        "description": "Enjoy a Moroccan feast at the camp as twilight fades to black."
+      },
+      {
+        "title": "Sky Tour",
+        "description": "Laser-guided tour of the constellations and North Star."
+      },
+      {
+        "title": "Telescope Time",
+        "description": "Individual observation through the telescope. See planets, clusters, and the moon."
+      },
+      {
+        "title": "Campfire Q&A",
+        "description": "Relax by the fire with tea."
+      },
+      {
+        "title": "Return",
+        "description": "Drive back to the city, feeling very small in a big universe."
+      }
+    ],
+    "included": [
+      "Round-trip Transport",
+      "Dinner (Soup, Main, Dessert)",
+      "Astronomy session and equipment",
+      "Tea/Water"
+    ],
+    "notIncluded": [
+      "Alcoholic drinks"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "Visibility is weather dependent. If it is completely overcast, we will offer to reschedule or refund.",
+      "The Full Moon is beautiful but its brightness hides the stars. Best stargazing is during the New Moon phase.",
+      "Bring warm clothes! Desert nights are cold."
+    ],
+    "faqs": [
+      {
+        "q": "What if it's cloudy?",
+        "a": "We monitor the forecast. If visibility is poor, we cancel the astronomy portion (refunded) or the whole trip."
+      },
+      {
+        "q": "Can I take photos through the telescope?",
+        "a": "Yes! The guide can help you attach your smartphone for an amazing moon shot."
+      },
+      {
+        "q": "Is it good for kids?",
+        "a": "Space-loving kids adore it. The dinner might be late for toddlers."
+      }
+    ],
+    "relatedExperiences": [
+      "Agafay Desert Sunset Camel Ride & Dinner Show",
+      "Glamping: Luxury Desert Camp Overnight",
+      "Sunrise Hot Air Balloon Flight"
+    ],
+    "imageConcepts": [
+      "Person looking through a large white telescope in the dark",
+      "Long exposure of the Milky Way above a tent",
+      "Green laser beam pointing at a star",
+      "Close up of the moon (telescope view)",
+      "Group sitting around a fire looking up"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/stargazing-1.jpg",
+      "/images/experiences/stargazing-2.jpg"
+    ],
+    "slug": "astronomy-stargazing-desert"
+  },
+  {
+    "title": "Sunrise Hot Air Balloon: Flight Over the Atlas",
+    "category": "Desert Experiences",
+    "location": "Marrakech Palm Grove",
+    "duration": "5 hours",
+    "price": 180,
+    "currency": "EUR",
+    "shortDescription": "Float silently over the waking landscapes of Marrakech and the Atlas Mountains in a bucket-list sunrise adventure.",
+    "fullDescription": "To truly understand the landscape of Morocco, you must see it from the sky. Your adventure begins in the cool pre-dawn darkness as a 4x4 collects you from your hotel. We drive out to the launch site in the Jebilet countryside, where you watch in awe as the giants wake up—massive multicolored balloons inflating with roaring blasts of fire against the starry sky.\n\nClimb into the basket and gently lift off. The sensation is not one of flying, but of floating. As you rise, the sun breaks over the ridge of the High Atlas Mountains, flooding the plains with golden light. You will drift silently over sleepy Berber villages, olive groves, and desert oases. You might see children waving from rooftops or shepherds guiding their flocks below.\n\nAfter an hour of peace, you land gently to a celebration. Following traditional aeronaut legend, enjoy a Berber breakfast in a royal tent. You will receive a personalized flight certificate to commemorate your journey before returning to the city, energized and inspired for the day ahead.",
+    "highlights": [
+      "1-hour Sunrise Flight (approx)",
+      "Breathtaking panoramic views of the Atlas Mountains",
+      "Witness the magical inflation of the balloons",
+      "Royal Berber Breakfast served in a tentCaidal tent",
+      "Flight Certificate signed by the Pilot",
+      "Round-trip 4x4 transfers",
+      "Experienced, licensed European/Moroccan pilots",
+      "Optional Champagne toast included"
+    ],
+    "itinerary": [
+      {
+        "title": "Early Pickup",
+        "description": "Pickup by 4x4 early morning (5:00-6:00 AM depending on season)."
+      },
+      {
+        "title": "The Awakening",
+        "description": "Arrive at the launch site. Coffee/Tea served while you watch the balloons inflate."
+      },
+      {
+        "title": "Liftoff",
+        "description": "Board the basket and take off just as the sun rises."
+      },
+      {
+        "title": "The Flight",
+        "description": "Float for approx 1 hour, changing altitude to catch the winds and views."
+      },
+      {
+        "title": "Celebration",
+        "description": "Land and transfer to the Caidal tent for a freshly prepared breakfast."
+      },
+      {
+        "title": "Return",
+        "description": "Drive back to your hotel, arriving mid-morning (10:00-11:00 AM)."
+      }
+    ],
+    "included": [
+      "1 Hour Flight",
+      "4x4 Transfers",
+      "Full Berber Breakfast",
+      "Tea/Coffee",
+      "Flight Certificate",
+      "Insurance"
+    ],
+    "notIncluded": [
+      "Video/Photos (Pilots often have GoPros, footage available for purchase)",
+      "Gratuities"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "Ballooning is strictly weather dependent. If wind conditions are unsafe, we will cancel the flight and offer a full refund or reschedule.",
+      "Dress in layers. It can be chilly in the air before sunrise.",
+      "Not suitable for pregnant women, children under 4, or those with serious back/knee problems (landing bumps)."
+    ],
+    "faqs": [
+      {
+        "q": "Is it scary?",
+        "a": "Most people find it incredibly peaceful. There is no sensation of vertigo because you are not connected to the ground."
+      },
+      {
+        "q": "How many people in the basket?",
+        "a": "Standard compartments hold 4-5 people each, with 16-20 total in the basket. VIP private compartments are available."
+      },
+      {
+        "q": "Can we bring a camera?",
+        "a": "Yes! You must bring a camera. Secure it with a strap."
+      }
+    ],
+    "relatedExperiences": [
+      "Vintage Sidecar Adventure: The Insider's Ride",
+      "Luxury Spa Day & Signature Massage",
+      "Agafay Desert Sunset Camel Ride & Dinner Show"
+    ],
+    "imageConcepts": [
+      "Huge colorful balloon inflating with fire blast",
+      "View from the basket looking down at geometric fields",
+      "Silhouette of multiple balloons against a sunrise",
+      "Couple toasting with juice/champagne in the basket",
+      "Interior of the breakfast tent with rugs"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/balloon-1.jpg",
+      "/images/experiences/balloon-2.jpg"
+    ],
+    "slug": "hot-air-balloon-flight"
+  },
+  {
+    "title": "Glamping: Luxury Desert Camp Overnight",
+    "category": "Desert Experiences",
+    "location": "Agafay Desert",
+    "duration": "1 Night",
+    "price": 250,
+    "currency": "EUR",
+    "shortDescription": "Spend a magical night under the stars in a luxury ensuite tent, combining the silence of the desert with the comfort of a boutique hotel.",
+    "fullDescription": "Experience the romance of the desert without sacrificing modern comforts. 'Glamping' (Glamorous Camping) in Agafay is a bucket-list experience. We have selected a camp that strikes the perfect balance between rustic authenticity and luxury. Your private tent is effectively a hotel suite with canvas walls: king-size bed, high thread-count linens, electricity, heating/AC (seasonal), and a full private bathroom with hot water and flush toilet.\n\nArrive in the afternoon to relax by the infinity pool that seems to drop off into the stony wilderness. As the heat causes the horizon to shimmer, take a camel ride into the sunset. Dinner is a white-tablecloth affair, served either in the dining tent or under the vast canopy of stars. \n\nSleep in the profound silence that only the desert can offer. Wake up to the spectacle of sunrise, enjoyed with a coffee on your private terrace. It’s the perfect unplugged getaway for couples or families seeking connection.",
+    "highlights": [
+      "Stay in a luxury tent with private ensuite bathroom",
+      "Infinity pool access with desert views",
+      "Sunset Camel Ride included",
+      "3-course gourmet Dinner by candlelight",
+      "Campfire evening with music",
+      "Unrivaled stargazing opportunities",
+      "Sunrise breakfast on your private terrace",
+      "Total silence and digital detox"
+    ],
+    "itinerary": [
+      {
+        "title": "Day 1: Arrival & Chill",
+        "description": "Pickup at 3:00 PM. Arrive at camp, check-in, and relax by the pool."
+      },
+      {
+        "title": "Day 1: Sunset",
+        "description": "Embark on a camel trek or a walk to watch the sun dip below the horizon."
+      },
+      {
+        "title": "Day 1: Evening",
+        "description": "Dinner served under the stars followed by live music around the fire."
+      },
+      {
+        "title": "Day 2: Morning",
+        "description": "Wake up early for sunrise. Enjoy a hearty breakfast."
+      },
+      {
+        "title": "Day 2: Departure",
+        "description": "Check out and transfer back to Marrakech around 11:00 AM."
+      }
+    ],
+    "included": [
+      "1 Night in Luxury Private Tent",
+      "Dinner and Breakfast",
+      "Camel Ride activity",
+      "Pool Access",
+      "Round-trip Transfers"
+    ],
+    "notIncluded": [
+      "Lunch on Day 1 (can be added or ordered a la carte)",
+      "Drinks (Bar available)",
+      "City tax (small fee payable on site)"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "Price is typically per person based on 2 people sharing a tent.",
+      "The camp is powered by solar energy; hair dryers might not work in the tents.",
+      "Agafay is a stone desert, not sand dunes.",
+      "Bring swimwear and a warm jacket for the night."
+    ],
+    "faqs": [
+      {
+        "q": "Is there WiFi?",
+        "a": "Yes, in the main reception areas, but signal is weak in the tents. Take the chance to disconnect!"
+      },
+      {
+        "q": "Are there showers?",
+        "a": "Yes, your tent has a private shower with hot water."
+      },
+      {
+        "q": "Is it safe?",
+        "a": "Very. The camp is guarded 24/7."
+      }
+    ],
+    "relatedExperiences": [
+      "Sunrise Hot Air Balloon Flight",
+      "Dune Buggy 1000cc Adventure",
+      "Luxury Spa Day & Signature Massage"
+    ],
+    "imageConcepts": [
+      "Interior of a luxury tent with white drapes and lanterns",
+      "Infinity pool reflecting the desert sky",
+      "Lantern-lit path leading to the dining tent",
+      "A table set for dinner alone in the desert",
+      "Stars seen from the terrace"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/camp-1.jpg",
+      "/images/experiences/camp-2.jpg"
+    ],
+    "slug": "luxury-desert-camp-overnight"
+  },
+  {
+    "title": "3-Day Merzouga Sahara Expedition: The Real Dunes",
+    "category": "Desert Experiences",
+    "location": "Merzouga (Erg Chebbi)",
+    "duration": "3 Days",
+    "price": 150,
+    "currency": "EUR",
+    "shortDescription": "The ultimate Moroccan road trip. Cross the High Atlas, visit ancient Kasbahs, and sleep in the golden dunes of the Sahara.",
+    "fullDescription": "This is the big one. While Agafay is a beautiful stone desert nearby, Merzouga is the real deal—the endless sea of orange sand dunes (Erg Chebbi) you see in movies. Reaching it is an epic journey that traverses the entire backbone of Morocco.\n\n**Day 1:** We leave Marrakech and climb the High Atlas, crossing the Tizi n'Tichka pass at 2,260m. We start the 'Road of 1,000 Kasbahs', visiting the movie-famous Ait Benhaddou and stopping in the Dades Valley for the night.\n\n**Day 2:** We venture further east, walking through the massive fault line of Todra Gorge. Finally, the asphalt ends and the sand begins. You swap the van for camels and trek into the dunes as the sun sets. The silence of the Sahara is absolute. You sleep in a camp under a blanket of stars.\n\n**Day 3:** Wake for a sunrise that sets the dunes on fire with color. Ride back to civilization and begin the long drive back to Marrakech (or transfer to Fes), passing through the Anti-Atlas landscapes.",
+    "highlights": [
+      "Cross the High Atlas Mountains via Tizi n'Tichka pass",
+      "Explore UNESCO World Heritage Ait Benhaddou",
+      "Drive through the Valley of Roses and Dades Gorge",
+      "Walk under the towering cliffs of Todra Gorge",
+      "Sunset Camel Trek into the Erg Chebbi dunes",
+      "Overnight in a Sahara Desert Camp (Merzouga)",
+      "Sample the changing landscapes of Morocco",
+      "Private or Small Group Minibus"
+    ],
+    "itinerary": [
+      {
+        "title": "Day 1: The Atlas Crossing",
+        "description": "Marrakech -> Tizi n'Tichka -> Ait Benhaddou (Visit) -> Ouarzazate -> Dades Valley. Overnight in Hotel."
+      },
+      {
+        "title": "Day 2: Into the Dunes",
+        "description": "Dades -> Todra Gorges (Walk) -> Merzouga. Camel Trek at sunset. Overnight in Desert Camp."
+      },
+      {
+        "title": "Day 3: The Return",
+        "description": "Merzouga -> Rissani -> Alnif -> Ouarzazate -> Marrakech. (Long drive, approx 9 hours)."
+      }
+    ],
+    "included": [
+      "Transport in AC Minibus/Van",
+      "Professional Driver/Guide",
+      "1 Night Hotel in Dades (Half Board)",
+      "1 Night Desert Camp in Merzouga (Half Board)",
+      "2 Dinners & 2 Breakfasts",
+      "Camel Trek activity"
+    ],
+    "notIncluded": [
+      "Lunches (approx 10-12 EUR each day)",
+      "Drinks",
+      "Guide fee at Ait Benhaddou (approx 3 EUR)",
+      "Entrance fees",
+      "Tips"
+    ],
+    "meetingPoint": "Hotel Pickup (Early: 7:00 AM).",
+    "importantInfo": [
+      "Total driving time is significant (approx 20+ hours over 3 days). Prepare for long spells in the car.",
+      "Luggage: You can bring your suitcases, they go in the van.",
+      "Accommodations are standard/comfortable. Luxury upgrades available.",
+      "The camp has shared bathrooms unless you book the Luxury option."
+    ],
+    "faqs": [
+      {
+        "q": "Can I be dropped in Fes?",
+        "a": "Yes! This is a popular route. You would take a taxi from Merzouga to Fes on Day 3 (extra cost)."
+      },
+      {
+        "q": "Is there AC in the bus?",
+        "a": "Yes, modern vehicles."
+      },
+      {
+        "q": "What regarding the heat?",
+        "a": "Summer (July/Aug) is extremely hot (45°C+). Spring/Autumn are best."
+      }
+    ],
+    "relatedExperiences": [
+      "Ait Benhaddou & Ouarzazate Cinema Tour",
+      "Agafay Desert Sunset Camel Ride & Dinner Show",
+      "Atlas Mountains & Ourika Valley Day Trip"
+    ],
+    "imageConcepts": [
+      "Line of camels walking on a sharp dune ridge",
+      "Red towering walls of Todra Gorge",
+      "Ait Benhaddou village across the river",
+      "Night sky full of stars above dunes",
+      "Winding mountain road of Tichka"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/merzouga-1.jpg",
+      "/images/experiences/merzouga-2.jpg"
+    ],
+    "slug": "merzouga-sahara-expedition"
+  },
+  {
+    "title": "Atlas Mountains & Ourika Valley Day Trip",
+    "category": "Day Trips",
+    "location": "Ourika Valley",
+    "duration": "8 hours",
+    "price": 30,
+    "currency": "EUR",
+    "shortDescription": "Escape the city heat to the cool, verdant valleys of the High Atlas, visiting waterfalls, Berber homes, and Argan cooperatives.",
+    "fullDescription": "The Ourika Valley is the favorite weekend escape for Marrakchis, and for good reason. Just 45 minutes from the city, the landscape changes from arid plains to lush, terraced valleys carved by the Ourika River. \n\nThis day trip is a journey into the culture of the Amazigh (Berber) people. We stop at a traditional house to drink tea with a local family and see how they live. We visit a women's cooperative to witness the labor-intensive process of cracking Argan nuts to make oil. \n\nThe road ends at the village of Setti Fatma. Here, you meet a mountain guide for a hike up the rocky cliffs to see a series of seven waterfalls. It’s a bit of a scramble, but the views are worth it. Afterward, reward yourself with a classic Tagine lunch. In the summer, the restaurants place tables literally *in* the river, so you can eat with the cool mountain water rushing over your feet.",
+    "highlights": [
+      "Scenic drive through the High Atlas Mountains",
+      "Guided hike to the 7 Waterfalls of Setti Fatma",
+      "Visit a traditional Berber family home",
+      "Learn about authentic Argan Oil production",
+      "Lunch at a riverside restaurant (feet in the water!)",
+      "Cooler temperatures and fresh air",
+      "Stunning red-rock and green-valley contrasts"
+    ],
+    "itinerary": [
+      {
+        "title": "Departure",
+        "description": "Pickup at 9:00 AM. Drive south towards the mountains."
+      },
+      {
+        "title": "Berber Hospitality",
+        "description": "Visit a local home for mint tea and bread. See the traditional layout of the house."
+      },
+      {
+        "title": "Liquid Gold",
+        "description": "Stop at a cooperative to see women making Argan oil and cosmetic products."
+      },
+      {
+        "title": "The Hike",
+        "description": "Arrive in Setti Fatma. 1-hour guided hike to the first few waterfalls."
+      },
+      {
+        "title": "River Lunch",
+        "description": "Relax and eat lunch by (or in) the river."
+      },
+      {
+        "title": "Return",
+        "description": "Drive back to Marrakech, arriving approx 5:00 PM."
+      }
+    ],
+    "included": [
+      "Transport in AC Minibus",
+      "Professional Driver",
+      "Local Mountain Guide in Setti Fatma",
+      "Visit to Berber House"
+    ],
+    "notIncluded": [
+      "Lunch (approx 10-12 EUR)",
+      "Drinks",
+      "Gratuities"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "The hike involves uneven, rocky ground and some climbing. Wear sneakers, not flip-flops.",
+      "If you cannot hike, you can stay by the river and relax.",
+      "It gets busy on weekends and summer holidays with locals.",
+      "The temperature is usually 10 degrees cooler than Marrakech."
+    ],
+    "faqs": [
+      {
+        "q": "Can we swim?",
+        "a": "The water is shallow and very cold (snowmelt), but you can wade."
+      },
+      {
+        "q": "Is the hike hard?",
+        "a": "It is moderate. The guide will help you. You don't have to go all the way to the top."
+      }
+    ],
+    "relatedExperiences": [
+      "Imlil Village High Atlas Trek",
+      "Ouzoud Waterfalls Full-Day Trip",
+      "Ait Benhaddou & Ouarzazate Cinema Tour"
+    ],
+    "imageConcepts": [
+      "Colorful plastic chairs and tables set inside the river stream",
+      "Waterfall cascading down red rocks",
+      "Woman's hands cracking argan nuts with a stone",
+      "Terraced green fields on the mountain side",
+      "Rope bridge crossing the river"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/ourika-1.jpg",
+      "/images/experiences/ourika-2.jpg"
+    ],
+    "slug": "atlas-mountains-ourika-valley"
+  },
+  {
+    "title": "Essaouira Coastal Escape: The Windy City",
+    "category": "Day Trips",
+    "location": "Essaouira",
+    "duration": "10 hours",
+    "price": 35,
+    "currency": "EUR",
+    "shortDescription": "Trade the Red City for the Blue City. Explore the Portuguese ramparts, fish markets, and artistic vibe of this Atlantic coastal gem.",
+    "fullDescription": "Essaouira (formerly Mogador) feels a world away from Marrakech. It is blue and white, breezy, and incredibly laid-back. This full-day trip takes you west to the Atlantic coast.\n\nThe drive takes you through the unique Argan forest biosphere. Keep your eyes peeled for goats climbing the trees to eat the nuts—a surreal sight you'll stop to photograph. Upon arrival in Essaouira, you have the freedom to explore at your own pace. The Medina is pedestrian-only and much easier to navigate than Marrakech. \n\nWalk the Skala de la Ville, the sea-facing fortifications where canons still point out to the ocean. Wander the thuya wood workshops and art galleries. Head to the port to see the blue boats unloading their catch—sardines, eels, crabs. You can buy fish fresh and have it grilled right there. It’s a day of fresh air, seagulls crying, and relaxed vibes.",
+    "highlights": [
+      "Explore the UNESCO World Heritage Medina of Essaouira",
+      "Walk the historic Skala ramparts (Game of Thrones location)",
+      "See the iconic blue fishing boats in the harbor",
+      "Fresh seafood lunch by the port",
+      "Stop to see 'Goats in Trees' on the way",
+      "Relaxed, hassle-free shopping atmosphere",
+      "Wide sandy beach walk"
+    ],
+    "itinerary": [
+      {
+        "title": "Departure",
+        "description": "Pickup 8:00 AM. 3-hour drive west."
+      },
+      {
+        "title": "Nature Stop",
+        "description": "Stop to see the famous tree-climbing goats (nature permitting)."
+      },
+      {
+        "title": "Arrival",
+        "description": "Drop off near the port/Medina entrance."
+      },
+      {
+        "title": "Free Time",
+        "description": "4 hours to explore the Medina, Ramparts, and have lunch."
+      },
+      {
+        "title": "Beach Walk",
+        "description": "Stroll on the vast beach, watching kite surfers."
+      },
+      {
+        "title": "Return",
+        "description": "Depart 4:00 PM, back in Marrakech by 7:00 PM."
+      }
+    ],
+    "included": [
+      "Round-trip Transport in AC Vehicle",
+      "Professional Driver"
+    ],
+    "notIncluded": [
+      "Lunch",
+      "Entrance fees (monuments are cheap)",
+      "Local Guide (The city is very easy to explore solo)"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "Essaouira is known as the 'Windy City'. Even in summer, bring a light layer/jacket.",
+      "The drive is approx 175km each way.",
+      "You are free to explore on your own; the driver waits at a designated spot."
+    ],
+    "faqs": [
+      {
+        "q": "Can we swim?",
+        "a": "Yes, there is a huge beach. The water is Atlantic-cold."
+      },
+      {
+        "q": "Is it good for shopping?",
+        "a": "Yes! Prices are often lower than Marrakech and shopkeepers are more relaxed."
+      }
+    ],
+    "relatedExperiences": [
+      "Ouzoud Waterfalls Full-Day Trip",
+      "Intercity Transfer: Marrakech to Casablanca",
+      "Medina Hidden Gems Walking Tour"
+    ],
+    "imageConcepts": [
+      "Blue fishing boats tightly packed in the harbor",
+      "Seagull flying over the stone rampart with cannon",
+      "Goat standing on a tree branch",
+      "Arched doorway in the white medina",
+      "Fresh grilled fish platter"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/essaouira-1.jpg",
+      "/images/experiences/essaouira-2.jpg"
+    ],
+    "slug": "essaouira-coastal-escape"
+  },
+  {
+    "title": "Ouzoud Waterfalls: Nature's Majesty",
+    "category": "Day Trips",
+    "location": "Middle Atlas (Azilal)",
+    "duration": "10 hours",
+    "price": 40,
+    "currency": "EUR",
+    "shortDescription": "Visit the highest waterfalls in North Africa, a stunning 110m cascade of water into red cliffs, home to wild monkeys.",
+    "fullDescription": "If you love nature, Ouzoud is the highlight of the Middle Atlas. Located about 2.5 hours from Marrakech, these falls are dramatic, plunging 110 meters over tiered red cliffs into deep green pools. 'Ouzoud' means 'olive' in Berber, named for the ancient trees that shade the path.\n\nUpon arrival, you can view the falls from the top, but the real experience is hiking down. A local guide leads you on a path winding through the olive groves. At the bottom, you can cross the pool on unique, hand-operated barges—getting close enough to feel the power of the spray (and get a little wet!).\n\nAs you hike back up, keep a look out for the resident Barbary Macaques. These wild monkeys are accustomed to visitors and will often pose for photos. We finish with a tagine lunch on a terrace overlooking the falls, offering one of the best views in Morocco.",
+    "highlights": [
+      "View the spectacular 110m (360ft) Ouzoud Waterfalls",
+      "Encounter wild Barbary Macaque monkeys",
+      "Take a quirky boat ride under the spray",
+      "Hike down the olive-tree lined path to the bottom",
+      "See rainbows in the mist",
+      "Lunch at a panoramic terrace",
+      "Nature photography heaven"
+    ],
+    "itinerary": [
+      {
+        "title": "Departure",
+        "description": "Pickup 8:00 AM. Drive north-east through olive country."
+      },
+      {
+        "title": "Arrival & Descent",
+        "description": "Meet local guide. Begin the walk down the cliffside path."
+      },
+      {
+        "title": "The Basin",
+        "description": "Reach the bottom pools. Optional boat ride."
+      },
+      {
+        "title": "Lunch",
+        "description": "Ascend partway to a restaurant for lunch with a view."
+      },
+      {
+        "title": "Monkey Business",
+        "description": "Interact with the monkeys on the final stretch up."
+      },
+      {
+        "title": "Return",
+        "description": "Drive back to Marrakech, arriving approx 6:30 PM."
+      }
+    ],
+    "included": [
+      "Transport in AC Minibus",
+      "Driver",
+      "Local Guide"
+    ],
+    "notIncluded": [
+      "Lunch (approx 10 EUR)",
+      "Boat ride (approx 20 MAD/2 EUR)",
+      "Tips"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "Moderate fitness required for the stairs/path.",
+      "Wear sneakers with good grip.",
+      "In summer it gets very hot; bring a hat and water.",
+      "Swimming is allowed in designated areas, but be careful of currents."
+    ],
+    "faqs": [
+      {
+        "q": "Are the monkeys dangerous?",
+        "a": "Generally no, but they are wild animals. Do not touch them and secure your food."
+      },
+      {
+        "q": "Can I do this with a baby?",
+        "a": "It's difficult with a stroller due to stairs. A carrier is necessary."
+      }
+    ],
+    "relatedExperiences": [
+      "Atlas Mountains & Ourika Valley Day Trip",
+      "Ait Benhaddou & Ouarzazate Cinema Tour",
+      "Imlil Village High Atlas Trek"
+    ],
+    "imageConcepts": [
+      "Full portrait shot of the 3-tiered waterfall with rainbow",
+      "Monkey sitting on a wooden fence eating a nut",
+      "Brightly decorated boat crossing the pool",
+      "View from restaurant terrace",
+      "Hikers on the red dirt path"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/ouzoud-1.jpg",
+      "/images/experiences/ouzoud-2.jpg"
+    ],
+    "slug": "ouzoud-waterfalls-trip"
+  },
+  {
+    "title": "Imlil Village: Hiking the High Atlas",
+    "category": "Day Trips",
+    "location": "Imlil (Toubkal National Park)",
+    "duration": "9 hours",
+    "price": 45,
+    "currency": "EUR",
+    "shortDescription": "A true hiking experience in the shadow of Mount Toubkal, exploring alpine villages, waterfall trails, and walnut groves.",
+    "fullDescription": "For those who want to stretch their legs and breathe the freshest air in Morocco, Imlil is the destination. Sitting at 1,740m, this village is the Chamonix of Morocco, the base camp for all mountaineers climbing Mt. Toubkal.\n\nYou don't need to be a pro climber for this day trip. We take a gentle but scenic trek (2-3 hours) through the valley. Guided by a local mountain expert, you'll walk through terraces of cherry and walnut trees, passing small waterfalls and irrigation channels. We hike up to the village of Aremd, a cluster of stone houses perched on a moraine spur, offering incredible views of the snowy peaks.\n\nLunch is served in a local guesthouse—simple, hearty Berber food tasted on a terrace with a million-dollar view. This is a day to connect with the mountains and the resilient culture of the people who live there.",
+    "highlights": [
+      "Trek in Toubkal National Park",
+      "Views of Mount Toubkal (4,167m - highest in N. Africa)",
+      "Guided hike through walnut and apple orchards",
+      "Visit the village of Aremd",
+      "Authentic lunch in a Berber guesthouse",
+      "Crisp mountain air and scenery",
+      "Option to ride a mule"
+    ],
+    "itinerary": [
+      {
+        "title": "Departure",
+        "description": "Pickup 9:00 AM. 1.5 hour drive via Asni (stopping at weekly market on Saturdays)."
+      },
+      {
+        "title": "Trailhead",
+        "description": "Arrive in Imlil. Meet your guide and start the trek."
+      },
+      {
+        "title": "The Climb",
+        "description": "Hike past the Kasbah du Toubkal and waterfalls."
+      },
+      {
+        "title": "Aremd Village",
+        "description": "Reach the higher village for panoramic photos."
+      },
+      {
+        "title": "Lunch",
+        "description": "Rest and eat at a guesthouse."
+      },
+      {
+        "title": "Descent",
+        "description": "Walk back down to the vehicle."
+      },
+      {
+        "title": "Return",
+        "description": "Drive back to Marrakech."
+      }
+    ],
+    "included": [
+      "Transport",
+      "Mountain Guide",
+      "Lunch",
+      "Mineral water"
+    ],
+    "notIncluded": [
+      "Soft drinks",
+      "Mule rental (optional, approx 10 EUR)",
+      "Tips"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "Good walking shoes/boots are essential.",
+      "Bring warm layers (fleece/jacket) – mountains are cold!",
+      "Moderate fitness required. If you get tired, mules are always available."
+    ],
+    "faqs": [
+      {
+        "q": "Is there snow?",
+        "a": "In winter (Dec-March), yes. The scenery is snowy, but paths are usually clear."
+      },
+      {
+        "q": "Do we summit the mountain?",
+        "a": "No, that takes 2 days. We stay in the valley foothills."
+      }
+    ],
+    "relatedExperiences": [
+      "Atlas Mountains & Ourika Valley Day Trip",
+      "3-Day Merzouga Sahara Expedition",
+      "Rock Climbing"
+    ],
+    "imageConcepts": [
+      "Snow-capped peak of Mount Toubkal",
+      "Hiker looking out over the winding valley path",
+      "Walnut trees shedding leaves in autumn",
+      "Mule carrying a rider up a slope",
+      "Stone houses of Aremd village"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/imlil-1.jpg",
+      "/images/experiences/imlil-2.jpg"
+    ],
+    "slug": "imlil-village-trek"
+  },
+  {
+    "title": "Ait Benhaddou & Ouarzazate: The Hollywood of Africa",
+    "category": "Day Trips",
+    "location": "Ouarzazate",
+    "duration": "12 hours",
+    "price": 50,
+    "currency": "EUR",
+    "shortDescription": "A spectacular road trip across the Atlas to the UNESCO fortress of Ait Benhaddou, filming location for Gladiator and Game of Thrones.",
+    "fullDescription": "Prepare for a long day, but one filled with the most dramatic scenery in Morocco. We head south, climbing the winding roads of the High Atlas to the Tizi n'Tichka pass. The views change at every turn—from pine forests to bare red rock to sub-Saharan oasis.\n\nOur destination is Ait Benhaddou, a striking fortified village (Ksar) made of earthen clay that has stood for centuries on the old caravan route. It is so perfectly preserved that it has become Hollywood's favorite backdrop. You've seen it in *Gladiator*, *The Mummy*, *Lawrence of Arabia*, and as Yunkai in *Game of Thrones*. \n\nWe cross the river stepping stones to explore its narrow streets, climbing to the granary at the top for a view over the valley. We continue to Ouarzazate to see the Taourirt Kasbah and the cinema museum before the scenic drive home.",
+    "highlights": [
+      "Cross the majestic Tizi n'Tichka Pass (2,260m)",
+      "Visit the UNESCO World Heritage Ksar of Ait Benhaddou",
+      "Walk in the footsteps of Gladiators and Daenerys Targaryen",
+      "See the Atlas Film Studios in Ouarzazate",
+      "Stunning changing landscapes: from snow to desert",
+      "Discover traditional Kasbah architecture"
+    ],
+    "itinerary": [
+      {
+        "title": "Early Start",
+        "description": "Pickup 7:00 AM. Start the ascent of the Atlas."
+      },
+      {
+        "title": "The Pass",
+        "description": "Photo stop at Tizi n'Tichka summit."
+      },
+      {
+        "title": "Ait Benhaddou",
+        "description": "Arrive approx 11:30 AM. Guided walking tour of the Ksar."
+      },
+      {
+        "title": "Lunch",
+        "description": "Lunch at a panoramic restaurant facing the monument."
+      },
+      {
+        "title": "Ouarzazate",
+        "description": "Short drive to Ouarzazate city for a photo stop at Cinema Museum/Kasbah."
+      },
+      {
+        "title": "Return",
+        "description": "Drive back to Marrakech, arriving approx 7:30 PM."
+      }
+    ],
+    "included": [
+      "Transport",
+      "Driver"
+    ],
+    "notIncluded": [
+      "Lunch",
+      "Local Guide at Ait Benhaddou (approx 3 EUR/30 MAD per person)",
+      "Entrance fees to museums",
+      "Tips"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "It is a LOT of driving (4 hours each way). Not for those who get car sick.",
+      "Wear comfortable shoes for walking on uneven ground.",
+      "It gets very hot in the south during summer."
+    ],
+    "faqs": [
+      {
+        "q": "Do we go inside the studios?",
+        "a": "We stop outside. Entering takes too long for a day trip, unless the whole group agrees to skip something else."
+      },
+      {
+        "q": "Is the Ksar inhabited?",
+        "a": "Only a few families remain; most live in the new village across the river."
+      }
+    ],
+    "relatedExperiences": [
+      "3-Day Merzouga Sahara Expedition",
+      "Ouzoud Waterfalls Full-Day Trip",
+      "Agafay Desert Sunset Camel Ride & Dinner Show"
+    ],
+    "imageConcepts": [
+      "Panoramic view of the red clay Ksar against blue sky",
+      "Winding hairpin turns of the Tichka pass",
+      "Cinema clapboard or Egyptian statue prop at studios",
+      "View from the top granary looking down",
+      "Stepping stones across the river"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/ait-benhaddou-1.jpg",
+      "/images/experiences/ait-benhaddou-2.jpg"
+    ],
+    "slug": "ait-benhaddou-cinema-tour"
+  },
+  {
+    "title": "Ultimate Medina Street Food Tour",
+    "category": "Food & Drink",
+    "location": "Marrakech Medina",
+    "duration": "3.5 hours",
+    "price": 45,
+    "currency": "EUR",
+    "shortDescription": "Taste your way through the backstreets of the Medina, sampling delicacies from slow-roasted lamb to snail soup with a local foodie.",
+    "fullDescription": "Forget the tourist restaurants with their 'international menu'. The real flavor of Marrakech is found in the smoke-filled alleyways and the bubbling pots of the street stalls. This tour is for the hungry and the curious.\n\nGuided by a local food expert, you will navigate the maze to visit the stalls where locals actually eat. We start with the basics: olives, nuts, and pastries. Then we move to the serious stuff. Try 'Maakouda' (deep-fried potato balls) in a fluffy bread roll, or 'Hout Quari' (sardine meatball sandwich).\n\nFor the main event, we visit the famous Mechoui Alley. Here, whole lambs are roasted in deep underground clay pits for hours until the meat falls off the bone—seasoned simply with cumin and salt. We also taste 'Tangia', the bachelor's stew slow-cooked in the Hammam ashes. This isn't just about eating; it's about understanding the culture of sharing food.",
+    "highlights": [
+      "10+ Authentic food tastings",
+      "Visit 'Mechoui Alley' for underground-roasted lamb",
+      "Taste 'Tangia', the signature dish of Marrakech",
+      "Try the adventurous: Snail soup and Sheep's Head (optional!)",
+      "Learn about spices and local ingredients",
+      "Unlimited mint tea",
+      "Replaces a full meal",
+      "Small intimate group"
+    ],
+    "itinerary": [
+      {
+        "title": "Meeting & Olives",
+        "description": "Meet in Jemaa el-Fnaa. Start with a tasting of olives and preserved lemons."
+      },
+      {
+        "title": "Souk Snacks",
+        "description": "Walk through the market trying Maakouda, Briouates, and Msamen."
+      },
+      {
+        "title": "Meat District",
+        "description": "Head to Mechoui Alley for the roast lamb and Tangia tasting."
+      },
+      {
+        "title": "The Dare",
+        "description": "A bowl of spiced snail soup. It's better than you think!"
+      },
+      {
+        "title": "Sweet Finish",
+        "description": "Finish with 'Sfenj' (donuts) or seasonal fruit and herbal tea."
+      }
+    ],
+    "included": [
+      "All food tastings",
+      "Bottled water",
+      "Local Food Guide",
+      "Napkins/Sanitizer"
+    ],
+    "notIncluded": [
+      "Alcohol",
+      "Gratuities",
+      "Hotel transfer"
+    ],
+    "meetingPoint": "Cafe de France, Jemaa el-Fnaa. Ground floor terrace.",
+    "importantInfo": [
+      "Come with an empty stomach!",
+      "Vegetarians are welcome (lots of options), but vegans might find it limited.",
+      "We select stalls with high hygiene standards.",
+      "Please advise of allergies (nuts, gluten) in advance."
+    ],
+    "faqs": [
+      {
+        "q": "Do I have to eat the sheep head?",
+        "a": "No! It is there to try if you want, but absolutely not mandatory."
+      },
+      {
+        "q": "Is alcohol served?",
+        "a": "No, street stalls are dry."
+      }
+    ],
+    "relatedExperiences": [
+      "Traditional Cooking Class & Souk Market Shop",
+      "Evening Jemaa El Fna & Souk Tasting Tour",
+      "Traditional Moroccan Bread Baking Workshop"
+    ],
+    "imageConcepts": [
+      "Chef cutting steaming roast lamb in the pit",
+      "Hands dipping bread into olive oil",
+      "Bowls of snail soup with steam",
+      "Colorful display of Moroccan pastries",
+      "Close up of Tangia clay pot"
+    ],
+    "pickupAvailable": false,
+    "gallery": [
+      "/images/experiences/food-tour-1.jpg",
+      "/images/experiences/food-tour-2.jpg"
+    ],
+    "slug": "ultimate-street-food-tour"
+  },
+  {
+    "title": "Market to Table: Traditional Cooking Class in a Riad",
+    "category": "Food & Drink",
+    "location": "Medina Riad",
+    "duration": "4.5 hours",
+    "price": 55,
+    "currency": "EUR",
+    "shortDescription": "Shop for fresh ingredients in the souk and learn to cook a 3-course Moroccan meal with a 'Dada' chef in a beautiful Riad.",
+    "fullDescription": "Don't just eat the food—learn to make it! This immersive experience takes you behind the scenes of Moroccan cuisine. Uniquely, it starts in the Souk. You join our chef to shop for fresh vegetables, herbs, and spices. Learn how to pick the best produce, how to bargain like a local, and discover the secret spices of the 'Ras el Hanout'.\n\nBack at our traditional Riad cooking school, you'll be welcomed with tea before tying on your apron. Under the guidance of a 'Dada', you will learn the techniques of chopping, seasoning, and slow-cooking. You will prepare a main course (Chicken Lemon Tagine, Lamb Prune Tagine, or Vegetable Couscous) and a selection of classic salads.\n\nWhile the clay pots simmer over charcoal, relax in the courtyard. Finally, the best part: sitting down together to enjoy the feast you created, accompanied by fresh bread and wine (optional/if available). You leave with a full belly and the skills to bring the taste of Morocco home.",
+    "highlights": [
+      "Guided market shopping tour for fresh produce",
+      "Hands-on cooking in a traditional courtyard Riad",
+      "Learn to make Tagine, Couscous, or Pastilla",
+      "Master 2-3 Moroccan cooked salads (Zaalouk, Taktouka)",
+      "Learn from a 'Dada' (traditional female cook)",
+      "Lunch included (the meal you prepare)",
+      "Recipe booklet to take home",
+      "Vegetarian/Gluten-free friendly"
+    ],
+    "itinerary": [
+      {
+        "title": "Market Tour",
+        "description": "Meet and head to the souk. Buy your vegetables and meat."
+      },
+      {
+        "title": "Welcome",
+        "description": "Arrive at the Riad. Wash up and enjoy tea."
+      },
+      {
+        "title": "Prep Work",
+        "description": "Chop, peel, and marinate. Assemble the Tagine."
+      },
+      {
+        "title": "Salads",
+        "description": "While the main cooks, make the side salads."
+      },
+      {
+        "title": "Lunch",
+        "description": "Feast on your creation."
+      }
+    ],
+    "included": [
+      "Market Tour",
+      "Cooking Class",
+      "3-course Lunch",
+      "Water/Tea",
+      "Recipes"
+    ],
+    "notIncluded": [
+      "Hotel transfer",
+      "Alcohol"
+    ],
+    "meetingPoint": "Dar El Bacha Palace entrance. Central and easy to find.",
+    "importantInfo": [
+      "Please mention dietary requirements at booking.",
+      "Wear comfortable closed shoes for the market.",
+      "Suitable for children 8+."
+    ],
+    "faqs": [
+      {
+        "q": "Do I need experience?",
+        "a": "No, it is step-by-step guidance."
+      },
+      {
+        "q": "Can I buy spices?",
+        "a": "Yes, we can help you buy quality spices during the tour."
+      }
+    ],
+    "relatedExperiences": [
+      "Traditional Moroccan Bread Baking Workshop",
+      "Tea Ceremony & Moroccan Pastry Workshop",
+      "Ultimate Medina Street Food Tour"
+    ],
+    "imageConcepts": [
+      "Chef holding a basket of vegetables in the market",
+      "Steam rising from multiple clay tagines",
+      "Hands sprinkling spices into a pot",
+      "Group toasting at a long table in the Riad",
+      "Display of colorful cooked salads"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/cooking-1.jpg",
+      "/images/experiences/cooking-2.jpg"
+    ],
+    "slug": "cooking-class-market-shop"
+  },
+  {
+    "title": "The Art of Tea: Ceremony & Pastry Workshop",
+    "category": "Food & Drink",
+    "location": "Medina",
+    "duration": "2 hours",
+    "price": 35,
+    "currency": "EUR",
+    "shortDescription": "Master the ancient ritual of Moroccan Mint Tea and learn to bake delicate 'Cornes de Gazelle' pastries with a local expert.",
+    "fullDescription": "In Morocco, tea is not just a drink; it is a symbol of hospitality, friendship, and tradition. The phrase 'Atay Billah' (Tea by God) reflects its importance. In this hands-on workshop, you will go beyond the surface and learn the true art of the tea ceremony.\n\nHosted in a beautiful Riad, your instructor will explain the different types of mint (Spearmint, Absinthe, Pennyroyal) and how they change with the seasons. watch the ritual washing of the tea, the boiling, and the theatrical high pour—essential for aerating the tea and creating the 'Riza' (foam) crown.\n\nWhile the tea steeps, you will get your hands floury making Moroccan pastries. Learn the delicate technique of rolling almond paste into 'Cornes de Gazelle' (Gazelle Horns) or folding honey-soaked Briouates. Sit down to enjoy your tea and warm pastries, discussing life in the Medina with your host.",
+    "highlights": [
+      "Learn the history and significance of Moroccan Mint Tea",
+      "Master the 'pour' (creating the foam)",
+      "Bake traditional pastries: Gazelle Horns or Briouates",
+      "Hosted in a private, serene Riad setting",
+      "Taste your creations with the host",
+      "Take home recipes and a small gift",
+      "Small group for personal attention"
+    ],
+    "itinerary": [
+      {
+        "title": "Welcome",
+        "description": "Arrive at the Riad. Introduction to the ingredients."
+      },
+      {
+        "title": "Pastry Making",
+        "description": "Prepare the almond filling and dough. Shape and bake the cookies."
+      },
+      {
+        "title": "The Tea Ritual",
+        "description": "Step-by-step demonstration and practice of the tea ceremony."
+      },
+      {
+        "title": "Degustation",
+        "description": "Enjoy the tea and pastries together."
+      },
+      {
+        "title": "Conclusion",
+        "description": "Receive your recipe card and departure."
+      }
+    ],
+    "included": [
+      "2-hour Workshop",
+      "All ingredients",
+      "Tea and Pastries to eat",
+      "Box of pastries to take away"
+    ],
+    "notIncluded": [
+      "Hotel transfer",
+      "Meals"
+    ],
+    "meetingPoint": "Riad Star or similar (exact location provided on booking).",
+    "importantInfo": [
+      "Contains nuts (almonds) and gluten.",
+      "Suitable for children.",
+      "A relaxing, low-intensity activity perfect for a hot afternoon."
+    ],
+    "faqs": [
+      {
+        "q": "Is it vegan?",
+        "a": "The tea is vegan. Pastries often use honey or egg wash, but vegan options can be arranged."
+      }
+    ],
+    "relatedExperiences": [
+      "Traditional Moroccan Bread Baking Workshop",
+      "Moroccan Perfume Creation Experience",
+      "Traditional Henna Art & Tea Ceremony"
+    ],
+    "imageConcepts": [
+      "Silver teapot pouring tea from a great height into a glass",
+      "Close up of hands shaping an almond pastry",
+      "Fresh bunch of mint leaves on a tray",
+      "Steam rising from a hot glass of tea",
+      "Tray of golden baked pastries"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/tea-1.jpg",
+      "/images/experiences/tea-2.jpg"
+    ],
+    "slug": "tea-ceremony-pastry-workshop"
+  },
+  {
+    "title": "Dinner with a Local Family: Authentic Home Dining",
+    "category": "Food & Drink",
+    "location": "Residential Marrakech",
+    "duration": "3 hours",
+    "price": 40,
+    "currency": "EUR",
+    "shortDescription": "Step inside a real Marrakech home for a shared meal, bridging the cultural gap and experiencing true Moroccan hospitality.",
+    "fullDescription": "The best food in Morocco isn't found in 5-star restaurants; it's found in the home. However, as a traveler, it's hard to get invited inside. This experience opens that door.\n\nYou will be welcomed into the home of a local family in the Medina. This is not a cooking class (though you can help in the kitchen if you like); it is a dinner party. You will sit in the family salon, wash your hands with rose water, and learn to eat with your right hand using bread as a utensil—the traditional way.\n\nThe menu changes daily but expect hearty dishes like Rfissa (chicken with lentils and fenugreek), 7-Vegetable Couscous, or a family-style Tagine. The real value, however, is the conversation. Ask about their lives, traditions, and views. It is a moment of genuine human connection that transcends the tourist bubble.",
+    "highlights": [
+      "Exclusive invitation to a family home (not a restaurant)",
+      "Traditional home-cooked meal (recipes passed down generations)",
+      "Learn dining etiquette and customs",
+      "Open conversation about culture, religion, and family life",
+      "Support a local family directly",
+      "Warm, unpretentious atmosphere",
+      "Vegetarian options available"
+    ],
+    "itinerary": [
+      {
+        "title": "Meet & Walk",
+        "description": "Meet a family member at a main square and walk together to the house."
+      },
+      {
+        "title": "Tea Welcome",
+        "description": "Traditional welcome with tea and dates."
+      },
+      {
+        "title": "The Meal",
+        "description": "Share a large communal platter of food. Learn the etiquette."
+      },
+      {
+        "title": "Dessert & Talk",
+        "description": "Fruit and conversation to end the evening."
+      },
+      {
+        "title": "Farewell",
+        "description": "Escort back to the main street/taxi point."
+      }
+    ],
+    "included": [
+      "3-course Dinner",
+      "Tea/Water/Juice",
+      "Translation help (Family speaks French/English)"
+    ],
+    "notIncluded": [
+      "Alcohol (Moroccan families generally do not drink alcohol)",
+      "Transfers"
+    ],
+    "meetingPoint": "Dar El Bacha (or nearest accessible point to the home).",
+    "importantInfo": [
+      "Please remove shoes upon entering the house.",
+      "Bring a small gift (chocolates or flowers) is a nice gesture but not mandatory.",
+      "Dress conservatively out of respect for the family."
+    ],
+    "faqs": [
+      {
+        "q": "Will I be safe?",
+        "a": "Yes, our host families are carefully vetted and experienced with travelers."
+      },
+      {
+        "q": "Can I eat with a fork?",
+        "a": "Yes, cutlery is always available for guests!"
+      }
+    ],
+    "relatedExperiences": [
+      "Ultimate Medina Street Food Tour",
+      "Traditional Cooking Class & Souk Market Shop",
+      "Jewish Quarter (Mellah) & Heritage Tour"
+    ],
+    "imageConcepts": [
+      "Family and guests sitting on floor cushions around a low round table",
+      "Close up of hand dipping bread into a tagine",
+      "Host pouring water from a silver ewer to wash hands",
+      "Laughter and conversation in a colorful salon",
+      "Platter of couscous with vegetables arranged in a pattern"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/family-dinner-1.jpg",
+      "/images/experiences/family-dinner-2.jpg"
+    ],
+    "slug": "dinner-with-local-family"
+  },
+  {
+    "title": "Daily Bread: Traditional Baking Workshop",
+    "category": "Food & Drink",
+    "location": "Medina",
+    "duration": "2 hours",
+    "price": 25,
+    "currency": "EUR",
+    "shortDescription": "Join the rhythm of the Medina by making your own bread, taking it to the communal oven (Farrane), and tasting it fresh.",
+    "fullDescription": "In Morocco, bread is sacred. It is never thrown away; if fallen, it is kissed and placed aside. Every neighborhood has a detailed system centered around the 'Farrane' (communal oven), where families bring their dough twice a day.\n\nIn this workshop, you become part of that cycle. In a local kitchen, you'll learn to mix semolina and flour to create the perfect dough. You'll master the technique of shaping the round 'Khobz', layering the flaky 'Msemmen' (pancakes), and pan-frying 'Batbout' (Moroccan pita).\n\nThe highlight is the walk to the Farrane. You'll carry your tray of dough, hand it to the master baker, and watch him work his magic with the wood fire. The smell of your own bread baking is unforgettable. We finish by eating it hot, dipped in local olive oil, honey, and amlou (almond butter).",
+    "highlights": [
+      "Knead and shape 3 types of Moroccan bread (Khobz, Batbout, Msemmen)",
+      "Visit the community 'Farrane' to bake your loaf",
+      "Learn the cultural significance of bread in Islam",
+      "Enjoy a 'Goûter' (afternoon snack) with your fresh bread, honey, and cheese",
+      "Hands-on activity suitable for all ages",
+      "Interactive and educational"
+    ],
+    "itinerary": [
+      {
+        "title": "Dough Prep",
+        "description": "Mixing and kneading techniques in the kitchen."
+      },
+      {
+        "title": "Shaping",
+        "description": "Create the different forms of bread."
+      },
+      {
+        "title": "The Walk",
+        "description": "Walk to the Farrane with the dough tray."
+      },
+      {
+        "title": "Baking",
+        "description": "Watch the baking process."
+      },
+      {
+        "title": "Feast",
+        "description": "Eat the bread with traditional accompaniments."
+      }
+    ],
+    "included": [
+      "Baking class",
+      "Farrane visit",
+      "Afternoon tea/snack",
+      "Bread to take home"
+    ],
+    "notIncluded": [
+      "Transfers"
+    ],
+    "meetingPoint": "Riad entrance.",
+    "importantInfo": [
+      "Not suitable for gluten-intolerant travelers.",
+      "Fun for kids who like to play with dough."
+    ],
+    "faqs": [
+      {
+        "q": "Is the oven clean?",
+        "a": "The fires are hot enough to sterilize everything! It is a centuries-old tradition."
+      }
+    ],
+    "relatedExperiences": [
+      "Tea Ceremony & Moroccan Pastry Workshop",
+      "Medina Hidden Gems Walking Tour",
+      "Traditional Cooking Class & Souk Market Shop"
+    ],
+    "imageConcepts": [
+      "Hands kneading dough in a large earthenware dish (Gsaa)",
+      "Baker sliding the wooden peel into the dark oven",
+      "Stack of hot, steaming flatbreads",
+      "Close up of honey dripping onto a pancake",
+      "Child with flour on face smiling"
+    ],
+    "pickupAvailable": false,
+    "gallery": [
+      "/images/experiences/bread-1.jpg",
+      "/images/experiences/bread-2.jpg"
+    ],
+    "slug": "bread-baking-workshop"
+  },
+  {
+    "title": "Fantasia Dinner Show - 1001 Nights",
+    "category": "Entertainment",
+    "location": "La Palmeraie (Chez Ali)",
+    "duration": "4 hours",
+    "price": 55,
+    "currency": "EUR",
+    "shortDescription": "Step into a folklore legend with this dinner show featuring horsemen charges, belly dancers, and traditional music under a caidal tent.",
+    "fullDescription": "Experience the pomp and pageantry of Moroccan history at the Chez Ali Fantasia complex. This is a large-scale dinner show that recreates the festive celebrations of the past. As you arrive, you are welcomed by tribesmen on horseback, musicians, and dancers lining the path to the tents.\n\nYou will dine in a traditional tent on a feast of Harira soup, roast lamb (Mechoui), Seven-vegetable Couscous, and dessert. Throughout the meal, different folklore groups from across Morocco pass by your table to perform.\n\nThe real show happens in the central arena. The 'Fantasia' or 'Tbourida' is a synchronized charge of Arab-Berber horsemen who fire their muskets into the air simultaneously—a display of power and coordination. It’s loud, colorful, and unlike anything else. The night ends with a belly dancing performance and a flying carpet illusion.",
+    "highlights": [
+      "Spectacular 'Tbourida' Horse Charge (UNESCO Heritage)",
+      "Dinner in a lavish Caidal Tent",
+      "Performances by Gnaoua, belly dancers, and acrobats",
+      "Flying Carpet ride (magical illusion show)",
+      "Traditional Moroccan Feast",
+      "Grand finale with fireworks (weather permitting)",
+      "Family-friendly entertainment"
+    ],
+    "itinerary": [
+      {
+        "title": "Pickup",
+        "description": "Hotel pickup 7:30 PM. Drive to the Palmeraie complex."
+      },
+      {
+        "title": "Welcome",
+        "description": "Walk the 'red carpet' with musicians greeting you."
+      },
+      {
+        "title": "Dinner",
+        "description": "Seated dinner in the tent with table-side performances."
+      },
+      {
+        "title": "The Show",
+        "description": "Move to the arena seating for the Fantasia horse show."
+      },
+      {
+        "title": "Return",
+        "description": "Transfer back to hotel approx 11:30 PM."
+      }
+    ],
+    "included": [
+      "Transport",
+      "Full Dinner",
+      "Show ticket",
+      "Drinks (Water/Soda)"
+    ],
+    "notIncluded": [
+      "Alcohol (available to buy)",
+      "Photos with performers (expect a tip)"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "This is a large, tourist-oriented venue, not an intimate experience. It is great for families and groups wanting a party atmosphere.",
+      "The muskets are LOUD. Ear protection recommended for sensitive children.",
+      "In winter, the tents are heated but bringing a jacket is wise."
+    ],
+    "faqs": [
+      {
+        "q": "Is the food good?",
+        "a": "It is mass-catered but traditional and tasty. The lamb is the highlight."
+      },
+      {
+        "q": "Is it cheesy?",
+        "a": "It is definitely a 'show', but the horsemanship is genuine and impressive."
+      }
+    ],
+    "relatedExperiences": [
+      "Evening Jemaa El Fna & Souk Tasting Tour",
+      "Agafay Desert Sunset Camel Ride & Dinner Show",
+      "Horse Riding in the Royal Club"
+    ],
+    "imageConcepts": [
+      "Horsemen charging with muskets raised",
+      "Smoke and dust from the gunshot",
+      "Belly dancer with candelabra on head",
+      "Roast lamb platter on table",
+      "Night shot of the illuminated fortress venue"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/fantasia-1.jpg",
+      "/images/experiences/fantasia-2.jpg"
+    ],
+    "slug": "fantasia-dinner-show"
+  },
+  {
+    "title": "Golfing at the Foot of the Atlas",
+    "category": "Sports & Adventure",
+    "location": "Amelkis / Royal Golf",
+    "duration": "4 hours",
+    "price": 100,
+    "currency": "EUR",
+    "shortDescription": "Tee off on world-class greens with the snow-capped Atlas Mountains as your backdrop. A premium golfing experience including transfers and green fees.",
+    "fullDescription": "Marrakech is voted one of the world's best emerging golf destinations. The contrast of the emerald green sculpted fairways against the arid red earth and the white peaks of the Atlas Mountains is visually arresting. \n\nWe organize your tee time at one of the city's prestigious courses. Choose from the historic Royal Golf (played by Churchill and Eisenhower), the modern sculpture-park style of Al Maaden, or the desert-style award-winning Assoufid. \n\nWe handle the logistics: a private driver picks you up, takes you to the clubhouse, waits while you play your round, and brings you back. Whether you are a scratch golfer or a weekend warrior, playing here is a unique pleasure.",
+    "highlights": [
+      "18 Holes at a top course (e.g., Royal Golf, Assoufid, Al Maaden)",
+      "Stunning scenery contrasting green fairways and red earth",
+      "Caddy or Buggy included (depending on course)",
+      "Private transfers for hassle-free logistics",
+      "Club rental available",
+      "Year-round sunshine"
+    ],
+    "itinerary": [
+      {
+        "title": "Pickup",
+        "description": "Driver picks you up 45 mins before tee time."
+      },
+      {
+        "title": "Check-in",
+        "description": "Arrive at course. Get scorecard and buggy/caddy."
+      },
+      {
+        "title": "The Round",
+        "description": "Play 18 holes (approx 4 hours)."
+      },
+      {
+        "title": "19th Hole",
+        "description": "Drink at the clubhouse (optional)."
+      },
+      {
+        "title": "Return",
+        "description": "Transfer back to hotel."
+      }
+    ],
+    "included": [
+      "Private return transfers",
+      "Green Fees (18 Holes)",
+      "Booking service"
+    ],
+    "notIncluded": [
+      "Caddy fee (mandatory on some courses, approx 150 MAD)",
+      "Buggy rental",
+      "Club rental",
+      "Tips"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "Handicap card usually required for top courses.",
+      "Dress code applies (Collared shirts, soft spikes).",
+      "Morning tee times are best to avoid afternoon heat."
+    ],
+    "faqs": [
+      {
+        "q": "Which course is best?",
+        "a": "Assoufid for desert views, Royal for history, Amelkis for difficulty. We can advise."
+      }
+    ],
+    "relatedExperiences": [
+      "Luxury Spa Day & Signature Massage",
+      "Vintage Sidecar Tour: The Insider's Ride",
+      "Wakeboarding at Waky Marrakech"
+    ],
+    "imageConcepts": [
+      "Golfer swinging with snowy mountains in background",
+      "Ball on tee with palm tree shadow",
+      "Perfectly manicured green fairway",
+      "Clubhouse terrace with view",
+      "Caddy handing a club to player"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/golf-1.jpg",
+      "/images/experiences/golf-2.jpg"
+    ],
+    "slug": "golfing-atlas-foot"
+  },
+  {
+    "title": "Wakeboarding at Waky Marrakech",
+    "category": "Sports & Adventure",
+    "location": "Ourika Road",
+    "duration": "2 hours",
+    "price": 40,
+    "currency": "EUR",
+    "shortDescription": "Cool off and catch some air at this world-class cable park set on an artificial lake with Atlas views.",
+    "fullDescription": "Surfing in the desert? Yes, it's possible. Waky Marrakech is a state-of-the-art cable park located in the Jardins de l'Atlas resort. A motorized cable pulls you around the purpose-built lake, eliminating the need for a boat and making it easy to learn or perfect your tricks.\n\nNever tried it? Start with a kneeboard to get the feel of the water. Once confident, strap on the wakeboard. The consistent pull of the cable makes learning faster than behind a boat. For pros, the park features kickers, sliders, and rails to test your skills.\n\nEven if you don't ride, the vibe is great. Relax by the infinity pool, order a burger and a cocktail, and watch the riders crash and fly. It’s the coolest place to be on a hot Marrakech day.",
+    "highlights": [
+      "1-hour or Day Pass cable wakeboarding",
+      "Course suitable for beginners (kneeboard) and pros",
+      "Obstacles and jumps for advanced riders",
+      "Equipment included (Board, Vest, Helmet)",
+      "Pool and chill-out area access",
+      "Restaurant/Bar on site",
+      "Resort atmosphere"
+    ],
+    "itinerary": [
+      {
+        "title": "Arrival",
+        "description": "Transfer to Waky (approx 20 mins from city)."
+      },
+      {
+        "title": "Gear Up",
+        "description": "Get wetsuit (if needed), vest, and board. Safety briefing."
+      },
+      {
+        "title": "Ride",
+        "description": "Hit the water! Ride the main cable."
+      },
+      {
+        "title": "Chill",
+        "description": "Relax by the pool."
+      },
+      {
+        "title": "Return",
+        "description": "Transfer back."
+      }
+    ],
+    "included": [
+      "Wakeboard Pass",
+      "Gear Rental",
+      "Pool Access",
+      "Transfers"
+    ],
+    "notIncluded": [
+      "Food and Drinks",
+      "Towel (bring your own)"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "Must be able to swim.",
+      "Children from 7 years old can participate (during slow speed hours usually)."
+    ],
+    "faqs": [
+      {
+        "q": "Is the water clean?",
+        "a": "Yes, it is filtered and treated."
+      }
+    ],
+    "relatedExperiences": [
+      "Quad Biking Adrenaline in Agafay",
+      "Ouzoud Waterfalls Full-Day Trip",
+      "Dune Buggy 1000cc Adventure"
+    ],
+    "imageConcepts": [
+      "Wakeboarder jumping off a kicker with water spray",
+      "Rider carving a turn on the blue lake",
+      "People lounging on beanbags watching the action",
+      "Palm trees reflecting in the water",
+      "Close up of wakeboard bindings"
+    ],
+    "pickupAvailable": false,
+    "gallery": [
+      "/images/experiences/wake-1.jpg",
+      "/images/experiences/wake-2.jpg"
+    ],
+    "slug": "wakeboarding-waky"
+  },
+  {
+    "title": "Horse Riding: Royal Equestrian Club & Forest",
+    "category": "Sports & Adventure",
+    "location": "Agdal / Royal Equestrian Club",
+    "duration": "2 hours",
+    "price": 45,
+    "currency": "EUR",
+    "shortDescription": "Ride elegant Arabian-Barb horses through the eucalyptus forests or the Royal Club grounds.",
+    "fullDescription": "Morocco has a deep equestrian tradition. Experience the grace of the Barb horse (the ancestor of the Thoroughbred) on a ride just outside the city walls. We partner with reputable stables that prioritize animal welfare.\n\nBeginners will enjoy a gentle walk through the eucalyptus and olive groves, enjoying the birdsong and the scent of the forest. Experienced riders can pick up the pace, enjoying long canters along the sandy tracks. The horses are responsive and spirited yet safe. It’s a noble way to connect with nature.",
+    "highlights": [
+      "1 or 2-hour Horse Ride",
+      "Well-trained Arabian and Barb stallions/mares",
+      "Scenic trails in the countryside",
+      "Expert Equestrian Guide",
+      "Safety helmet included",
+      "Suitable for all levels (Walk, Trot, Gallop)",
+      "Morning or Sunset options"
+    ],
+    "itinerary": [
+      {
+        "title": "Pickup",
+        "description": "Drive to the stables."
+      },
+      {
+        "title": "Matching",
+        "description": "Meet your horse, matched to your ability."
+      },
+      {
+        "title": "The Ride",
+        "description": "Guided trail ride."
+      },
+      {
+        "title": "Grooming",
+        "description": "Help unsaddle and feed a carrot (optional)."
+      },
+      {
+        "title": "Return",
+        "description": "Transfer back."
+      }
+    ],
+    "included": [
+      "Horse Rental",
+      "Guide",
+      "Helmet",
+      "Transfers"
+    ],
+    "notIncluded": [
+      "Long boots/chaps"
+    ],
+    "meetingPoint": "Hotel Pickup.",
+    "importantInfo": [
+      "Wear long trousers and closed shoes (boots with small heel ideal).",
+      "Max weight limit 90kg."
+    ],
+    "faqs": [
+      {
+        "q": "I've never ridden, is it okay?",
+        "a": "Yes, we have calm horses for first-timers."
+      }
+    ],
+    "relatedExperiences": [
+      "Fantasia Dinner Show - 1001 Nights",
+      "Vintage Sidecar Tour: The Insider's Ride",
+      "Agafay Desert Sunset Camel Ride & Dinner Show"
+    ],
+    "imageConcepts": [
+      "Horse galloping on a dirt track",
+      "Rider patting the neck of a horse",
+      "Sunlight filtering through eucalyptus trees",
+      "Silhouette of horse and rider",
+      "Close up of leather saddle"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/horse-1.jpg",
+      "/images/experiences/horse-2.jpg"
+    ],
+    "slug": "horse-riding-royal-club"
+  },
+  {
+    "title": "VIP Marrakech Airport Arrival Transfer",
+    "category": "Transfers",
+    "location": "Marrakech Menara Airport (RAK)",
+    "duration": "45 mins",
+    "price": 20,
+    "currency": "EUR",
+    "shortDescription": "Start your trip stress-free with a private driver waiting for you at arrivals, helping with luggage, and driving you directly to your Riad/Hotel.",
+    "fullDescription": "Marrakech Menara Airport can be chaotic. Avoid the hassle of negotiating with taxi drivers or getting lost in the heat. Our private transfer service ensures a smooth start to your holiday.\n\nYour driver will be waiting in the arrivals hall holding a clear sign with your name. They will assist with your bags and escort you to a clean, air-conditioned vehicle. During the drive, they can answer initial questions about the city. \n\nIf you are staying in the Medina (car-free zone), the driver will take you to the nearest drop-off point and, if needed, call your Riad to send a porter (carossa) for your bags. No stress, no haggling, just service.",
+    "highlights": [
+      "Meet & Greet inside the airport terminal",
+      "Sign with your name",
+      "Flight tracking (we wait if you are delayed)",
+      "Private AC Vehicle (Van or Sedan)",
+      "Help with luggage",
+      "Door-to-door service (or as close as cars can get in Medina)",
+      "Handover to Riad staff if needed"
+    ],
+    "itinerary": [
+      {
+        "title": "Arrival",
+        "description": "Land and pass customs."
+      },
+      {
+        "title": "Meet",
+        "description": "Driver waiting at exit gate with sign."
+      },
+      {
+        "title": "Drive",
+        "description": "20-30 min drive to city center."
+      },
+      {
+        "title": "Drop-off",
+        "description": "Hotel door or Medina meeting point."
+      }
+    ],
+    "included": [
+      "Private Vehicle",
+      "Driver",
+      "Fuel",
+      "Airport Parking fees"
+    ],
+    "notIncluded": [
+      "Porter tips"
+    ],
+    "meetingPoint": "Arrival Hall, Marrakech Menara Airport (RAK).",
+    "importantInfo": [
+      "Provide flight number and arrival time.",
+      "Free waiting time up to 90 mins after landing."
+    ],
+    "faqs": [
+      {
+        "q": "Can you take me to the Medina?",
+        "a": "Cars cannot enter deep Medina. We drop you at the closest gate/square."
+      }
+    ],
+    "relatedExperiences": [
+      "Marrakech Airport Departure Transfer",
+      "Intercity Transfer: Marrakech to Casablanca"
+    ],
+    "imageConcepts": [
+      "Driver holding a sign in a modern airport terminal",
+      "Black Mercedes van parked",
+      "Luggage being loaded into trunk",
+      "Smiling driver opening door",
+      "Highway view of Koutoubia mosque approaching"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/transfer-arrival-1.jpg"
+    ],
+    "slug": "airport-arrival-transfer"
+  },
+  {
+    "title": "Stress-Free Airport Departure Transfer",
+    "category": "Transfers",
+    "location": "Marrakech City",
+    "duration": "45 mins",
+    "price": 15,
+    "currency": "EUR",
+    "shortDescription": "End your trip smoothly. We pick you up from your hotel and ensure you reach the airport with plenty of time for your flight.",
+    "fullDescription": "Don't leave your departure to chance. Book your ride back to Marrakech Menara Airport (RAK) in advance. We recommend a pickup time 3 hours before your flight departure (or 3.5 hours for busy periods).\n\nYour driver will meet you at your hotel reception or the nearest accessible point for your Riad. Sit back and relax for the final ride through the Red City.",
+    "highlights": [
+      "Reliable pickup time",
+      "Assistance with luggage",
+      "Comfortable AC vehicle",
+      "Fixed price (no meter anxiety)",
+      " Avoid last-minute taxi stress"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/transfer-depart-1.jpg"
+    ],
+    "slug": "airport-departure-transfer"
+  },
+  {
+    "title": "Private Intercity Transfer: Marrakech to Casablanca",
+    "category": "Transfers",
+    "location": "Marrakech Menara Airport (RAK)",
+    "duration": "45 mins",
+    "price": 20,
+    "currency": "EUR",
+    "shortDescription": "Travel in comfort between Morocco's two major cities in a private vehicle with a professional driver.",
+    "fullDescription": "Need to get to Casablanca? Skip the train schedule and the crowded taxis. Our private intercity transfer offers the flexibility to leave when you want.\n\nThe journey takes approximately 2.5 to 3 hours via the smooth highway. We use comfortable vehicles with plenty of legroom and trunk space. You can request a stop halfway for a coffee or restroom break. We can drop you off at a hotel in Casablanca city center or directly at Mohammed V International Airport (CMN) for your connecting flight.",
+    "highlights": [
+      "Door-to-door service",
+      "Highway toll fees included",
+      "Comfortable wide vehicle",
+      "Stop for coffee/rest break",
+      "2.5 to 3 hours travel time",
+      "Available for Airport (CMN) or City Centre"
+    ],
+    "itinerary": [
+      {
+        "title": "Pickup",
+        "description": "Marrakech Hotel."
+      },
+      {
+        "title": "Drive",
+        "description": "Highway drive."
+      },
+      {
+        "title": "Drop-off",
+        "description": "Casablanca location."
+      }
+    ],
+    "included": [
+      "Private Vehicle",
+      "Tolls",
+      "Driver"
+    ],
+    "importantInfo": [
+      "Distance is approx 240km.",
+      "Please specify if you have excess luggage."
+    ],
+    "relatedExperiences": [
+      "Marrakech Airport Arrival Transfer",
+      "Essaouira Coastal Escape"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/transfer-arrival-1.jpg"
+    ],
+    "slug": "intercity-transfer-casablanca"
+  },
+  {
+    "title": "Sunrise Yoga on a Panoramic Medina Rooftop",
+    "category": "Wellness",
+    "location": "Marrakech Medina",
+    "duration": "1.5 hours",
+    "price": 35,
+    "currency": "EUR",
+    "shortDescription": "Greet the sun as it rises over the Atlas Mountains with a rejuvenating yoga session on a peaceful rooftop high above the waking city.",
+    "fullDescription": "Marrakech is a city of energy, but also of deep spiritual calm. This experience invites you to find your center before the hustle of the day begins. \n\nWe meet at a hidden Riad in the heart of the Medina. Ascend to the highest terrace as the call to prayer echoes softly across the rooftops. Your instructor leads you through a gentle yet energizing flow, synchronizing your breath with the rising sun. \n\nThe view is unmatched: storks nesting on minarets, the pink light hitting the city walls, and the snowy peaks of the Atlas in the distance. After Savasana, stay for a nutritious breakfast of fresh juice, fruit, yogurt, and Moroccan pancakes, sharing the morning peace with fellow travelers.",
+    "highlights": [
+      "1-hour Yoga session (Hatha/Vinyasa flow)",
+      "Certified Yoga Instructor",
+      "Panoramic views of Koutoubia and Atlas Mountains",
+      "Healthy Berber Breakfast included",
+      "Mat and props provided",
+      "Small intimate group",
+      "Suitable for all levels"
+    ],
+    "itinerary": [
+      {
+        "title": "Arrival",
+        "description": "Meet at the Riad door."
+      },
+      {
+        "title": "Practice",
+        "description": "60-minute Yoga flow."
+      },
+      {
+        "title": "Breakfast",
+        "description": "Communal breakfast on the terrace."
+      }
+    ],
+    "included": [
+      "Yoga Class",
+      "Instructor",
+      "Breakfast",
+      "Equipment"
+    ],
+    "notIncluded": [
+      "Transfers"
+    ],
+    "meetingPoint": "Riad (Location provided).",
+    "importantInfo": [
+      "Wear comfortable clothing.",
+      "In winter, wear layers as mornings are crisp."
+    ],
+    "relatedExperiences": [
+      "Luxury Spa Day & Signature Massage",
+      "Tea Ceremony & Moroccan Pastry Workshop"
+    ],
+    "pickupAvailable": false,
+    "gallery": [
+      "/images/experiences/yoga-1.jpg",
+      "/images/experiences/yoga-2.jpg"
+    ],
+    "slug": "sunrise-yoga-medina-rooftop"
+  },
+  {
+    "title": "The Authentic Ritual: Traditional Hammam & Spa",
+    "category": "Wellness",
+    "location": "Marrakech Medina",
+    "duration": "2 hours",
+    "price": 55,
+    "currency": "EUR",
+    "shortDescription": "Surrender to the steam and scrub of the Moroccan Hammam, a centuries-old purification ritual that leaves your skin glowing and spirit renewed.",
+    "fullDescription": "You cannot visit Morocco without experiencing the Hammam. It is more than a bath; it is a social and spiritual necessity. In our selected boutique spa, you get the authenticity of the ritual with the privacy and hygiene of a luxury establishment.\n\nThe process is a journey. First, the steam opens your pores in the warm room. Your attendant applies 'Savon Beldi', a gel-like soap made from black olives. Then comes the vigorous scrub with the 'Kessa' glove—you will be amazed at how much dead skin comes off! Finally, a coating of mineral-rich Ghassoul clay softens the skin before a warm rinse. You emerge feeling lighter, cleaner, and incredibly relaxed.",
+    "highlights": [
+      "Private Hammam room (warm steam)",
+      "Traditional Black Soap (Savon Beldi) application",
+      "Exfoliation with Kessa glove",
+      "Ghassoul (clay) body mask",
+      "Relaxing massage (optional add-on)",
+      "Tea relaxation room",
+      "Authentic Riad Spa setting"
+    ],
+    "itinerary": [
+      {
+        "title": "Welcome",
+        "description": "Herbal tea and consultation."
+      },
+      {
+        "title": "Steam",
+        "description": "Relax in the hot room."
+      },
+      {
+        "title": "The Scrub",
+        "description": "Full body exfoliation."
+      },
+      {
+        "title": "Mask",
+        "description": "Body wrap."
+      },
+      {
+        "title": "Relax",
+        "description": "Nap in the lounge."
+      }
+    ],
+    "included": [
+      "Hammam Ritual (45-60 mins)",
+      "Towel/Robe/Slippers",
+      "Tea"
+    ],
+    "importantInfo": [
+      "Men and Women have separate sections or times, or private couples rooms.",
+      "You wear disposable underwear or swimsuit bottoms."
+    ],
+    "relatedExperiences": [
+      "Luxury Spa Day & Signature Massage",
+      "Sunrise Yoga on a Panoramic Medina Rooftop"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/hammam-1.jpg",
+      "/images/experiences/hammam-2.jpg"
+    ],
+    "slug": "traditional-hammam-spa-ritual"
+  },
+  {
+    "title": "Luxury Spa Day & Signature Massage",
+    "category": "Wellness",
+    "location": "Hivernage District",
+    "duration": "3 hours",
+    "price": 120,
+    "currency": "EUR",
+    "shortDescription": "Indulge in pure pampering with a full package of treatments including hammam, massage, and facial in a 5-star spa sanctuary.",
+    "fullDescription": "Escape the chaos of the souks into a haven of silence and scent. This is the upgrade your holiday deserves. We partner with the city's most elegant spas to offer a complete restoration package.\n\nStart with the purifying Hammam to prep your skin. Move on to a 60-minute signature massage using warm organic Argan oil, scented with verbena or orange blossom. Expert hands work out the tension of travel. Finish with a facial to hydrate your sun-kissed skin. It is half a day of bliss that leaves you floating.",
+    "highlights": [
+      "3-hour Spa Package",
+      "Luxury Hammam Ritual",
+      "1-hour Argan Oil Relaxing Massage",
+      "Express Facial treatment",
+      "Access to spa pool/jacuzzi (where available)",
+      "Premium products (Les Sens de Marrakech etc.)"
+    ],
+    "pickupAvailable": true,
+    "gallery": [
+      "/images/experiences/luxury-spa-1.jpg",
+      "/images/experiences/luxury-spa-2.jpg"
+    ],
+    "slug": "luxury-spa-day-massage"
+  },
+  {
+    "title": "Traditional Henna Art & Tea Ceremony",
+    "category": "Wellness",
+    "location": "Marrakech Medina",
+    "duration": "1 hour",
+    "price": 25,
+    "currency": "EUR",
+    "shortDescription": "Adorn your hands with intricate, natural Henna designs applied by a 'Nakacha' artist, while learning the symbols of Berber culture.",
+    "fullDescription": "Henna is the makeup of celebration in Morocco. Worn by brides and guests at festivals, the patterns tell stories. In this safe and relaxed workshop, you sit with a professional 'Nakacha' (Henna artist).\n\nBrowse a book of traditional Amazigh (Berber) and Fassi (Fes style) designs. As she paints the cool paste onto your skin with a syringe-like applicator, learn what the diamond, the eye, and the fibula represent. Relax with tea while it dries, leaving a temporary tattoo that will travel home with you, lasting 1-2 weeks.",
+    "highlights": [
+      "Natural premium Henna (Green/Red)",
+      "Design of your choice (Simple or Intricate)",
+      "Learn the meanings of the symbols (protection, fertility, luck)",
+      "Tea and sweets included",
+      "Avoid the unsafe 'Black Henna' of the street",
+      "Beautiful setting"
+    ],
+    "pickupAvailable": false,
+    "gallery": [
+      "/images/experiences/henna-1.jpg",
+      "/images/experiences/henna-2.jpg"
+    ],
+    "slug": "henna-art-tea-ceremony"
+  },
+  {
+    "title": "Clay & Color: Pottery and Zellige Workshop",
+    "category": "Workshops & Culture",
+    "location": "Medina Artisan District",
+    "duration": "3 hours",
+    "price": 40,
+    "currency": "EUR",
+    "shortDescription": "Get your hands dirty at the potter's wheel or learn the incredible geometry of Zellige mosaic cutting with a master artisan.",
+    "fullDescription": "Marrakech is famous for its Zellige—the colorful mosaic tilework that covers palaces and fountains. In this workshop, you realize the immense skill required to create it. \n\nOpt for Zellige and you will learn to chip glazed clay tiles into precise shapes using a sharp 'Menqach' hammer, then assemble them face-down into a geometric star pattern. It is a puzzle of logic and art. \n\nAlternatively, sit at the traditional potter’s kick-wheel. Feel the wet red clay of Safi spinning between your fingers as you coax it into a bowl or tagine. It is meditative, grounding, and harder than it looks!",
+    "highlights": [
+      "Choose: Potter's Wheel OR Zellige (Mosaic) cutting",
+      "Taught by a Maâlem (Master Craftsman)",
+      "Create your own bowl, cup, or tile pattern",
+      "Learn the geometry of Islamic art",
+      "Take your fired piece home (or pick up later)",
+      "Hands-on cultural immersion"
+    ],
+    "pickupAvailable": false,
+    "gallery": [
+      "/images/experiences/pottery-1.jpg",
+      "/images/experiences/pottery-2.jpg"
+    ],
+    "slug": "pottery-zellige-workshop"
+  },
+  {
+    "title": "Scent of Morocco: Perfume Creation Workshop",
+    "category": "Workshops & Culture",
+    "location": "Medina Perfumery",
+    "duration": "2 hours",
+    "price": 60,
+    "currency": "EUR",
+    "shortDescription": "Design your own signature fragrance using the essential oils of Morocco—Rose, Jasmine, Cedar, and Oud—guided by a perfumer.",
+    "fullDescription": "Smell is the strongest trigger for memory. Capture the essence of your Moroccan trip in a bottle. Morocco is a major producer of perfume ingredients, from the Roses of Kelâat M'Gouna to the Cedar of the Atlas.\n\nIn this sophisticated workshop, a 'Nose' (perfume expert) guides you through the organ of scents. You'll learn to balance fresh citrus top notes with floral hearts and deep woody bases. Will your scent be a spicy oriental or a fresh floral? You decide, mix, and bottle it, naming your creation. A truly unique souvenir.",
+    "highlights": [
+      "Introduction to the Olfactory Pyramid (Top, Heart, Base notes)",
+      "Smell and select from 30+ essences",
+      "Create your unique formula",
+      "Compose a 30ml bottle of Eau de Parfum to take home",
+      "Personalized label",
+      "Certificate of creation"
+    ],
+    "itinerary": [
+      {
+        "title": "Theory",
+        "description": "Basics of perfumery."
+      },
+      {
+        "title": "Selection",
+        "description": "Choosing your notes."
+      },
+      {
+        "title": "Creation",
+        "description": "Pipetting and mixing."
+      },
+      {
+        "title": "Bottling",
+        "description": "Filtering and sealing your bottle."
+      }
+    ],
+    "included": [
+      "Workshop",
+      "30ml Perfume",
+      "Guide"
+    ],
+    "importantInfo": [
+      "Perfume needs 2 weeks to macerate (mature) before it smells its best."
+    ],
+    "pickupAvailable": false,
+    "gallery": [
+      "/images/experiences/perfume-1.jpg",
+      "/images/experiences/perfume-2.jpg"
+    ],
+    "slug": "perfume-creation-workshop"
+  },
+  {
+    "title": "The Sacred Script: Arabic Calligraphy Workshop",
+    "category": "Workshops & Culture",
+    "location": "Medina Cultural Center",
+    "duration": "1.5 hours",
+    "price": 25,
+    "currency": "EUR",
+    "shortDescription": "Learn the bamboo quill techniques of the beautiful Maghrebi script, writing your name and ancient proverbs.",
+    "fullDescription": "In Islamic culture, where figurative art was traditionally discouraged, calligraphy became the ultimate visual expression of the divine. The sweeping curves of the Arabic script are everywhere in Marrakech.\n\nSit with a master calligrapher and learn the discipline of the ink and the reed. You will practice the 'Maghrebi' script, distinct to North Africa with its rounded, flowing forms. It demands patience and breath control. By the end of the session, you will have written a proverb or your name, creating a piece of art that bridges language and image.",
+    "highlights": [
+      "Learn to sharpen and hold the 'Qalam' (bamboo pen)",
+      "Practice the basic strokes and curves",
+      "Write your name in Arabic calligraphy",
+      "Create a final artwork on parchment paper",
+      "Meditative and artistic experience",
+      "Taught by a Calligraphy Master"
+    ],
+    "pickupAvailable": false,
+    "gallery": [
+      "/images/experiences/calligraphy-1.jpg",
+      "/images/experiences/calligraphy-2.jpg"
+    ],
+    "slug": "arabic-calligraphy-introduction"
+  }
+]

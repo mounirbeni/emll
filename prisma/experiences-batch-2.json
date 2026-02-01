@@ -1,0 +1,805 @@
+[
+    {
+        "id": "hot-air-balloon-flight",
+        "title": "Sunrise Hot Air Balloon: Flight Over the Atlas",
+        "summary": "Float silently over the waking landscapes of Marrakech and the Atlas Mountains in a bucket-list sunrise adventure.",
+        "highlights": [
+            "1-hour Sunrise Flight (approx)",
+            "Breathtaking panoramic views of the Atlas Mountains",
+            "Witness the magical inflation of the balloons",
+            "Royal Berber Breakfast served in a tentCaidal tent",
+            "Flight Certificate signed by the Pilot",
+            "Round-trip 4x4 transfers",
+            "Experienced, licensed European/Moroccan pilots",
+            "Optional Champagne toast included"
+        ],
+        "description": "To truly understand the landscape of Morocco, you must see it from the sky. Your adventure begins in the cool pre-dawn darkness as a 4x4 collects you from your hotel. We drive out to the launch site in the Jebilet countryside, where you watch in awe as the giants wake up—massive multicolored balloons inflating with roaring blasts of fire against the starry sky.\n\nClimb into the basket and gently lift off. The sensation is not one of flying, but of floating. As you rise, the sun breaks over the ridge of the High Atlas Mountains, flooding the plains with golden light. You will drift silently over sleepy Berber villages, olive groves, and desert oases. You might see children waving from rooftops or shepherds guiding their flocks below.\n\nAfter an hour of peace, you land gently to a celebration. Following traditional aeronaut legend, enjoy a Berber breakfast in a royal tent. You will receive a personalized flight certificate to commemorate your journey before returning to the city, energized and inspired for the day ahead.",
+        "itinerary": [
+            {
+                "title": "Early Pickup",
+                "description": "Pickup by 4x4 early morning (5:00-6:00 AM depending on season)."
+            },
+            {
+                "title": "The Awakening",
+                "description": "Arrive at the launch site. Coffee/Tea served while you watch the balloons inflate."
+            },
+            {
+                "title": "Liftoff",
+                "description": "Board the basket and take off just as the sun rises."
+            },
+            {
+                "title": "The Flight",
+                "description": "Float for approx 1 hour, changing altitude to catch the winds and views."
+            },
+            {
+                "title": "Celebration",
+                "description": "Land and transfer to the Caidal tent for a freshly prepared breakfast."
+            },
+            {
+                "title": "Return",
+                "description": "Drive back to your hotel, arriving mid-morning (10:00-11:00 AM)."
+            }
+        ],
+        "included": [
+            "1 Hour Flight",
+            "4x4 Transfers",
+            "Full Berber Breakfast",
+            "Tea/Coffee",
+            "Flight Certificate",
+            "Insurance"
+        ],
+        "notIncluded": [
+            "Video/Photos (Pilots often have GoPros, footage available for purchase)",
+            "Gratuities"
+        ],
+        "meetingPoint": "Hotel Pickup.",
+        "importantInfo": [
+            "Ballooning is strictly weather dependent. If wind conditions are unsafe, we will cancel the flight and offer a full refund or reschedule.",
+            "Dress in layers. It can be chilly in the air before sunrise.",
+            "Not suitable for pregnant women, children under 4, or those with serious back/knee problems (landing bumps)."
+        ],
+        "faqs": [
+            {
+                "q": "Is it scary?",
+                "a": "Most people find it incredibly peaceful. There is no sensation of vertigo because you are not connected to the ground."
+            },
+            {
+                "q": "How many people in the basket?",
+                "a": "Standard compartments hold 4-5 people each, with 16-20 total in the basket. VIP private compartments are available."
+            },
+            {
+                "q": "Can we bring a camera?",
+                "a": "Yes! You must bring a camera. Secure it with a strap."
+            }
+        ],
+        "relatedExperiences": [
+            "Vintage Sidecar Adventure: The Insider's Ride",
+            "Luxury Spa Day & Signature Massage",
+            "Agafay Desert Sunset Camel Ride & Dinner Show"
+        ],
+        "imageConcepts": [
+            "Huge colorful balloon inflating with fire blast",
+            "View from the basket looking down at geometric fields",
+            "Silhouette of multiple balloons against a sunrise",
+            "Couple toasting with juice/champagne in the basket",
+            "Interior of the breakfast tent with rugs"
+        ]
+    },
+    {
+        "id": "luxury-desert-camp-overnight",
+        "title": "Glamping: Luxury Desert Camp Overnight",
+        "summary": "Spend a magical night under the stars in a luxury ensuite tent, combining the silence of the desert with the comfort of a boutique hotel.",
+        "highlights": [
+            "Stay in a luxury tent with private ensuite bathroom",
+            "Infinity pool access with desert views",
+            "Sunset Camel Ride included",
+            "3-course gourmet Dinner by candlelight",
+            "Campfire evening with music",
+            "Unrivaled stargazing opportunities",
+            "Sunrise breakfast on your private terrace",
+            "Total silence and digital detox"
+        ],
+        "description": "Experience the romance of the desert without sacrificing modern comforts. 'Glamping' (Glamorous Camping) in Agafay is a bucket-list experience. We have selected a camp that strikes the perfect balance between rustic authenticity and luxury. Your private tent is effectively a hotel suite with canvas walls: king-size bed, high thread-count linens, electricity, heating/AC (seasonal), and a full private bathroom with hot water and flush toilet.\n\nArrive in the afternoon to relax by the infinity pool that seems to drop off into the stony wilderness. As the heat causes the horizon to shimmer, take a camel ride into the sunset. Dinner is a white-tablecloth affair, served either in the dining tent or under the vast canopy of stars. \n\nSleep in the profound silence that only the desert can offer. Wake up to the spectacle of sunrise, enjoyed with a coffee on your private terrace. It’s the perfect unplugged getaway for couples or families seeking connection.",
+        "itinerary": [
+            {
+                "title": "Day 1: Arrival & Chill",
+                "description": "Pickup at 3:00 PM. Arrive at camp, check-in, and relax by the pool."
+            },
+            {
+                "title": "Day 1: Sunset",
+                "description": "Embark on a camel trek or a walk to watch the sun dip below the horizon."
+            },
+            {
+                "title": "Day 1: Evening",
+                "description": "Dinner served under the stars followed by live music around the fire."
+            },
+            {
+                "title": "Day 2: Morning",
+                "description": "Wake up early for sunrise. Enjoy a hearty breakfast."
+            },
+            {
+                "title": "Day 2: Departure",
+                "description": "Check out and transfer back to Marrakech around 11:00 AM."
+            }
+        ],
+        "included": [
+            "1 Night in Luxury Private Tent",
+            "Dinner and Breakfast",
+            "Camel Ride activity",
+            "Pool Access",
+            "Round-trip Transfers"
+        ],
+        "notIncluded": [
+            "Lunch on Day 1 (can be added or ordered a la carte)",
+            "Drinks (Bar available)",
+            "City tax (small fee payable on site)"
+        ],
+        "meetingPoint": "Hotel Pickup.",
+        "importantInfo": [
+            "Price is typically per person based on 2 people sharing a tent.",
+            "The camp is powered by solar energy; hair dryers might not work in the tents.",
+            "Agafay is a stone desert, not sand dunes.",
+            "Bring swimwear and a warm jacket for the night."
+        ],
+        "faqs": [
+            {
+                "q": "Is there WiFi?",
+                "a": "Yes, in the main reception areas, but signal is weak in the tents. Take the chance to disconnect!"
+            },
+            {
+                "q": "Are there showers?",
+                "a": "Yes, your tent has a private shower with hot water."
+            },
+            {
+                "q": "Is it safe?",
+                "a": "Very. The camp is guarded 24/7."
+            }
+        ],
+        "relatedExperiences": [
+            "Sunrise Hot Air Balloon Flight",
+            "Dune Buggy 1000cc Adventure",
+            "Luxury Spa Day & Signature Massage"
+        ],
+        "imageConcepts": [
+            "Interior of a luxury tent with white drapes and lanterns",
+            "Infinity pool reflecting the desert sky",
+            "Lantern-lit path leading to the dining tent",
+            "A table set for dinner alone in the desert",
+            "Stars seen from the terrace"
+        ]
+    },
+    {
+        "id": "merzouga-sahara-expedition",
+        "title": "3-Day Merzouga Sahara Expedition: The Real Dunes",
+        "summary": "The ultimate Moroccan road trip. Cross the High Atlas, visit ancient Kasbahs, and sleep in the golden dunes of the Sahara.",
+        "highlights": [
+            "Cross the High Atlas Mountains via Tizi n'Tichka pass",
+            "Explore UNESCO World Heritage Ait Benhaddou",
+            "Drive through the Valley of Roses and Dades Gorge",
+            "Walk under the towering cliffs of Todra Gorge",
+            "Sunset Camel Trek into the Erg Chebbi dunes",
+            "Overnight in a Sahara Desert Camp (Merzouga)",
+            "Sample the changing landscapes of Morocco",
+            "Private or Small Group Minibus"
+        ],
+        "description": "This is the big one. While Agafay is a beautiful stone desert nearby, Merzouga is the real deal—the endless sea of orange sand dunes (Erg Chebbi) you see in movies. Reaching it is an epic journey that traverses the entire backbone of Morocco.\n\n**Day 1:** We leave Marrakech and climb the High Atlas, crossing the Tizi n'Tichka pass at 2,260m. We start the 'Road of 1,000 Kasbahs', visiting the movie-famous Ait Benhaddou and stopping in the Dades Valley for the night.\n\n**Day 2:** We venture further east, walking through the massive fault line of Todra Gorge. Finally, the asphalt ends and the sand begins. You swap the van for camels and trek into the dunes as the sun sets. The silence of the Sahara is absolute. You sleep in a camp under a blanket of stars.\n\n**Day 3:** Wake for a sunrise that sets the dunes on fire with color. Ride back to civilization and begin the long drive back to Marrakech (or transfer to Fes), passing through the Anti-Atlas landscapes.",
+        "itinerary": [
+            {
+                "title": "Day 1: The Atlas Crossing",
+                "description": "Marrakech -> Tizi n'Tichka -> Ait Benhaddou (Visit) -> Ouarzazate -> Dades Valley. Overnight in Hotel."
+            },
+            {
+                "title": "Day 2: Into the Dunes",
+                "description": "Dades -> Todra Gorges (Walk) -> Merzouga. Camel Trek at sunset. Overnight in Desert Camp."
+            },
+            {
+                "title": "Day 3: The Return",
+                "description": "Merzouga -> Rissani -> Alnif -> Ouarzazate -> Marrakech. (Long drive, approx 9 hours)."
+            }
+        ],
+        "included": [
+            "Transport in AC Minibus/Van",
+            "Professional Driver/Guide",
+            "1 Night Hotel in Dades (Half Board)",
+            "1 Night Desert Camp in Merzouga (Half Board)",
+            "2 Dinners & 2 Breakfasts",
+            "Camel Trek activity"
+        ],
+        "notIncluded": [
+            "Lunches (approx 10-12 EUR each day)",
+            "Drinks",
+            "Guide fee at Ait Benhaddou (approx 3 EUR)",
+            "Entrance fees",
+            "Tips"
+        ],
+        "meetingPoint": "Hotel Pickup (Early: 7:00 AM).",
+        "importantInfo": [
+            "Total driving time is significant (approx 20+ hours over 3 days). Prepare for long spells in the car.",
+            "Luggage: You can bring your suitcases, they go in the van.",
+            "Accommodations are standard/comfortable. Luxury upgrades available.",
+            "The camp has shared bathrooms unless you book the Luxury option."
+        ],
+        "faqs": [
+            {
+                "q": "Can I be dropped in Fes?",
+                "a": "Yes! This is a popular route. You would take a taxi from Merzouga to Fes on Day 3 (extra cost)."
+            },
+            {
+                "q": "Is there AC in the bus?",
+                "a": "Yes, modern vehicles."
+            },
+            {
+                "q": "What regarding the heat?",
+                "a": "Summer (July/Aug) is extremely hot (45°C+). Spring/Autumn are best."
+            }
+        ],
+        "relatedExperiences": [
+            "Ait Benhaddou & Ouarzazate Cinema Tour",
+            "Agafay Desert Sunset Camel Ride & Dinner Show",
+            "Atlas Mountains & Ourika Valley Day Trip"
+        ],
+        "imageConcepts": [
+            "Line of camels walking on a sharp dune ridge",
+            "Red towering walls of Todra Gorge",
+            "Ait Benhaddou village across the river",
+            "Night sky full of stars above dunes",
+            "Winding mountain road of Tichka"
+        ]
+    },
+    {
+        "id": "atlas-mountains-ourika-valley",
+        "title": "Atlas Mountains & Ourika Valley Day Trip",
+        "summary": "Escape the city heat to the cool, verdant valleys of the High Atlas, visiting waterfalls, Berber homes, and Argan cooperatives.",
+        "highlights": [
+            "Scenic drive through the High Atlas Mountains",
+            "Guided hike to the 7 Waterfalls of Setti Fatma",
+            "Visit a traditional Berber family home",
+            "Learn about authentic Argan Oil production",
+            "Lunch at a riverside restaurant (feet in the water!)",
+            "Cooler temperatures and fresh air",
+            "Stunning red-rock and green-valley contrasts"
+        ],
+        "description": "The Ourika Valley is the favorite weekend escape for Marrakchis, and for good reason. Just 45 minutes from the city, the landscape changes from arid plains to lush, terraced valleys carved by the Ourika River. \n\nThis day trip is a journey into the culture of the Amazigh (Berber) people. We stop at a traditional house to drink tea with a local family and see how they live. We visit a women's cooperative to witness the labor-intensive process of cracking Argan nuts to make oil. \n\nThe road ends at the village of Setti Fatma. Here, you meet a mountain guide for a hike up the rocky cliffs to see a series of seven waterfalls. It’s a bit of a scramble, but the views are worth it. Afterward, reward yourself with a classic Tagine lunch. In the summer, the restaurants place tables literally *in* the river, so you can eat with the cool mountain water rushing over your feet.",
+        "itinerary": [
+            {
+                "title": "Departure",
+                "description": "Pickup at 9:00 AM. Drive south towards the mountains."
+            },
+            {
+                "title": "Berber Hospitality",
+                "description": "Visit a local home for mint tea and bread. See the traditional layout of the house."
+            },
+            {
+                "title": "Liquid Gold",
+                "description": "Stop at a cooperative to see women making Argan oil and cosmetic products."
+            },
+            {
+                "title": "The Hike",
+                "description": "Arrive in Setti Fatma. 1-hour guided hike to the first few waterfalls."
+            },
+            {
+                "title": "River Lunch",
+                "description": "Relax and eat lunch by (or in) the river."
+            },
+            {
+                "title": "Return",
+                "description": "Drive back to Marrakech, arriving approx 5:00 PM."
+            }
+        ],
+        "included": [
+            "Transport in AC Minibus",
+            "Professional Driver",
+            "Local Mountain Guide in Setti Fatma",
+            "Visit to Berber House"
+        ],
+        "notIncluded": [
+            "Lunch (approx 10-12 EUR)",
+            "Drinks",
+            "Gratuities"
+        ],
+        "meetingPoint": "Hotel Pickup.",
+        "importantInfo": [
+            "The hike involves uneven, rocky ground and some climbing. Wear sneakers, not flip-flops.",
+            "If you cannot hike, you can stay by the river and relax.",
+            "It gets busy on weekends and summer holidays with locals.",
+            "The temperature is usually 10 degrees cooler than Marrakech."
+        ],
+        "faqs": [
+            {
+                "q": "Can we swim?",
+                "a": "The water is shallow and very cold (snowmelt), but you can wade."
+            },
+            {
+                "q": "Is the hike hard?",
+                "a": "It is moderate. The guide will help you. You don't have to go all the way to the top."
+            }
+        ],
+        "relatedExperiences": [
+            "Imlil Village High Atlas Trek",
+            "Ouzoud Waterfalls Full-Day Trip",
+            "Ait Benhaddou & Ouarzazate Cinema Tour"
+        ],
+        "imageConcepts": [
+            "Colorful plastic chairs and tables set inside the river stream",
+            "Waterfall cascading down red rocks",
+            "Woman's hands cracking argan nuts with a stone",
+            "Terraced green fields on the mountain side",
+            "Rope bridge crossing the river"
+        ]
+    },
+    {
+        "id": "essaouira-coastal-escape",
+        "title": "Essaouira Coastal Escape: The Windy City",
+        "summary": "Trade the Red City for the Blue City. Explore the Portuguese ramparts, fish markets, and artistic vibe of this Atlantic coastal gem.",
+        "highlights": [
+            "Explore the UNESCO World Heritage Medina of Essaouira",
+            "Walk the historic Skala ramparts (Game of Thrones location)",
+            "See the iconic blue fishing boats in the harbor",
+            "Fresh seafood lunch by the port",
+            "Stop to see 'Goats in Trees' on the way",
+            "Relaxed, hassle-free shopping atmosphere",
+            "Wide sandy beach walk"
+        ],
+        "description": "Essaouira (formerly Mogador) feels a world away from Marrakech. It is blue and white, breezy, and incredibly laid-back. This full-day trip takes you west to the Atlantic coast.\n\nThe drive takes you through the unique Argan forest biosphere. Keep your eyes peeled for goats climbing the trees to eat the nuts—a surreal sight you'll stop to photograph. Upon arrival in Essaouira, you have the freedom to explore at your own pace. The Medina is pedestrian-only and much easier to navigate than Marrakech. \n\nWalk the Skala de la Ville, the sea-facing fortifications where canons still point out to the ocean. Wander the thuya wood workshops and art galleries. Head to the port to see the blue boats unloading their catch—sardines, eels, crabs. You can buy fish fresh and have it grilled right there. It’s a day of fresh air, seagulls crying, and relaxed vibes.",
+        "itinerary": [
+            {
+                "title": "Departure",
+                "description": "Pickup 8:00 AM. 3-hour drive west."
+            },
+            {
+                "title": "Nature Stop",
+                "description": "Stop to see the famous tree-climbing goats (nature permitting)."
+            },
+            {
+                "title": "Arrival",
+                "description": "Drop off near the port/Medina entrance."
+            },
+            {
+                "title": "Free Time",
+                "description": "4 hours to explore the Medina, Ramparts, and have lunch."
+            },
+            {
+                "title": "Beach Walk",
+                "description": "Stroll on the vast beach, watching kite surfers."
+            },
+            {
+                "title": "Return",
+                "description": "Depart 4:00 PM, back in Marrakech by 7:00 PM."
+            }
+        ],
+        "included": [
+            "Round-trip Transport in AC Vehicle",
+            "Professional Driver"
+        ],
+        "notIncluded": [
+            "Lunch",
+            "Entrance fees (monuments are cheap)",
+            "Local Guide (The city is very easy to explore solo)"
+        ],
+        "meetingPoint": "Hotel Pickup.",
+        "importantInfo": [
+            "Essaouira is known as the 'Windy City'. Even in summer, bring a light layer/jacket.",
+            "The drive is approx 175km each way.",
+            "You are free to explore on your own; the driver waits at a designated spot."
+        ],
+        "faqs": [
+            {
+                "q": "Can we swim?",
+                "a": "Yes, there is a huge beach. The water is Atlantic-cold."
+            },
+            {
+                "q": "Is it good for shopping?",
+                "a": "Yes! Prices are often lower than Marrakech and shopkeepers are more relaxed."
+            }
+        ],
+        "relatedExperiences": [
+            "Ouzoud Waterfalls Full-Day Trip",
+            "Intercity Transfer: Marrakech to Casablanca",
+            "Medina Hidden Gems Walking Tour"
+        ],
+        "imageConcepts": [
+            "Blue fishing boats tightly packed in the harbor",
+            "Seagull flying over the stone rampart with cannon",
+            "Goat standing on a tree branch",
+            "Arched doorway in the white medina",
+            "Fresh grilled fish platter"
+        ]
+    },
+    {
+        "id": "ouzoud-waterfalls-trip",
+        "title": "Ouzoud Waterfalls: Nature's Majesty",
+        "summary": "Visit the highest waterfalls in North Africa, a stunning 110m cascade of water into red cliffs, home to wild monkeys.",
+        "highlights": [
+            "View the spectacular 110m (360ft) Ouzoud Waterfalls",
+            "Encounter wild Barbary Macaque monkeys",
+            "Take a quirky boat ride under the spray",
+            "Hike down the olive-tree lined path to the bottom",
+            "See rainbows in the mist",
+            "Lunch at a panoramic terrace",
+            "Nature photography heaven"
+        ],
+        "description": "If you love nature, Ouzoud is the highlight of the Middle Atlas. Located about 2.5 hours from Marrakech, these falls are dramatic, plunging 110 meters over tiered red cliffs into deep green pools. 'Ouzoud' means 'olive' in Berber, named for the ancient trees that shade the path.\n\nUpon arrival, you can view the falls from the top, but the real experience is hiking down. A local guide leads you on a path winding through the olive groves. At the bottom, you can cross the pool on unique, hand-operated barges—getting close enough to feel the power of the spray (and get a little wet!).\n\nAs you hike back up, keep a look out for the resident Barbary Macaques. These wild monkeys are accustomed to visitors and will often pose for photos. We finish with a tagine lunch on a terrace overlooking the falls, offering one of the best views in Morocco.",
+        "itinerary": [
+            {
+                "title": "Departure",
+                "description": "Pickup 8:00 AM. Drive north-east through olive country."
+            },
+            {
+                "title": "Arrival & Descent",
+                "description": "Meet local guide. Begin the walk down the cliffside path."
+            },
+            {
+                "title": "The Basin",
+                "description": "Reach the bottom pools. Optional boat ride."
+            },
+            {
+                "title": "Lunch",
+                "description": "Ascend partway to a restaurant for lunch with a view."
+            },
+            {
+                "title": "Monkey Business",
+                "description": "Interact with the monkeys on the final stretch up."
+            },
+            {
+                "title": "Return",
+                "description": "Drive back to Marrakech, arriving approx 6:30 PM."
+            }
+        ],
+        "included": [
+            "Transport in AC Minibus",
+            "Driver",
+            "Local Guide"
+        ],
+        "notIncluded": [
+            "Lunch (approx 10 EUR)",
+            "Boat ride (approx 20 MAD/2 EUR)",
+            "Tips"
+        ],
+        "meetingPoint": "Hotel Pickup.",
+        "importantInfo": [
+            "Moderate fitness required for the stairs/path.",
+            "Wear sneakers with good grip.",
+            "In summer it gets very hot; bring a hat and water.",
+            "Swimming is allowed in designated areas, but be careful of currents."
+        ],
+        "faqs": [
+            {
+                "q": "Are the monkeys dangerous?",
+                "a": "Generally no, but they are wild animals. Do not touch them and secure your food."
+            },
+            {
+                "q": "Can I do this with a baby?",
+                "a": "It's difficult with a stroller due to stairs. A carrier is necessary."
+            }
+        ],
+        "relatedExperiences": [
+            "Atlas Mountains & Ourika Valley Day Trip",
+            "Ait Benhaddou & Ouarzazate Cinema Tour",
+            "Imlil Village High Atlas Trek"
+        ],
+        "imageConcepts": [
+            "Full portrait shot of the 3-tiered waterfall with rainbow",
+            "Monkey sitting on a wooden fence eating a nut",
+            "Brightly decorated boat crossing the pool",
+            "View from restaurant terrace",
+            "Hikers on the red dirt path"
+        ]
+    },
+    {
+        "id": "imlil-village-trek",
+        "title": "Imlil Village: Hiking the High Atlas",
+        "summary": "A true hiking experience in the shadow of Mount Toubkal, exploring alpine villages, waterfall trails, and walnut groves.",
+        "highlights": [
+            "Trek in Toubkal National Park",
+            "Views of Mount Toubkal (4,167m - highest in N. Africa)",
+            "Guided hike through walnut and apple orchards",
+            "Visit the village of Aremd",
+            "Authentic lunch in a Berber guesthouse",
+            "Crisp mountain air and scenery",
+            "Option to ride a mule"
+        ],
+        "description": "For those who want to stretch their legs and breathe the freshest air in Morocco, Imlil is the destination. Sitting at 1,740m, this village is the Chamonix of Morocco, the base camp for all mountaineers climbing Mt. Toubkal.\n\nYou don't need to be a pro climber for this day trip. We take a gentle but scenic trek (2-3 hours) through the valley. Guided by a local mountain expert, you'll walk through terraces of cherry and walnut trees, passing small waterfalls and irrigation channels. We hike up to the village of Aremd, a cluster of stone houses perched on a moraine spur, offering incredible views of the snowy peaks.\n\nLunch is served in a local guesthouse—simple, hearty Berber food tasted on a terrace with a million-dollar view. This is a day to connect with the mountains and the resilient culture of the people who live there.",
+        "itinerary": [
+            {
+                "title": "Departure",
+                "description": "Pickup 9:00 AM. 1.5 hour drive via Asni (stopping at weekly market on Saturdays)."
+            },
+            {
+                "title": "Trailhead",
+                "description": "Arrive in Imlil. Meet your guide and start the trek."
+            },
+            {
+                "title": "The Climb",
+                "description": "Hike past the Kasbah du Toubkal and waterfalls."
+            },
+            {
+                "title": "Aremd Village",
+                "description": "Reach the higher village for panoramic photos."
+            },
+            {
+                "title": "Lunch",
+                "description": "Rest and eat at a guesthouse."
+            },
+            {
+                "title": "Descent",
+                "description": "Walk back down to the vehicle."
+            },
+            {
+                "title": "Return",
+                "description": "Drive back to Marrakech."
+            }
+        ],
+        "included": [
+            "Transport",
+            "Mountain Guide",
+            "Lunch",
+            "Mineral water"
+        ],
+        "notIncluded": [
+            "Soft drinks",
+            "Mule rental (optional, approx 10 EUR)",
+            "Tips"
+        ],
+        "meetingPoint": "Hotel Pickup.",
+        "importantInfo": [
+            "Good walking shoes/boots are essential.",
+            "Bring warm layers (fleece/jacket) – mountains are cold!",
+            "Moderate fitness required. If you get tired, mules are always available."
+        ],
+        "faqs": [
+            {
+                "q": "Is there snow?",
+                "a": "In winter (Dec-March), yes. The scenery is snowy, but paths are usually clear."
+            },
+            {
+                "q": "Do we summit the mountain?",
+                "a": "No, that takes 2 days. We stay in the valley foothills."
+            }
+        ],
+        "relatedExperiences": [
+            "Atlas Mountains & Ourika Valley Day Trip",
+            "3-Day Merzouga Sahara Expedition",
+            "Rock Climbing"
+        ],
+        "imageConcepts": [
+            "Snow-capped peak of Mount Toubkal",
+            "Hiker looking out over the winding valley path",
+            "Walnut trees shedding leaves in autumn",
+            "Mule carrying a rider up a slope",
+            "Stone houses of Aremd village"
+        ]
+    },
+    {
+        "id": "ait-benhaddou-cinema-tour",
+        "title": "Ait Benhaddou & Ouarzazate: The Hollywood of Africa",
+        "summary": "A spectacular road trip across the Atlas to the UNESCO fortress of Ait Benhaddou, filming location for Gladiator and Game of Thrones.",
+        "highlights": [
+            "Cross the majestic Tizi n'Tichka Pass (2,260m)",
+            "Visit the UNESCO World Heritage Ksar of Ait Benhaddou",
+            "Walk in the footsteps of Gladiators and Daenerys Targaryen",
+            "See the Atlas Film Studios in Ouarzazate",
+            "Stunning changing landscapes: from snow to desert",
+            "Discover traditional Kasbah architecture"
+        ],
+        "description": "Prepare for a long day, but one filled with the most dramatic scenery in Morocco. We head south, climbing the winding roads of the High Atlas to the Tizi n'Tichka pass. The views change at every turn—from pine forests to bare red rock to sub-Saharan oasis.\n\nOur destination is Ait Benhaddou, a striking fortified village (Ksar) made of earthen clay that has stood for centuries on the old caravan route. It is so perfectly preserved that it has become Hollywood's favorite backdrop. You've seen it in *Gladiator*, *The Mummy*, *Lawrence of Arabia*, and as Yunkai in *Game of Thrones*. \n\nWe cross the river stepping stones to explore its narrow streets, climbing to the granary at the top for a view over the valley. We continue to Ouarzazate to see the Taourirt Kasbah and the cinema museum before the scenic drive home.",
+        "itinerary": [
+            {
+                "title": "Early Start",
+                "description": "Pickup 7:00 AM. Start the ascent of the Atlas."
+            },
+            {
+                "title": "The Pass",
+                "description": "Photo stop at Tizi n'Tichka summit."
+            },
+            {
+                "title": "Ait Benhaddou",
+                "description": "Arrive approx 11:30 AM. Guided walking tour of the Ksar."
+            },
+            {
+                "title": "Lunch",
+                "description": "Lunch at a panoramic restaurant facing the monument."
+            },
+            {
+                "title": "Ouarzazate",
+                "description": "Short drive to Ouarzazate city for a photo stop at Cinema Museum/Kasbah."
+            },
+            {
+                "title": "Return",
+                "description": "Drive back to Marrakech, arriving approx 7:30 PM."
+            }
+        ],
+        "included": [
+            "Transport",
+            "Driver"
+        ],
+        "notIncluded": [
+            "Lunch",
+            "Local Guide at Ait Benhaddou (approx 3 EUR/30 MAD per person)",
+            "Entrance fees to museums",
+            "Tips"
+        ],
+        "meetingPoint": "Hotel Pickup.",
+        "importantInfo": [
+            "It is a LOT of driving (4 hours each way). Not for those who get car sick.",
+            "Wear comfortable shoes for walking on uneven ground.",
+            "It gets very hot in the south during summer."
+        ],
+        "faqs": [
+            {
+                "q": "Do we go inside the studios?",
+                "a": "We stop outside. Entering takes too long for a day trip, unless the whole group agrees to skip something else."
+            },
+            {
+                "q": "Is the Ksar inhabited?",
+                "a": "Only a few families remain; most live in the new village across the river."
+            }
+        ],
+        "relatedExperiences": [
+            "3-Day Merzouga Sahara Expedition",
+            "Ouzoud Waterfalls Full-Day Trip",
+            "Agafay Desert Sunset Camel Ride & Dinner Show"
+        ],
+        "imageConcepts": [
+            "Panoramic view of the red clay Ksar against blue sky",
+            "Winding hairpin turns of the Tichka pass",
+            "Cinema clapboard or Egyptian statue prop at studios",
+            "View from the top granary looking down",
+            "Stepping stones across the river"
+        ]
+    },
+    {
+        "id": "ultimate-street-food-tour",
+        "title": "Ultimate Medina Street Food Tour",
+        "summary": "Taste your way through the backstreets of the Medina, sampling delicacies from slow-roasted lamb to snail soup with a local foodie.",
+        "highlights": [
+            "10+ Authentic food tastings",
+            "Visit 'Mechoui Alley' for underground-roasted lamb",
+            "Taste 'Tangia', the signature dish of Marrakech",
+            "Try the adventurous: Snail soup and Sheep's Head (optional!)",
+            "Learn about spices and local ingredients",
+            "Unlimited mint tea",
+            "Replaces a full meal",
+            "Small intimate group"
+        ],
+        "description": "Forget the tourist restaurants with their 'international menu'. The real flavor of Marrakech is found in the smoke-filled alleyways and the bubbling pots of the street stalls. This tour is for the hungry and the curious.\n\nGuided by a local food expert, you will navigate the maze to visit the stalls where locals actually eat. We start with the basics: olives, nuts, and pastries. Then we move to the serious stuff. Try 'Maakouda' (deep-fried potato balls) in a fluffy bread roll, or 'Hout Quari' (sardine meatball sandwich).\n\nFor the main event, we visit the famous Mechoui Alley. Here, whole lambs are roasted in deep underground clay pits for hours until the meat falls off the bone—seasoned simply with cumin and salt. We also taste 'Tangia', the bachelor's stew slow-cooked in the Hammam ashes. This isn't just about eating; it's about understanding the culture of sharing food.",
+        "itinerary": [
+            {
+                "title": "Meeting & Olives",
+                "description": "Meet in Jemaa el-Fnaa. Start with a tasting of olives and preserved lemons."
+            },
+            {
+                "title": "Souk Snacks",
+                "description": "Walk through the market trying Maakouda, Briouates, and Msamen."
+            },
+            {
+                "title": "Meat District",
+                "description": "Head to Mechoui Alley for the roast lamb and Tangia tasting."
+            },
+            {
+                "title": "The Dare",
+                "description": "A bowl of spiced snail soup. It's better than you think!"
+            },
+            {
+                "title": "Sweet Finish",
+                "description": "Finish with 'Sfenj' (donuts) or seasonal fruit and herbal tea."
+            }
+        ],
+        "included": [
+            "All food tastings",
+            "Bottled water",
+            "Local Food Guide",
+            "Napkins/Sanitizer"
+        ],
+        "notIncluded": [
+            "Alcohol",
+            "Gratuities",
+            "Hotel transfer"
+        ],
+        "meetingPoint": "Cafe de France, Jemaa el-Fnaa. Ground floor terrace.",
+        "importantInfo": [
+            "Come with an empty stomach!",
+            "Vegetarians are welcome (lots of options), but vegans might find it limited.",
+            "We select stalls with high hygiene standards.",
+            "Please advise of allergies (nuts, gluten) in advance."
+        ],
+        "faqs": [
+            {
+                "q": "Do I have to eat the sheep head?",
+                "a": "No! It is there to try if you want, but absolutely not mandatory."
+            },
+            {
+                "q": "Is alcohol served?",
+                "a": "No, street stalls are dry."
+            }
+        ],
+        "relatedExperiences": [
+            "Traditional Cooking Class & Souk Market Shop",
+            "Evening Jemaa El Fna & Souk Tasting Tour",
+            "Traditional Moroccan Bread Baking Workshop"
+        ],
+        "imageConcepts": [
+            "Chef cutting steaming roast lamb in the pit",
+            "Hands dipping bread into olive oil",
+            "Bowls of snail soup with steam",
+            "Colorful display of Moroccan pastries",
+            "Close up of Tangia clay pot"
+        ]
+    },
+    {
+        "id": "cooking-class-market-shop",
+        "title": "Market to Table: Traditional Cooking Class in a Riad",
+        "summary": "Shop for fresh ingredients in the souk and learn to cook a 3-course Moroccan meal with a 'Dada' chef in a beautiful Riad.",
+        "highlights": [
+            "Guided market shopping tour for fresh produce",
+            "Hands-on cooking in a traditional courtyard Riad",
+            "Learn to make Tagine, Couscous, or Pastilla",
+            "Master 2-3 Moroccan cooked salads (Zaalouk, Taktouka)",
+            "Learn from a 'Dada' (traditional female cook)",
+            "Lunch included (the meal you prepare)",
+            "Recipe booklet to take home",
+            "Vegetarian/Gluten-free friendly"
+        ],
+        "description": "Don't just eat the food—learn to make it! This immersive experience takes you behind the scenes of Moroccan cuisine. Uniquely, it starts in the Souk. You join our chef to shop for fresh vegetables, herbs, and spices. Learn how to pick the best produce, how to bargain like a local, and discover the secret spices of the 'Ras el Hanout'.\n\nBack at our traditional Riad cooking school, you'll be welcomed with tea before tying on your apron. Under the guidance of a 'Dada', you will learn the techniques of chopping, seasoning, and slow-cooking. You will prepare a main course (Chicken Lemon Tagine, Lamb Prune Tagine, or Vegetable Couscous) and a selection of classic salads.\n\nWhile the clay pots simmer over charcoal, relax in the courtyard. Finally, the best part: sitting down together to enjoy the feast you created, accompanied by fresh bread and wine (optional/if available). You leave with a full belly and the skills to bring the taste of Morocco home.",
+        "itinerary": [
+            {
+                "title": "Market Tour",
+                "description": "Meet and head to the souk. Buy your vegetables and meat."
+            },
+            {
+                "title": "Welcome",
+                "description": "Arrive at the Riad. Wash up and enjoy tea."
+            },
+            {
+                "title": "Prep Work",
+                "description": "Chop, peel, and marinate. Assemble the Tagine."
+            },
+            {
+                "title": "Salads",
+                "description": "While the main cooks, make the side salads."
+            },
+            {
+                "title": "Lunch",
+                "description": "Feast on your creation."
+            }
+        ],
+        "included": [
+            "Market Tour",
+            "Cooking Class",
+            "3-course Lunch",
+            "Water/Tea",
+            "Recipes"
+        ],
+        "notIncluded": [
+            "Hotel transfer",
+            "Alcohol"
+        ],
+        "meetingPoint": "Dar El Bacha Palace entrance. Central and easy to find.",
+        "importantInfo": [
+            "Please mention dietary requirements at booking.",
+            "Wear comfortable closed shoes for the market.",
+            "Suitable for children 8+."
+        ],
+        "faqs": [
+            {
+                "q": "Do I need experience?",
+                "a": "No, it is step-by-step guidance."
+            },
+            {
+                "q": "Can I buy spices?",
+                "a": "Yes, we can help you buy quality spices during the tour."
+            }
+        ],
+        "relatedExperiences": [
+            "Traditional Moroccan Bread Baking Workshop",
+            "Tea Ceremony & Moroccan Pastry Workshop",
+            "Ultimate Medina Street Food Tour"
+        ],
+        "imageConcepts": [
+            "Chef holding a basket of vegetables in the market",
+            "Steam rising from multiple clay tagines",
+            "Hands sprinkling spices into a pot",
+            "Group toasting at a long table in the Riad",
+            "Display of colorful cooked salads"
+        ]
+    }
+]
