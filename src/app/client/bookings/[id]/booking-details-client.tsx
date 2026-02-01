@@ -32,7 +32,8 @@ import {
     AlertTriangle,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { Booking, BookingStatus } from '@prisma/client';
+import { BookingStatus } from '@prisma/client';
+import type { Booking } from '@prisma/client';
 import { cancelBooking } from '@/app/client/actions';
 
 // Extended Booking type to include relation
@@ -52,6 +53,7 @@ const StatusIcon = ({ status }: { status: BookingStatus }) => {
         case BookingStatus.PENDING: return <Clock className="w-5 h-5 text-amber-600" />;
         case BookingStatus.CANCELLED: return <XCircle className="w-5 h-5 text-red-600" />;
         case BookingStatus.COMPLETED: return <CheckCircle className="w-5 h-5 text-primary" />;
+        case BookingStatus.NEEDS_UPDATE: return <AlertTriangle className="w-5 h-5 text-amber-600" />;
         default: return <AlertTriangle className="w-5 h-5 text-gray-600" />;
     }
 };
@@ -61,6 +63,7 @@ const statusStyles: Record<BookingStatus, string> = {
     [BookingStatus.PENDING]: 'bg-amber-50 text-amber-700 border-amber-200',
     [BookingStatus.CANCELLED]: 'bg-red-50 text-red-700 border-red-200',
     [BookingStatus.COMPLETED]: 'bg-primary/10 text-primary border-primary/20',
+    [BookingStatus.NEEDS_UPDATE]: 'bg-amber-50 text-amber-700 border-amber-200',
 };
 
 const statusBarColors: Record<BookingStatus, string> = {
@@ -68,6 +71,7 @@ const statusBarColors: Record<BookingStatus, string> = {
     [BookingStatus.PENDING]: 'bg-amber-500',
     [BookingStatus.CANCELLED]: 'bg-red-500',
     [BookingStatus.COMPLETED]: 'bg-primary',
+    [BookingStatus.NEEDS_UPDATE]: 'bg-amber-500',
 };
 
 export function BookingDetailsClient({ booking }: BookingDetailsClientProps) {

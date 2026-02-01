@@ -18,7 +18,7 @@ export async function POST(req: Request) {
         const result = promoSchema.safeParse(body);
 
         if (!result.success) {
-            return NextResponse.json({ error: 'Invalid input', details: result.error.errors }, { status: 400 });
+            return NextResponse.json({ error: 'Invalid input', details: result.error.issues }, { status: 400 });
         }
 
         const { userIds, promoCode, discountAmount, expirationDate } = result.data;
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
             select: { id: true, email: true, name: true }
         });
 
-        console.log(`Sending promo "${promoCode}" to ${users.length} users...`);
+        console.info(`Sending promo "${promoCode}" to ${users.length} users...`);
 
         let sentCount = 0;
 
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
                     promoCode,
                     discountAmount,
                     expirationDate
-                });
+                } as Record<string, any>);
 
                 await sendEmail({
                     to: user.email,

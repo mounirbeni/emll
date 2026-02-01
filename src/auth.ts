@@ -74,7 +74,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             // Initial sign in
             if (user) {
                 token.id = user.id
-                token.role = (user as any).role || UserRole.CUSTOMER
+                token.role = user.role || UserRole.CUSTOMER
                 token.email = user.email
                 token.name = user.name
                 token.iat = Math.floor(Date.now() / 1000)
@@ -132,10 +132,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         },
     },
     events: {
-        async linkAccount({ user }) {
+        async linkAccount({ user: _user }) {
             // Log link account event if needed, or maintain for audit
         },
-        async signIn({ user, account, profile, isNewUser }) {
+        async signIn({ user, account, profile: _profile, isNewUser: _isNewUser }) {
             // Log sign in event if needed
             if (account?.provider === "google") {
                 // Allow all google sign-ins (no return value needed for events)

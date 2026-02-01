@@ -11,7 +11,7 @@ type TemplateName =
     | 'announcement'
     | 'promo';
 
-export async function getEmailTemplate(templateName: TemplateName, data: Record<string, string | number>) {
+export async function getEmailTemplate(templateName: TemplateName, data: Record<string, string | number | boolean | null | undefined>) {
     try {
         const templatePath = path.join(process.cwd(), 'src', 'emails', 'templates', `${templateName}.html`);
         let html = await fs.promises.readFile(templatePath, 'utf8');

@@ -57,7 +57,7 @@ export async function POST(req: Request) {
                         ctaText: ctaText || '',
                         ctaLink: ctaLink || '',
                         unsubscribeUrl: `${process.env.NEXT_PUBLIC_APP_URL}/unsubscribe?email=${user.email}`
-                    });
+                    } as Record<string, any>);
 
                     await sendEmail({
                         to: user.email,
