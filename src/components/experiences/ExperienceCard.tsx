@@ -15,8 +15,8 @@ interface Experience {
     currency: string;
     shortDescription: string;
     gallery: string[];
-    reviews?: number;
-    rating?: number;
+    reviewCount?: number;
+    avgRating?: number;
     featured?: boolean;
 }
 
@@ -34,10 +34,14 @@ function ExperienceCardComponent({ experience }: ExperienceCardProps) {
         price,
         currency,
         gallery,
-        // Use a deterministic fallback for reviews to avoid hydration mismatch
-        reviews = experience.reviews || (id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % 300) + 50,
-        rating = 4.8,
+        // Use real data, default to 0
+        reviewCount = 0,
+        avgRating = 0,
     } = experience;
+
+    // Map to component variables for cleaner usage below
+    const reviews = reviewCount;
+    const rating = avgRating;
 
     return (
         <Link

@@ -71,11 +71,22 @@ async function main() {
 
     for (const exp of experiences) {
       try {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { image, ...expData } = exp as any;
+
+        // Ensure defaults and remove invalid fields
+        if (!expData.meetingPoint) expData.meetingPoint = "Meeting point TBD";
+        if (expData.pickupAvailable === undefined) expData.pickupAvailable = false;
+
+        // Override for task requirements
+        expData.popularity = 0;
+        expData.featured = false;
+        expData.enabled = true;
+
         await prisma.experience.upsert({
           where: { slug: exp.slug },
           update: {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            ...exp as any,
+            ...expData,
             faqs: exp.faqs,
             itinerary: exp.itinerary,
             importantInfo: exp.importantInfo,
@@ -83,16 +94,13 @@ async function main() {
             relatedExperiences: exp.relatedExperiences,
           },
           create: {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            ...exp as any,
+            ...expData,
             slug: exp.slug,
             faqs: exp.faqs,
             itinerary: exp.itinerary,
             importantInfo: exp.importantInfo,
             imageConcepts: exp.imageConcepts,
             relatedExperiences: exp.relatedExperiences,
-            popularity: Math.floor(Math.random() * 100),
-            featured: Math.random() > 0.8
           }
         })
       } catch (error) {
