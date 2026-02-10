@@ -20,6 +20,7 @@ async function getData() {
 
 export default async function AdminDashboard() {
     const { stats, dailyStats } = await getData();
+    const health = await adminService.getSystemHealth();
 
     // Timeline merging
     const timeline = [
@@ -170,9 +171,21 @@ export default async function AdminDashboard() {
                         </CardHeader>
                         <CardContent>
                             <div className="space-y-4">
-                                <HealthItem status="operational" title="Database" description="Connected" />
-                                <HealthItem status="operational" title="Server Actions" description="Unified Mutations Active" />
-                                <HealthItem status="operational" title="Cache" description="Revalidation Enabled" />
+                                <HealthItem
+                                    status={health.database as any}
+                                    title="Database"
+                                    description={health.database === 'operational' ? "Connected & Responding" : "Connection Failed"}
+                                />
+                                <HealthItem
+                                    status={health.server as any}
+                                    title="Server Actions"
+                                    description={health.server === 'operational' ? "Unified Mutations Active" : "Degraded Performance"}
+                                />
+                                <HealthItem
+                                    status="operational"
+                                    title="Cache"
+                                    description="Revalidation Enabled"
+                                />
                             </div>
                         </CardContent>
                     </Card>

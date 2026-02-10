@@ -42,23 +42,15 @@ export interface SettingsData {
 }
 
 export async function getSettings(): Promise<SettingsData> {
-    // Placeholder using environment variables or defaults
-    // since Service table is removed.
-    return {
-        businessName: "Explore Marrakesh",
-        contactEmail: "contact@exploremarrakesh.com",
-        contactPhone: "+212 524 000 000",
-        address: "Marrakech, Morocco",
-        cancellationPolicy: "Flexible",
-        socialFacebook: "https://facebook.com",
-        socialInstagram: "https://instagram.com"
-    };
+    const settings = await adminService.getSettings();
+    return settings as SettingsData; // Type casting or mapping as needed
 }
 
 export async function updateSettings(data: unknown): Promise<ActionResponse> {
     try {
         await requireAdmin()
         await adminService.updateSettings(data)
+        revalidatePath('/admin/settings')
         return { success: true }
     } catch (e) {
         console.error("Failed to update settings:", e)

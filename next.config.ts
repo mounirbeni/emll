@@ -7,7 +7,14 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   images: {
-    remotePatterns: [],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60,
   },

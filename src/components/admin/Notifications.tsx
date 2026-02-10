@@ -20,7 +20,10 @@ import { toast } from 'sonner'
 
 const fetcher = async (url: string) => {
     const res = await fetch(url)
-    return res.json()
+    const data = await res.json()
+    // The API returns { notifications: [], unreadCount: number }
+    // We want the useSWR hook to return the notifications array
+    return data.notifications || []
 }
 
 export function Notifications() {
@@ -30,7 +33,7 @@ export function Notifications() {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
 
-    const unreadCount = notifications?.filter(n => !n.read).length || 0
+    const unreadCount = Array.isArray(notifications) ? notifications.filter(n => !n.read).length : 0
 
     const handleNotificationClick = (notification: Notification) => {
         setIsOpen(false)

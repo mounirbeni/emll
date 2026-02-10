@@ -33,6 +33,7 @@ import { Badge } from '@/components/ui/badge'
 import Image from 'next/image'
 import { toast } from 'sonner'
 import { deleteBlogPost } from '@/app/actions/admin-actions'
+import { format } from 'date-fns'
 
 interface BlogPost {
     id: string
@@ -232,7 +233,7 @@ export function BlogClient({ posts }: BlogClientProps) {
                                     <TableCell>
                                         <div className="flex items-center gap-1 text-sm text-medium-gray">
                                             <Calendar className="h-3 w-3" />
-                                            {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : 'Draft'}
+                                            {post.publishedAt ? format(new Date(post.publishedAt), 'MMM d, yyyy') : 'Draft'}
                                         </div>
                                     </TableCell>
                                     <TableCell className="text-right">

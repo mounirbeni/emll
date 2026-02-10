@@ -349,3 +349,15 @@ model EmailLog {
   @@index([type])
   @@index([sentAt])
 }
+
+model Settings {
+  id                 String   @id @default(uuid())
+  businessName       String   @default("Explore Marrakesh")
+  contactEmail       String   @default("contact@exploremarrakesh.com")
+  contactPhone       String   @default("+212 524 000 000")
+  address            String   @default("Marrakech, Morocco")
+  cancellationPolicy String   @default("Flexible")
+  socialFacebook     String?
+  socialInstagram    String?
+  updatedAt          DateTime @updatedAt
+}

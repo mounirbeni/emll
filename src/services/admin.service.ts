@@ -311,10 +311,65 @@ export class AdminService {
             return [];
         }
     }
-    async updateSettings(data: unknown): Promise<void> {
-        // Placeholder: Implementation pending new Settings model
-        // Validates that the operation is allowed but does not persist data yet
-        return;
+    async getSettings() {
+        // Dynamic import to avoid circular dependency issues during build if convenient, 
+        // though standard import at top is usually fine.
+        const { prisma } = await import('@/lib/prisma');
+
+        let settings = await prisma.settings.findFirst();
+
+        if (!settings) {
+            settings = await prisma.settings.create({
+                data: {
+                    businessName: "Explore Marrakesh",
+                    contactEmail: "contact@exploremarrakesh.com",
+                    contactPhone: "+212 524 000 000",
+                    address: "Marrakech, Morocco",
+                    cancellationPolicy: "Flexible",
+                }
+            });
+        }
+
+        return settings;
+    }
+
+    async updateSettings(data: any): Promise<void> {
+        const { prisma } = await import('@/lib/prisma');
+
+        // Ensure a settings record exists
+        let settings = await prisma.settings.findFirst();
+
+        if (!settings) {
+            settings = await prisma.settings.create({
+                data: {
+                    ...data
+                }
+            });
+        } else {
+            await prisma.settings.update({
+                where: { id: settings.id },
+                data
+            });
+        }
+    }
+    async getSystemHealth() {
+        try {
+            const { prisma } = await import('@/lib/prisma');
+            // Check database connection by querying a simple record
+            await prisma.user.findFirst({ select: { id: true } });
+            return {
+                database: 'operational',
+                server: 'operational',
+                cache: 'operational' // Assuming ISR is working if we are valid
+            };
+        } catch (error) {
+            console.error("Health check failed:", error);
+            return {
+                database: 'down',
+                server: 'degraded',
+                cache: 'unknown'
+            };
+        }
     }
 }
 
