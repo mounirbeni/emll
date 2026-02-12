@@ -12,11 +12,15 @@ interface DashboardHomeProps {
         name: string | null;
         email: string | null;
         image?: string | null;
+        id?: string;
     };
     stats: {
-        totalBookings: number;
-        completedBookings: number;
-        totalSpent: number;
+        total: number;
+        upcoming: number;
+        completed: number;
+        cancelled: number;
+        pending: number;
+        totalRevenue: number;
     };
     nextBooking: any;
 }
@@ -57,7 +61,7 @@ export function DashboardHome({ user, stats, nextBooking }: DashboardHomeProps) 
                         <div className="p-3 bg-orange-50 rounded-2xl group-hover:scale-110 transition-transform text-primary">
                             <Calendar className="w-6 h-6" />
                         </div>
-                        <span className="text-3xl font-black text-gray-900">{stats.totalBookings}</span>
+                        <span className="text-3xl font-black text-gray-900">{stats.total}</span>
                     </div>
                     <div className="text-sm font-medium text-gray-400">Total Bookings</div>
                 </div>
@@ -68,7 +72,7 @@ export function DashboardHome({ user, stats, nextBooking }: DashboardHomeProps) 
                             <Wallet className="w-6 h-6" />
                         </div>
                         <span className="text-2xl font-black text-gray-900">
-                            €{stats.totalSpent}
+                            €{stats.totalRevenue}
                         </span>
                     </div>
                     <div className="text-sm font-medium text-gray-400">Total Spent</div>
@@ -79,7 +83,7 @@ export function DashboardHome({ user, stats, nextBooking }: DashboardHomeProps) 
                         <div className="p-3 bg-green-50 rounded-2xl group-hover:scale-110 transition-transform text-green-500">
                             <MapPin className="w-6 h-6" />
                         </div>
-                        <span className="text-3xl font-black text-gray-900">{stats.completedBookings}</span>
+                        <span className="text-3xl font-black text-gray-900">{stats.completed}</span>
                     </div>
                     <div className="text-sm font-medium text-gray-400">Places Visited</div>
                 </div>

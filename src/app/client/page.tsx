@@ -43,6 +43,7 @@ export default async function ClientDashboard() {
         <DashboardHome
             user={{
                 name: session.user.name ?? null,
+                email: session.user.email ?? null,
                 id: session.user.id
             }}
             stats={stats}
