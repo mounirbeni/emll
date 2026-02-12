@@ -74,8 +74,14 @@ export function PayPalButton({
               onError(err instanceof Error ? err.message : 'Payment failed');
             }
           }}
-          onError={(err) => {
-            onError(err?.message || 'PayPal error');
+          onError={(err: unknown) => {
+            const message =
+              err instanceof Error
+                ? err.message
+                : typeof err === 'object' && err !== null && 'message' in err
+                  ? String((err as { message?: unknown }).message)
+                  : 'PayPal error';
+            onError(String(message));
           }}
           onCancel={() => {
             onError('Payment was cancelled.');
