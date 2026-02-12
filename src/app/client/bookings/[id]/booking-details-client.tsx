@@ -31,7 +31,6 @@ import {
     XCircle,
     AlertTriangle,
 } from 'lucide-react';
-import Link from 'next/link';
 import { PaymentStatusBadge } from '@/components/payment/PaymentStatusBadge';
 import type { PaymentStatusType } from '@/components/payment/PaymentStatusBadge';
 import { toast } from 'sonner';
