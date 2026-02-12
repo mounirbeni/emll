@@ -9,18 +9,11 @@ import { env } from "@/lib/env"
 import { comparePassword } from "@/lib/auth"
 import { UserRole } from "@prisma/client"
 
+import { authConfig } from "./auth.config"
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
+    ...authConfig,
     adapter: PrismaAdapter(prisma) as Adapter,
-    session: {
-        strategy: "jwt",
-        maxAge: 30 * 24 * 60 * 60, // 30 days
-        updateAge: 24 * 60 * 60, // Update age every 24 hours
-    },
-    pages: {
-        signIn: '/login',
-        signOut: '/login',
-        error: '/login',
-    },
     providers: [
         // Only add Google provider if credentials are provided
         ...(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET
@@ -69,7 +62,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             }
         })
     ],
+    // Extended callbacks that include DB logic
     callbacks: {
+        ...authConfig.callbacks,
         async jwt({ token, user, trigger, session }) {
             // Initial sign in
             if (user) {

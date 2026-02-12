@@ -2,10 +2,9 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { ImageIcon, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
-import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { cn } from '@/lib/utils';
 
 interface ExperienceGalleryProps {
     images: string[];
@@ -13,127 +12,211 @@ interface ExperienceGalleryProps {
 }
 
 export default function ExperienceGallery({ images, title }: ExperienceGalleryProps) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-
+    // Filter out placeholder images for display
     const validImages = images.filter(img => img && img !== 'IMAGE_PLACEHOLDER_PENDING_UPLOAD');
 
-    // Ensure we have at least 1 image
-    if (validImages.length === 0) return null;
+    // If no valid images, use a placeholder
+    const displayImages = validImages.length > 0 ? validImages : ['/images/placeholder-experience.svg'];
 
-    // Use validImages for display
-    const displaySrc = (index: number) => validImages[index] || validImages[0]; // Fallback to first regular image if index missing (redundancy)
+    const openModal = (index: number) => {
+        setCurrentImageIndex(index);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const goToPrevious = () => {
+        setCurrentImageIndex((prev) => (prev === 0 ? displayImages.length - 1 : prev - 1));
+    };
+
+    const goToNext = () => {
+        setCurrentImageIndex((prev) => (prev === displayImages.length - 1 ? 0 : prev + 1));
+    };
+
+    // Keyboard navigation
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'ArrowLeft') goToPrevious();
+        if (e.key === 'ArrowRight') goToNext();
+        if (e.key === 'Escape') closeModal();
+    };
 
     return (
-        <section className="hidden md:block">
-            <div className="container mx-auto px-4">
-                <div className="grid h-[400px] grid-cols-4 gap-2 overflow-hidden rounded-2xl lg:h-[500px]">
-                    {/* Main Large Image */}
-                    <div className="relative col-span-2 row-span-2 cursor-pointer transition-opacity hover:opacity-95" onClick={() => setIsOpen(true)}>
+        <>
+            {/* Desktop Gallery Grid */}
+            <div className="hidden md:block container mx-auto px-4">
+                <div className="grid grid-cols-4 gap-2 h-[500px]">
+                    {/* Main large image */}
+                    <div
+                        className="col-span-2 row-span-2 relative overflow-hidden rounded-2xl cursor-pointer group"
+                        onClick={() => openModal(0)}
+                    >
                         <Image
-                            src={displaySrc(0)}
-                            alt={`${title} - Main View`}
+                            src={displayImages[0]}
+                            alt={`${title} - Main view`}
                             fill
-                            className="object-cover"
-                            sizes="(min-width: 1024px) 50vw, 100vw"
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
                             priority
                         />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                     </div>
 
-                    {/* Secondary Images Column */}
-                    <div className="col-span-1 row-span-2 grid grid-rows-2 gap-2">
-                        {validImages[1] && (
-                            <div className="relative h-full cursor-pointer transition-opacity hover:opacity-95" onClick={() => setIsOpen(true)}>
-                                <Image
-                                    src={displaySrc(1)}
-                                    alt={`${title} - Detail 1`}
-                                    fill
-                                    className="object-cover"
-                                    sizes="(min-width: 1024px) 25vw, 50vw"
-                                />
-                            </div>
-                        )}
-                        {validImages[2] && (
-                            <div className="relative h-full cursor-pointer transition-opacity hover:opacity-95" onClick={() => setIsOpen(true)}>
-                                <Image
-                                    src={displaySrc(2)}
-                                    alt={`${title} - Detail 2`}
-                                    fill
-                                    className="object-cover"
-                                    sizes="(min-width: 1024px) 25vw, 50vw"
-                                />
-                            </div>
-                        )}
-                    </div>
+                    {/* Smaller images grid */}
+                    {displayImages.slice(1, 5).map((image, index) => (
+                        <div
+                            key={index}
+                            className="relative overflow-hidden rounded-2xl cursor-pointer group"
+                            onClick={() => openModal(index + 1)}
+                        >
+                            <Image
+                                src={image}
+                                alt={`${title} - View ${index + 2}`}
+                                fill
+                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
 
-                    {/* Tertiary Images Column */}
-                    <div className="col-span-1 row-span-2 grid grid-rows-2 gap-2">
-                        {validImages[3] && (
-                            <div className="relative h-full cursor-pointer transition-opacity hover:opacity-95" onClick={() => setIsOpen(true)}>
-                                <Image
-                                    src={displaySrc(3)}
-                                    alt={`${title} - Detail 3`}
-                                    fill
-                                    className="object-cover"
-                                    sizes="(min-width: 1024px) 25vw, 50vw"
-                                />
-                            </div>
-                        )}
-                        {/* 5th Image with "View All" Overlay */}
-                        {validImages[4] && (
-                            <div className="relative h-full cursor-pointer transition-opacity hover:opacity-95" onClick={() => setIsOpen(true)}>
-                                <Image
-                                    src={displaySrc(4)}
-                                    alt={`${title} - Detail 4`}
-                                    fill
-                                    className="object-cover"
-                                    sizes="(min-width: 1024px) 25vw, 50vw"
-                                />
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors">
-                                    <Button variant="secondary" size="sm" className="gap-2 font-bold shadow-lg">
-                                        <ImageIcon className="h-4 w-4" />
-                                        Show all {validImages.length} photos
-                                    </Button>
+                            {/* Show all photos button on last image */}
+                            {index === 3 && displayImages.length > 5 && (
+                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                                    <span className="text-white font-bold text-lg">
+                                        +{displayImages.length - 5} more
+                                    </span>
                                 </div>
-                            </div>
-                        )}
-                    </div>
+                            )}
+                        </div>
+                    ))}
                 </div>
             </div>
 
-            {/* Lightbox / Full Screen Gallery */}
-            <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogContent className="max-w-[95vw] h-[90vh] p-0 bg-black/95 border-none">
-                    <VisuallyHidden.Root>
-                        <DialogTitle>Gallery - {title}</DialogTitle>
-                    </VisuallyHidden.Root>
+            {/* Mobile Carousel */}
+            <div className="md:hidden relative h-[300px] w-full">
+                <div className="relative h-full overflow-hidden">
+                    <Image
+                        src={displayImages[currentImageIndex]}
+                        alt={`${title} - View ${currentImageIndex + 1}`}
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                </div>
 
-                    <div className="relative h-full w-full overflow-y-auto p-4 md:p-10">
-                        <Button
-                            variant="secondary"
-                            size="icon"
-                            className="fixed right-4 top-4 z-50 rounded-full bg-white/10 text-white hover:bg-white/20"
-                            onClick={() => setIsOpen(false)}
+                {/* Navigation arrows for mobile */}
+                {displayImages.length > 1 && (
+                    <>
+                        <button
+                            onClick={goToPrevious}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg hover:bg-white transition-colors"
+                            aria-label="Previous image"
                         >
-                            <X className="h-6 w-6" />
-                        </Button>
+                            <ChevronLeft className="w-6 h-6 text-gray-900" />
+                        </button>
+                        <button
+                            onClick={goToNext}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg hover:bg-white transition-colors"
+                            aria-label="Next image"
+                        >
+                            <ChevronRight className="w-6 h-6 text-gray-900" />
+                        </button>
+                    </>
+                )}
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-20">
-                            {validImages.map((img, idx) => (
-                                <div key={idx} className="relative aspect-[3/2] w-full overflow-hidden rounded-lg bg-gray-900">
+                {/* Image counter */}
+                <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">
+                    {currentImageIndex + 1} / {displayImages.length}
+                </div>
+
+                {/* View all button */}
+                <button
+                    onClick={() => openModal(currentImageIndex)}
+                    className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-bold text-gray-900 hover:bg-white transition-colors"
+                >
+                    View all photos
+                </button>
+            </div>
+
+            {/* Full-Screen Modal */}
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <DialogContent
+                    className="max-w-[95vw] max-h-[95vh] w-full h-full p-0 bg-black/95 border-none"
+                    onKeyDown={handleKeyDown}
+                >
+                    <div className="relative w-full h-full flex items-center justify-center">
+                        {/* Close button */}
+                        <button
+                            onClick={closeModal}
+                            className="absolute top-4 right-4 z-50 bg-white/10 backdrop-blur-sm p-2 rounded-full hover:bg-white/20 transition-colors"
+                            aria-label="Close gallery"
+                        >
+                            <X className="w-6 h-6 text-white" />
+                        </button>
+
+                        {/* Main image */}
+                        <div className="relative w-full h-full flex items-center justify-center p-16">
+                            <Image
+                                src={displayImages[currentImageIndex]}
+                                alt={`${title} - View ${currentImageIndex + 1}`}
+                                fill
+                                className="object-contain"
+                                priority
+                            />
+                        </div>
+
+                        {/* Navigation arrows */}
+                        {displayImages.length > 1 && (
+                            <>
+                                <button
+                                    onClick={goToPrevious}
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-sm p-3 rounded-full hover:bg-white/20 transition-colors z-40"
+                                    aria-label="Previous image"
+                                >
+                                    <ChevronLeft className="w-8 h-8 text-white" />
+                                </button>
+                                <button
+                                    onClick={goToNext}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-sm p-3 rounded-full hover:bg-white/20 transition-colors z-40"
+                                    aria-label="Next image"
+                                >
+                                    <ChevronRight className="w-8 h-8 text-white" />
+                                </button>
+                            </>
+                        )}
+
+                        {/* Image counter */}
+                        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium z-40">
+                            {currentImageIndex + 1} / {displayImages.length}
+                        </div>
+
+                        {/* Thumbnail strip */}
+                        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2 overflow-x-auto max-w-[90vw] px-4 z-40 scrollbar-hide">
+                            {displayImages.map((image, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setCurrentImageIndex(index)}
+                                    className={cn(
+                                        "relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all",
+                                        currentImageIndex === index
+                                            ? "border-white scale-110"
+                                            : "border-transparent opacity-60 hover:opacity-100"
+                                    )}
+                                >
                                     <Image
-                                        src={img}
-                                        alt={`Gallery image ${idx + 1}`}
+                                        src={image}
+                                        alt={`Thumbnail ${index + 1}`}
                                         fill
                                         className="object-cover"
-                                        sizes="(min-width: 768px) 50vw, (min-width: 1024px) 33vw, 100vw"
                                     />
-                                </div>
+                                </button>
                             ))}
                         </div>
                     </div>
                 </DialogContent>
             </Dialog>
-        </section>
+        </>
     );
 }

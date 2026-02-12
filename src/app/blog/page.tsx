@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import { useState, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { format } from "date-fns";
 
 const CATEGORIES = ["All", "Travel Guide", "Food & Drink", "Tips", "Excursions"];
 
@@ -84,7 +85,7 @@ export default function BlogPage() {
                                 <div className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-xl shadow-gray-200/50 flex flex-col md:flex-row group cursor-pointer hover:border-primary/20 transition-all">
                                     <div className="md:w-1/2 relative min-h-[300px] md:min-h-[400px]">
                                         <Image
-                                            src={featuredPost.image}
+                                            src={featuredPost.image.startsWith('http') || featuredPost.image.startsWith('/') ? featuredPost.image : "/images/placeholder-blog.svg"}
                                             alt={featuredPost.title}
                                             fill
                                             className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -108,7 +109,7 @@ export default function BlogPage() {
                                             </div>
                                             <div className="text-sm">
                                                 <p className="font-bold text-gray-900">{featuredPost.author}</p>
-                                                <p className="text-gray-400">{featuredPost.readTime} • {new Date(featuredPost.publishedAt).toLocaleDateString()}</p>
+                                                <p className="text-gray-400">{featuredPost.readTime} • {format(new Date(featuredPost.publishedAt), "MMM d, yyyy")}</p>
                                             </div>
                                         </div>
                                     </div>

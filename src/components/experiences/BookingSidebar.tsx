@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Calendar as CalendarIcon, Check, User, Mail, Phone, Loader2, CheckCircle, MessageCircle, X } from 'lucide-react';
+import { Calendar as CalendarIcon, Check, User, Mail, Phone, Loader2, CheckCircle, MessageCircle, X, CreditCard, Wallet, Banknote } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -36,6 +36,7 @@ export default function BookingSidebar({
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [specialRequests, setSpecialRequests] = useState('');
+    const [paymentPreference, setPaymentPreference] = useState<'arrival' | 'deposit' | 'online'>('arrival');
     const [bookingState, setBookingState] = useState<BookingState>('form');
     const [bookingResult, setBookingResult] = useState<BookingResult | null>(null);
     const [error, setError] = useState<string | null>(null);
@@ -82,7 +83,8 @@ export default function BookingSidebar({
                     userName: name,
                     userEmail: email,
                     userPhone: phone,
-                    notes: specialRequests || undefined
+                    notes: specialRequests || undefined,
+                    paymentPreference: paymentPreference
                 })
             });
 
@@ -339,6 +341,75 @@ export default function BookingSidebar({
                             rows={2}
                             className="w-full rounded-xl border border-gray-200 py-3 px-4 text-sm font-medium transition-colors focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 resize-none"
                         />
+                    </div>
+                </div>
+
+                {/* Payment Preference */}
+                <div className="space-y-3 border-t border-gray-100 pt-5">
+                    <h4 className="text-sm font-bold text-gray-900">Payment Preference</h4>
+                    <div className="space-y-2">
+                        <label className={cn(
+                            "flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all",
+                            paymentPreference === 'arrival'
+                                ? "border-orange-500 bg-orange-50"
+                                : "border-gray-200 hover:border-orange-300"
+                        )}>
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="arrival"
+                                checked={paymentPreference === 'arrival'}
+                                onChange={() => setPaymentPreference('arrival')}
+                                className="w-4 h-4 text-orange-500"
+                            />
+                            <Wallet className="w-5 h-5 text-gray-600" />
+                            <div className="flex-1">
+                                <span className="text-sm font-medium text-gray-900">Pay on arrival</span>
+                                <p className="text-xs text-gray-500">Cash or card at meeting point</p>
+                            </div>
+                        </label>
+
+                        <label className={cn(
+                            "flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all",
+                            paymentPreference === 'deposit'
+                                ? "border-orange-500 bg-orange-50"
+                                : "border-gray-200 hover:border-orange-300"
+                        )}>
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="deposit"
+                                checked={paymentPreference === 'deposit'}
+                                onChange={() => setPaymentPreference('deposit')}
+                                className="w-4 h-4 text-orange-500"
+                            />
+                            <Banknote className="w-5 h-5 text-gray-600" />
+                            <div className="flex-1">
+                                <span className="text-sm font-medium text-gray-900">Pay deposit now</span>
+                                <p className="text-xs text-gray-500">30% now, rest on arrival</p>
+                            </div>
+                        </label>
+
+                        <label className={cn(
+                            "flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all",
+                            paymentPreference === 'online'
+                                ? "border-orange-500 bg-orange-50"
+                                : "border-gray-200 hover:border-orange-300"
+                        )}>
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="online"
+                                checked={paymentPreference === 'online'}
+                                onChange={() => setPaymentPreference('online')}
+                                className="w-4 h-4 text-orange-500"
+                            />
+                            <CreditCard className="w-5 h-5 text-gray-600" />
+                            <div className="flex-1">
+                                <span className="text-sm font-medium text-gray-900">Pay online now</span>
+                                <p className="text-xs text-gray-500">Secure online payment</p>
+                            </div>
+                        </label>
                     </div>
                 </div>
 

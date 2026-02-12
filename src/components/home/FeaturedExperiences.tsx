@@ -10,8 +10,8 @@ const experiences = [
         title: "Marrakech Medina Guided Walking Tour",
         image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
         price: 45,
-        rating: 4.9,
-        reviews: 128,
+        rating: 0,
+        reviews: 0,
         duration: "4 hours",
         category: "City Tours"
     },
@@ -20,8 +20,8 @@ const experiences = [
         title: "Agafay Desert Sunset & Dinner",
         image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
         price: 85,
-        rating: 4.8,
-        reviews: 94,
+        rating: 0,
+        reviews: 0,
         duration: "6 hours",
         category: "Desert Trips"
     },
@@ -30,8 +30,8 @@ const experiences = [
         title: "Atlas Mountains Day Trip",
         image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
         price: 60,
-        rating: 4.7,
-        reviews: 210,
+        rating: 0,
+        reviews: 0,
         duration: "8 hours",
         category: "Adventures"
     },
@@ -40,8 +40,8 @@ const experiences = [
         title: "Traditional Moroccan Cooking Class",
         image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
         price: 55,
-        rating: 5.0,
-        reviews: 75,
+        rating: 0,
+        reviews: 0,
         duration: "3 hours",
         category: "Food & Culture"
     }

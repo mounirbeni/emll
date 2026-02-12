@@ -1,3 +1,5 @@
+'use client';
+
 import { Check, X } from 'lucide-react';
 
 interface ExperienceInclusionsProps {
@@ -6,40 +8,54 @@ interface ExperienceInclusionsProps {
 }
 
 export default function ExperienceInclusions({ included, notIncluded }: ExperienceInclusionsProps) {
+    const hasIncluded = included && included.length > 0;
+    const hasNotIncluded = notIncluded && notIncluded.length > 0;
+
+    if (!hasIncluded && !hasNotIncluded) {
+        return null;
+    }
+
     return (
-        <section className="mb-10 rounded-2xl border border-gray-100 bg-white p-6 md:p-8">
-            <h2 className="mb-6 text-2xl font-bold text-gray-900">What&apos;s Included</h2>
-            <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
-
-                {/* Included */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* What's Included */}
+            {hasIncluded && (
                 <div>
-                    <div className="space-y-4">
-                        {included.map((item, idx) => (
-                            <div key={idx} className="flex items-start gap-3">
-                                <div className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-green-100 text-green-600">
-                                    <Check className="h-3 w-3" />
-                                </div>
-                                <span className="text-gray-700 font-medium">{item}</span>
-                            </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+                            <Check className="w-4 h-4 text-green-600" />
+                        </div>
+                        What's Included
+                    </h3>
+                    <ul className="space-y-3">
+                        {included.map((item, index) => (
+                            <li key={index} className="flex items-start gap-3 group">
+                                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                                <span className="text-gray-700 leading-relaxed">{item}</span>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </div>
+            )}
 
-                {/* Not Included */}
+            {/* What's Not Included */}
+            {hasNotIncluded && (
                 <div>
-                    <h3 className="mb-4 text-sm font-bold uppercase tracking-wide text-gray-400">Not Included</h3>
-                    <div className="space-y-4">
-                        {notIncluded.map((item, idx) => (
-                            <div key={idx} className="flex items-start gap-3 opacity-75">
-                                <div className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-gray-100 text-gray-400">
-                                    <X className="h-3 w-3" />
-                                </div>
-                                <span className="text-gray-500">{item}</span>
-                            </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
+                            <X className="w-4 h-4 text-red-600" />
+                        </div>
+                        What's Not Included
+                    </h3>
+                    <ul className="space-y-3">
+                        {notIncluded.map((item, index) => (
+                            <li key={index} className="flex items-start gap-3 group">
+                                <X className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                                <span className="text-gray-700 leading-relaxed">{item}</span>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </div>
-            </div>
-        </section>
+            )}
+        </div>
     );
 }

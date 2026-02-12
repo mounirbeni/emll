@@ -1,8 +1,11 @@
-import { auth } from "@/auth"
+import NextAuth from "next-auth"
+import { authConfig } from "./auth.config"
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { getSecurityHeaders } from "@/lib/middleware/security-headers"
 import { rateLimit } from "@/lib/rate-limit"
+
+const { auth } = NextAuth(authConfig)
 
 // Initialize rate limiter (100 requests per minute per IP)
 const limiter = rateLimit({

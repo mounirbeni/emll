@@ -1,5 +1,3 @@
-"use client";
-
 import { BLOG_POSTS } from "@/lib/data/blog-data";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -9,13 +7,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 interface BlogPostPageProps {
-    params: {
+    params: Promise<{
         slug: string;
-    }
+    }>;
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-    const post = BLOG_POSTS.find(p => p.slug === params.slug);
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+    const { slug } = await params;
+    const post = BLOG_POSTS.find(p => p.slug === slug);
 
     if (!post) {
         return notFound();

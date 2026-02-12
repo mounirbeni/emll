@@ -10,29 +10,29 @@ datasource db {
 
 model Booking {
   id              String        @id @default(cuid())
-  experienceId    String
-  experience      Experience    @relation(fields: [experienceId], references: [id])
-  userId          String?
-  user            User?         @relation(fields: [userId], references: [id])
-  userName        String
-  userEmail       String
-  userPhone       String
-  date            DateTime
-  numberOfPeople  Int
-  totalPrice      Float
-  status          BookingStatus @default(PENDING)
-  paymentStatus   PaymentStatus @default(UNPAID)
-  notes           String?
-  paymentIntentId String?
-  pickupLocation  String?
-  specialRequests String?
-  dietary         String?
-  language        String?
-  flightNumber    String?
-  payments        Payment[]
-  review          Review?
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
+  date            DateTime
+  totalPrice      Float
+  status          BookingStatus @default(PENDING)
+  notes           String?
+  experienceId    String
+  numberOfPeople  Int
+  userEmail       String
+  userName        String
+  userPhone       String
+  dietary         String?
+  flightNumber    String?
+  language        String?
+  paymentIntentId String?
+  paymentStatus   PaymentStatus @default(UNPAID)
+  pickupLocation  String?
+  specialRequests String?
+  userId          String?
+  experience      Experience    @relation(fields: [experienceId], references: [id])
+  user            User?         @relation(fields: [userId], references: [id])
+  payments        Payment[]
+  review          Review?
 }
 
 model Payment {
@@ -180,15 +180,6 @@ model AdminNotification {
   @@index([createdAt])
 }
 
-enum AdminNotificationType {
-  BOOKING
-  CANCELLATION
-  REVIEW
-  MESSAGE
-  SYSTEM
-  ALERT
-}
-
 model SupportRequest {
   id        String   @id @default(uuid())
   name      String
@@ -224,6 +215,97 @@ model BlogPost {
 
   @@index([slug])
   @@index([authorId])
+}
+
+model Experience {
+  id                 String    @id @default(cuid())
+  title              String
+  slug               String    @unique
+  category           String
+  location           String
+  duration           String
+  price              Int
+  currency           String    @default("EUR")
+  shortDescription   String
+  fullDescription    String
+  highlights         String[]
+  included           String[]
+  notIncluded        String[]
+  meetingPoint       String
+  pickupAvailable    Boolean   @default(true)
+  gallery            String[]
+  faqs               Json      @default("[]")
+  enabled            Boolean   @default(true)
+  featured           Boolean   @default(false)
+  popularity         Int       @default(0)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  imageConcepts      Json      @default("[]")
+  importantInfo      Json      @default("[]")
+  itinerary          Json      @default("[]")
+  relatedExperiences Json      @default("[]")
+  avgRating          Float     @default(0)
+  reviewCount        Int       @default(0)
+  bookings           Booking[]
+  reviews            Review[]
+
+  @@index([category])
+  @@index([enabled])
+  @@index([slug])
+}
+
+model Review {
+  id           String     @id @default(cuid())
+  rating       Int
+  comment      String
+  userId       String
+  experienceId String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  bookingId    String     @unique
+  images       String[]   @default([])
+  title        String?
+  verified     Boolean    @default(true)
+  booking      Booking    @relation(fields: [bookingId], references: [id])
+  experience   Experience @relation(fields: [experienceId], references: [id])
+  user         User       @relation(fields: [userId], references: [id])
+
+  @@index([experienceId])
+  @@index([userId])
+}
+
+model EmailLog {
+  id       String   @id @default(uuid())
+  userId   String?
+  type     String
+  status   String
+  sentAt   DateTime @default(now())
+  metadata Json?
+
+  @@index([userId])
+  @@index([type])
+  @@index([sentAt])
+}
+
+model Settings {
+  id                 String   @id @default(uuid())
+  businessName       String   @default("Explore Marrakesh")
+  contactEmail       String   @default("contact@exploremarrakesh.com")
+  contactPhone       String   @default("+212 524 000 000")
+  address            String   @default("Marrakech, Morocco")
+  cancellationPolicy String   @default("Flexible")
+  socialFacebook     String?
+  socialInstagram    String?
+  updatedAt          DateTime @updatedAt
+}
+
+enum AdminNotificationType {
+  BOOKING
+  CANCELLATION
+  REVIEW
+  MESSAGE
+  SYSTEM
+  ALERT
 }
 
 enum UserRole {
@@ -277,87 +359,4 @@ enum NotificationType {
   ERROR
   BOOKING
   REVIEW
-}
-
-model Experience {
-  id                 String   @id @default(cuid())
-  title              String
-  slug               String   @unique
-  category           String
-  location           String
-  duration           String
-  price              Int
-  currency           String   @default("EUR")
-  shortDescription   String
-  fullDescription    String
-  highlights         String[]
-  included           String[]
-  notIncluded        String[]
-  meetingPoint       String
-  pickupAvailable    Boolean  @default(true)
-  gallery            String[]
-  faqs               Json     @default("[]")
-  itinerary          Json     @default("[]")
-  importantInfo      Json     @default("[]")
-  imageConcepts      Json     @default("[]")
-  relatedExperiences Json     @default("[]")
-  enabled            Boolean  @default(true)
-  featured           Boolean  @default(false)
-  popularity         Int      @default(0)
-  avgRating          Float    @default(0)
-  reviewCount        Int      @default(0)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-
-  bookings Booking[]
-  reviews  Review[]
-
-  @@index([category])
-  @@index([enabled])
-  @@index([slug])
-}
-
-model Review {
-  id           String     @id @default(cuid())
-  rating       Int
-  title        String?
-  comment      String
-  images       String[]   @default([])
-  userId       String
-  user         User       @relation(fields: [userId], references: [id])
-  experienceId String
-  experience   Experience @relation(fields: [experienceId], references: [id])
-  bookingId    String     @unique
-  booking      Booking    @relation(fields: [bookingId], references: [id])
-  verified     Boolean    @default(true)
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-
-  @@index([experienceId])
-  @@index([userId])
-}
-
-model EmailLog {
-  id       String   @id @default(uuid())
-  userId   String?
-  type     String
-  status   String // SENT, FAILED
-  sentAt   DateTime @default(now())
-  metadata Json? // Store extra info like error message or recipient
-
-  @@index([userId])
-  @@index([type])
-  @@index([sentAt])
-}
-
-model Settings {
-  id                 String   @id @default(uuid())
-  businessName       String   @default("Explore Marrakesh")
-  contactEmail       String   @default("contact@exploremarrakesh.com")
-  contactPhone       String   @default("+212 524 000 000")
-  address            String   @default("Marrakech, Morocco")
-  cancellationPolicy String   @default("Flexible")
-  socialFacebook     String?
-  socialInstagram    String?
-  updatedAt          DateTime @updatedAt
 }
