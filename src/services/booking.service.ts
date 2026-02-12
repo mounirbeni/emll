@@ -68,18 +68,21 @@ export class BookingService {
 
     /**
      * Get booking by ID
+     * ownershipId: optional email or userId to verify ownership
      */
-    async getBookingById(id: string, userEmail?: string): Promise<DetailedBooking> {
+    async getBookingById(id: string, ownershipId?: string): Promise<DetailedBooking> {
         const booking = await bookingRepository.findById(id);
 
         if (!booking) {
             throw new NotFoundError('Booking', id);
         }
 
-        // If userEmail provided, verify ownership
-        // Access userEmail via the flat field on Booking model
-        if (userEmail && booking.userEmail !== userEmail) {
-            throw new NotFoundError('Booking', id);
+        if (ownershipId) {
+            const byEmail = booking.userEmail === ownershipId;
+            const byUserId = (booking as { userId?: string | null }).userId === ownershipId;
+            if (!byEmail && !byUserId) {
+                throw new NotFoundError('Booking', id);
+            }
         }
 
         return booking as unknown as DetailedBooking;

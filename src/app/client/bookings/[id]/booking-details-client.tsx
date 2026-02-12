@@ -31,6 +31,9 @@ import {
     XCircle,
     AlertTriangle,
 } from 'lucide-react';
+import Link from 'next/link';
+import { PaymentStatusBadge } from '@/components/payment/PaymentStatusBadge';
+import type { PaymentStatusType } from '@/components/payment/PaymentStatusBadge';
 import { toast } from 'sonner';
 import { BookingStatus } from '@prisma/client';
 import type { Booking } from '@prisma/client';
@@ -98,33 +101,11 @@ export function BookingDetailsClient({ booking }: BookingDetailsClientProps) {
         }
     };
 
-    const [isPaying, setIsPaying] = useState(false);
-    const handlePayment = async () => {
-        setIsPaying(true);
-        try {
-            const res = await fetch(`/api/bookings/${booking.id}/payment`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    amount: Number(booking.totalPrice),
-                    currency: 'EUR',
-                    method: 'CREDIT_CARD'
-                })
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) throw new Error(data.error || 'Payment failed');
-
-            toast.success('Payment successful!');
-            router.refresh();
-        } catch (error) {
-            console.error('Payment Error:', error);
-            toast.error('Payment failed. Please try again.');
-        } finally {
-            setIsPaying(false);
-        }
-    };
+    const needsPayment =
+        booking.paymentStatus !== 'PAID' &&
+        booking.paymentStatus !== 'CASH_ON_ARRIVAL' &&
+        booking.paymentStatus !== 'PENDING_VERIFICATION' &&
+        booking.status !== 'CANCELLED';
 
     return (
         <div className="space-y-6 animate-fade-in pb-20">
@@ -287,26 +268,17 @@ export function BookingDetailsClient({ booking }: BookingDetailsClientProps) {
                             </div>
                             <div className="flex justify-between items-center px-3">
                                 <span className="text-sm text-gray-500">Status</span>
-                                <span className={`font-bold text-sm ${booking.paymentStatus === 'PAID' ? 'text-green-600' : 'text-amber-600'}`}>
-                                    {booking.paymentStatus}
-                                </span>
+                                <PaymentStatusBadge status={booking.paymentStatus as PaymentStatusType} />
                             </div>
 
-                            {booking.paymentStatus === 'UNPAID' && booking.status !== 'CANCELLED' && (
-                                <Button
-                                    onClick={handlePayment}
-                                    disabled={isPaying}
-                                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-12 rounded-xl shadow-lg shadow-green-200 mt-2"
-                                >
-                                    {isPaying ? (
-                                        <>
-                                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                            Processing...
-                                        </>
-                                    ) : (
-                                        'Pay Now'
-                                    )}
-                                </Button>
+                            {needsPayment && (
+                                <Link href={`/client/bookings/${booking.id}/payment`}>
+                                    <Button
+                                        className="w-full bg-primary hover:bg-orange-600 text-white font-bold h-12 rounded-xl shadow-lg shadow-orange-200 mt-2"
+                                    >
+                                        Pay Now
+                                    </Button>
+                                </Link>
                             )}
                         </div>
                     </CardContent>

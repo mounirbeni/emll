@@ -1,10 +1,10 @@
-
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
-import BookingActions from "@/components/admin/BookingActions"; // We need to create this for interactive buttons
+import BookingActions from "@/components/admin/BookingActions";
 import { ArrowLeft, User, Calendar, Mail, Phone, CreditCard } from "lucide-react";
 import Link from "next/link";
+import { VerifyPaymentButton } from "./VerifyPaymentButton";
 
 export default async function BookingDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
@@ -113,10 +113,20 @@ export default async function BookingDetailPage({ params }: { params: Promise<{ 
                             </div>
                             <div className="border-t border-gray-100 pt-3 flex justify-between font-bold text-lg">
                                 <span>Total Due</span>
-                                <span>€{booking.totalPrice}</span>
+                                <span>€{Number(booking.totalPrice).toFixed(2)}</span>
                             </div>
-                            <div className="pt-2">
-                                <span className="inline-block px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-medium">Pay on Arrival / Card</span>
+                            <div className="pt-2 flex flex-wrap items-center gap-2">
+                                <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
+                                    booking.paymentStatus === 'PAID' ? 'bg-green-100 text-green-700' :
+                                    booking.paymentStatus === 'PENDING_VERIFICATION' ? 'bg-amber-100 text-amber-700' :
+                                    booking.paymentStatus === 'CASH_ON_ARRIVAL' ? 'bg-primary/10 text-primary' :
+                                    'bg-gray-100 text-gray-600'
+                                }`}>
+                                    {booking.paymentStatus}
+                                </span>
+                                {booking.paymentStatus === 'PENDING_VERIFICATION' && (
+                                    <VerifyPaymentButton bookingId={booking.id} />
+                                )}
                             </div>
                         </div>
                     </div>

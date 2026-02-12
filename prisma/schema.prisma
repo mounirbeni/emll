@@ -36,14 +36,16 @@ model Booking {
 }
 
 model Payment {
-  id        String            @id @default(uuid())
-  amount    Decimal
-  currency  PaymentCurrency   @default(EUR)
-  status    TransactionStatus @default(PENDING)
-  method    PaymentMethod?
-  createdAt DateTime          @default(now())
-  bookingId String
-  booking   Booking           @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  id            String            @id @default(uuid())
+  amount        Decimal
+  currency      PaymentCurrency   @default(EUR)
+  status        TransactionStatus @default(PENDING)
+  method        PaymentMethod?
+  transactionId String? // PayPal transaction ID
+  proofImageUrl String? // Bank transfer proof image URL
+  createdAt     DateTime          @default(now())
+  bookingId     String
+  booking       Booking           @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 
   @@index([bookingId])
   @@index([status])
@@ -323,7 +325,10 @@ enum BookingStatus {
 
 enum PaymentStatus {
   UNPAID
+  PENDING
   PAID
+  PENDING_VERIFICATION
+  CASH_ON_ARRIVAL
   REFUNDED
 }
 
@@ -336,6 +341,7 @@ enum TransactionStatus {
 enum PaymentMethod {
   CREDIT_CARD
   PAYPAL
+  BANK_TRANSFER
   CASH
 }
 

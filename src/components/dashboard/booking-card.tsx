@@ -2,7 +2,8 @@ import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Clock, Users, ArrowRight } from 'lucide-react';
-import { Booking } from '@prisma/client';
+import { PaymentStatusBadge } from '@/components/payment/PaymentStatusBadge';
+import type { PaymentStatusType } from '@/components/payment/PaymentStatusBadge';
 
 interface BookingCardProps {
     booking: any;
@@ -58,6 +59,9 @@ export function BookingCard({ booking }: BookingCardProps) {
                             <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold border ${badgeStyle}`}>
                                 {booking.status}
                             </span>
+                        </div>
+                        <div className="flex items-center gap-2 mt-2">
+                            <PaymentStatusBadge status={((booking as { paymentStatus?: string }).paymentStatus ?? 'UNPAID') as PaymentStatusType} showIcon={false} />
                         </div>
 
                         <div className="flex items-center justify-between pt-4 border-t border-gray-50">

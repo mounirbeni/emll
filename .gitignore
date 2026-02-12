@@ -31,3 +31,6 @@ ts-debug.log*
 .vercel
 
 /src/generated/prisma
+
+# user uploads (payment proof images)
+/public/uploads
