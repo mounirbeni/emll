@@ -366,3 +366,20 @@ enum NotificationType {
   BOOKING
   REVIEW
 }
+
+model Reservation {
+  id              String   @id @default(cuid())
+  fullName        String
+  email           String
+  phone           String
+  experienceId    String
+  numberOfPersons Int
+  date            String
+  time            String
+  notes           String?
+  basePrice       Int
+  finalPrice      Int?
+  paymentMethod   String?
+  paymentStatus   String   @default("NOT_PAID")
+  createdAt       DateTime @default(now())
+}

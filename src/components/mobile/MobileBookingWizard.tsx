@@ -15,8 +15,12 @@ interface MobileBookingWizardProps {
     serviceTitle: string
     servicePrice: number
     serviceId: string
-    onBookingSuccess: () => void
-    user?: any
+    onBookingSuccess: (bookingId?: string) => void
+    user?: {
+        name?: string | null
+        email?: string | null
+        phone?: string | null
+    }
 }
 
 type Step = "date" | "time" | "guests" | "details" | "review"
@@ -91,24 +95,28 @@ export function MobileBookingWizard({
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    serviceId,
+                    experienceId: serviceId, // Fixed prop name mismatch if any, component passed serviceId
                     date: selectedDate,
                     time: selectedTime,
-                    adults,
+                    numberOfPeople: adults + children, // Mapping to API schema
+                    adults, // Keeping detailed fields just in case
                     children,
-                    fullName,
-                    email,
-                    phone,
-                    specialRequests,
-                    totalPrice: servicePrice * (adults + children * 0.5)
+                    userName: fullName,
+                    userEmail: email,
+                    userPhone: phone,
+                    notes: specialRequests,
+                    totalPrice: servicePrice * adults + (servicePrice * 0.5) * children
                 })
             })
 
+            const data = await response.json();
+
             if (response.ok) {
-                onBookingSuccess()
+                // Pass bookingId to parent
+                onBookingSuccess(data.id)
                 onClose()
             } else {
-                throw new Error('Booking failed')
+                throw new Error(data.error || 'Booking failed')
             }
         } catch (error) {
             console.error(error)

@@ -2,8 +2,9 @@
 
 import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Building2, Upload, Loader2, CheckCircle, Copy } from 'lucide-react';
+import { Building2, Upload, Loader2, CheckCircle, Copy, X } from 'lucide-react';
 import { toast } from 'sonner';
+import Image from 'next/image';
 
 const BANK_DETAILS = {
   bankName: 'Explore Marrakesh Business',
@@ -25,6 +26,8 @@ interface BankTransferFormProps {
 export function BankTransferForm(props: BankTransferFormProps) {
   const { bookingId, amount, onSuccess, onError, disabled } = props;
   const [uploading, setUploading] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -33,34 +36,62 @@ export function BankTransferForm(props: BankTransferFormProps) {
     toast.success(label + ' copied');
   };
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const ext = file.name.split('.').pop()?.toLowerCase();
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (!selectedFile) return;
+
+    const ext = selectedFile.name.split('.').pop()?.toLowerCase();
     if (!ext || !ALLOWED_EXTENSIONS.includes(ext)) {
       onError('Invalid file type. Please use JPG, JPEG or PNG.');
       return;
     }
+
+    if (selectedFile.size > 5 * 1024 * 1024) {
+      onError('File size too large. Max 5MB.');
+      return;
+    }
+
+    setFile(selectedFile);
+    setPreview(URL.createObjectURL(selectedFile));
+    onError('');
+  };
+
+  const clearFile = () => {
+    setFile(null);
+    setPreview(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  const handeUpload = async () => {
+    if (!file) return;
+
     setUploading(true);
     onError('');
+
     try {
       const formData = new FormData();
-      formData.append('proof', file);
-      const res = await fetch(`/api/bookings/${bookingId}/payment/upload-proof`, {
+      formData.append('file', file);
+      formData.append('bookingId', bookingId);
+      formData.append('type', 'paymentProof');
+
+      const res = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
       });
+
       const data = await res.json();
+
       if (!res.ok) throw new Error(data.error || 'Upload failed');
+
       setSuccess(true);
       toast.success('Proof uploaded. We will verify your payment shortly.');
       onSuccess();
     } catch (err) {
+      console.error(err);
       onError(err instanceof Error ? err.message : 'Upload failed');
       toast.error(err instanceof Error ? err.message : 'Upload failed');
     } finally {
       setUploading(false);
-      if (fileInputRef.current) fileInputRef.current.value = '';
     }
   };
 
@@ -107,12 +138,77 @@ export function BankTransferForm(props: BankTransferFormProps) {
           </div>
         </div>
       </div>
-      <div>
-        <p className="text-sm font-medium text-gray-700 mb-2">Upload proof of payment (JPG or PNG)</p>
-        <input ref={fileInputRef} type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png" onChange={handleFileChange} disabled={disabled || uploading} className="hidden" />
-        <Button type="button" onClick={() => fileInputRef.current?.click()} disabled={disabled || uploading} className="w-full h-12 rounded-xl bg-primary hover:bg-orange-600 text-white font-semibold">
-          {uploading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Uploading...</> : <><Upload className="w-4 h-4 mr-2" /> Choose file</>}
-        </Button>
+
+      <div className="space-y-4">
+        <p className="text-sm font-medium text-gray-700">Upload proof of payment (JPG or PNG)</p>
+
+        {!file ? (
+          <div
+            onClick={() => fileInputRef.current?.click()}
+            className="border-2 border-dashed border-gray-300 rounded-xl p-8 hover:bg-gray-50 transition-colors cursor-pointer text-center group"
+          >
+            <div className="w-12 h-12 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+              <Upload className="w-6 h-6" />
+            </div>
+            <p className="text-sm font-medium text-gray-700 group-hover:text-primary">Click to upload image</p>
+            <p className="text-xs text-gray-500 mt-1">PNG, JPG up to 5MB</p>
+          </div>
+        ) : (
+          <div className="relative rounded-xl overflow-hidden border border-gray-200">
+            {preview && (
+              <div className="aspect-video relative bg-black/5">
+                <Image
+                  src={preview}
+                  alt="Proof preview"
+                  fill
+                  className="object-contain"
+                  unoptimized // Local blob url
+                />
+              </div>
+            )}
+            <div className="p-3 bg-white flex items-center justify-between">
+              <span className="text-sm font-medium text-gray-700 truncate max-w-[200px]">{file.name}</span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={clearFile}
+                disabled={uploading}
+                className="text-red-500 hover:text-red-600 hover:bg-red-50"
+              >
+                <X className="w-4 h-4 mr-1" /> Remove
+              </Button>
+            </div>
+          </div>
+        )}
+
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+          onChange={handleFileSelect}
+          disabled={disabled || uploading}
+          className="hidden"
+        />
+
+        {file && (
+          <Button
+            type="button"
+            onClick={handeUpload}
+            disabled={disabled || uploading}
+            className="w-full h-12 rounded-xl bg-primary hover:bg-orange-600 text-white font-semibold transition-all shadow-lg shadow-primary/20"
+          >
+            {uploading ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Uploading...
+              </>
+            ) : (
+              <>
+                Confirm Payment
+              </>
+            )}
+          </Button>
+        )}
       </div>
     </div>
   );

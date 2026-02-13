@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { MobileBookingWizard } from '@/components/mobile/MobileBookingWizard';
+import { useRouter } from 'next/navigation';
 
 interface MobileBookingBarProps {
     experienceId: string;
@@ -18,6 +19,7 @@ export default function MobileBookingBar({
     currency
 }: MobileBookingBarProps) {
     const [isOpen, setIsOpen] = useState(false);
+    const router = useRouter();
 
     // Mobile bottom bar (hidden on desktop)
     return (
@@ -52,8 +54,9 @@ export default function MobileBookingBar({
                 serviceTitle={experienceTitle}
                 servicePrice={price}
                 serviceId={experienceId}
-                onBookingSuccess={() => {
-                    // Optional: Show success toast or redirect
+                onBookingSuccess={(bookingId) => {
+                    setIsOpen(false);
+                    router.push(`/client/payments?bookingId=${bookingId}`);
                 }}
             />
         </>
