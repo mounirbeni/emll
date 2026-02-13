@@ -7,7 +7,6 @@ export default async function PaymentPage({ params }: { params: Promise<{ id: st
     const { id } = await params;
 
     // Fetch Reservation
-    // @ts-expect-error: Prisma client update pending
     const reservation = await prisma.reservation.findUnique({
         where: { id },
     });
