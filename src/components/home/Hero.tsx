@@ -32,7 +32,7 @@ export function Hero() {
     };
 
     return (
-        <div className="relative h-[80vh] min-h-[600px] w-full flex items-center justify-center">
+        <div className="relative h-[65vh] min-h-[500px] md:h-[80vh] md:min-h-[600px] w-full flex items-center justify-center">
             {/* Background Image with Overlay */}
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
@@ -46,11 +46,11 @@ export function Hero() {
 
             {/* Content */}
             <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center">
-                <h1 className="text-white text-4xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6 drop-shadow-md tracking-tight leading-tight">
+                <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 md:mb-6 drop-shadow-md tracking-tight leading-tight">
                     Discover Marrakech Like a Local
                 </h1>
 
-                <p className="text-white/90 text-lg md:text-xl max-w-2xl mb-8 md:mb-12 font-medium drop-shadow-sm">
+                <p className="text-white/90 text-base md:text-xl max-w-2xl mb-6 md:mb-12 font-medium drop-shadow-sm hidden sm:block">
                     Uncover authentic experiences, verified guides, and hidden gems in the Red City.
                 </p>
 
@@ -63,7 +63,7 @@ export function Hero() {
                             <div className="flex items-center gap-3">
                                 <Search className="w-5 h-5 text-gray-400 shrink-0" />
                                 <div className="flex flex-col items-start w-full">
-                                    <label className="text-xs text-gray-500 font-semibold uppercase tracking-wider">What</label>
+                                    <label className="text-sm text-gray-500 font-semibold uppercase tracking-wider">What</label>
                                     <input
                                         type="text"
                                         value={searchQuery}
@@ -80,7 +80,7 @@ export function Hero() {
                             <div className="flex items-center gap-3">
                                 <List className="w-5 h-5 text-gray-400 shrink-0" />
                                 <div className="flex flex-col items-start w-full">
-                                    <label className="text-xs text-gray-500 font-semibold uppercase tracking-wider">Category</label>
+                                    <label className="text-sm text-gray-500 font-semibold uppercase tracking-wider">Category</label>
                                     <select
                                         value={category}
                                         onChange={(e) => setCategory(e.target.value)}
@@ -99,7 +99,7 @@ export function Hero() {
                             <div className="flex items-center gap-3">
                                 <Calendar className="w-5 h-5 text-gray-400 shrink-0" />
                                 <div className="flex flex-col items-start w-full">
-                                    <label className="text-xs text-gray-500 font-semibold uppercase tracking-wider">When</label>
+                                    <label className="text-sm text-gray-500 font-semibold uppercase tracking-wider">When</label>
                                     <input
                                         type="date"
                                         value={date}

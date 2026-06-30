@@ -151,6 +151,15 @@
     padding-bottom: env(safe-area-inset-bottom);
   }
 
+  /* Aliases used by MobileTopBar, MobileNav, MobileAppContainer */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
   /* Bottom navigation safe area - Updated to 80px + safe area */
   .pb-safe-nav {
     padding-bottom: calc(80px + env(safe-area-inset-bottom));

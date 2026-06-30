@@ -9,7 +9,7 @@ import SkipLink from "@/components/shared/SkipLink"
 
 export function PublicLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname()
-    const isExcluded = pathname?.startsWith('/admin') || pathname?.startsWith('/dashboard')
+    const isExcluded = pathname?.startsWith('/admin') || pathname?.startsWith('/dashboard') || pathname?.startsWith('/client')
 
     if (isExcluded) {
         return <>{children}</>
@@ -22,7 +22,7 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                 <Header />
             </div>
             <MobileHeader />
-            <main id="main-content" className="flex-1 w-full pt-[56px] md:pt-20 pb-safe-nav">{children}</main>
+            <main id="main-content" className="flex-1 w-full pt-[56px] md:pt-20 pb-safe-nav md:pb-0">{children}</main>
             <Footer />
             <WhatsAppButton />
         </>

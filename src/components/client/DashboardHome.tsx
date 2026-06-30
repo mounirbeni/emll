@@ -35,11 +35,11 @@ export function DashboardHome({ user, stats, nextBooking }: DashboardHomeProps) 
     if (hour >= 17) greeting = 'Good evening';
 
     return (
-        <div className="space-y-8 animate-fade-in pb-safe-nav lg:pb-0">
+        <div className="space-y-8 animate-fade-in">
             {/* Header Section */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight">
+                    <h1 className="text-2xl md:text-4xl font-black text-gray-900 tracking-tight">
                         {greeting}, <span className="text-primary">{firstName}!</span>
                     </h1>
                     <p className="text-gray-500 mt-1 text-lg">
@@ -61,7 +61,7 @@ export function DashboardHome({ user, stats, nextBooking }: DashboardHomeProps) 
                         <div className="p-3 bg-orange-50 rounded-2xl group-hover:scale-110 transition-transform text-primary">
                             <Calendar className="w-6 h-6" />
                         </div>
-                        <span className="text-3xl font-black text-gray-900">{stats.total}</span>
+                        <span className="text-2xl md:text-3xl font-black text-gray-900">{stats.total}</span>
                     </div>
                     <div className="text-sm font-medium text-gray-400">Total Bookings</div>
                 </div>
@@ -111,7 +111,7 @@ export function DashboardHome({ user, stats, nextBooking }: DashboardHomeProps) 
                     {nextBooking ? (
                         <div className="bg-white rounded-[2rem] overflow-hidden border border-gray-100 shadow-xl shadow-gray-200/40 relative group">
                             <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-transparent z-10" />
-                            <div className="relative h-64 w-full">
+                            <div className="relative h-48 md:h-64 w-full">
                                 <Image
                                     src={nextBooking.experience.images[0] || "/images/placeholder-experience.svg"}
                                     alt={nextBooking.experience.title}
@@ -124,7 +124,7 @@ export function DashboardHome({ user, stats, nextBooking }: DashboardHomeProps) 
                                 <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
                                     Upcoming
                                 </span>
-                                <h3 className="text-3xl font-black text-white mb-2 leading-tight max-w-xl">
+                                <h3 className="text-xl md:text-3xl font-black text-white mb-2 leading-tight max-w-xl">
                                     {nextBooking.experience.title}
                                 </h3>
 

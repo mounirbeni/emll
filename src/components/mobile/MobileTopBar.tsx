@@ -67,7 +67,7 @@ export function MobileTopBar({
                             variant="ghost"
                             size="icon"
                             className={cn(
-                                "h-9 w-9 rounded-full -ml-2 transition-colors",
+                                "h-11 w-11 rounded-full -ml-2 transition-colors",
                                 isTransparent
                                     ? "bg-black/20 hover:bg-black/30 text-white backdrop-blur-sm"
                                     : "hover:bg-gray-100"
@@ -114,7 +114,7 @@ export function MobileDetailTopBar({
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="h-9 w-9 rounded-full bg-black/20 hover:bg-black/30 text-white backdrop-blur-sm"
+                            className="h-11 w-11 rounded-full bg-black/20 hover:bg-black/30 text-white backdrop-blur-sm"
                             onClick={onShare}
                         >
                             <Share2 className="h-4 w-4" />
@@ -124,7 +124,7 @@ export function MobileDetailTopBar({
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="h-9 w-9 rounded-full bg-black/20 hover:bg-black/30 text-white backdrop-blur-sm"
+                            className="h-11 w-11 rounded-full bg-black/20 hover:bg-black/30 text-white backdrop-blur-sm"
                             onClick={onFavorite}
                         >
                             <Heart className={cn("h-4 w-4", isFavorited && "fill-red-500 text-red-500")} />

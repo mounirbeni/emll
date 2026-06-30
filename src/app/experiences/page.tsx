@@ -91,7 +91,7 @@ export default async function ExperiencesPage({
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 -mt-10 relative z-20 pb-24 md:pb-20">
+            <div className="container mx-auto px-4 -mt-10 relative z-20 pb-safe-nav md:pb-12">
 
                 {/* Filter Bar */}
                 <ExperienceFilterBar />

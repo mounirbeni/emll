@@ -11,8 +11,8 @@ export function MobileBottomNav() {
     const pathname = usePathname()
     const { data: session } = useSession()
 
-    // Don't show on admin pages
-    if (pathname?.startsWith('/admin')) {
+    // Don't show on admin or client dashboard pages (client has its own MobileNav)
+    if (pathname?.startsWith('/admin') || pathname?.startsWith('/client')) {
         return null
     }
 
