@@ -330,7 +330,6 @@ export default function BookingsClient({ initialBookings }: BookingsClientProps)
                                             <div className="font-bold text-foreground text-base">
                                                 €{Number(booking.totalPrice).toFixed(0)}
                                             </div>
-                                            <BookingStatusBadge status={booking.status} />
                                         </td>
                                         <td className="px-5 py-4">
                                             <BookingStatusBadge status={booking.status} />

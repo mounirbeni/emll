@@ -80,6 +80,11 @@ export function Footer() {
                                 </Link>
                             </li>
                             <li>
+                                <Link href="/contact" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                                    Contact Us
+                                </Link>
+                            </li>
+                            <li>
                                 <Link href="/support" className="text-muted-foreground hover:text-primary text-sm transition-colors">
                                     Support
                                 </Link>

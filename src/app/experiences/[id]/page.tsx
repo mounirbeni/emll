@@ -45,7 +45,10 @@ export default async function ExperienceDetailsPage({ params }: { params: Promis
                 { id: id },
                 { slug: id }
             ]
-        }
+        },
+        include: {
+            _count: { select: { reviews: true } },
+        },
     });
 
     if (!experience) {
@@ -108,8 +111,8 @@ export default async function ExperienceDetailsPage({ params }: { params: Promis
                 category={experience.category}
                 location={experience.location}
                 duration={experience.duration}
-                rating={0}
-                reviews={0}
+                rating={experience.avgRating}
+                reviews={experience.reviewCount}
                 pickupAvailable={experience.pickupAvailable}
                 languages={languages}
                 images={experience.gallery}

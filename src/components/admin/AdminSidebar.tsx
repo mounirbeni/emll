@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Calendar, Settings, LogOut, MessageSquare, Users, Shield, ClipboardList, BarChart3, Mail, Compass, ChevronRight } from 'lucide-react'
+import { LayoutDashboard, Calendar, Settings, LogOut, MessageSquare, Users, Shield, ClipboardList, BarChart3, Mail, Compass, ChevronRight, Map } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
@@ -18,6 +18,12 @@ const sidebarItems = [
         href: '/admin/bookings',
         icon: ClipboardList,
         description: 'Manage reservations',
+    },
+    {
+        title: 'Experiences',
+        href: '/admin/experiences',
+        icon: Map,
+        description: 'Manage activities',
     },
     {
         title: 'Calendar',
