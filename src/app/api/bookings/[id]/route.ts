@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 import { sendEmail } from '@/lib/email-client';
 import { getEmailTemplate } from '@/lib/email-templates';
+import { auth } from '@/auth';
 
 const updateBookingSchema = z.object({
     status: z.enum(['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED', 'NEEDS_UPDATE']).optional(),
@@ -145,6 +146,74 @@ export async function PUT(
     } catch (error) {
         console.error("Error updating booking:", error);
         return NextResponse.json({ error: 'Failed to update booking' }, { status: 500 });
+    }
+}
+
+// PATCH /api/bookings/[id] — user can modify date and/or numberOfPeople on PENDING bookings
+const modifyBookingSchema = z.object({
+    date: z.string().datetime().optional(),
+    numberOfPeople: z.number().int().min(1).optional(),
+});
+
+export async function PATCH(
+    req: Request,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    const { id } = await params;
+    try {
+        const session = await auth();
+        if (!session?.user?.id) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        const body = await req.json();
+        const result = modifyBookingSchema.safeParse(body);
+        if (!result.success) {
+            return NextResponse.json({ error: 'Invalid input', details: result.error.flatten() }, { status: 400 });
+        }
+
+        const { date, numberOfPeople } = result.data;
+        if (!date && numberOfPeople === undefined) {
+            return NextResponse.json({ error: 'Provide at least one field to update' }, { status: 400 });
+        }
+
+        const booking = await prisma.booking.findUnique({
+            where: { id },
+            include: { experience: { select: { price: true } } },
+        });
+
+        if (!booking) {
+            return NextResponse.json({ error: 'Booking not found' }, { status: 404 });
+        }
+        if (booking.userId !== session.user.id) {
+            return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+        }
+        if (booking.status !== 'PENDING') {
+            return NextResponse.json({ error: 'Only pending bookings can be modified' }, { status: 400 });
+        }
+        if (date && new Date(date) < new Date()) {
+            return NextResponse.json({ error: 'Date must be in the future' }, { status: 400 });
+        }
+
+        const newPeople = numberOfPeople ?? booking.numberOfPeople;
+        const pricePerPerson = booking.experience.price;
+        const newTotal = pricePerPerson * newPeople;
+
+        const updated = await prisma.booking.update({
+            where: { id },
+            data: {
+                ...(date && { date: new Date(date) }),
+                ...(numberOfPeople !== undefined && {
+                    numberOfPeople,
+                    totalPrice: newTotal,
+                }),
+            },
+        });
+
+        return NextResponse.json(updated);
+    } catch (error) {
+        console.error('[bookings PATCH]', error);
+        return NextResponse.json({ error: 'Failed to modify booking' }, { status: 500 });
     }
 }
 

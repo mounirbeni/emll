@@ -30,7 +30,17 @@ import {
     CheckCircle,
     XCircle,
     AlertTriangle,
+    Pencil,
 } from 'lucide-react';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter,
+} from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import { PaymentStatusBadge } from '@/components/payment/PaymentStatusBadge';
 import type { PaymentStatusType } from '@/components/payment/PaymentStatusBadge';
 import { toast } from 'sonner';
@@ -79,8 +89,41 @@ const statusBarColors: Record<BookingStatus, string> = {
 export function BookingDetailsClient({ booking }: BookingDetailsClientProps) {
     const router = useRouter();
     const [cancelling, setCancelling] = useState(false);
+    const [modifyOpen, setModifyOpen] = useState(false);
+    const [modifying, setModifying] = useState(false);
+    const [modifyDate, setModifyDate] = useState(
+        new Date(booking.date).toISOString().slice(0, 10)
+    );
+    const [modifyPeople, setModifyPeople] = useState(booking.numberOfPeople);
 
     const canCancel = booking.status === BookingStatus.PENDING || booking.status === BookingStatus.CONFIRMED;
+    const canModify = booking.status === BookingStatus.PENDING;
+
+    const handleModifyBooking = async () => {
+        setModifying(true);
+        try {
+            const res = await fetch(`/api/bookings/${booking.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    date: new Date(modifyDate).toISOString(),
+                    numberOfPeople: modifyPeople,
+                }),
+            });
+            if (res.ok) {
+                toast.success('Booking updated successfully');
+                setModifyOpen(false);
+                router.refresh();
+            } else {
+                const data = await res.json();
+                toast.error(data.error || 'Failed to update booking');
+            }
+        } catch {
+            toast.error('Something went wrong');
+        } finally {
+            setModifying(false);
+        }
+    };
 
     const handleCancelBooking = async () => {
         setCancelling(true);
@@ -301,6 +344,16 @@ export function BookingDetailsClient({ booking }: BookingDetailsClientProps) {
 
             {/* Action Buttons */}
             <div className="space-y-3 pt-4">
+                {canModify && (
+                    <Button
+                        variant="outline"
+                        className="w-full rounded-xl border-gray-200 hover:bg-gray-50 h-12 font-semibold text-gray-700"
+                        onClick={() => setModifyOpen(true)}
+                    >
+                        <Pencil className="w-4 h-4 mr-2" />
+                        Modify Booking
+                    </Button>
+                )}
                 <Link href="/client/messages/new">
                     <Button variant="outline" className="w-full rounded-xl border-gray-200 hover:bg-gray-50 h-12 font-semibold text-gray-700">
                         <MessageSquare className="w-4 h-4 mr-2" />
@@ -343,6 +396,51 @@ export function BookingDetailsClient({ booking }: BookingDetailsClientProps) {
                     </AlertDialog>
                 )}
             </div>
+
+            {/* Modify Booking Dialog */}
+            <Dialog open={modifyOpen} onOpenChange={setModifyOpen}>
+                <DialogContent className="rounded-3xl sm:max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>Modify Booking</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-4 py-2">
+                        <div className="space-y-1.5">
+                            <Label htmlFor="modify-date">Date</Label>
+                            <Input
+                                id="modify-date"
+                                type="date"
+                                min={new Date().toISOString().slice(0, 10)}
+                                value={modifyDate}
+                                onChange={(e) => setModifyDate(e.target.value)}
+                                className="rounded-xl"
+                            />
+                        </div>
+                        <div className="space-y-1.5">
+                            <Label htmlFor="modify-people">Number of Guests</Label>
+                            <Input
+                                id="modify-people"
+                                type="number"
+                                min={1}
+                                value={modifyPeople}
+                                onChange={(e) => setModifyPeople(Number(e.target.value))}
+                                className="rounded-xl"
+                            />
+                        </div>
+                    </div>
+                    <DialogFooter className="gap-2">
+                        <Button variant="outline" className="rounded-xl" onClick={() => setModifyOpen(false)}>
+                            Cancel
+                        </Button>
+                        <Button
+                            className="rounded-xl bg-primary text-white"
+                            onClick={handleModifyBooking}
+                            disabled={modifying || !modifyDate || modifyPeople < 1}
+                        >
+                            {modifying ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Saving...</> : 'Save Changes'}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }
