@@ -1,9 +1,10 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useState, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Clock, MapPin, Star } from 'lucide-react';
+import { Clock, MapPin, Star, Heart } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface Experience {
     id: string;
@@ -22,9 +23,10 @@ interface Experience {
 
 interface ExperienceCardProps {
     experience: Experience;
+    isWishlisted?: boolean;
 }
 
-function ExperienceCardComponent({ experience }: ExperienceCardProps) {
+function ExperienceCardComponent({ experience, isWishlisted = false }: ExperienceCardProps) {
     const {
         id,
         title,
@@ -42,6 +44,36 @@ function ExperienceCardComponent({ experience }: ExperienceCardProps) {
     // Map to component variables for cleaner usage below
     const reviews = reviewCount;
     const rating = avgRating;
+
+    const [wishlisted, setWishlisted] = useState(isWishlisted);
+    const [wishlistLoading, setWishlistLoading] = useState(false);
+
+    const handleWishlist = useCallback(async (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (wishlistLoading) return;
+        setWishlistLoading(true);
+        try {
+            const res = await fetch('/api/wishlist', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ experienceId: id }),
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setWishlisted(data.inWishlist);
+                toast.success(data.inWishlist ? 'Added to wishlist' : 'Removed from wishlist');
+            } else if (res.status === 401) {
+                toast.error('Sign in to save experiences');
+            } else {
+                toast.error('Failed to update wishlist');
+            }
+        } catch {
+            toast.error('Something went wrong');
+        } finally {
+            setWishlistLoading(false);
+        }
+    }, [id, wishlistLoading]);
 
     return (
         <Link
@@ -69,7 +101,17 @@ function ExperienceCardComponent({ experience }: ExperienceCardProps) {
                     </span>
                 </div>
 
-                {/* Wishlist/Heart Button placeholder could go here */}
+                {/* Wishlist heart button */}
+                <button
+                    onClick={handleWishlist}
+                    disabled={wishlistLoading}
+                    className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow backdrop-blur-sm transition-all hover:scale-110 hover:bg-white"
+                    title={wishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
+                >
+                    <Heart
+                        className={`h-4 w-4 transition-colors ${wishlisted ? 'fill-red-500 text-red-500' : 'text-gray-400'}`}
+                    />
+                </button>
             </div>
 
             {/* Content Container */}
