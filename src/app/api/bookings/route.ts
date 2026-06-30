@@ -32,6 +32,40 @@ export async function POST(req: Request) {
 
         const { experienceId, userName, userEmail, userPhone, date, numberOfPeople, totalPrice, notes } = result.data;
 
+        // Check experience availability
+        const experience = await prisma.experience.findUnique({
+            where: { id: experienceId },
+            select: { blockedDates: true, maxCapacity: true, enabled: true },
+        });
+        if (!experience || !experience.enabled) {
+            return NextResponse.json({ error: 'Experience not available' }, { status: 400 });
+        }
+        const bookingDate = new Date(date);
+        const bookingDateStr = bookingDate.toISOString().slice(0, 10);
+        const isBlocked = experience.blockedDates.some(
+            (d) => d.toISOString().slice(0, 10) === bookingDateStr
+        );
+        if (isBlocked) {
+            return NextResponse.json({ error: 'This date is not available for booking' }, { status: 400 });
+        }
+        if (experience.maxCapacity > 0) {
+            const existingBookings = await prisma.booking.aggregate({
+                where: {
+                    experienceId,
+                    date: {
+                        gte: new Date(bookingDate.toISOString().slice(0, 10)),
+                        lt: new Date(new Date(bookingDate).setDate(bookingDate.getDate() + 1)),
+                    },
+                    status: { notIn: ['CANCELLED'] },
+                },
+                _sum: { numberOfPeople: true },
+            });
+            const currentTotal = existingBookings._sum.numberOfPeople ?? 0;
+            if (currentTotal + numberOfPeople > experience.maxCapacity) {
+                return NextResponse.json({ error: 'Not enough capacity available for this date' }, { status: 400 });
+            }
+        }
+
         // Create Booking
         const booking = await prisma.booking.create({
             data: {

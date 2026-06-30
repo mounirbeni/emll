@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Experience" ADD COLUMN "blockedDates" TIMESTAMP(3)[] NOT NULL DEFAULT ARRAY[]::TIMESTAMP(3)[];
+ALTER TABLE "Experience" ADD COLUMN "maxCapacity" INTEGER NOT NULL DEFAULT 0;

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { Save, Loader2, ArrowLeft } from 'lucide-react';
+import { Save, Loader2, ArrowLeft, X, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -24,6 +24,8 @@ interface ExperienceData {
     highlights: string[];
     included: string[];
     notIncluded: string[];
+    blockedDates?: string[];
+    maxCapacity?: number;
 }
 
 const CATEGORIES = ['Wellness', 'City Tours', 'Food & Drink', 'Desert', 'Adventure', 'Workshops', 'Transfers', 'Entertainment', 'Day Trips', 'Sports'];
@@ -48,6 +50,12 @@ export default function ExperienceEditForm({ experience }: { experience: Experie
         notIncluded: experience.notIncluded.join('\n'),
     });
     const [loading, setLoading] = useState(false);
+    const [blockedDates, setBlockedDates] = useState<string[]>(
+        (experience.blockedDates ?? []).map((d) => new Date(d).toISOString().slice(0, 10))
+    );
+    const [maxCapacity, setMaxCapacity] = useState(experience.maxCapacity ?? 0);
+    const [newBlockedDate, setNewBlockedDate] = useState('');
+    const [availabilitySaving, setAvailabilitySaving] = useState(false);
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -86,6 +94,39 @@ export default function ExperienceEditForm({ experience }: { experience: Experie
             toast.error('Network error. Please try again.');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const addBlockedDate = () => {
+        if (!newBlockedDate || blockedDates.includes(newBlockedDate)) return;
+        setBlockedDates((prev) => [...prev, newBlockedDate].sort());
+        setNewBlockedDate('');
+    };
+
+    const removeBlockedDate = (date: string) => {
+        setBlockedDates((prev) => prev.filter((d) => d !== date));
+    };
+
+    const saveAvailability = async () => {
+        setAvailabilitySaving(true);
+        try {
+            const res = await fetch(`/api/experiences/${experience.id}/availability`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    blockedDates: blockedDates.map((d) => new Date(d).toISOString()),
+                    maxCapacity,
+                }),
+            });
+            if (res.ok) {
+                toast.success('Availability settings saved');
+            } else {
+                toast.error('Failed to save availability');
+            }
+        } catch {
+            toast.error('Network error');
+        } finally {
+            setAvailabilitySaving(false);
         }
     };
 
@@ -174,6 +215,61 @@ export default function ExperienceEditForm({ experience }: { experience: Experie
                         <input type="checkbox" name="featured" checked={form.featured} onChange={handleChange} className="rounded accent-orange-500 h-4 w-4" />
                         <span className="text-sm font-medium">Featured on homepage</span>
                     </label>
+                </div>
+            </section>
+
+            {/* Availability */}
+            <section className="bg-white rounded-xl border border-border p-6 space-y-5 shadow-sm">
+                <div className="flex items-center justify-between">
+                    <h2 className="text-base font-semibold text-foreground">Availability</h2>
+                    <Button
+                        type="button"
+                        onClick={saveAvailability}
+                        disabled={availabilitySaving}
+                        variant="outline"
+                        size="sm"
+                        className="rounded-lg"
+                    >
+                        {availabilitySaving ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Save Availability'}
+                    </Button>
+                </div>
+
+                <FormField label="Max Capacity (guests per day, 0 = unlimited)">
+                    <input
+                        type="number"
+                        min={0}
+                        value={maxCapacity}
+                        onChange={(e) => setMaxCapacity(Number(e.target.value))}
+                        className="form-input"
+                    />
+                </FormField>
+
+                <div className="space-y-2">
+                    <label className="block text-sm font-medium text-foreground">Blocked Dates (unavailable for booking)</label>
+                    <div className="flex gap-2">
+                        <input
+                            type="date"
+                            min={new Date().toISOString().slice(0, 10)}
+                            value={newBlockedDate}
+                            onChange={(e) => setNewBlockedDate(e.target.value)}
+                            className="form-input flex-1"
+                        />
+                        <Button type="button" onClick={addBlockedDate} size="sm" className="rounded-lg shrink-0">
+                            <Plus className="h-4 w-4" />
+                        </Button>
+                    </div>
+                    {blockedDates.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-2">
+                            {blockedDates.map((date) => (
+                                <span key={date} className="inline-flex items-center gap-1 text-xs bg-red-50 text-red-700 border border-red-200 rounded-lg px-2 py-1">
+                                    {date}
+                                    <button type="button" onClick={() => removeBlockedDate(date)} className="hover:text-red-900">
+                                        <X className="h-3 w-3" />
+                                    </button>
+                                </span>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </section>
 
