@@ -144,7 +144,7 @@ export default function AdminMessagesPage() {
         if (!selectedConversation || !confirm('Delete this entire conversation? This action cannot be undone.')) return;
 
         try {
-            const res = await fetch(`/api/admin/conversations/${selectedConversation.userId}`, {
+            const res = await fetch(`/api/admin/conversations/${selectedConversation.id}`, {
                 method: 'DELETE'
             });
 
