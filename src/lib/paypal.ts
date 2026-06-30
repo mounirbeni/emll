@@ -76,6 +76,28 @@ export async function createPayPalOrder(params: CreateOrderParams): Promise<{ or
   return { orderId: data.id };
 }
 
+export async function refundPayPalCapture(captureId: string, amount?: number, currency = 'EUR'): Promise<{ refundId: string }> {
+  const token = await getPayPalAccessToken();
+  const body: Record<string, unknown> = {};
+  if (amount !== undefined) {
+    body.amount = { value: amount.toFixed(2), currency_code: currency };
+  }
+  const res = await fetch(`${PAYPAL_API_BASE}/v2/payments/captures/${captureId}/refund`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ message: res.statusText }));
+    throw new Error((err as { message?: string }).message || 'PayPal refund failed');
+  }
+  const data = (await res.json()) as { id: string };
+  return { refundId: data.id };
+}
+
 export async function capturePayPalOrder(orderId: string): Promise<{ transactionId: string }> {
   const token = await getPayPalAccessToken();
   const res = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}/capture`, {

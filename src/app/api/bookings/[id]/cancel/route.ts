@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from '@/lib/prisma';
 import { auth } from "@/auth";
+import { refundPayPalCapture } from '@/lib/paypal';
+import { PaymentMethod, TransactionStatus, PaymentStatus } from '@prisma/client';
 
 export async function PUT(
     request: Request,
@@ -14,10 +16,19 @@ export async function PUT(
 
         const { id } = await params;
 
-        // Fetch the booking
+        // Fetch the booking with payments
         const booking = await prisma.booking.findUnique({
             where: { id },
-            include: { experience: { select: { title: true } } }
+            include: {
+                experience: { select: { title: true } },
+                payments: {
+                    where: {
+                        method: PaymentMethod.PAYPAL,
+                        status: TransactionStatus.COMPLETED,
+                    },
+                    select: { id: true, transactionId: true, amount: true, currency: true },
+                },
+            },
         });
 
         if (!booking) {
@@ -37,10 +48,31 @@ export async function PUT(
             );
         }
 
-        // Update booking status
+        // Attempt PayPal refund for any completed PayPal payments
+        let refunded = false;
+        for (const payment of booking.payments) {
+            if (payment.transactionId) {
+                try {
+                    await refundPayPalCapture(
+                        payment.transactionId,
+                        Number(payment.amount),
+                        payment.currency,
+                    );
+                    // No REFUNDED status in TransactionStatus — booking.paymentStatus handles this
+                    refunded = true;
+                } catch (refundErr) {
+                    console.error('[cancel] PayPal refund failed for payment', payment.id, refundErr);
+                }
+            }
+        }
+
+        // Update booking status and payment status
         const updatedBooking = await prisma.booking.update({
             where: { id },
-            data: { status: "CANCELLED" },
+            data: {
+                status: "CANCELLED",
+                ...(refunded && { paymentStatus: PaymentStatus.REFUNDED }),
+            },
         });
 
         // Create notification for user
@@ -49,7 +81,7 @@ export async function PUT(
                 userId: session.user.id,
                 type: "BOOKING",
                 title: "Booking Cancelled",
-                message: `Your booking for "${booking.experience.title}" has been cancelled.`,
+                message: `Your booking for "${booking.experience.title}" has been cancelled.${refunded ? ' A refund has been initiated.' : ''}`,
                 read: false,
             },
         });
@@ -57,6 +89,7 @@ export async function PUT(
         return NextResponse.json({
             success: true,
             booking: updatedBooking,
+            refunded,
         });
     } catch (error) {
         console.error("Error cancelling booking:", error);
