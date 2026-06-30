@@ -12,7 +12,12 @@ export function MobileBottomNav() {
     const { data: session } = useSession()
 
     // Don't show on admin or client dashboard pages (client has its own MobileNav)
-    if (pathname?.startsWith('/admin') || pathname?.startsWith('/client')) {
+    // Don't show on experience detail pages (they have their own MobileBookingBar)
+    if (
+        pathname?.startsWith('/admin') ||
+        pathname?.startsWith('/client') ||
+        (pathname?.startsWith('/experiences/') && pathname !== '/experiences/')
+    ) {
         return null
     }
 

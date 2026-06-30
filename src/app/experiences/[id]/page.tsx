@@ -103,7 +103,7 @@ export default async function ExperienceDetailsPage({ params }: { params: Promis
     };
 
     return (
-        <div className="min-h-screen bg-white pb-32 pt-20">
+        <div className="min-h-screen bg-white pb-safe-nav md:pb-8 pt-20">
 
             {/* 1. Hero Section */}
             <ExperienceHero

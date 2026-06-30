@@ -34,7 +34,7 @@ export function MobileBookingCTA({
     return (
         <div
             className={cn(
-                "md:hidden fixed bottom-0 left-0 right-0 z-40",
+                "md:hidden fixed bottom-0 left-0 right-0 z-[60]",
                 "bg-white/95 backdrop-blur-lg border-t border-gray-100",
                 "safe-bottom shadow-2xl",
                 className
@@ -92,7 +92,7 @@ export function MobileBookingCTAWithActions({
     return (
         <div
             className={cn(
-                "md:hidden fixed bottom-0 left-0 right-0 z-40",
+                "md:hidden fixed bottom-0 left-0 right-0 z-[60]",
                 "bg-white/95 backdrop-blur-lg border-t border-gray-100",
                 "safe-bottom shadow-2xl",
                 className
