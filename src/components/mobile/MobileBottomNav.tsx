@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Calendar, User, Compass } from "lucide-react"
+import { Home, Calendar, User, Compass, Sparkles } from "lucide-react"
 import { useSession } from "next-auth/react"
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
@@ -19,11 +19,13 @@ export function MobileBottomNav() {
     const navItems = session ? [
         { href: "/", icon: Home, label: "Home" },
         { href: "/experiences", icon: Compass, label: "Experiences" },
+        { href: "/recommendations", icon: Sparkles, label: "Guide" },
         { href: "/client/bookings", icon: Calendar, label: "Trips" },
         { href: "/client/profile", icon: User, label: "Profile" },
     ] : [
         { href: "/", icon: Home, label: "Home" },
         { href: "/experiences", icon: Compass, label: "Experiences" },
+        { href: "/recommendations", icon: Sparkles, label: "Guide" },
         { href: "/login", icon: User, label: "Login" },
     ]
 

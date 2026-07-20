@@ -54,6 +54,7 @@ export function MobileHeader() {
 function getPageTitle(pathname: string | null): string {
     if (!pathname) return ""
     if (pathname.startsWith("/experiences")) return "Experiences"
+    if (pathname.startsWith("/recommendations")) return "Recommendations"
     if (pathname.startsWith("/client/bookings")) return "My Trips"
     if (pathname.startsWith("/client/profile")) return "Profile"
     return ""
