@@ -1,9 +1,9 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { BlogPost } from "@/lib/types";
+import type { BlogPost } from "@/lib/types";
 import { format } from "date-fns";
 import { ArrowRight, Clock } from "lucide-react";
 
@@ -11,18 +11,33 @@ interface BlogCardProps {
     post: BlogPost;
 }
 
+const PLACEHOLDER = "/images/placeholder-blog.svg";
+
+/** Only real URLs can resolve; anything else falls back to the placeholder. */
+function resolveImage(src?: string) {
+    if (!src) return PLACEHOLDER;
+    const value = src.trim();
+    if (value.startsWith("/")) return value;
+    if (value.startsWith("http://") || value.startsWith("https://")) return value;
+    return PLACEHOLDER;
+}
+
 function BlogCardComponent({ post }: BlogCardProps) {
+    // Remote images can be slow, blocked or removed — never leave a broken frame.
+    const [imgSrc, setImgSrc] = useState(() => resolveImage(post.image));
+
     return (
         <Link href={`/blog/${post.slug}`} className="group h-full block">
-            <div className="bg-white h-full flex flex-col rounded-2xl border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-gray-200/50 hover:border-primary/20 hover:-translate-y-1">
+            <div className="surface-card-interactive h-full flex flex-col overflow-hidden">
                 {/* Image */}
-                <div className="relative w-full aspect-[16/9] overflow-hidden bg-gray-50">
+                <div className="relative w-full aspect-[16/9] overflow-hidden bg-ink-100">
                     <Image
-                        src={post.image === "IMAGE_PLACEHOLDER_PENDING_UPLOAD" ? "/images/placeholder-blog.svg" : post.image}
+                        src={imgSrc}
                         alt={post.title}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        onError={() => setImgSrc(PLACEHOLDER)}
                     />
                     <div className="absolute top-3 left-3">
                         <span className="px-3 py-1 bg-white/95 backdrop-blur-sm rounded-full text-[10px] font-bold text-primary uppercase tracking-wide shadow-sm">

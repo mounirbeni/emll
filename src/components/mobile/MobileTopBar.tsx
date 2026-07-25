@@ -52,7 +52,7 @@ export function MobileTopBar({
     return (
         <header
             className={cn(
-                "md:hidden fixed top-0 left-0 right-0 z-40 safe-top transition-all duration-300",
+                "md:hidden fixed top-0 left-0 right-0 layer-header safe-top transition-all duration-300",
                 isTransparent
                     ? "bg-transparent border-transparent"
                     : shouldBlur

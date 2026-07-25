@@ -171,7 +171,7 @@ export default function LoginPage() {
                                     <Label htmlFor="password">Password</Label>
                                     <Link
                                         href="/forgot-password"
-                                        className="text-sm font-medium text-primary hover:text-accent"
+                                        className="text-primary hover:text-brand-700 -my-2 inline-flex min-h-11 items-center text-sm font-medium"
                                     >
                                         Forgot password?
                                     </Link>
@@ -192,7 +192,8 @@ export default function LoginPage() {
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-3 text-muted-foreground hover:text-foreground transition-colors"
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                        className="text-muted-foreground hover:text-foreground absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-lg transition-colors"
                                     >
                                         {showPassword ? (
                                             <EyeOff className="h-4 w-4" />
@@ -204,20 +205,20 @@ export default function LoginPage() {
                             </div>
                         </div>
 
-                        <div className="flex items-center space-x-2">
+                        {/* The label carries the touch area so the whole row is
+                            tappable, not just the 18px checkbox. */}
+                        <label
+                            htmlFor="remember"
+                            className="-ml-1 inline-flex min-h-11 cursor-pointer items-center gap-2 px-1 text-sm font-medium"
+                        >
                             <Checkbox id="remember" />
-                            <label
-                                htmlFor="remember"
-                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                            >
-                                Remember me
-                            </label>
-                        </div>
+                            Remember me
+                        </label>
 
                         <Button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full h-11 bg-primary hover:bg-accent font-bold text-lg shadow-brand"
+                            className="w-full h-11 bg-primary hover:bg-brand-600 font-bold text-lg shadow-brand"
                         >
                             {isLoading ? (
                                 <>
@@ -273,7 +274,7 @@ export default function LoginPage() {
 
                     <p className="text-center text-sm text-muted-foreground">
                         Don&apos;t have an account?{" "}
-                        <Link href="/register" className="font-semibold text-primary hover:text-accent">
+                        <Link href="/register" className="font-semibold text-primary hover:text-brand-700">
                             Sign up
                         </Link>
                     </p>

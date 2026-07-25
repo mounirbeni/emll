@@ -134,7 +134,7 @@ export function MobileFilterSheet({
                             onApply()
                             onClose()
                         }}
-                        className="flex-1 h-12 rounded-xl bg-primary hover:bg-accent text-white font-semibold transition-colors shadow-lg shadow-primary/20"
+                        className="flex-1 h-12 rounded-xl bg-primary hover:bg-brand-600 text-white font-semibold transition-colors shadow-lg shadow-primary/20"
                     >
                         Show Results {appliedCount > 0 && `(${appliedCount})`}
                     </button>

@@ -41,7 +41,9 @@ function Calendar({
         ...formatters,
       }}
       classNames={{
-        root: cn("w-fit", defaultClassNames.root),
+        // max-w-full rather than w-fit: on a narrow phone the intrinsic width
+        // overflowed its container instead of shrinking to fit.
+        root: cn("w-full max-w-full", defaultClassNames.root),
         months: cn(
           "flex gap-4 flex-col md:flex-row relative",
           defaultClassNames.months

@@ -3,7 +3,7 @@
 import { BLOG_POSTS } from "@/lib/data/blog-data";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { Search } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -33,6 +33,18 @@ export default function BlogPage() {
         const others = filteredPosts.filter(p => p.id !== featured?.id);
         return { featuredPost: featured, otherPosts: others };
     }, [filteredPosts]);
+
+    // Remote hero images can be blocked or removed — fall back rather than
+    // leaving a broken frame at the top of the page. Storing the failed src
+    // (instead of a boolean) means it resets by itself when the post changes,
+    // with no effect needed.
+    const [failedSrc, setFailedSrc] = useState<string | null>(null);
+
+    const rawFeatured = featuredPost?.image ?? "";
+    const featuredImg =
+        failedSrc === rawFeatured || !(rawFeatured.startsWith("http") || rawFeatured.startsWith("/"))
+            ? "/images/placeholder-blog.svg"
+            : rawFeatured;
 
     return (
         <>
@@ -97,14 +109,15 @@ export default function BlogPage() {
                                 href={`/blog/${featuredPost.slug}`}
                                 className="surface-card-interactive group flex flex-col overflow-hidden md:flex-row"
                             >
-                                <div className="relative min-h-[280px] md:min-h-[400px] md:w-1/2">
+                                <div className="bg-ink-100 relative min-h-[280px] md:min-h-[400px] md:w-1/2">
                                     <Image
-                                        src={featuredPost.image.startsWith('http') || featuredPost.image.startsWith('/') ? featuredPost.image : "/images/placeholder-blog.svg"}
+                                        src={featuredImg}
                                         alt={featuredPost.title}
                                         fill
                                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                                         sizes="(max-width: 768px) 100vw, 50vw"
                                         priority
+                                        onError={() => setFailedSrc(rawFeatured)}
                                     />
                                 </div>
                                 <div className="flex flex-col justify-center p-8 md:w-1/2 md:p-12">

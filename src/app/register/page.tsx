@@ -165,7 +165,8 @@ export default function RegisterPage() {
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-3 text-muted-foreground hover:text-foreground transition-colors"
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                        className="text-muted-foreground hover:text-foreground absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-lg transition-colors"
                                     >
                                         {showPassword ? (
                                             <EyeOff className="h-4 w-4" />
@@ -199,7 +200,7 @@ export default function RegisterPage() {
                         <Button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full h-11 bg-primary hover:bg-accent font-bold text-lg shadow-brand"
+                            className="w-full h-11 bg-primary hover:bg-brand-600 font-bold text-lg shadow-brand"
                         >
                             {isLoading ? (
                                 <>
@@ -255,7 +256,7 @@ export default function RegisterPage() {
 
                     <p className="text-center text-sm text-muted-foreground">
                         Already have an account?{" "}
-                        <Link href="/login" className="font-semibold text-primary hover:text-accent">
+                        <Link href="/login" className="font-semibold text-primary hover:text-brand-700">
                             Sign in
                         </Link>
                     </p>
@@ -278,7 +279,7 @@ export default function RegisterPage() {
             <div className="hidden lg:block relative flex-1 bg-gray-50">
                 <div className="absolute inset-0">
                     <Image
-                        src="/images/register-hero.jpg"
+                        src="/images/homepage.jpg"
                         alt="Marrakech Desert"
                         fill
                         className="object-cover"

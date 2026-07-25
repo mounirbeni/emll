@@ -108,7 +108,7 @@ export default function AdminLoginPage() {
 
                         <Button
                             type="submit"
-                            className="w-full h-11 bg-primary hover:bg-accent text-white font-bold shadow-brand transition-all hover:-translate-y-0.5"
+                            className="w-full h-11 bg-primary hover:bg-brand-600 text-white font-bold shadow-brand transition-all hover:-translate-y-0.5"
                             disabled={loading}
                         >
                             {loading ? (

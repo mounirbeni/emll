@@ -36,7 +36,7 @@ export function MobileButton({
     const baseStyles = "font-semibold rounded-[14px] transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 
     const variants = {
-        primary: "bg-primary hover:bg-accent text-white shadow-lg shadow-primary/20",
+        primary: "bg-primary hover:bg-brand-600 text-white shadow-lg shadow-primary/20",
         secondary: "bg-gray-100 hover:bg-gray-200 text-charcoal",
         ghost: "bg-transparent hover:bg-gray-100 text-charcoal",
         outline: "bg-white border-2 border-gray-200 hover:border-primary hover:text-primary text-charcoal"
@@ -90,7 +90,7 @@ export function MobileIconButton({
     variant?: "primary" | "secondary" | "ghost"
 } & ButtonHTMLAttributes<HTMLButtonElement>) {
     const variants = {
-        primary: "bg-primary hover:bg-accent text-white shadow-lg shadow-primary/20",
+        primary: "bg-primary hover:bg-brand-600 text-white shadow-lg shadow-primary/20",
         secondary: "bg-gray-100 hover:bg-gray-200 text-charcoal",
         ghost: "bg-transparent hover:bg-gray-100 text-charcoal"
     }
@@ -129,9 +129,9 @@ export function MobileFAB({
             onClick={onClick}
             aria-label={label}
             className={cn(
-                "fixed bottom-20 right-4 z-40",
+                "fab-floating layer-docked fixed right-4",
                 "w-[52px] h-[52px] rounded-full",
-                "bg-primary hover:bg-accent text-white",
+                "bg-primary hover:bg-brand-600 text-white",
                 "shadow-lg shadow-primary/30",
                 "flex items-center justify-center",
                 "transition-all duration-200 active:scale-[0.97]",

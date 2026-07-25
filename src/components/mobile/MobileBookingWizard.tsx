@@ -1,13 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Calendar } from "@/components/ui/calendar"
 import { X, ChevronLeft, Check, Calendar as CalendarIcon, Users, User, Mail, Phone, Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { format } from "date-fns"
+import { format, startOfToday } from "date-fns"
 
 interface MobileBookingWizardProps {
     isOpen: boolean
@@ -51,6 +51,27 @@ export function MobileBookingWizard({
     const [phone, setPhone] = useState("")
     const [specialRequests, setSpecialRequests] = useState("")
     const [isSubmitting, setIsSubmitting] = useState(false)
+
+    // Lock the page behind the wizard so it can't scroll under the overlay, and
+    // restore the previous value on close (never hard-code back to "").
+    useEffect(() => {
+        if (!isOpen) return
+        const previous = document.body.style.overflow
+        document.body.style.overflow = "hidden"
+        return () => {
+            document.body.style.overflow = previous
+        }
+    }, [isOpen])
+
+    // Close on hardware/browser back and on Escape rather than trapping the user.
+    useEffect(() => {
+        if (!isOpen) return
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === "Escape") onClose()
+        }
+        window.addEventListener("keydown", onKey)
+        return () => window.removeEventListener("keydown", onKey)
+    }, [isOpen, onClose])
 
     const steps: Step[] = ["date", "time", "guests", "details", "review"]
     const currentStepIndex = steps.indexOf(currentStep)
@@ -141,9 +162,13 @@ export function MobileBookingWizard({
     const totalPrice = servicePrice * adults + (servicePrice * 0.5) * children
 
     return (
-        <div className="fixed inset-0 bg-beige-50 z-50 md:hidden">
+        // A full-screen flex column: header and footer stay put, only the middle
+        // scrolls. Previously the children used `flex-1` with no `flex flex-col`
+        // on this parent, so nothing constrained the height and the calendar
+        // spilled over the rest of the step.
+        <div className="layer-modal bg-beige-50 fixed inset-0 flex flex-col overscroll-contain md:hidden">
             {/* Header */}
-            <div className="bg-white border-b border-gray-200 px-4 py-3 safe-top">
+            <div className="safe-top shrink-0 border-b border-border bg-white px-4 py-3">
                 <div className="flex items-center justify-between mb-2">
                     <button onClick={currentStepIndex > 0 ? handleBack : onClose} className="p-2 -ml-2">
                         {currentStepIndex > 0 ? (
@@ -165,8 +190,8 @@ export function MobileBookingWizard({
                 </div>
             </div>
 
-            {/* Content */}
-            <div className="flex-1 overflow-y-auto px-4 py-6 pb-32">
+            {/* Content — the only scrollable region */}
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-6">
                 {/* Date Step */}
                 {currentStep === "date" && (
                     <div className="space-y-4">
@@ -175,22 +200,25 @@ export function MobileBookingWizard({
                             <p className="text-sm text-gray-600">Select your preferred date</p>
                         </div>
 
-                        <div className="bg-white rounded-2xl p-4 shadow-sm">
+                        <div className="surface-card flex justify-center p-2">
                             <Calendar
                                 mode="single"
                                 selected={selectedDate}
                                 onSelect={setSelectedDate}
-                                disabled={(date) => date < new Date()}
-                                className="w-full"
+                                /* Compare against the start of today, otherwise
+                                   "now" makes today itself unselectable. */
+                                disabled={{ before: startOfToday() }}
+                                defaultMonth={selectedDate ?? startOfToday()}
+                                className="w-full max-w-[22rem]"
                             />
                         </div>
 
                         {selectedDate && (
-                            <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4 flex items-center gap-3">
-                                <CalendarIcon className="w-5 h-5 text-orange-600" />
-                                <div>
-                                    <p className="text-sm font-medium text-orange-900">Selected Date</p>
-                                    <p className="text-lg font-bold text-orange-600">
+                            <div className="border-brand-200 bg-brand-50 flex items-center gap-3 rounded-2xl border p-4">
+                                <CalendarIcon className="text-brand-600 h-5 w-5 shrink-0" />
+                                <div className="min-w-0">
+                                    <p className="text-brand-900 text-sm font-medium">Selected Date</p>
+                                    <p className="text-brand-600 truncate text-base font-bold">
                                         {format(selectedDate, "EEEE, MMMM d, yyyy")}
                                     </p>
                                 </div>
@@ -460,12 +488,13 @@ export function MobileBookingWizard({
                 )}
             </div>
 
-            {/* Sticky Bottom CTA */}
-            <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 safe-bottom">
+            {/* Bottom CTA — a flex child, not fixed, so it can never overlap the
+                scrolling content above it. */}
+            <div className="safe-bottom shrink-0 border-t border-border bg-white p-4">
                 <Button
                     onClick={currentStep === "review" ? handleSubmit : handleNext}
                     disabled={!canProceed() || isSubmitting}
-                    className="w-full h-14 bg-orange-500 hover:bg-orange-600 text-white font-semibold text-base rounded-2xl disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="h-14 w-full rounded-2xl text-base font-semibold disabled:cursor-not-allowed disabled:opacity-50"
                 >
                     {isSubmitting ? (
                         "Processing..."

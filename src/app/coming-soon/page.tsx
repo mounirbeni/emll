@@ -11,7 +11,7 @@ export default function ComingSoonPage() {
                 We are expanding our services and this service will be available soon.
             </p>
             <Link href="/">
-                <Button className="bg-primary hover:bg-accent text-white rounded-full px-8 py-6 text-lg font-bold">
+                <Button className="bg-primary hover:bg-brand-600 text-white rounded-full px-8 py-6 text-lg font-bold">
                     Back to Homepage
                 </Button>
             </Link>

@@ -23,7 +23,7 @@ export function MobileReviewsSheet({ isOpen, onClose, reviews, summary }: Mobile
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[100] z-50 lg:hidden">
+        <div className="layer-modal fixed inset-0 lg:hidden">
             {/* Backdrop */}
             <div
                 className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"

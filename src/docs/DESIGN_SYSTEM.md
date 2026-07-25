@@ -167,7 +167,25 @@ the booking bar ended up *underneath* the bottom nav.
 | `layer-nav` | 60 | Mobile bottom navigation |
 | `layer-overlay` | 70 | Scrims behind sheets/modals |
 | `layer-sheet` | 80 | Bottom sheets (full takeovers, must beat the nav) |
-| `layer-modal` | 90 | Modals |
+| `layer-modal` | 90 | Modals, full-screen wizards, image galleries |
+| `layer-popover` | 95 | Dropdown / select / popover — highest, since they open from inside modals |
+
+The shadcn primitives in `components/ui` already use these; they shipped with a
+flat `z-50`, which put every dialog and dropdown *underneath* the bottom nav.
+
+### Full-screen overlays
+
+A full-screen overlay (booking wizard, gallery) must:
+
+1. use `layer-modal`, not `z-50`;
+2. set an **opaque background** — verify the colour token exists, or the page
+   shows straight through it;
+3. be `flex flex-col` if its children use `flex-1`, otherwise nothing constrains
+   the height and long content (a calendar, a list) spills over the rest;
+4. keep header/footer as `shrink-0` flex children and let only the middle scroll
+   (`min-h-0 flex-1 overflow-y-auto overscroll-contain`) — a `fixed` footer
+   inside an overlay will overlap its own content;
+5. lock body scroll while open, restoring the previous value on close.
 
 ### Positioning helpers
 
@@ -212,4 +230,25 @@ nav. `pb-safe-nav` is still correct for the client dashboard, which has no foote
    `bottom-0 z-50`.
 6. **Checked it at 390px wide, scrolled to the very bottom?** Most "hidden
    content" bugs only appear at the end of the page on a phone.
-7. Does it still read as the same product as the page next to it?
+7. Tap targets at least 44px tall? Wrap small controls (checkboxes, icon
+   buttons) in a label or padded box rather than shrinking the hit area.
+8. Any `hover:` colour that lands white-on-cream? `hover:bg-accent` with white
+   text is invisible — use `hover:bg-brand-600`.
+9. Remote image? Give it an `onError` fallback; never render a broken frame.
+10. Does it still read as the same product as the page next to it?
+
+### Catching regressions
+
+Two checks worth re-running after mobile work — both catch silent failures that
+look fine in code review:
+
+```bash
+# 1. Colour families referenced but never defined (these emit NO css at all,
+#    which is how the booking wizard ended up with a transparent background).
+grep -rhoE '\b(bg|text|border|ring|from|to|via|fill)-([a-z]+)-(50|100|200|300|400|500|600|700|800|900)\b' \
+  --include=*.tsx src/ | sed -E 's/^[a-z]+-//; s/-[0-9]+$//' | sort -u
+
+# 2. Local images referenced but missing from public/
+grep -rhoE '"/images/[^"]+"' src/ --include=*.tsx | tr -d '"' | sort -u \
+  | while read -r i; do [ -f "public$i" ] || echo "MISSING: $i"; done
+```

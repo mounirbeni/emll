@@ -82,7 +82,7 @@ export function MobileModalContainer({
     return (
         <div
             className={cn(
-                "md:hidden fixed inset-0 z-50 bg-white",
+                "layer-modal md:hidden fixed inset-0 bg-white",
                 "safe-top safe-bottom",
                 "flex flex-col",
                 className

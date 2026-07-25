@@ -65,32 +65,32 @@ export function Footer() {
                         <h4 className="font-bold text-lg text-foreground">Quick Links</h4>
                         <ul className="space-y-3">
                             <li>
-                                <Link href="/experiences" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                                <Link href="/experiences" className="text-muted-foreground hover:text-primary inline-flex min-h-11 items-center text-sm transition-colors md:min-h-0">
                                     Experiences
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/recommendations" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                                <Link href="/recommendations" className="text-muted-foreground hover:text-primary inline-flex min-h-11 items-center text-sm transition-colors md:min-h-0">
                                     Recommendations
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/how-it-works" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                                <Link href="/how-it-works" className="text-muted-foreground hover:text-primary inline-flex min-h-11 items-center text-sm transition-colors md:min-h-0">
                                     How It Works
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/about" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                                <Link href="/about" className="text-muted-foreground hover:text-primary inline-flex min-h-11 items-center text-sm transition-colors md:min-h-0">
                                     About Us
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/faq" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                                <Link href="/faq" className="text-muted-foreground hover:text-primary inline-flex min-h-11 items-center text-sm transition-colors md:min-h-0">
                                     FAQ
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/support" className="text-muted-foreground hover:text-primary text-sm transition-colors">
+                                <Link href="/support" className="text-muted-foreground hover:text-primary inline-flex min-h-11 items-center text-sm transition-colors md:min-h-0">
                                     Support
                                 </Link>
                             </li>
@@ -121,17 +121,17 @@ export function Footer() {
 
                         <div className="pt-2">
                             <h5 className="font-semibold text-sm mb-3">Follow Us</h5>
-                            <div className="flex gap-3">
-                                <Link href="https://www.instagram.com/emll.ma" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                            <div className="-ml-2 flex gap-1 md:ml-0 md:gap-2">
+                                <Link href="https://www.instagram.com/emll.ma" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary flex h-11 w-11 items-center justify-center rounded-full transition-colors md:h-9 md:w-9">
                                     <Instagram className="h-5 w-5" />
                                 </Link>
-                                <Link href="https://www.facebook.com/share/1C3vJtvcui/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                <Link href="https://www.facebook.com/share/1C3vJtvcui/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary flex h-11 w-11 items-center justify-center rounded-full transition-colors md:h-9 md:w-9">
                                     <Facebook className="h-5 w-5" />
                                 </Link>
-                                <Link href="https://x.com/emwma24?s=09" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                <Link href="https://x.com/emwma24?s=09" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary flex h-11 w-11 items-center justify-center rounded-full transition-colors md:h-9 md:w-9">
                                     <Twitter className="h-5 w-5" />
                                 </Link>
-                                <Link href="https://www.tiktok.com/@emll.ma" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                <Link href="https://www.tiktok.com/@emll.ma" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary flex h-11 w-11 items-center justify-center rounded-full transition-colors md:h-9 md:w-9">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -158,10 +158,10 @@ export function Footer() {
                     <div className="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4 text-sm text-muted-foreground">
                         <p>&copy; {new Date().getFullYear()} Explore Marrakech like local. All rights reserved.</p>
                         <div className="flex gap-6">
-                            <Link href="/terms" className="hover:text-primary transition-colors">
-                                Terms & Conditions
+                            <Link href="/terms" className="hover:text-primary inline-flex min-h-11 items-center transition-colors md:min-h-0">
+                                Terms &amp; Conditions
                             </Link>
-                            <Link href="/privacy" className="hover:text-primary transition-colors">
+                            <Link href="/privacy" className="hover:text-primary inline-flex min-h-11 items-center transition-colors md:min-h-0">
                                 Privacy Policy
                             </Link>
                         </div>

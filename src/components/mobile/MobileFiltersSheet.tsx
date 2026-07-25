@@ -25,7 +25,7 @@ export function MobileFiltersSheet({
             {/* Backdrop */}
             {isOpen && (
                 <div
-                    className="fixed inset-0 bg-black/50 z-40 md:hidden"
+                    className="layer-overlay fixed inset-0 bg-black/50 md:hidden"
                     onClick={onClose}
                 />
             )}

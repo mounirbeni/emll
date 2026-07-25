@@ -70,7 +70,7 @@ export default async function EditProfilePage() {
                     </div>
 
                     <div className="pt-8">
-                        <Button className="w-full h-12 text-base font-semibold rounded-xl bg-primary hover:bg-accent shadow-brand">
+                        <Button className="w-full h-12 text-base font-semibold rounded-xl bg-primary hover:bg-brand-600 shadow-brand">
                             Save Changes
                         </Button>
                     </div>
