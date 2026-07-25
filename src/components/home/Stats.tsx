@@ -84,12 +84,12 @@ function Counter({ target, suffix }: { target: number; suffix: string }) {
 
 export function Stats() {
     return (
-        <section className="py-20 md:py-32 bg-accent relative overflow-hidden">
+        <section className="app-section md:py-32 bg-accent relative overflow-hidden">
             {/* Decorative Elements */}
             <div className="absolute top-10 right-10 w-32 h-32 rounded-full bg-primary/5 animate-float" />
             <div className="absolute bottom-20 left-10 w-24 h-24 rounded-full bg-primary/5 animate-float" style={{ animationDelay: '1s' }} />
 
-            <div className="container mx-auto px-8 max-w-7xl relative z-10">
+            <div className="app-container relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -97,7 +97,7 @@ export function Stats() {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-4 tracking-tight">
+                    <h2 className="type-h2 text-foreground mb-4">
                         Trusted by Thousands
                     </h2>
                     <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto font-light">

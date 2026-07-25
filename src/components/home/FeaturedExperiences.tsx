@@ -49,11 +49,11 @@ const experiences = [
 
 export function FeaturedExperiences() {
     return (
-        <section className="py-16 bg-gray-50">
-            <div className="container mx-auto px-4">
+        <section className="app-section bg-gray-50">
+            <div className="app-container">
                 <div className="flex justify-between items-end mb-10">
                     <div>
-                        <h2 className="text-3xl font-bold text-gray-900 mb-2">Top Experiences</h2>
+                        <h2 className="type-h2 text-foreground mb-2">Top Experiences</h2>
                         <p className="text-gray-600">Handpicked activities for your trip</p>
                     </div>
                     <Link href="/experiences">

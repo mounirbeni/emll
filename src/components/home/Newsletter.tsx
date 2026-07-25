@@ -25,12 +25,12 @@ export function Newsletter() {
     };
 
     return (
-        <section className="py-20 md:py-32 bg-primary relative overflow-hidden">
+        <section className="app-section md:py-32 bg-primary relative overflow-hidden">
             {/* Decorative Elements */}
             <div className="absolute top-1/4 right-10 w-40 h-40 rounded-full bg-white/10 animate-float" />
             <div className="absolute bottom-1/4 left-10 w-32 h-32 rounded-full bg-white/10 animate-float" style={{ animationDelay: '1s' }} />
 
-            <div className="container mx-auto px-8 max-w-4xl relative z-10">
+            <div className="app-container relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -42,7 +42,7 @@ export function Newsletter() {
                         <Mail className="w-10 h-10 text-white" />
                     </div>
 
-                    <h2 className="text-4xl md:text-5xl font-serif text-white mb-4 tracking-tight">
+                    <h2 className="type-h2 text-white mb-4">
                         Get Travel Inspiration
                     </h2>
                     <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed">

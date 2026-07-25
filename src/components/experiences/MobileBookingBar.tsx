@@ -41,7 +41,7 @@ export default function MobileBookingBar({
                     </div>
                     <Button
                         onClick={() => setIsOpen(true)}
-                        className="rounded-xl bg-orange-500 px-8 py-6 text-base font-bold text-white shadow-lg shadow-orange-500/25 hover:bg-orange-600"
+                        className="rounded-xl bg-orange-500 px-8 py-6 text-base font-bold text-white shadow-brand hover:bg-orange-600"
                     >
                         Book Now
                     </Button>

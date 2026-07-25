@@ -1,100 +1,452 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* ============================================================================
+   EXPLORE MARRAKECH — DESIGN SYSTEM
+   ----------------------------------------------------------------------------
+   One identity across every page and section. Anything visual should come from
+   a token below rather than an ad-hoc value, so the whole product reads as a
+   single brand instead of a set of separate screens.
+
+   Structure:
+     1. Brand ramps      — terracotta (primary), saffron (accent), warm ink
+     2. Palette override — Tailwind's orange/amber/gray remapped onto our ramps
+     3. Semantic tokens  — surfaces, text, borders, states
+     4. Typography       — fluid scale, one family pairing
+     5. Form & rhythm    — radius, shadow, layout, motion
+   ========================================================================= */
 
 @theme {
-  /* Marrakesh Brand Identity - FLAT ORANGE */
+  /* --- 1. BRAND RAMPS ----------------------------------------------------- */
+
+  /* Terracotta — the Marrakech clay. Primary brand, anchored at 500 (#FF6900). */
+  --color-brand-50: #FFF3EA;
+  --color-brand-100: #FFE2CC;
+  --color-brand-200: #FFC49B;
+  --color-brand-300: #FFA267;
+  --color-brand-400: #FF8434;
+  --color-brand-500: #FF6900;
+  --color-brand-600: #E85C00;
+  --color-brand-700: #BF4B00;
+  --color-brand-800: #963B00;
+  --color-brand-900: #7A3100;
+  --color-brand-950: #431A00;
+
+  /* Saffron — spice-market warmth. Secondary accent, ratings, highlights. */
+  --color-saffron-50: #FFF8EB;
+  --color-saffron-100: #FFEDC7;
+  --color-saffron-200: #FFD98A;
+  --color-saffron-300: #FFC24D;
+  --color-saffron-400: #FFAE24;
+  --color-saffron-500: #F59A0B;
+  --color-saffron-600: #D97A06;
+  --color-saffron-700: #B45A09;
+  --color-saffron-800: #92460E;
+  --color-saffron-900: #78390F;
+
+  /* Ink — warm-tinted neutrals. Never pure gray, so text and surfaces sit in
+     the same temperature as the brand instead of feeling bolted on. */
+  --color-ink-50: #FAF9F7;
+  --color-ink-100: #F4F2EF;
+  --color-ink-200: #E7E4DF;
+  --color-ink-300: #D4D0C9;
+  --color-ink-400: #A8A39A;
+  --color-ink-500: #7C776E;
+  --color-ink-600: #5C5851;
+  --color-ink-700: #45423C;
+  --color-ink-800: #2C2A26;
+  --color-ink-900: #1A1815;
+  --color-ink-950: #0F0E0C;
+
+  /* Mint — Moroccan tea green. Success + the one cool note in the system. */
+  --color-mint-50: #EFFAF4;
+  --color-mint-100: #D8F3E4;
+  --color-mint-500: #10A16A;
+  --color-mint-600: #0B8355;
+  --color-mint-700: #0A6844;
+
+  /* --- 2. PALETTE OVERRIDE ------------------------------------------------
+     The codebase already reaches for orange-*, amber-* and gray-* in hundreds
+     of places. Rather than leave three competing palettes in play, we point
+     Tailwind's ramps at our brand ramps. Existing markup keeps working and
+     instantly renders in-brand. New code should prefer brand-/saffron-/ink-. */
+
+  --color-orange-50: #FFF3EA;
+  --color-orange-100: #FFE2CC;
+  --color-orange-200: #FFC49B;
+  --color-orange-300: #FFA267;
+  --color-orange-400: #FF8434;
+  --color-orange-500: #FF6900;
+  --color-orange-600: #E85C00;
+  --color-orange-700: #BF4B00;
+  --color-orange-800: #963B00;
+  --color-orange-900: #7A3100;
+  --color-orange-950: #431A00;
+
+  --color-amber-50: #FFF8EB;
+  --color-amber-100: #FFEDC7;
+  --color-amber-200: #FFD98A;
+  --color-amber-300: #FFC24D;
+  --color-amber-400: #FFAE24;
+  --color-amber-500: #F59A0B;
+  --color-amber-600: #D97A06;
+  --color-amber-700: #B45A09;
+  --color-amber-800: #92460E;
+  --color-amber-900: #78390F;
+
+  --color-yellow-50: #FFF8EB;
+  --color-yellow-100: #FFEDC7;
+  --color-yellow-400: #FFAE24;
+  --color-yellow-500: #F59A0B;
+  --color-yellow-700: #B45A09;
+
+  --color-gray-50: #FAF9F7;
+  --color-gray-100: #F4F2EF;
+  --color-gray-200: #E7E4DF;
+  --color-gray-300: #D4D0C9;
+  --color-gray-400: #A8A39A;
+  --color-gray-500: #7C776E;
+  --color-gray-600: #5C5851;
+  --color-gray-700: #45423C;
+  --color-gray-800: #2C2A26;
+  --color-gray-900: #1A1815;
+  --color-gray-950: #0F0E0C;
+
+  /* --- 3. SEMANTIC TOKENS ------------------------------------------------- */
+
   --color-primary: #FF6900;
+  --color-primary-hover: #E85C00;
   --color-primary-foreground: #FFFFFF;
   --color-brand-orange: #FF6900;
   --color-brand-beige: #F5EADB;
 
-  /* Neutrals */
+  /* Surfaces — page sits on warm off-white, cards lift to pure white. */
   --color-background: #FFFFFF;
-  --color-foreground: #000000;
-  --color-charcoal: #2D2D2D;
+  --color-surface: #FAF9F7;
+  --color-surface-raised: #FFFFFF;
+  --color-surface-sunken: #F4F2EF;
+  --color-foreground: #1A1815;
+  --color-charcoal: #2C2A26;
 
-  --color-muted: #F5F5F5;
-  --color-muted-foreground: #666666;
+  --color-muted: #F4F2EF;
+  --color-muted-foreground: #5C5851;
 
   --color-card: #FFFFFF;
-  --color-card-foreground: #000000;
+  --color-card-foreground: #1A1815;
 
   --color-popover: #FFFFFF;
-  --color-popover-foreground: #000000;
+  --color-popover-foreground: #1A1815;
 
-  --color-border: #E5E5E5;
-  --color-input: #E5E5E5;
+  --color-border: #E7E4DF;
+  --color-border-strong: #D4D0C9;
+  --color-input: #E7E4DF;
   --color-ring: #FF6900;
 
-  /* Status Colors */
-  --color-success: #10B981;
-  /* Warning kept distinctive but branding applied where relevant */
-  --color-warning: #F59E0B;
-  --color-error: #EF4444;
+  /* States */
+  --color-success: #10A16A;
+  --color-warning: #F59A0B;
+  --color-error: #E5484D;
   --color-info: #3B82F6;
 
-  /* Typography */
+  /* --- 4. TYPOGRAPHY ------------------------------------------------------
+     Outfit for UI, Playfair for editorial display moments. Fluid sizes so the
+     hierarchy holds identically from mobile to desktop without per-page
+     breakpoint guesswork. */
+
   --font-sans: var(--font-outfit), -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   --font-serif: var(--font-playfair), Georgia, serif;
+  --font-display: var(--font-playfair), Georgia, serif;
 
-  /* Spacing System (4px base) */
-  --spacing-1: 4px;
-  --spacing-2: 8px;
-  --spacing-3: 12px;
-  --spacing-4: 16px;
-  --spacing-6: 24px;
-  --spacing-8: 32px;
-  --spacing-12: 48px;
-  --spacing-16: 64px;
+  --text-display: clamp(2.5rem, 1.6rem + 4.5vw, 4.5rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 700;
 
-  /* Border Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  --text-h1: clamp(2rem, 1.4rem + 3vw, 3.25rem);
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.025em;
+  --text-h1--font-weight: 700;
+
+  --text-h2: clamp(1.625rem, 1.25rem + 1.9vw, 2.5rem);
+  --text-h2--line-height: 1.15;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h2--font-weight: 700;
+
+  --text-h3: clamp(1.25rem, 1.1rem + 0.8vw, 1.625rem);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.015em;
+  --text-h3--font-weight: 600;
+
+  --text-h4: clamp(1.075rem, 1rem + 0.4vw, 1.25rem);
+  --text-h4--line-height: 1.35;
+  --text-h4--letter-spacing: -0.01em;
+  --text-h4--font-weight: 600;
+
+  --text-lead: clamp(1.05rem, 1rem + 0.45vw, 1.25rem);
+  --text-lead--line-height: 1.6;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.12em;
+  --text-eyebrow--font-weight: 700;
+
+  /* --- 5. FORM & RHYTHM ---------------------------------------------------
+     One radius language (soft, 12–20px in the common range) and warm-tinted
+     shadows, so elevation reads as part of the brand rather than neutral haze. */
+
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-3xl: 36px;
   --radius-full: 9999px;
 
-  /* Shadows (Subtle/Clean) */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-xs: 0 1px 2px 0 rgb(67 26 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(67 26 0 / 0.07), 0 1px 2px -1px rgb(67 26 0 / 0.05);
+  --shadow-md: 0 4px 12px -2px rgb(67 26 0 / 0.09), 0 2px 6px -2px rgb(67 26 0 / 0.05);
+  --shadow-lg: 0 12px 28px -6px rgb(67 26 0 / 0.12), 0 4px 10px -4px rgb(67 26 0 / 0.06);
+  --shadow-xl: 0 24px 48px -12px rgb(67 26 0 / 0.16), 0 8px 20px -8px rgb(67 26 0 / 0.08);
+  --shadow-brand: 0 8px 24px -6px rgb(255 105 0 / 0.35);
+
+  /* Layout rhythm — every page uses these, so spacing never drifts per screen. */
+  --container-max: 1200px;
+  --container-wide: 1440px;
+  --container-narrow: 760px;
+  --gutter: clamp(1rem, 0.6rem + 1.6vw, 2rem);
+  --section-y: clamp(3.5rem, 2.2rem + 4.5vw, 6rem);
+  --section-y-sm: clamp(2.5rem, 1.8rem + 2.6vw, 4rem);
+
+  /* Motion — shared easing so transitions feel like one product. */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* Enhanced Light Mode - Flat & Clean */
+/* shadcn-style consumers read these var names directly. */
 :root {
   color-scheme: light;
 
   --background: #FFFFFF;
-  --foreground: #000000;
+  --foreground: #1A1815;
 
   --card: #FFFFFF;
-  --card-foreground: #000000;
+  --card-foreground: #1A1815;
 
   --popover: #FFFFFF;
-  --popover-foreground: #000000;
+  --popover-foreground: #1A1815;
 
   --primary: #FF6900;
   --primary-foreground: #FFFFFF;
 
-  --secondary: #F5F5F5;
-  --secondary-foreground: #000000;
+  --secondary: #F4F2EF;
+  --secondary-foreground: #1A1815;
 
-  --muted: #F5F5F5;
-  --muted-foreground: #666666;
+  --muted: #F4F2EF;
+  --muted-foreground: #5C5851;
 
-  --accent: #F5EADB;
-  /* Light orange tint for hovers */
-  --accent-foreground: #FF6900;
+  --accent: #FFF3EA;
+  --accent-foreground: #BF4B00;
 
-  --destructive: #EF4444;
+  --destructive: #E5484D;
   --destructive-foreground: #FFFFFF;
 
-  --border: #E5E5E5;
-  --input: #E5E5E5;
+  --border: #E7E4DF;
+  --input: #E7E4DF;
   --ring: #FF6900;
 
-  --radius: 0.5rem;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Offset anchor jumps for the fixed header. */
+    scroll-padding-top: 6rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-foreground font-semibold tracking-tight;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* One focus treatment everywhere, brand-tinted. */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+
+  ::selection {
+    background: var(--color-brand-200);
+    color: var(--color-brand-900);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+
+  /* --- Type scale --------------------------------------------------------
+     Exposed as `type-*` rather than `text-*` on purpose: `cn()` runs
+     tailwind-merge, which treats every `text-*` class as one group and would
+     silently drop `text-h1` when a `text-white` is passed alongside it. A
+     distinct prefix makes size and colour composable without collisions. */
+
+  .type-display {
+    font-size: var(--text-display);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+
+  .type-h1 {
+    font-size: var(--text-h1);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+  }
+
+  .type-h2 {
+    font-size: var(--text-h2);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  .type-h3 {
+    font-size: var(--text-h3);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+  }
+
+  .type-h4 {
+    font-size: var(--text-h4);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+
+  .type-lead {
+    font-size: var(--text-lead);
+    line-height: 1.6;
+  }
+
+  .type-eyebrow {
+    font-size: var(--text-eyebrow);
+    line-height: 1;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  /* --- Layout primitives ------------------------------------------------
+     Used by the Section/Container components so every page inherits the same
+     horizontal gutter, max width, and vertical rhythm. */
+
+  .app-container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .app-container-wide {
+    width: 100%;
+    max-width: var(--container-wide);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .app-container-narrow {
+    width: 100%;
+    max-width: var(--container-narrow);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .app-section {
+    padding-block: var(--section-y);
+  }
+
+  .app-section-sm {
+    padding-block: var(--section-y-sm);
+  }
+
+  /* --- Surface language --------------------------------------------------
+     The single card treatment for the whole product. */
+
+  .surface-card,
+  .surface-card-interactive {
+    @apply rounded-2xl bg-card ring-1 ring-ink-900/5;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .surface-card-interactive {
+    transition: box-shadow 0.3s var(--ease-out-soft), transform 0.3s var(--ease-out-soft);
+  }
+
+  .surface-card-interactive:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  /* Eyebrow label above section headings. */
+  .eyebrow {
+    font-size: var(--text-eyebrow);
+    line-height: 1;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-brand-600);
+  }
+
+  /* Brand gradient used for hero and feature surfaces. */
+  .bg-brand-gradient {
+    background-image: linear-gradient(135deg, #FF6900 0%, #E85C00 55%, #BF4B00 100%);
+  }
+
+  .bg-brand-gradient-soft {
+    background-image: linear-gradient(135deg, #FFF3EA 0%, #FFE2CC 100%);
+  }
+
+  /* Subtle dotted texture for hero surfaces — one shared motif. */
+  .bg-brand-texture {
+    background-image: radial-gradient(circle at 2px 2px, rgb(255 255 255 / 0.16) 1px, transparent 0);
+    background-size: 26px 26px;
+  }
 }
 
 @layer utilities {
@@ -102,43 +454,7 @@
     text-wrap: balance;
   }
 
-  /* Premium Button Styles - Flat & Clean */
-  .btn-primary {
-    @apply inline-flex items-center justify-center rounded-xl bg-[var(--primary)] px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
-    box-shadow: 0 4px 6px -1px rgba(255, 165, 0, 0.2);
-  }
-
-  .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-900 transition-colors hover:bg-gray-50 hover:border-gray-300 active:bg-gray-100;
-  }
-
-  .btn-outline {
-    @apply inline-flex items-center justify-center rounded-xl border-2 border-[var(--primary)] bg-transparent px-6 py-3 text-sm font-bold text-[var(--primary)] transition-colors hover:bg-[var(--accent)];
-  }
-
-  /* GetYourGuide Style Cards */
-  .card-experience {
-    @apply relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-  }
-
-  /* Badge Styles */
-  .badge {
-    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
-  }
-
-  .badge-primary {
-    @apply border-transparent bg-[var(--primary)] text-white shadow hover:bg-[var(--primary)]/80;
-  }
-
-  .badge-secondary {
-    @apply border-transparent bg-gray-100 text-gray-900 hover:bg-gray-200;
-  }
-
-  .badge-outline {
-    @apply text-foreground;
-  }
-
-  /* Mobile Optimizations */
+  /* Mobile / safe-area helpers */
   .touch-target {
     @apply min-h-[44px] min-w-[44px];
   }
@@ -151,93 +467,136 @@
     padding-bottom: env(safe-area-inset-bottom);
   }
 
-  /* Bottom navigation safe area - Updated to 80px + safe area */
   .pb-safe-nav {
     padding-bottom: calc(80px + env(safe-area-inset-bottom));
   }
 
-  /* Margin variant for certain layouts */
   .mb-safe-nav {
     margin-bottom: calc(80px + env(safe-area-inset-bottom));
   }
 
-  /* Extra large padding for forms or sticky CTAs */
   .pb-safe-nav-xl {
     padding-bottom: calc(96px + env(safe-area-inset-bottom));
   }
 
-  /* Smooth scrolling for better mobile experience */
   .smooth-scroll {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
 
-  .hide-scrollbar {
+  .hide-scrollbar,
+  .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
 
-  .hide-scrollbar::-webkit-scrollbar {
+  .hide-scrollbar::-webkit-scrollbar,
+  .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Line clamping used across card components. */
+  .line-clamp-2-safe {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
+/* --- Legacy helpers -------------------------------------------------------
+   Retained so older markup keeps rendering, now pointed at design tokens. */
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-600 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+    box-shadow: var(--shadow-brand);
   }
 
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-xl border border-border bg-white px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-ink-50 hover:border-border-strong;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply tracking-tight text-[var(--color-dark-gray)];
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-xl border-2 border-primary bg-transparent px-6 py-3 text-sm font-bold text-primary transition-colors hover:bg-brand-50;
   }
 
-  /* Typography Hierarchy */
+  .card-experience {
+    @apply relative flex flex-col overflow-hidden rounded-2xl bg-card ring-1 ring-ink-900/5;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.3s var(--ease-out-soft), transform 0.3s var(--ease-out-soft);
+  }
+
+  .card-experience:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors;
+  }
+
+  .badge-primary {
+    @apply border-transparent bg-primary text-white;
+  }
+
+  .badge-secondary {
+    @apply border-transparent bg-ink-100 text-ink-900;
+  }
+
+  .badge-outline {
+    @apply text-foreground;
+  }
+
   .h1 {
-    @apply text-4xl font-bold md:text-5xl lg:text-6xl;
+    font-size: var(--text-h1);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    font-weight: 700;
   }
 
   .h2 {
-    @apply text-3xl font-bold md:text-4xl;
+    font-size: var(--text-h2);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 700;
   }
 
   .h3 {
-    @apply text-2xl font-bold md:text-3xl;
+    font-size: var(--text-h3);
+    line-height: 1.25;
+    font-weight: 600;
   }
 
   .h4 {
-    @apply text-xl font-bold md:text-2xl;
+    font-size: var(--text-h4);
+    line-height: 1.35;
+    font-weight: 600;
   }
 
   .subtitle {
-    @apply text-lg text-gray-600 md:text-xl;
+    @apply text-muted-foreground;
+    font-size: var(--text-lead);
+    line-height: 1.6;
   }
 
   .body-lead {
-    @apply text-lg text-gray-700;
+    @apply text-ink-700;
+    font-size: var(--text-lead);
+    line-height: 1.6;
   }
 
   .body-text {
-    @apply text-base text-gray-600;
+    @apply text-base text-muted-foreground;
   }
 
   .caption {
-    @apply text-sm text-gray-500;
+    @apply text-sm text-ink-500;
   }
 }
 
-/* Animations */
+/* --- Animations ---------------------------------------------------------- */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -250,7 +609,7 @@
 
 @keyframes slideUp {
   from {
-    transform: translateY(10px);
+    transform: translateY(12px);
     opacity: 0;
   }
 
@@ -261,9 +620,9 @@
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
+  animation: fadeIn 0.4s var(--ease-out-soft) forwards;
 }
 
 .animate-slide-up {
-  animation: slideUp 0.5s ease-out forwards;
+  animation: slideUp 0.5s var(--ease-out-soft) forwards;
 }

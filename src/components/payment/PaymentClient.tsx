@@ -102,7 +102,7 @@ export default function PaymentClient({ booking }: PaymentClientProps) {
                                     </div>
                                     <Button
                                         size="lg"
-                                        className="w-full max-w-md bg-orange-500 hover:bg-orange-600 text-white rounded-xl py-6 font-bold text-lg shadow-lg shadow-orange-500/20"
+                                        className="w-full max-w-md bg-orange-500 hover:bg-orange-600 text-white rounded-xl py-6 font-bold text-lg shadow-brand"
                                         onClick={handleCashPayload}
                                         disabled={isProcessing}
                                     >

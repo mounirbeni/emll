@@ -6,7 +6,14 @@ import { Search } from "lucide-react";
 import { useState, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 import { format } from "date-fns";
+import {
+    Container,
+    PageHero,
+    Section,
+    SectionHeader,
+} from "@/components/layout/PageShell";
 
 const CATEGORIES = ["All", "Travel Guide", "Food & Drink", "Tips", "Excursions"];
 
@@ -28,114 +35,124 @@ export default function BlogPage() {
     }, [filteredPosts]);
 
     return (
-        <div className="min-h-screen bg-gray-50 pb-20">
-            {/* Header */}
-            <div className="bg-white pt-24 pb-12 px-4 shadow-sm relative z-10">
-                <div className="max-w-[1400px] mx-auto text-center">
-                    <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
-                        Marrakech <span className="text-primary">Travel Journal</span>
-                    </h1>
-                    <p className="text-gray-500 text-lg max-w-2xl mx-auto mb-8">
-                        Insider tips, hidden gems, and local secrets for your perfect trip.
-                    </p>
-
-                    {/* Search & Filter */}
-                    <div className="flex flex-col md:flex-row items-center justify-center gap-4 max-w-2xl mx-auto">
-                        <div className="relative w-full md:w-auto flex-1">
-                            <input
-                                type="text"
-                                placeholder="Search articles..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full pl-10 pr-4 py-3 rounded-full border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none transition-all"
-                            />
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                        </div>
-                        <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar px-1">
-                            {CATEGORIES.map(cat => (
-                                <button
-                                    key={cat}
-                                    onClick={() => setSelectedCategory(cat)}
-                                    className={cn(
-                                        "px-4 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition-all",
-                                        selectedCategory === cat
-                                            ? "bg-primary text-white shadow-md shadow-orange-500/20"
-                                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                                    )}
-                                >
-                                    {cat}
-                                </button>
-                            ))}
-                        </div>
+        <>
+            <PageHero
+                eyebrow="Travel journal"
+                title="Marrakech Travel Journal"
+                subtitle="Insider tips, hidden gems, and local secrets for your perfect trip."
+            >
+                <div className="mx-auto flex w-full max-w-2xl flex-col items-center gap-3 md:flex-row">
+                    <div className="relative w-full flex-1">
+                        <input
+                            type="text"
+                            placeholder="Search articles..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            aria-label="Search articles"
+                            className="text-foreground placeholder:text-ink-400 w-full rounded-full bg-white py-3 pl-10 pr-4 shadow-lg outline-none"
+                        />
+                        <Search className="text-ink-400 absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2" />
                     </div>
                 </div>
+            </PageHero>
+
+            <div className="border-border bg-background/95 sticky top-[56px] z-30 border-b backdrop-blur-sm md:top-20">
+                <Container className="py-4">
+                    <div className="hide-scrollbar flex items-center gap-2 overflow-x-auto">
+                        {CATEGORIES.map(cat => (
+                            <button
+                                key={cat}
+                                onClick={() => setSelectedCategory(cat)}
+                                aria-pressed={selectedCategory === cat}
+                                className={cn(
+                                    "shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-colors",
+                                    selectedCategory === cat
+                                        ? "bg-primary text-white"
+                                        : "bg-ink-100 text-ink-600 hover:bg-ink-200"
+                                )}
+                            >
+                                {cat}
+                            </button>
+                        ))}
+                    </div>
+                </Container>
             </div>
 
-            {/* Content */}
-            <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
-                {filteredPosts.length > 0 ? (
-                    <div className="space-y-12">
-                        {/* Featured Post (if any) */}
-                        {featuredPost && (
-                            <section>
-                                <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                                    <span className="w-2 h-8 bg-primary rounded-full block"></span>
-                                    Featured Story
-                                </h2>
-                                <div className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-xl shadow-gray-200/50 flex flex-col md:flex-row group cursor-pointer hover:border-primary/20 transition-all">
-                                    <div className="md:w-1/2 relative min-h-[300px] md:min-h-[400px]">
-                                        <Image
-                                            src={featuredPost.image.startsWith('http') || featuredPost.image.startsWith('/') ? featuredPost.image : "/images/placeholder-blog.svg"}
-                                            alt={featuredPost.title}
-                                            fill
-                                            className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                            sizes="(max-width: 768px) 100vw, 50vw"
-                                            priority
-                                        />
-                                    </div>
-                                    <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
-                                        <span className="text-primary font-bold tracking-wide uppercase text-sm mb-3">
-                                            {featuredPost.category}
-                                        </span>
-                                        <h3 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 leading-tight group-hover:text-primary transition-colors">
-                                            {featuredPost.title}
-                                        </h3>
-                                        <p className="text-gray-500 text-lg mb-6 leading-relaxed">
-                                            {featuredPost.excerpt}
-                                        </p>
-                                        <div className="flex items-center gap-4 mt-auto">
-                                            <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-primary font-bold text-sm">
-                                                {featuredPost.author.charAt(0)}
-                                            </div>
-                                            <div className="text-sm">
-                                                <p className="font-bold text-gray-900">{featuredPost.author}</p>
-                                                <p className="text-gray-400">{featuredPost.readTime} • {format(new Date(featuredPost.publishedAt), "MMM d, yyyy")}</p>
-                                            </div>
+            {filteredPosts.length === 0 ? (
+                <Section tone="surface">
+                    <div className="py-16 text-center">
+                        <h3 className="type-h3">No articles found</h3>
+                        <p className="text-muted-foreground mt-2">
+                            Try adjusting your search terms.
+                        </p>
+                    </div>
+                </Section>
+            ) : (
+                <>
+                    {featuredPost && (
+                        <Section tone="surface" size="sm">
+                            <SectionHeader eyebrow="Don't miss" title="Featured Story" />
+
+                            <Link
+                                href={`/blog/${featuredPost.slug}`}
+                                className="surface-card-interactive group flex flex-col overflow-hidden md:flex-row"
+                            >
+                                <div className="relative min-h-[280px] md:min-h-[400px] md:w-1/2">
+                                    <Image
+                                        src={featuredPost.image.startsWith('http') || featuredPost.image.startsWith('/') ? featuredPost.image : "/images/placeholder-blog.svg"}
+                                        alt={featuredPost.title}
+                                        fill
+                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        priority
+                                    />
+                                </div>
+                                <div className="flex flex-col justify-center p-8 md:w-1/2 md:p-12">
+                                    <span className="eyebrow mb-3">{featuredPost.category}</span>
+                                    <h3 className="type-h2 group-hover:text-brand-600 mb-4 transition-colors">
+                                        {featuredPost.title}
+                                    </h3>
+                                    <p className="text-muted-foreground type-lead mb-6">
+                                        {featuredPost.excerpt}
+                                    </p>
+                                    <div className="mt-auto flex items-center gap-4">
+                                        <div className="bg-brand-100 text-brand-700 flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold">
+                                            {featuredPost.author.charAt(0)}
+                                        </div>
+                                        <div className="text-sm">
+                                            <p className="text-foreground font-semibold">
+                                                {featuredPost.author}
+                                            </p>
+                                            <p className="text-ink-400">
+                                                {featuredPost.readTime} •{" "}
+                                                {format(new Date(featuredPost.publishedAt), "MMM d, yyyy")}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
-                            </section>
-                        )}
+                            </Link>
+                        </Section>
+                    )}
 
-                        {/* Other Posts Grid */}
-                        {otherPosts.length > 0 && (
-                            <section>
-                                <h2 className="text-2xl font-bold text-gray-900 mb-6">Latest Articles</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                    {otherPosts.map(post => (
-                                        <BlogCard key={post.id} post={post} />
-                                    ))}
-                                </div>
-                            </section>
-                        )}
-                    </div>
-                ) : (
-                    <div className="text-center py-20">
-                        <h3 className="text-2xl font-bold text-gray-900">No articles found</h3>
-                        <p className="text-gray-500 mt-2">Try adjusting your search terms.</p>
-                    </div>
-                )}
-            </main>
-        </div>
+                    {otherPosts.length > 0 && (
+                        <Section>
+                            <SectionHeader
+                                title="Latest Articles"
+                                action={
+                                    <span className="text-muted-foreground text-sm font-medium">
+                                        {otherPosts.length} article{otherPosts.length === 1 ? "" : "s"}
+                                    </span>
+                                }
+                            />
+                            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                                {otherPosts.map(post => (
+                                    <BlogCard key={post.id} post={post} />
+                                ))}
+                            </div>
+                        </Section>
+                    )}
+                </>
+            )}
+        </>
     );
 }

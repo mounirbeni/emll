@@ -22,7 +22,7 @@ export default function MessagesPage() {
 
                 <Link
                     href="/support"
-                    className="bg-primary text-white font-medium px-6 py-3 rounded-xl shadow-lg shadow-orange-500/20 hover:bg-primary-dark transition-all"
+                    className="bg-primary text-white font-medium px-6 py-3 rounded-xl shadow-brand hover:bg-primary-dark transition-all"
                 >
                     Contact Support
                 </Link>

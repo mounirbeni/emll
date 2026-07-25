@@ -50,7 +50,7 @@ export default function PasswordPage() {
                     </div>
 
                     <div className="pt-8">
-                        <Button className="w-full h-12 text-base font-semibold rounded-xl bg-primary hover:bg-accent shadow-lg shadow-orange-500/20">
+                        <Button className="w-full h-12 text-base font-semibold rounded-xl bg-primary hover:bg-accent shadow-brand">
                             Update Password
                         </Button>
                     </div>

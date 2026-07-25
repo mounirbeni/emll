@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useState } from "react";
 import { toast } from "sonner";
+import { PageHero, Section } from "@/components/layout/PageShell";
 
 export default function SupportPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,21 +46,15 @@ export default function SupportPage() {
     };
 
     return (
-        <div className="min-h-screen bg-background pt-24 sm:pt-28 pb-12 sm:pb-20">
-            {/* Header Section */}
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl mb-12">
-                <div className="text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
-                        Support Center
-                    </h1>
-                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                        We&apos;re here to help you with any questions or issues you may have.
-                    </p>
-                </div>
-            </div>
+        <>
+            <PageHero
+                eyebrow="Support centre"
+                title="We're here to help"
+                subtitle="Questions about a booking, a payment, or planning your trip? Reach us any time."
+            />
 
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-12">
+            <Section>
+                <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 sm:gap-12">
 
                     {/* Left Column: Contact Info & FAQ */}
                     <div className="lg:col-span-1 space-y-8">
@@ -204,7 +199,7 @@ export default function SupportPage() {
                     </div>
 
                 </div>
-            </div>
-        </div>
+            </Section>
+        </>
     );
 }

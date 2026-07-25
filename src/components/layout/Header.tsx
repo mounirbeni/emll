@@ -46,40 +46,48 @@ export function Header() {
     return (
         <header
             className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+                "fixed left-0 right-0 top-0 z-50 border-b transition-all duration-300",
                 isScrolled
-                    ? "bg-white shadow-sm py-3"
-                    : "bg-white py-4"
+                    ? "bg-background/95 border-border py-3 shadow-sm backdrop-blur-md"
+                    : "bg-background border-transparent py-4"
             )}
         >
-            <div className="container mx-auto px-4">
+            <div className="app-container">
                 <div className="flex items-center justify-between">
                     {/* Logo */}
                     <Link href="/" className="relative z-50">
                         {/* Assuming Logo component takes className or similar, 
                  but sticking to simple link wrapper if Logo text is internal */}
                         <div className="flex items-center gap-2">
-                            <Compass className="w-8 h-8 text-primary" />
-                            <span className="text-2xl font-bold text-primary">
+                            <Compass className="text-primary h-7 w-7" />
+                            <span className="text-primary text-xl font-bold tracking-tight">
                                 Explore Marrakesh
                             </span>
                         </div>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center space-x-8">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className={cn(
-                                    "text-sm font-medium transition-colors hover:text-primary",
-                                    pathname === link.href ? "text-primary" : "text-gray-700"
-                                )}
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
+                    <nav className="hidden items-center gap-7 md:flex">
+                        {navLinks.map((link) => {
+                            const isActive =
+                                pathname === link.href || pathname?.startsWith(`${link.href}/`);
+                            return (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    aria-current={isActive ? "page" : undefined}
+                                    className={cn(
+                                        "hover:text-primary relative py-1 text-sm font-medium transition-colors",
+                                        "after:bg-primary after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:rounded-full after:transition-all",
+                                        isActive
+                                            ? "text-primary after:w-full"
+                                            : "text-ink-700 after:w-0 hover:after:w-full"
+                                    )}
+                                >
+                                    {link.label}
+                                </Link>
+                            );
+                        })}
                     </nav>
 
                     {/* Actions */}
@@ -124,7 +132,7 @@ export function Header() {
                             </DropdownMenu>
                         ) : (
                             <Link href="/login">
-                                <Button className="bg-primary hover:bg-accent text-white rounded-full font-bold px-6 shadow-md shadow-orange-500/20">
+                                <Button className="rounded-full px-6 font-bold">
                                     Sign In
                                 </Button>
                             </Link>

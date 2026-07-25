@@ -114,7 +114,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                                 Experience the real Marrakech with our curated guided tours and activities.
                             </p>
                             <Link href="/about" className="block">
-                                <Button className="w-full bg-primary hover:bg-primary/90 text-white font-bold h-12 rounded-xl shadow-lg shadow-orange-500/20">
+                                <Button className="w-full bg-primary hover:bg-primary/90 text-white font-bold h-12 rounded-xl shadow-brand">
                                     Learn More About Us
                                 </Button>
                             </Link>

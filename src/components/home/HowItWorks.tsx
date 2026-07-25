@@ -4,10 +4,10 @@
 
 export function HowItWorks() {
     return (
-        <section className="py-16 bg-white border-t border-gray-100">
-            <div className="container mx-auto px-4 max-w-5xl">
+        <section className="app-section bg-white border-t border-gray-100">
+            <div className="app-container">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl font-bold text-gray-900">How It Works</h2>
+                    <h2 className="type-h2 text-foreground">How It Works</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">

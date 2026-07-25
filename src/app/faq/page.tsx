@@ -1,108 +1,137 @@
 "use client";
 
+import Link from "next/link";
+import { MessageCircle } from "lucide-react";
+
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { PageHero, Section } from "@/components/layout/PageShell";
+
+const faqGroups = [
+    {
+        heading: "Booking & Payment",
+        items: [
+            {
+                q: "How do I book an experience?",
+                a: "Simply browse our experiences, select the one you like, choose your date and number of guests, then click Check Availability. We'll contact you to confirm your booking.",
+            },
+            {
+                q: "Do I need to pay online?",
+                a: "No payment is required online. You can pay in cash when you meet your guide, or arrange payment via WhatsApp with our team.",
+            },
+            {
+                q: "What payment methods do you accept?",
+                a: "We accept cash in EUR, USD, and MAD. Payment details will be confirmed when we contact you.",
+            },
+            {
+                q: "Can I cancel or change my booking?",
+                a: "Yes. You can cancel free of charge up to 24 hours before your experience starts. To change a date, message us and we'll rebook you subject to availability.",
+            },
+        ],
+    },
+    {
+        heading: "Experience Details",
+        items: [
+            {
+                q: "Are hotel pickups included?",
+                a: "Most experiences include hotel pickup from the Medina or Gueliz areas. Specific pickup details are listed in each experience description.",
+            },
+            {
+                q: "What languages do guides speak?",
+                a: "Our guides speak English, French, and Arabic. Some also speak Spanish, Italian, and German.",
+            },
+            {
+                q: "What should I wear or bring?",
+                a: "Comfortable walking shoes and modest clothing work best across the Medina and religious sites. For desert and mountain trips, bring sunscreen, a hat, and a light layer for the evening.",
+            },
+        ],
+    },
+    {
+        heading: "Groups & Accessibility",
+        items: [
+            {
+                q: "Do you host private or family groups?",
+                a: "Yes. Almost every experience can be booked privately for your group. Message us with your dates and group size and we'll arrange it.",
+            },
+            {
+                q: "Are experiences suitable for children?",
+                a: "Many are. Each experience page lists a recommended minimum age, and our team is happy to suggest the most family-friendly options.",
+            },
+        ],
+    },
+];
 
 export default function FAQPage() {
     return (
-        <div className="min-h-screen bg-background pt-28 pb-20">
-            <div className="container mx-auto px-4 max-w-4xl">
+        <>
+            <PageHero
+                eyebrow="Help centre"
+                title="Frequently Asked Questions"
+                subtitle="Answers to the questions we get most about booking and experiencing Marrakech."
+            />
 
-                <div className="text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                        Frequently Asked Questions
-                    </h1>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        Find answers to common questions about booking and experiencing Marrakech.
-                    </p>
-                </div>
-
+            <Section width="narrow">
                 <div className="space-y-12">
-                    <div>
-                        <h2 className="text-2xl font-bold text-foreground mb-6 border-b border-border pb-3">
-                            Booking & Payment
-                        </h2>
+                    {faqGroups.map((group) => (
+                        <div key={group.heading}>
+                            <h2 className="type-h3 border-border mb-6 border-b pb-3">
+                                {group.heading}
+                            </h2>
 
-                        <Accordion type="single" collapsible className="space-y-4">
-                            <AccordionItem value="item-1" className="border border-border rounded-lg px-6 data-[state=open]:border-primary/50">
-                                <AccordionTrigger className="text-left font-semibold hover:text-primary">
-                                    How do I book an experience?
-                                </AccordionTrigger>
-                                <AccordionContent className="text-muted-foreground leading-relaxed">
-                                    Simply browse our experiences, select the one you like, choose your date and number of guests, then click Check Availability. We&apos;ll contact you to confirm your booking.
-                                </AccordionContent>
-                            </AccordionItem>
-
-                            <AccordionItem value="item-2" className="border border-border rounded-lg px-6 data-[state=open]:border-primary/50">
-                                <AccordionTrigger className="text-left font-semibold hover:text-primary">
-                                    Do I need to pay online?
-                                </AccordionTrigger>
-                                <AccordionContent className="text-muted-foreground leading-relaxed">
-                                    No payment is required online. You can pay in cash when you meet your guide, or arrange payment via WhatsApp with our team.
-                                </AccordionContent>
-                            </AccordionItem>
-
-                            <AccordionItem value="item-3" className="border border-border rounded-lg px-6 data-[state=open]:border-primary/50">
-                                <AccordionTrigger className="text-left font-semibold hover:text-primary">
-                                    What payment methods do you accept?
-                                </AccordionTrigger>
-                                <AccordionContent className="text-muted-foreground leading-relaxed">
-                                    We accept cash in EUR, USD, and MAD. Payment details will be confirmed when we contact you.
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
-                    </div>
-
-                    <div>
-                        <h2 className="text-2xl font-bold text-foreground mb-6 border-b border-border pb-3">
-                            Experience Details
-                        </h2>
-
-                        <Accordion type="single" collapsible className="space-y-4">
-                            <AccordionItem value="item-4" className="border border-border rounded-lg px-6 data-[state=open]:border-primary/50">
-                                <AccordionTrigger className="text-left font-semibold hover:text-primary">
-                                    Are hotel pickups included?
-                                </AccordionTrigger>
-                                <AccordionContent className="text-muted-foreground leading-relaxed">
-                                    Most experiences include hotel pickup from the Medina or Gueliz areas. Specific pickup details are listed in each experience description.
-                                </AccordionContent>
-                            </AccordionItem>
-
-                            <AccordionItem value="item-5" className="border border-border rounded-lg px-6 data-[state=open]:border-primary/50">
-                                <AccordionTrigger className="text-left font-semibold hover:text-primary">
-                                    What languages do guides speak?
-                                </AccordionTrigger>
-                                <AccordionContent className="text-muted-foreground leading-relaxed">
-                                    Our guides speak English, French, and Arabic. Some also speak Spanish, Italian, and German.
-                                </AccordionContent>
-                            </AccordionItem>
-                        </Accordion>
-                    </div>
+                            <Accordion type="single" collapsible className="space-y-3">
+                                {group.items.map((item) => (
+                                    <AccordionItem
+                                        key={item.q}
+                                        value={item.q}
+                                        className="border-border data-[state=open]:border-brand-300 data-[state=open]:bg-brand-50/40 rounded-xl border px-5 transition-colors"
+                                    >
+                                        <AccordionTrigger className="hover:text-primary text-left font-semibold">
+                                            {item.q}
+                                        </AccordionTrigger>
+                                        <AccordionContent className="text-muted-foreground leading-relaxed">
+                                            {item.a}
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                ))}
+                            </Accordion>
+                        </div>
+                    ))}
                 </div>
+            </Section>
 
-                <div className="mt-16 text-center bg-secondary rounded-xl p-8">
-                    <h3 className="text-2xl font-bold mb-3">Still have questions?</h3>
-                    <p className="text-muted-foreground mb-6">
-                        Our team is here to help! Contact us anytime.
+            <Section tone="surface" size="sm" width="narrow">
+                <div className="surface-card flex flex-col items-center gap-5 p-8 text-center md:p-10">
+                    <h3 className="type-h3">Still have questions?</h3>
+                    <p className="text-muted-foreground max-w-md">
+                        Our team is here to help — usually replying within a couple of hours.
                     </p>
-                    <div className="flex flex-wrap gap-4 justify-center">
-                        <a href="/contact" className="px-6 py-3 bg-primary text-primary-foreground rounded-full font-semibold hover:bg-primary/90 transition-colors inline-block">
-                            Contact Us
-                        </a>
-                        <button
-                            onClick={() => window.open('https://wa.me/212601439975', '_blank')}
-                            className="px-6 py-3 border-2 border-primary text-primary rounded-full font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
+                    <div className="flex flex-wrap justify-center gap-3">
+                        <Button asChild size="lg" className="rounded-full">
+                            <Link href="/support">Contact Us</Link>
+                        </Button>
+                        <Button
+                            asChild
+                            size="lg"
+                            variant="outline"
+                            className="rounded-full"
                         >
-                            WhatsApp Us
-                        </button>
+                            <a
+                                href="https://wa.me/212601439975"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <MessageCircle className="h-4 w-4" />
+                                WhatsApp Us
+                            </a>
+                        </Button>
                     </div>
                 </div>
-
-            </div>
-        </div>
+            </Section>
+        </>
     );
 }

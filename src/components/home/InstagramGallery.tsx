@@ -34,8 +34,8 @@ const galleryImages = [
 
 export function InstagramGallery() {
     return (
-        <section className="py-20 md:py-28 bg-surface">
-            <div className="container mx-auto px-8 max-w-7xl">
+        <section className="app-section md:py-28 bg-surface">
+            <div className="app-container">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -45,7 +45,7 @@ export function InstagramGallery() {
                 >
                     <div className="flex items-center justify-center gap-3 mb-4">
                         <Instagram className="w-8 h-8 text-primary" />
-                        <h2 className="text-4xl md:text-5xl font-serif text-foreground tracking-tight">
+                        <h2 className="type-h2 text-foreground">
                             #MarrakechMoments
                         </h2>
                     </div>

@@ -47,7 +47,7 @@ export function DashboardHome({ user, stats, nextBooking }: DashboardHomeProps) 
                     </p>
                 </div>
                 <Link href="/experiences">
-                    <Button className="rounded-full bg-primary hover:bg-orange-600 text-white shadow-lg shadow-orange-500/20 px-6 h-12 text-base font-bold transition-all hover:scale-105 active:scale-95">
+                    <Button className="rounded-full bg-primary hover:bg-orange-600 text-white shadow-brand px-6 h-12 text-base font-bold transition-all hover:scale-105 active:scale-95">
                         <Sparkles className="w-4 h-4 mr-2" />
                         Book New Experience
                     </Button>
@@ -168,7 +168,7 @@ export function DashboardHome({ user, stats, nextBooking }: DashboardHomeProps) 
                                 You haven't booked any experiences yet. Start your journey by exploring our curated selection.
                             </p>
                             <Link href="/experiences">
-                                <Button className="bg-primary hover:bg-orange-600 font-bold rounded-full h-12 px-8 shadow-lg shadow-orange-500/20">
+                                <Button className="bg-primary hover:bg-orange-600 font-bold rounded-full h-12 px-8 shadow-brand">
                                     Browse Experiences
                                 </Button>
                             </Link>

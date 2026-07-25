@@ -23,8 +23,8 @@ const features = [
 
 export function WhyBookWithUs() {
     return (
-        <section className="py-20 md:py-28 bg-surface">
-            <div className="container mx-auto px-8 max-w-7xl">
+        <section className="app-section md:py-28 bg-surface">
+            <div className="app-container">
                 <div className="text-center mb-12 md:mb-16">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}

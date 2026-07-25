@@ -273,7 +273,7 @@ export function BookingDetailsClient({ booking }: BookingDetailsClientProps) {
                             {needsPayment && (
                                 <Link href={`/client/bookings/${booking.id}/payment`}>
                                     <Button
-                                        className="w-full bg-primary hover:bg-orange-600 text-white font-bold h-12 rounded-xl shadow-lg shadow-orange-200 mt-2"
+                                        className="w-full bg-primary hover:bg-orange-600 text-white font-bold h-12 rounded-xl shadow-brand mt-2"
                                     >
                                         Pay Now
                                     </Button>

@@ -102,7 +102,7 @@ export function AdminHeader() {
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="rounded-full pl-0 pr-3 py-1.5 h-auto hover:bg-orange-50 border border-transparent hover:border-orange-100 gap-3 transition-all">
-                            <div className="h-10 w-10 bg-primary rounded-full flex items-center justify-center text-white font-medium shadow-md shadow-orange-500/20 ring-2 ring-white">
+                            <div className="h-10 w-10 bg-primary rounded-full flex items-center justify-center text-white font-medium shadow-brand ring-2 ring-white">
                                 {session?.user?.name?.[0]?.toUpperCase() || 'A'}
                             </div>
                             <div className="hidden md:flex flex-col items-start">

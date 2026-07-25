@@ -28,17 +28,22 @@ export function Hero() {
                     backgroundPosition: 'center',
                 }}
             >
-                <div className="absolute inset-0 bg-black/30 md:bg-black/20" />
-                {/* Soft overlay for text readability */}
+                {/* Warm brand-tinted scrim keeps the hero in the same colour family
+                    as the rest of the product while holding text contrast. */}
+                <div className="absolute inset-0 bg-gradient-to-b from-brand-950/55 via-brand-950/35 to-brand-950/60" />
             </div>
 
             {/* Content */}
-            <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center">
-                <h1 className="text-white text-4xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6 drop-shadow-md tracking-tight leading-tight">
+            <div className="app-container relative z-10 flex flex-col items-center text-center">
+                <span className="type-eyebrow mb-5 inline-flex rounded-full bg-white/15 px-4 py-1.5 uppercase text-white backdrop-blur-sm">
+                    Explore Marrakech like local
+                </span>
+
+                <h1 className="type-display mb-4 max-w-4xl text-white drop-shadow-sm md:mb-6">
                     Discover Marrakech Like a Local
                 </h1>
 
-                <p className="text-white/90 text-lg md:text-xl max-w-2xl mb-8 md:mb-12 font-medium drop-shadow-sm">
+                <p className="type-lead mb-8 max-w-2xl font-medium text-white/90 md:mb-12">
                     Uncover authentic experiences, verified guides, and hidden gems in the Red City.
                 </p>
 
@@ -101,7 +106,7 @@ export function Hero() {
                             <Button
                                 type="submit"
                                 size="lg"
-                                className="w-full md:w-auto rounded-xl md:rounded-full bg-primary hover:bg-primary/90 text-white font-bold h-12 md:h-14 px-8 shadow-lg shadow-orange-500/20"
+                                className="w-full md:w-auto rounded-xl md:rounded-full bg-primary hover:bg-primary/90 text-white font-bold h-12 md:h-14 px-8 shadow-brand"
                             >
                                 Explore
                             </Button>

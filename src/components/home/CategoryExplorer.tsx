@@ -38,9 +38,9 @@ const categories = [
 
 export function CategoryExplorer() {
     return (
-        <section className="py-12 bg-white">
-            <div className="container mx-auto px-4">
-                <h2 className="text-2xl font-bold text-gray-900 mb-8">Browse by Category</h2>
+        <section className="app-section-sm bg-white">
+            <div className="app-container">
+                <h2 className="type-h2 text-foreground mb-8">Browse by Category</h2>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                     {categories.map((cat, index) => (

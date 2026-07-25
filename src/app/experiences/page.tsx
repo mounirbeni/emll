@@ -4,6 +4,7 @@ import ExperienceFilterBar from '@/components/experiences/ExperienceFilterBar';
 import { prisma } from '@/lib/prisma';
 import { Search, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { PageHero, Section } from '@/components/layout/PageShell';
 
 // Force dynamic rendering as search params change
 export const dynamic = 'force-dynamic';
@@ -68,89 +69,77 @@ export default async function ExperiencesPage({
     const experiences = await getExperiences(resolvedSearchParams);
 
     return (
-        <div className="min-h-screen bg-white">
+        <>
+            <PageHero
+                eyebrow="Explore Marrakech"
+                title="Unforgettable Experiences"
+                subtitle="Discover the best activities, tours, and hidden gems in Marrakech. Curated by locals, loved by travelers."
+            />
 
-            {/* Hero Section */}
-            <div className="relative bg-gray-50 pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-                {/* Decorative Background Elements */}
-                <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-                    <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-orange-300 blur-3xl"></div>
-                    <div className="absolute top-1/2 -left-24 w-72 h-72 rounded-full bg-blue-200 blur-3xl"></div>
-                </div>
-
-                <div className="container relative mx-auto px-4 text-center">
-                    <span className="mb-4 inline-block rounded-full bg-orange-100 px-4 py-1.5 text-sm font-bold text-orange-600">
-                        Explore Marrakech
-                    </span>
-                    <h1 className="mb-6 text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl lg:text-7xl">
-                        Unforgettable <span className="text-orange-500">Experiences</span>
-                    </h1>
-                    <p className="mx-auto max-w-2xl text-lg text-gray-600 md:text-xl leading-relaxed">
-                        Discover the best activities, tours, and hidden gems in Marrakech. Curated by locals, loved by travelers.
-                    </p>
-                </div>
-            </div>
-
-            <div className="container mx-auto px-4 -mt-10 relative z-20 pb-24 md:pb-20">
-
-                {/* Filter Bar */}
+            <Section size="sm">
                 <ExperienceFilterBar />
 
-                {/* Results Count & Sort Label (Mobile/Tablet usually shown in filter bar, but good to have a summary) */}
-                <div className="mt-8 mb-6 flex items-center justify-between text-sm text-gray-500">
-                    <span>Showing {experiences.length} experiences</span>
+                <div className="text-muted-foreground mb-6 mt-8 flex items-center justify-between text-sm">
+                    <span>
+                        Showing {experiences.length} experience{experiences.length === 1 ? "" : "s"}
+                    </span>
                 </div>
 
-                {/* Grid Section */}
-                <Suspense fallback={<div className="py-20 text-center text-gray-500">Loading experiences...</div>}>
-                    {
-                        experiences.length > 0 ? (
-                            <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                                {
-                                    experiences.map((experience) => (
-                                        <ExperienceCard key={experience.id} experience={experience as any} />
-                                    ))
-                                }
-                            </div>
-                        ) : (
-                            <EmptyState />
-                        )
+                <Suspense
+                    fallback={
+                        <div className="text-muted-foreground py-20 text-center">
+                            Loading experiences...
+                        </div>
                     }
+                >
+                    {experiences.length > 0 ? (
+                        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                            {experiences.map((experience) => (
+                                <ExperienceCard key={experience.id} experience={experience as any} />
+                            ))}
+                        </div>
+                    ) : (
+                        <EmptyState />
+                    )}
                 </Suspense>
-            </div>
+            </Section>
 
-            {/* Newsletter / Bottom CTA Section */}
-            <div className="bg-gray-900 py-20 text-white">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-bold mb-4">Can't find what you're looking for?</h2>
-                    <p className="text-gray-400 mb-8">Our concierge team can help you plan the perfect custom trip.</p>
-                    <Link href="/contact" className="inline-flex items-center rounded-xl bg-white text-gray-900 px-8 py-4 font-bold hover:bg-gray-100 transition-colors">
+            {/* Concierge CTA */}
+            <Section tone="brand" size="sm">
+                <div className="flex flex-col items-center gap-5 text-center">
+                    <h2 className="type-h2 text-white">Can&apos;t find what you&apos;re looking for?</h2>
+                    <p className="type-lead max-w-2xl text-white/90">
+                        Our concierge team can help you plan the perfect custom trip.
+                    </p>
+                    <Link
+                        href="/support"
+                        className="text-brand-600 inline-flex items-center rounded-full bg-white px-8 py-4 font-bold transition-colors hover:bg-white/90"
+                    >
                         Contact Concierge <ArrowRight className="ml-2 h-5 w-5" />
                     </Link>
                 </div>
-            </div>
-        </div>
+            </Section>
+        </>
     );
 }
 
 function EmptyState() {
     return (
-        <div className="flex flex-col items-center justify-center py-32 text-center rounded-3xl bg-gray-50 border-2 border-dashed border-gray-200">
-            <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-gray-100">
-                <Search className="h-8 w-8 text-gray-400" />
+        <div className="border-border bg-surface flex flex-col items-center justify-center rounded-2xl border-2 border-dashed py-24 text-center">
+            <div className="ring-border mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-sm ring-1">
+                <Search className="text-ink-400 h-8 w-8" />
             </div>
-            <h3 className="mb-3 text-2xl font-bold text-gray-900">No experiences found</h3>
-            <p className="max-w-md text-gray-500 mb-8">
-                We couldn't find any experiences matching your search filters. Try adjusting your dates, price range, or category.
+            <h3 className="type-h3 mb-3">No experiences found</h3>
+            <p className="text-muted-foreground mb-8 max-w-md">
+                We couldn&apos;t find any experiences matching your search filters. Try adjusting your
+                dates, price range, or category.
             </p>
-            <div className="flex gap-4">
-                <Link
-                    href="/experiences"
-                    className="rounded-xl bg-orange-500 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-orange-600 shadow-lg shadow-orange-500/20"
-                >
-                    Clear All Filters
-                </Link>
-            </div>
+            <Link
+                href="/experiences"
+                className="bg-primary hover:bg-brand-600 rounded-full px-6 py-3 text-sm font-bold text-white transition-colors"
+            >
+                Clear All Filters
+            </Link>
         </div>
     )
 }

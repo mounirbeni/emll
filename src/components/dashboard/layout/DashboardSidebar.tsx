@@ -112,7 +112,7 @@ export function DashboardSidebar({ className, showLogo = true }: SidebarProps) {
                 {/* User Profile Card */}
                 <div className="px-6">
                     <div className="bg-white border border-gray-100 p-5 rounded-3xl flex items-center gap-4 hover:shadow-md transition-all shadow-sm">
-                        <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white shadow-md shadow-orange-500/20 z-10">
+                        <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white shadow-brand z-10">
                             <span className="font-bold text-xl">{session?.user?.name?.[0]?.toUpperCase() || 'T'}</span>
                         </div>
                         <div className="flex flex-col overflow-hidden z-10">

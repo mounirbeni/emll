@@ -45,9 +45,9 @@ const WRITINGS = [
 
 export function MoreAboutMarrakech() {
     return (
-        <section className="py-16 bg-white border-t border-gray-100">
-            <div className="container mx-auto px-4 max-w-[1400px]">
-                <h2 className="text-[24px] font-bold text-black mb-8">
+        <section className="app-section bg-white border-t border-gray-100">
+            <div className="app-container">
+                <h2 className="type-h2 text-foreground mb-8">
                     Read more about Marrakech
                 </h2>
 

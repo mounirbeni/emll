@@ -334,7 +334,7 @@ function FilterBarContent() {
 
                         {/* Desktop Search Button */}
                         <div className="hidden md:block">
-                            <Button onClick={applyFilters} className="rounded-xl bg-orange-500 px-8 font-bold text-white hover:bg-orange-600 shadow-md shadow-orange-500/20">
+                            <Button onClick={applyFilters} className="rounded-xl bg-orange-500 px-8 font-bold text-white hover:bg-orange-600 shadow-brand">
                                 Search
                             </Button>
                         </div>

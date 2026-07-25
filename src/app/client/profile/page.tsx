@@ -146,7 +146,7 @@ export default function ProfilePage() {
                                 <Button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="bg-primary hover:bg-orange-600 text-white font-bold rounded-xl h-11 px-8 shadow-lg shadow-orange-500/10 min-w-[120px]"
+                                    className="bg-primary hover:bg-orange-600 text-white font-bold rounded-xl h-11 px-8 shadow-brand min-w-[120px]"
                                 >
                                     {isLoading ? (
                                         <>

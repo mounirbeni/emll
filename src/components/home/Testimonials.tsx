@@ -45,8 +45,8 @@ const testimonials = [
 
 export function Testimonials() {
     return (
-        <section className="py-20 md:py-28 bg-background">
-            <div className="container mx-auto px-8 max-w-7xl">
+        <section className="app-section md:py-28 bg-background">
+            <div className="app-container">
 
                 {/* Header */}
                 <div className="text-center mb-12 md:mb-16">

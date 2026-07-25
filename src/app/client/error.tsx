@@ -29,7 +29,7 @@ export default function ClientError({
             </div>
 
             <div className="flex gap-4">
-                <Button onClick={() => reset()} size="lg" className="rounded-full shadow-lg shadow-orange-500/20">
+                <Button onClick={() => reset()} size="lg" className="rounded-full shadow-brand">
                     <RefreshCw className="mr-2 h-4 w-4" />
                     Try Again
                 </Button>
