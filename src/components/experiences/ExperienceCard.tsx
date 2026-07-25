@@ -1,6 +1,6 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Clock, MapPin, Star } from 'lucide-react';
@@ -24,6 +24,22 @@ interface ExperienceCardProps {
     experience: Experience;
 }
 
+const PLACEHOLDER = '/images/placeholder-experience.svg';
+
+/**
+ * Only http(s) URLs and root-relative paths can actually resolve. Seeded rows
+ * carry sentinel values like "IMAGE_PLACEHOLDER_PENDING_UPLOAD", which would
+ * otherwise render as a broken image with the alt text spilling over the card.
+ */
+function resolveImage(src?: string) {
+    if (!src) return PLACEHOLDER;
+    const value = src.trim();
+    if (!value) return PLACEHOLDER;
+    if (value.startsWith('/')) return value;
+    if (value.startsWith('http://') || value.startsWith('https://')) return value;
+    return PLACEHOLDER;
+}
+
 function ExperienceCardComponent({ experience }: ExperienceCardProps) {
     const {
         id,
@@ -34,92 +50,98 @@ function ExperienceCardComponent({ experience }: ExperienceCardProps) {
         price,
         currency,
         gallery,
-        // Use real data, default to 0
         reviewCount = 0,
         avgRating = 0,
     } = experience;
 
-    // Map to component variables for cleaner usage below
-    const reviews = reviewCount;
-    const rating = avgRating;
+    const [imgSrc, setImgSrc] = useState(() => resolveImage(gallery?.[0]));
+
+    const href = `/experiences/${id}`;
+    const symbol = currency === 'EUR' ? '€' : currency;
+    const hasReviews = reviewCount > 0;
 
     return (
-        <Link
-            href={`/experiences/${id}`}
-            className="group relative flex flex-col h-full overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ring-1 ring-black/5 active:scale-[0.98]"
-        >
-            {/* Image Container - 16:9 Aspect Ratio */}
-            <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100">
+        // The card is an <article> rather than a link so the booking CTA can be a
+        // real, separate link. The title's stretched ::after keeps the whole card
+        // clickable without nesting one anchor inside another.
+        <article className="surface-card-interactive group relative flex h-full flex-col overflow-hidden">
+            {/* Image */}
+            <div className="bg-ink-100 relative aspect-[16/10] w-full overflow-hidden">
                 <Image
-                    src={(!gallery[0] || gallery[0] === 'IMAGE_PLACEHOLDER_PENDING_UPLOAD') ? '/images/placeholder-experience.svg' : gallery[0]}
+                    src={imgSrc}
                     alt={title}
                     fill
-                    className="object-cover transition-transform duration-700 will-change-transform group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                    priority={false}
+                    className="object-cover transition-transform duration-700 will-change-transform group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    onError={() => setImgSrc(PLACEHOLDER)}
                 />
 
-                {/* Overlay Gradient on Hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                {/* Category Badge - Top Left */}
                 <div className="absolute left-3 top-3">
-                    <span className="inline-flex items-center rounded-lg bg-white/95 px-3 py-1 text-xs font-bold uppercase tracking-wider text-orange-600 shadow-sm backdrop-blur-sm">
+                    <span className="type-eyebrow text-brand-600 inline-flex items-center rounded-lg bg-white/95 px-3 py-1 shadow-sm backdrop-blur-sm">
                         {category}
                     </span>
                 </div>
-
-                {/* Wishlist/Heart Button placeholder could go here */}
             </div>
 
-            {/* Content Container */}
+            {/* Content */}
             <div className="flex flex-1 flex-col p-4 md:p-5">
-
-                {/* Meta Info: Duration & Location */}
-                <div className="mb-3 flex items-center justify-between text-xs font-medium text-gray-500">
+                <div className="text-ink-500 mb-3 flex items-center justify-between gap-2 text-xs font-medium">
                     <div className="flex items-center gap-1">
-                        <Clock className="h-3.5 w-3.5" />
+                        <Clock className="h-3.5 w-3.5 shrink-0" />
                         <span>{duration}</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                        <MapPin className="h-3.5 w-3.5" />
-                        <span className="max-w-[120px] truncate">{location}</span>
+                    <div className="flex min-w-0 items-center gap-1">
+                        <MapPin className="h-3.5 w-3.5 shrink-0" />
+                        <span className="truncate">{location}</span>
                     </div>
                 </div>
 
-                {/* Title */}
-                <h3 className="mb-2 line-clamp-2 text-lg font-bold leading-tight text-gray-900 group-hover:text-orange-600 transition-colors">
-                    {title}
+                <h3 className="type-h4 group-hover:text-brand-600 mb-2 line-clamp-2 transition-colors">
+                    <Link href={href} className="after:absolute after:inset-0 after:content-['']">
+                        {title}
+                    </Link>
                 </h3>
 
-                {/* Rating */}
+                {/* Rating — a bare "0 (0 reviews)" reads as a bad score, so new
+                    experiences show a neutral label instead. */}
                 <div className="mb-4 flex items-center gap-1.5">
-                    <div className="flex items-center gap-0.5">
-                        <Star className="h-4 w-4 fill-orange-400 text-orange-400" />
-                        <span className="font-bold text-gray-900">{rating}</span>
-                    </div>
-                    <span className="text-sm text-gray-400">({reviews} reviews)</span>
+                    {hasReviews ? (
+                        <>
+                            <Star className="fill-saffron-400 text-saffron-400 h-4 w-4" />
+                            <span className="text-foreground font-bold">{avgRating.toFixed(1)}</span>
+                            <span className="text-ink-400 text-sm">({reviewCount} reviews)</span>
+                        </>
+                    ) : (
+                        <span className="bg-mint-50 text-mint-700 rounded-md px-2 py-0.5 text-xs font-semibold">
+                            New experience
+                        </span>
+                    )}
                 </div>
 
-                {/* Footer: Price */}
-                <div className="mt-auto flex items-end justify-between border-t border-gray-100 pt-4">
+                {/* Price + booking CTA */}
+                <div className="border-border mt-auto flex items-center justify-between gap-3 border-t pt-4">
                     <div className="flex flex-col">
-                        <span className="text-xs text-gray-400">From</span>
+                        <span className="text-ink-400 text-xs">From</span>
                         <div className="flex items-baseline gap-1">
-                            <span className="text-xl font-bold text-gray-900">
-                                {currency === 'EUR' ? '€' : currency}{price}
+                            <span className="text-foreground text-lg font-bold">
+                                {symbol}{price}
                             </span>
-                            <span className="text-xs text-gray-500 font-medium">per person</span>
+                            <span className="text-ink-500 text-xs font-medium">per person</span>
                         </div>
                     </div>
 
-                    {/* Mobile CTA / Desktop Visual Indicator */}
-                    <div className="hidden h-8 w-8 items-center justify-center rounded-full bg-orange-50 text-orange-600 transition-colors group-hover:bg-orange-500 group-hover:text-white md:flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-                    </div>
+                    <Link
+                        href={href}
+                        aria-label={`Book ${title}`}
+                        className="bg-primary hover:bg-brand-600 relative z-10 shrink-0 rounded-full px-5 py-2.5 text-sm font-bold text-white transition-colors active:scale-[0.97]"
+                    >
+                        Book Now
+                    </Link>
                 </div>
             </div>
-        </Link>
+        </article>
     );
 }
 
