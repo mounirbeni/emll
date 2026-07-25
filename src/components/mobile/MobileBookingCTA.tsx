@@ -34,7 +34,7 @@ export function MobileBookingCTA({
     return (
         <div
             className={cn(
-                "md:hidden fixed bottom-0 left-0 right-0 z-40",
+                "md:hidden fixed left-0 right-0 dock-above-nav layer-docked",
                 "bg-white/95 backdrop-blur-lg border-t border-gray-100",
                 "safe-bottom shadow-2xl",
                 className
@@ -59,7 +59,7 @@ export function MobileBookingCTA({
                     {/* Book Button */}
                     <button
                         onClick={onBook}
-                        className="flex-1 h-[44px] bg-primary hover:bg-accent text-white font-semibold rounded-[14px] transition-all active:scale-[0.97] shadow-lg shadow-primary/20 text-[15px]"
+                        className="hover:bg-brand-600 shadow-brand h-[44px] flex-1 rounded-[14px] bg-primary text-[15px] font-semibold text-white transition-all active:scale-[0.97]"
                     >
                         {buttonText}
                     </button>
@@ -92,7 +92,7 @@ export function MobileBookingCTAWithActions({
     return (
         <div
             className={cn(
-                "md:hidden fixed bottom-0 left-0 right-0 z-40",
+                "md:hidden fixed left-0 right-0 dock-above-nav layer-docked",
                 "bg-white/95 backdrop-blur-lg border-t border-gray-100",
                 "safe-bottom shadow-2xl",
                 className
@@ -121,7 +121,7 @@ export function MobileBookingCTAWithActions({
                         )}
                         <button
                             onClick={onBook}
-                            className="flex-1 h-[44px] bg-primary hover:bg-accent text-white font-semibold rounded-[14px] transition-all active:scale-[0.97] shadow-lg shadow-primary/20 text-[15px]"
+                            className="hover:bg-brand-600 shadow-brand h-[44px] flex-1 rounded-[14px] bg-primary text-[15px] font-semibold text-white transition-all active:scale-[0.97]"
                         >
                             Book Now
                         </button>

@@ -33,7 +33,7 @@ export function MobileFiltersSheet({
             {/* Bottom Sheet */}
             <div
                 className={cn(
-                    "fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl z-50 md:hidden transition-transform duration-300 ease-out",
+                    "fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl layer-sheet md:hidden transition-transform duration-300 ease-out",
                     isOpen ? "translate-y-0" : "translate-y-full"
                 )}
                 style={{ maxHeight: "85vh" }}

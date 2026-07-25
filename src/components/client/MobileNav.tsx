@@ -15,7 +15,7 @@ export function MobileNav() {
     ];
 
     return (
-        <div className="fixed bottom-0 left-0 z-50 w-full bg-white border-t border-gray-200 lg:hidden safe-bottom">
+        <div className="layer-nav safe-bottom border-border fixed bottom-0 left-0 w-full border-t bg-white lg:hidden">
             <div className="grid h-16 grid-cols-4 mx-auto">
                 {navigation.map((item) => {
                     const isActive = pathname === item.href || (item.href !== "/client" && pathname.startsWith(item.href));

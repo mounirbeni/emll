@@ -256,6 +256,14 @@
   --ring: #FF6900;
 
   --radius: 0.75rem;
+
+  /* --- Mobile chrome metrics -------------------------------------------
+     The bottom nav is 64px of content + 8px padding. Anything that docks to
+     the bottom of the viewport measures itself from these, so a change here
+     moves every dependent element together instead of leaving one behind. */
+  --bottom-nav-h: 72px;
+  --bottom-nav-safe: calc(72px + env(safe-area-inset-bottom));
+  --docked-bar-h: 76px;
 }
 
 @layer base {
@@ -433,6 +441,45 @@
     color: var(--color-brand-600);
   }
 
+  /* --- Layering ----------------------------------------------------------
+     A single stacking order for everything that overlaps. Before this existed
+     each overlay independently picked `z-50`, so whichever rendered last in
+     the DOM won — which is how the booking bar ended up underneath the bottom
+     nav. Use these instead of a bare z-index. */
+
+  .layer-sticky {
+    z-index: 30;
+  }
+
+  /* Fixed site header */
+  .layer-header {
+    z-index: 50;
+  }
+
+  /* Page-level bars docked above the nav (booking CTA, etc.) */
+  .layer-docked {
+    z-index: 55;
+  }
+
+  /* Persistent mobile bottom navigation */
+  .layer-nav {
+    z-index: 60;
+  }
+
+  /* Scrims behind sheets and modals */
+  .layer-overlay {
+    z-index: 70;
+  }
+
+  /* Bottom sheets — must sit above the nav, they are full takeovers */
+  .layer-sheet {
+    z-index: 80;
+  }
+
+  .layer-modal {
+    z-index: 90;
+  }
+
   /* Brand gradient used for hero and feature surfaces. */
   .bg-brand-gradient {
     background-image: linear-gradient(135deg, #FF6900 0%, #E85C00 55%, #BF4B00 100%);
@@ -463,20 +510,71 @@
     padding-top: env(safe-area-inset-top);
   }
 
-  .safe-area-bottom {
+  .safe-area-bottom,
+  .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom);
   }
 
+  /* Clears the bottom nav. Applied to <main> so no page content can end up
+     trapped underneath it. */
   .pb-safe-nav {
-    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+    padding-bottom: calc(var(--bottom-nav-h) + 8px + env(safe-area-inset-bottom));
   }
 
   .mb-safe-nav {
-    margin-bottom: calc(80px + env(safe-area-inset-bottom));
+    margin-bottom: calc(var(--bottom-nav-h) + 8px + env(safe-area-inset-bottom));
   }
 
-  .pb-safe-nav-xl {
-    padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  /* Clears the bottom nav *and* a docked bar above it. Use on pages that
+     render a sticky booking CTA, otherwise the last section hides behind it. */
+  .pb-safe-nav-xl,
+  .pb-safe-dock {
+    padding-bottom: calc(var(--bottom-nav-h) + var(--docked-bar-h) + 16px + env(safe-area-inset-bottom));
+  }
+
+  /* Docks a fixed element directly above the bottom nav rather than under it. */
+  .dock-above-nav {
+    bottom: var(--bottom-nav-safe);
+  }
+
+  /* The footer is the last element on the page, so it — not <main> — is what
+     has to clear the fixed bottom chrome. Padding <main> leaves the footer
+     itself trapped underneath the nav. */
+  .footer-safe {
+    padding-bottom: calc(var(--bottom-nav-h) + 12px + env(safe-area-inset-bottom));
+  }
+
+  body:has(.dock-above-nav) .footer-safe {
+    padding-bottom: calc(var(--bottom-nav-h) + var(--docked-bar-h) + 16px + env(safe-area-inset-bottom));
+  }
+
+  /* Floating action button (WhatsApp). Clears the bottom nav by default, and
+     lifts again on pages that also dock a bar above it, so the two can never
+     sit on top of each other. */
+  .fab-floating {
+    bottom: calc(var(--bottom-nav-safe) + 12px);
+  }
+
+  body:has(.dock-above-nav) .fab-floating {
+    bottom: calc(var(--bottom-nav-safe) + var(--docked-bar-h) + 12px);
+  }
+
+  @media (min-width: 768px) {
+
+    /* The bottom nav is mobile-only, so docked elements sit flush on desktop. */
+    .dock-above-nav {
+      bottom: 0;
+    }
+
+    .fab-floating,
+    body:has(.dock-above-nav) .fab-floating {
+      bottom: 1.5rem;
+    }
+
+    .footer-safe,
+    body:has(.dock-above-nav) .footer-safe {
+      padding-bottom: 2rem;
+    }
   }
 
   .smooth-scroll {

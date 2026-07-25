@@ -11,8 +11,9 @@ export function MobileBottomNav() {
     const pathname = usePathname()
     const { data: session } = useSession()
 
-    // Don't show on admin pages
-    if (pathname?.startsWith('/admin')) {
+    // Admin has no bottom nav, and the client dashboard ships its own
+    // contextual one — rendering both stacked them on top of each other.
+    if (pathname?.startsWith('/admin') || pathname?.startsWith('/client')) {
         return null
     }
 
@@ -31,7 +32,7 @@ export function MobileBottomNav() {
 
     return (
         <nav
-            className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-100 z-50 shadow-lg"
+            className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-border layer-nav shadow-lg"
             style={{
                 paddingBottom: 'calc(8px + env(safe-area-inset-bottom))',
             }}

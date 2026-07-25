@@ -24,24 +24,20 @@ export default function MobileBookingBar({
     // Mobile bottom bar (hidden on desktop)
     return (
         <>
-            {/* Fixed Bottom Bar - Mobile Only */}
-            <div
-                className="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-200 bg-white px-4 py-3 shadow-2xl shadow-gray-900/20 lg:hidden"
-                style={{
-                    paddingBottom: 'calc(12px + env(safe-area-inset-bottom))',
-                }}
-            >
+            {/* Docked above the bottom nav so both stay reachable on mobile. */}
+            <div className="dock-above-nav layer-docked border-border fixed left-0 right-0 border-t bg-white px-4 py-3 shadow-lg lg:hidden">
                 <div className="flex items-center justify-between gap-4">
                     <div>
-                        <p className="text-xs text-gray-500">From</p>
-                        <p className="text-xl font-bold text-gray-900">
+                        <p className="text-ink-500 text-xs">From</p>
+                        <p className="text-foreground text-xl font-bold">
                             {currency === 'EUR' ? '€' : currency}{price}
-                            <span className="text-sm font-normal text-gray-500">/person</span>
+                            <span className="text-ink-500 text-sm font-normal">/person</span>
                         </p>
                     </div>
                     <Button
                         onClick={() => setIsOpen(true)}
-                        className="rounded-xl bg-orange-500 px-8 py-6 text-base font-bold text-white shadow-brand hover:bg-orange-600"
+                        size="lg"
+                        className="shadow-brand rounded-xl px-8 text-base font-bold"
                     >
                         Book Now
                     </Button>

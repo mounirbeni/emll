@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ExperiencesLoading() {
     return (
-        <div className="min-h-screen bg-white pb-20 pt-20">
+        <div className="min-h-screen bg-background app-section-sm">
             {/* Hero Section Skeleton */}
             <div className="bg-gray-50 py-16 text-center md:py-24">
                 <div className="container mx-auto px-4">

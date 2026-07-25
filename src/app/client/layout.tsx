@@ -73,7 +73,7 @@ export default function ClientLayout({
                 </header>
 
                 {/* Page Content */}
-                <main className="p-4 lg:p-8 max-w-[1600px] mx-auto pb-24 lg:pb-8 animate-fade-in">
+                <main className="pb-safe-nav animate-fade-in mx-auto max-w-[1600px] p-4 lg:p-8 lg:pb-8">
                     {children}
                 </main>
 

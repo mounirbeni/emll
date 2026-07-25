@@ -6,7 +6,7 @@ export default function BlogLoading() {
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
             {/* Header Skeleton */}
-            <div className="bg-white pt-24 pb-12 px-4 shadow-sm relative z-10">
+            <div className="bg-background app-section-sm relative">
                 <div className="max-w-[1400px] mx-auto text-center">
                     <Skeleton className="h-12 w-80 mx-auto mb-4" />
                     <Skeleton className="h-6 w-96 mx-auto mb-8" />

@@ -99,8 +99,10 @@ export default async function ExperienceDetailsPage({ params }: { params: Promis
         dressCode: "Modest clothing recommended when visiting religious sites"
     };
 
+    // No pt-* here — PublicLayout offsets the fixed header, and the Footer
+    // carries the bottom clearance for the nav and the docked booking bar.
     return (
-        <div className="min-h-screen bg-white pb-32 pt-20">
+        <div className="min-h-screen bg-background">
 
             {/* 1. Hero Section */}
             <ExperienceHero

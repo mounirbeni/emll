@@ -17,7 +17,9 @@ export function WhatsAppButton() {
             onClick={handleClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="fixed bottom-6 right-6 z-50 h-14 px-4 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full shadow-lg transition-all duration-300 flex items-center gap-2 group"
+            /* .fab-floating keeps this clear of the bottom nav and of any docked
+               booking bar; see globals.css. */
+            className="fab-floating layer-docked group fixed right-4 flex h-14 items-center gap-2 rounded-full bg-[#25D366] px-4 text-white shadow-lg transition-all duration-300 hover:bg-[#20bd5a] md:right-6"
             aria-label="Contact us on WhatsApp"
         >
             <MessageCircle className="h-6 w-6 group-hover:scale-110 transition-transform" />

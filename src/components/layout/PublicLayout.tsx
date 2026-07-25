@@ -22,7 +22,10 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                 <Header />
             </div>
             <MobileHeader />
-            <main id="main-content" className="flex-1 w-full pt-[56px] md:pt-20 pb-safe-nav">{children}</main>
+            {/* Bottom clearance lives on the Footer (.footer-safe), since that is
+                the last element on the page — padding <main> would leave the
+                footer itself trapped under the fixed bottom nav. */}
+            <main id="main-content" className="w-full flex-1 pt-[56px] md:pt-20">{children}</main>
             <Footer />
             <WhatsAppButton />
         </>

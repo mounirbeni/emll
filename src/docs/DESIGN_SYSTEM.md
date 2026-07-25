@@ -138,7 +138,61 @@ Driven by tokens, so spacing never drifts per screen:
 
 ---
 
-## 6. Motion & accessibility
+## 6. Mobile chrome & layering
+
+Mobile has two pieces of fixed chrome that overlap page content: the **bottom
+nav** and, on product pages, a **docked booking bar**. Everything that touches
+the bottom of the viewport must measure itself from the shared metrics rather
+than hard-coding a value.
+
+### Metrics
+
+| Token | Value |
+|---|---|
+| `--bottom-nav-h` | `72px` (64px content + 8px padding) |
+| `--bottom-nav-safe` | nav height + `env(safe-area-inset-bottom)` |
+| `--docked-bar-h` | `76px` |
+
+### Stacking order
+
+Use these classes instead of a bare `z-*`. Every overlay previously picked
+`z-50` independently, so whichever rendered last in the DOM won — which is how
+the booking bar ended up *underneath* the bottom nav.
+
+| Class | z | For |
+|---|---|---|
+| `layer-sticky` | 30 | Sticky filter/category bars |
+| `layer-header` | 50 | Fixed site header |
+| `layer-docked` | 55 | Booking bars, floating action button |
+| `layer-nav` | 60 | Mobile bottom navigation |
+| `layer-overlay` | 70 | Scrims behind sheets/modals |
+| `layer-sheet` | 80 | Bottom sheets (full takeovers, must beat the nav) |
+| `layer-modal` | 90 | Modals |
+
+### Positioning helpers
+
+- **`dock-above-nav`** — pins a fixed bar directly above the bottom nav (flush
+  to the bottom on desktop, where no nav exists). Use this for booking CTAs;
+  never `bottom-0`, which lands underneath the nav.
+- **`fab-floating`** — for the floating action button. Clears the nav, and
+  automatically lifts further on pages that also render a docked bar.
+- **`safe-bottom`** — `env(safe-area-inset-bottom)` padding, for iPhone home
+  indicator clearance.
+
+### Bottom clearance is the Footer's job
+
+`.footer-safe` on `<footer>` carries the clearance, and grows automatically via
+`body:has(.dock-above-nav)` when a booking bar is present.
+
+**Do not** put `pb-safe-nav` on `<main>` in the public layout: the footer is a
+*sibling after* main, so padding main leaves the footer itself trapped under the
+nav. `pb-safe-nav` is still correct for the client dashboard, which has no footer.
+
+**Do not** add `pt-*` for the header — `PublicLayout` already offsets `<main>`.
+
+---
+
+## 7. Motion & accessibility
 
 - Shared easing: `--ease-out-soft`, `--ease-in-out-soft`.
 - `prefers-reduced-motion` is respected globally — don't re-add unconditional animation.
@@ -154,4 +208,8 @@ Driven by tokens, so spacing never drifts per screen:
 2. Any raw hex, or a `text-*`/`bg-*` outside the ramps? Replace it.
 3. Section built with `Section` + `SectionHeader`?
 4. Heading using the `type-*` scale?
-5. Does it still read as the same product as the page next to it?
+5. Anything fixed to the bottom? Use `layer-*` + `dock-above-nav`, never
+   `bottom-0 z-50`.
+6. **Checked it at 390px wide, scrolled to the very bottom?** Most "hidden
+   content" bugs only appear at the end of the page on a phone.
+7. Does it still read as the same product as the page next to it?

@@ -55,7 +55,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
 
     if (!eligibility.canReview) {
         return (
-            <div className="min-h-screen bg-gray-50 pt-20 pb-16">
+            <div className="min-h-screen bg-surface app-section-sm">
                 <div className="container mx-auto px-4 max-w-2xl">
                     <Link
                         href={`/experiences/${experience.slug}`}
@@ -86,7 +86,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-20 pb-16">
+        <div className="min-h-screen bg-surface app-section-sm">
             <div className="container mx-auto px-4">
                 <Link
                     href={`/experiences/${experience.slug}`}

@@ -39,7 +39,7 @@ export function MobileBottomSheet({
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="md:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-50"
+                        className="md:hidden fixed inset-0 bg-black/40 backdrop-blur-sm layer-overlay"
                         onClick={onClose}
                     />
 
@@ -54,7 +54,7 @@ export function MobileBottomSheet({
                             stiffness: 300
                         }}
                         className={cn(
-                            "md:hidden fixed bottom-0 left-0 right-0 z-50",
+                            "md:hidden fixed bottom-0 left-0 right-0 layer-sheet",
                             "bg-white rounded-t-3xl shadow-2xl",
                             "max-h-[90vh] flex flex-col",
                             "safe-bottom",
