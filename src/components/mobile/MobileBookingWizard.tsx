@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Calendar } from "@/components/ui/calendar"
+import { BookingCalendar } from "@/components/mobile/BookingCalendar"
 import { X, ChevronLeft, Check, Calendar as CalendarIcon, Users, User, Mail, Phone, Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { format, startOfToday } from "date-fns"
@@ -200,16 +200,11 @@ export function MobileBookingWizard({
                             <p className="text-sm text-gray-600">Select your preferred date</p>
                         </div>
 
-                        <div className="surface-card flex justify-center p-2">
-                            <Calendar
-                                mode="single"
+                        <div className="surface-card p-4">
+                            <BookingCalendar
                                 selected={selectedDate}
                                 onSelect={setSelectedDate}
-                                /* Compare against the start of today, otherwise
-                                   "now" makes today itself unselectable. */
-                                disabled={{ before: startOfToday() }}
-                                defaultMonth={selectedDate ?? startOfToday()}
-                                className="w-full max-w-[22rem]"
+                                minDate={startOfToday()}
                             />
                         </div>
 

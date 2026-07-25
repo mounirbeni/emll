@@ -1,91 +1,57 @@
 "use client";
 
 import Link from "next/link";
-import NextImage from "next/image";
 import { ArrowRight } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
+import { BlogCard } from "@/components/blog/BlogCard";
+import { BLOG_POSTS } from "@/lib/data/blog-data";
 
-const posts = [
-    {
-        id: 1,
-        title: "Top 10 Hidden Gems in Marrakech Medina",
-        excerpt: "Discover the secret spots that only locals know about in the heart of the old city.",
-        image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
-        date: "October 15, 2025",
-        slug: "hidden-gems-marrakech"
-    },
-    {
-        id: 2,
-        title: "A Foodie’s Guide to Moroccan Street Food",
-        excerpt: "From tangy tajines to sweet pastries, here is what you must try in Jemaa el-Fnaa.",
-        image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
-        date: "November 2, 2025",
-        slug: "foodies-guide-marrakech"
-    },
-    {
-        id: 3,
-        title: "Day Trip to Atlas Mountains: What to Expect",
-        excerpt: "Everything you need to know before booking your adventure to the stunning Atlas Mountains.",
-        image: "IMAGE_PLACEHOLDER_PENDING_UPLOAD",
-        date: "November 20, 2025",
-        slug: "atlas-mountains-guide"
-    }
-];
-
+/**
+ * Latest articles on the homepage.
+ *
+ * This used to hold its own hardcoded posts whose slugs
+ * ("hidden-gems-marrakech", "foodies-guide-marrakech", "atlas-mountains-guide")
+ * matched nothing in BLOG_POSTS, so every "Read Article" link 404'd. It now
+ * reads the real posts and reuses BlogCard so the cards match /blog exactly.
+ */
 export function BlogPreview() {
+    const posts = [...BLOG_POSTS]
+        .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+        .slice(0, 3);
+
+    if (posts.length === 0) return null;
+
     return (
-        <section className="app-section bg-gray-50">
+        <section className="app-section bg-surface">
             <div className="app-container">
-                <div className="flex justify-between items-end mb-10">
+                <div className="mb-10 flex items-end justify-between gap-4">
                     <div>
-                        <h2 className="type-h2 text-foreground mb-2">Travel Tips & Inspiration</h2>
-                        <p className="text-gray-600">Get ready for your trip with our latest guides</p>
+                        <span className="eyebrow">Travel journal</span>
+                        <h2 className="type-h2 text-foreground mb-2 mt-3">
+                            Travel Tips &amp; Inspiration
+                        </h2>
+                        <p className="text-muted-foreground">
+                            Get ready for your trip with our latest guides
+                        </p>
                     </div>
-                    <Link href="/blog">
-                        <Button variant="ghost" className="text-primary hover:text-primary/80 hidden md:flex items-center gap-2">
-                            Read Journal <ArrowRight className="w-4 h-4" />
-                        </Button>
-                    </Link>
+                    <Button asChild variant="ghost" className="text-primary hidden shrink-0 items-center gap-2 md:flex">
+                        <Link href="/blog">
+                            Read Journal <ArrowRight className="h-4 w-4" />
+                        </Link>
+                    </Button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                     {posts.map((post) => (
-                        <Link key={post.id} href={`/blog/${post.slug}`} className="group cursor-pointer">
-                            <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 h-full flex flex-col">
-                                <div className="relative h-48 w-full bg-gray-200 overflow-hidden">
-                                    <NextImage
-                                        src={post.image === "IMAGE_PLACEHOLDER_PENDING_UPLOAD" ? "/images/placeholder-blog.svg" : post.image}
-                                        alt={post.title}
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                    />
-                                    {/* Overlay effect on hover */}
-                                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-                                </div>
-
-                                <div className="p-6 flex-1 flex flex-col">
-                                    <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-2 block">{post.date}</span>
-                                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                                        {post.title}
-                                    </h3>
-                                    <p className="text-gray-600 text-sm line-clamp-3 mb-4 flex-1">
-                                        {post.excerpt}
-                                    </p>
-                                    <span className="text-sm font-medium text-primary flex items-center gap-1 mt-auto">
-                                        Read Article <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
-                                    </span>
-                                </div>
-                            </div>
-                        </Link>
+                        <BlogCard key={post.id} post={post} />
                     ))}
                 </div>
 
-                <div className="mt-8 text-center md:hidden">
-                    <Link href="/blog">
-                        <Button variant="outline" className="w-full">
-                            View All Articles
-                        </Button>
-                    </Link>
+                <div className="mt-10 flex justify-center md:hidden">
+                    <Button asChild variant="outline" className="w-full rounded-full">
+                        <Link href="/blog">View All Articles</Link>
+                    </Button>
                 </div>
             </div>
         </section>
