@@ -106,12 +106,13 @@ export default async function ExperienceDetailsPage({ params }: { params: Promis
 
             {/* 1. Hero Section */}
             <ExperienceHero
+                experienceId={experience.id}
                 title={experience.title}
                 category={experience.category}
                 location={experience.location}
                 duration={experience.duration}
-                rating={0}
-                reviews={0}
+                rating={experience.avgRating ?? 0}
+                reviews={experience.reviewCount ?? 0}
                 pickupAvailable={experience.pickupAvailable}
                 languages={languages}
                 images={experience.gallery}

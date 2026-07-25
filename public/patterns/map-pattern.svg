@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" role="img" aria-label="Decorative map pattern">
+  <rect width="240" height="240" fill="#FFF3EA"/>
+  <g stroke="#FFC49B" stroke-width="2" fill="none" opacity="0.9">
+    <path d="M0 48h240M0 120h240M0 192h240"/>
+    <path d="M40 0v240M112 0v240M184 0v240"/>
+  </g>
+  <g stroke="#FF8434" stroke-width="3" fill="none" opacity="0.55">
+    <path d="M-10 150c40-30 70 10 110-16s70 18 150-24"/>
+    <path d="M-10 74c50 22 84-18 128 4s60-4 122-26"/>
+  </g>
+  <g fill="#FFC49B" opacity="0.7">
+    <circle cx="40" cy="48" r="4"/>
+    <circle cx="112" cy="120" r="4"/>
+    <circle cx="184" cy="192" r="4"/>
+  </g>
+</svg>

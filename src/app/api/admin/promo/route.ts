@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { sendEmail } from '@/lib/email-client';
 import { getEmailTemplate } from '@/lib/email-templates';
 import { z } from 'zod';
+import { requireAdminResponse } from '@/lib/api-guard';
 
 // Schema for promo request
 const promoSchema = z.object({
@@ -13,6 +14,9 @@ const promoSchema = z.object({
 });
 
 export async function POST(req: Request) {
+    const denied = await requireAdminResponse();
+    if (denied) return denied;
+
     try {
         const body = await req.json();
         const result = promoSchema.safeParse(body);

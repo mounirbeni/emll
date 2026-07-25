@@ -118,7 +118,7 @@ export default function ForgotPasswordPage() {
             {/* Right Side - Hero Image */}
             <div className="hidden lg:block relative flex-1 bg-gray-50">
                 <div className="absolute inset-0">
-                    <div className="absolute inset-0 bg-[url('/marrakech-bg.jpg')] bg-cover bg-center mix-blend-overlay opacity-50" />
+                    <div className="absolute inset-0 bg-[url('/images/homepage.jpg')] bg-cover bg-center mix-blend-overlay opacity-50" />
                     <div className="absolute inset-0 bg-black/20" />
                 </div>
                 <div className="relative h-full flex items-center justify-center p-12 text-center">

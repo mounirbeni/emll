@@ -5,6 +5,7 @@ import { getEmailTemplate } from '@/lib/email-templates';
 import { z } from 'zod';
 
 import { UserRole, Prisma } from '@prisma/client';
+import { requireAdminResponse } from '@/lib/api-guard';
 
 // Schema for broadcast request
 const broadcastSchema = z.object({
@@ -16,6 +17,9 @@ const broadcastSchema = z.object({
 });
 
 export async function POST(req: Request) {
+    const denied = await requireAdminResponse();
+    if (denied) return denied;
+
     try {
         const body = await req.json();
         const result = broadcastSchema.safeParse(body);

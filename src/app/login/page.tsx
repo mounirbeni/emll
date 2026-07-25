@@ -286,7 +286,7 @@ export default function LoginPage() {
                 <div className="absolute inset-0">
                     {/* We could use an actual image here, but a gradient placeholder works for now if no image is available 
                        If there's an image in public, we could use it. */}
-                    <div className="absolute inset-0 bg-[url('/marrakech-bg.jpg')] bg-cover bg-center mix-blend-overlay opacity-50" />
+                    <div className="absolute inset-0 bg-[url('/images/homepage.jpg')] bg-cover bg-center mix-blend-overlay opacity-50" />
                     <div className="absolute inset-0 bg-black/20" />
                 </div>
                 <div className="relative h-full flex items-center justify-center p-12 text-center">

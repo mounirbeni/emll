@@ -78,11 +78,13 @@ export function DashboardHeader() {
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-3 md:gap-5">
-                <Button variant="ghost" size="icon" className="relative group hover:bg-orange-50 text-gray-400 hover:text-primary rounded-full h-11 w-11 transition-all">
+                <Button asChild variant="ghost" size="icon" className="relative group hover:bg-brand-50 text-ink-400 hover:text-primary rounded-full h-11 w-11 transition-all">
+                    <Link href="/client/notifications" aria-label={unreadCount > 0 ? `Notifications (${unreadCount} unread)` : "Notifications"}>
                     <Bell className="h-5 w-5" />
                     {unreadCount > 0 && (
                         <span className="absolute top-3 right-3 h-2.5 w-2.5 rounded-full bg-primary ring-2 ring-white animate-pulse" />
                     )}
+                    </Link>
                 </Button>
 
                 <div className="h-8 w-px bg-gray-100 hidden md:block" />

@@ -14,26 +14,36 @@ export default function ClientLayout({
     children: React.ReactNode;
 }) {
     const { data: session } = useSession();
-    const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+    // Read the persisted state during the initial render (lazy initialiser)
+    // rather than setting state inside an effect, which triggered a second
+    // render pass on every mount.
+    const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
+        if (typeof window === 'undefined') return false;
+        try {
+            const saved = window.localStorage.getItem('sidebarCollapsed');
+            return saved !== null ? Boolean(JSON.parse(saved)) : false;
+        } catch {
+            return false;
+        }
+    });
     const [mounted, setMounted] = useState(false);
 
-    // Handle hydration mismatch
+    // Marks the end of hydration. This is the one legitimate case for setting
+    // state in an effect: it must run after the first client render so the
+    // server and client markup match, and it runs exactly once.
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMounted(true);
-    }, []);
-
-    // Load sidebar state from localStorage
-    useEffect(() => {
-        const saved = localStorage.getItem('sidebarCollapsed');
-        if (saved !== null) {
-            setSidebarCollapsed(JSON.parse(saved));
-        }
     }, []);
 
     // Save sidebar state to localStorage
     useEffect(() => {
-        if (mounted) {
-            localStorage.setItem('sidebarCollapsed', JSON.stringify(sidebarCollapsed));
+        if (!mounted) return;
+        try {
+            window.localStorage.setItem('sidebarCollapsed', JSON.stringify(sidebarCollapsed));
+        } catch {
+            /* storage can be unavailable in private mode — non-critical */
         }
     }, [sidebarCollapsed, mounted]);
 

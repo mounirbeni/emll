@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { requireAdminResponse } from '@/lib/api-guard';
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
-        const id = params.id;
+        const { id } = await params;
         const experience = await prisma.experience.findUnique({
             where: { id },
         });
@@ -26,9 +27,12 @@ export async function GET(request: Request, { params }: { params: { id: string }
     }
 }
 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
+    const denied = await requireAdminResponse();
+    if (denied) return denied;
+
     try {
-        const id = params.id;
+        const { id } = await params;
         const body = await request.json();
 
         const experience = await prisma.experience.update({
@@ -43,9 +47,12 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
+    const denied = await requireAdminResponse();
+    if (denied) return denied;
+
     try {
-        const id = params.id;
+        const { id } = await params;
         await prisma.experience.delete({
             where: { id },
         });

@@ -24,7 +24,7 @@ export function BecomePartner() {
                             Become a Partner
                         </Button>
                     </Link>
-                    <Link href="/contact">
+                    <Link href="/support">
                         <Button variant="outline" size="lg" className="w-full sm:w-auto px-10 h-14 text-lg font-bold rounded-full border-2 border-gray-200 bg-transparent hover:bg-white hover:border-gray-300 text-gray-700">
                             Contact Support
                         </Button>

@@ -16,7 +16,7 @@ export default function ExperienceMeetingPoint({ address, description, pickupAva
 
             <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white">
                 {/* Visual Map Placeholder (Interactive Maps can be heavy for MVP, static image or placeholder is fine) */}
-                <div className="relative h-48 w-full bg-orange-50 bg-[url('/patterns/map-pattern.png')] bg-cover bg-center">
+                <div className="relative h-48 w-full bg-orange-50 bg-[url('/patterns/map-pattern.svg')] bg-cover bg-center">
                     <div className="absolute inset-0 bg-black/5" />
                     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                         <div className="flex h-12 w-12 animate-bounce items-center justify-center rounded-full bg-orange-600 text-white shadow-xl">

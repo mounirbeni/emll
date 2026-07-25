@@ -263,7 +263,9 @@ export default function ProfileClient({ user }: ProfileClientProps) {
                                         <p className="text-sm text-gray-500">Last changed 3 months ago</p>
                                     </div>
                                 </div>
-                                <Button variant="outline" size="sm">Update</Button>
+                                <Button asChild variant="outline" size="sm">
+                                    <Link href="/client/security/password">Update</Link>
+                                </Button>
                             </div>
                             <div className="flex items-center justify-between p-4 rounded-2xl border border-gray-100 hover:border-gray-200 transition-colors">
                                 <div className="flex items-center gap-4">
@@ -275,7 +277,9 @@ export default function ProfileClient({ user }: ProfileClientProps) {
                                         <p className="text-sm text-gray-500">Add an extra layer of security</p>
                                     </div>
                                 </div>
-                                <Button variant="outline" size="sm">Enable</Button>
+                                <Button asChild variant="outline" size="sm">
+                                    <Link href="/client/security/2fa">Enable</Link>
+                                </Button>
                             </div>
                         </div>
                     </div>

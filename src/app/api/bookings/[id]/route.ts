@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 import { sendEmail } from '@/lib/email-client';
 import { getEmailTemplate } from '@/lib/email-templates';
+import { requireAdminResponse } from '@/lib/api-guard';
 
 const updateBookingSchema = z.object({
     status: z.enum(['PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED', 'NEEDS_UPDATE']).optional(),
@@ -38,7 +39,10 @@ export async function PUT(
     req: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
-    const { id } = await params;
+    const denied = await requireAdminResponse();
+    if (denied) return denied;
+
+const { id } = await params;
     try {
         const body = await req.json();
         const result = updateBookingSchema.safeParse(body);
@@ -152,7 +156,10 @@ export async function DELETE(
     req: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
-    const { id } = await params;
+    const denied = await requireAdminResponse();
+    if (denied) return denied;
+
+const { id } = await params;
     try {
         await prisma.booking.delete({
             where: { id },

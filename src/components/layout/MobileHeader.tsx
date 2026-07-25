@@ -1,13 +1,16 @@
 "use client"
 
 import React from "react"
+import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
 import { ChevronLeft, Search, Bell } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function MobileHeader() {
     const pathname = usePathname()
     const router = useRouter()
+    const { data: session } = useSession()
     const isHome = pathname === "/"
 
     const handleBack = () => {
@@ -39,11 +42,18 @@ export function MobileHeader() {
                 </div>
 
                 <div className="flex items-center gap-1">
-                    <Button variant="ghost" size="icon" className="touch-target text-gray-600">
-                        <Search className="h-5 w-5" />
+                    <Button asChild variant="ghost" size="icon" className="touch-target text-ink-600">
+                        <Link href="/experiences" aria-label="Search experiences">
+                            <Search className="h-5 w-5" />
+                        </Link>
                     </Button>
-                    <Button variant="ghost" size="icon" className="touch-target text-gray-600">
-                        <Bell className="h-5 w-5" />
+                    <Button asChild variant="ghost" size="icon" className="touch-target text-ink-600">
+                        <Link
+                            href={session ? "/client/notifications" : "/login"}
+                            aria-label="Notifications"
+                        >
+                            <Bell className="h-5 w-5" />
+                        </Link>
                     </Button>
                 </div>
             </div>

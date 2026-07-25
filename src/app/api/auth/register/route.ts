@@ -52,7 +52,6 @@ export async function POST(request: Request) {
         // Link existing bookings to this new user (History matching)
         await prisma.booking.updateMany({
             where: { userEmail: user.email },
-            // @ts-ignore: userId field exists in schema
             data: { userId: user.id }
         });
 

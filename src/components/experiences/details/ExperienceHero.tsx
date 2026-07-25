@@ -5,8 +5,11 @@ import Image from 'next/image';
 import { MapPin, Clock, Star, Share2, Heart, ShieldCheck, Globe, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { MobileImageGallery } from '@/components/mobile/MobileImageGallery';
+import { WishlistButton } from '@/components/experiences/WishlistButton';
+import { toast } from 'sonner';
 
 interface ExperienceHeroProps {
+    experienceId?: string;
     title: string;
     category: string;
     location: string;
@@ -19,6 +22,7 @@ interface ExperienceHeroProps {
 }
 
 export default function ExperienceHero({
+    experienceId,
     title,
     category,
     location,
@@ -42,6 +46,23 @@ export default function ExperienceHero({
 
     const prevImage = () => {
         setCurrentImageIndex((prev) => (prev - 1 + displayImages.length) % displayImages.length);
+    };
+
+    // Native share sheet on mobile, clipboard copy everywhere else.
+    const handleShare = async () => {
+        const url = typeof window !== 'undefined' ? window.location.href : '';
+        try {
+            if (typeof navigator !== 'undefined' && navigator.share) {
+                await navigator.share({ title, url });
+                return;
+            }
+            await navigator.clipboard.writeText(url);
+            toast.success('Link copied to clipboard');
+        } catch (error) {
+            // A user dismissing the share sheet throws AbortError — not a failure.
+            if (error instanceof Error && error.name === 'AbortError') return;
+            toast.error('Could not share this experience');
+        }
     };
 
     return (
@@ -68,13 +89,16 @@ export default function ExperienceHero({
                     <h1 className="max-w-4xl text-3xl font-extrabold leading-tight text-gray-900 md:text-5xl lg:text-6xl">
                         {title}
                     </h1>
-                    <div className="flex gap-2">
-                        <Button variant="outline" size="icon" className="rounded-full hover:bg-orange-50 hover:text-orange-600">
-                            <Share2 className="h-5 w-5" />
-                        </Button>
-                        <Button variant="outline" size="icon" className="rounded-full hover:bg-red-50 hover:text-red-500">
-                            <Heart className="h-5 w-5" />
-                        </Button>
+                    <div className="flex shrink-0 gap-2">
+                        <button
+                            type="button"
+                            onClick={handleShare}
+                            aria-label="Share this experience"
+                            className="border-border hover:border-brand-300 hover:bg-brand-50 inline-flex h-11 w-11 items-center justify-center rounded-full border bg-white transition-colors"
+                        >
+                            <Share2 className="text-ink-500 h-5 w-5" />
+                        </button>
+                        {experienceId && <WishlistButton experienceId={experienceId} />}
                     </div>
                 </div>
 

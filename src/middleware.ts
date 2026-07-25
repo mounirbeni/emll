@@ -58,6 +58,13 @@ export async function middleware(request: NextRequest) {
             // Redirect to client dashboard if logged in but not admin
             return NextResponse.redirect(new URL('/client', request.url))
         }
+
+        // Send /admin straight to the dashboard here rather than rendering a
+        // page that immediately redirects — that render started a session fetch
+        // which the redirect then aborted, logging a ClientFetchError.
+        if (pathname === '/admin' || pathname === '/admin/') {
+            return NextResponse.redirect(new URL('/admin/dashboard', request.url))
+        }
     }
 
     // 3. Redirect logged-in users away from auth pages

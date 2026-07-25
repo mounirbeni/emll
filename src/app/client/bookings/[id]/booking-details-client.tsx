@@ -301,7 +301,7 @@ export function BookingDetailsClient({ booking }: BookingDetailsClientProps) {
 
             {/* Action Buttons */}
             <div className="space-y-3 pt-4">
-                <Link href="/client/messages/new">
+                <Link href="/client/support">
                     <Button variant="outline" className="w-full rounded-xl border-gray-200 hover:bg-gray-50 h-12 font-semibold text-gray-700">
                         <MessageSquare className="w-4 h-4 mr-2" />
                         Contact Support

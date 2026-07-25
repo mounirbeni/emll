@@ -118,11 +118,16 @@ export default function AdminExperiencesPage() {
                                     </td>
                                     <td className="px-6 py-3 text-right">
                                         <div className="flex justify-end gap-2">
-                                            <button className="p-1 text-gray-500 hover:text-primary">
+                                            <Link
+                                                href={`/admin/experiences/${exp.id}/edit`}
+                                                aria-label={`Edit ${exp.title}`}
+                                                className="text-ink-500 hover:text-primary inline-flex h-9 w-9 items-center justify-center rounded-lg"
+                                            >
                                                 <Edit2 className="h-4 w-4" />
-                                            </button>
+                                            </Link>
                                             <button
-                                                className="p-1 text-gray-500 hover:text-red-600"
+                                                className="text-ink-500 inline-flex h-9 w-9 items-center justify-center rounded-lg hover:text-red-600"
+                                                aria-label={`Delete ${exp.title}`}
                                                 onClick={() => handleDelete(exp.id)}
                                             >
                                                 <Trash2 className="h-4 w-4" />

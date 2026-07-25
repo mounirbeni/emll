@@ -5,6 +5,8 @@ import { format } from "date-fns";
 import { ArrowLeft, Calendar, Clock, Share2, Facebook, Twitter, Linkedin } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ShareButtons } from "@/components/blog/ShareButtons";
+import { NewsletterForm } from "@/components/shared/NewsletterForm";
 
 interface BlogPostPageProps {
     params: Promise<{
@@ -86,22 +88,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         />
 
                         {/* Share Links */}
-                        <div className="mt-12 pt-8 border-t border-gray-100 flex items-center justify-between">
-                            <span className="font-bold text-gray-900">Share this article</span>
-                            <div className="flex gap-2">
-                                <Button variant="outline" size="icon" className="rounded-full text-gray-500 hover:text-primary hover:border-primary">
-                                    <Facebook className="w-4 h-4" />
-                                </Button>
-                                <Button variant="outline" size="icon" className="rounded-full text-gray-500 hover:text-primary hover:border-primary">
-                                    <Twitter className="w-4 h-4" />
-                                </Button>
-                                <Button variant="outline" size="icon" className="rounded-full text-gray-500 hover:text-primary hover:border-primary">
-                                    <Linkedin className="w-4 h-4" />
-                                </Button>
-                                <Button variant="outline" size="icon" className="rounded-full text-gray-500 hover:text-primary hover:border-primary">
-                                    <Share2 className="w-4 h-4" />
-                                </Button>
-                            </div>
+                        <div className="mt-12 border-t border-border pt-8">
+                            <ShareButtons
+                                title={post.title}
+                                url={`https://marrakech-luxe.vercel.app/blog/${post.slug}`}
+                            />
                         </div>
                     </article>
 
@@ -120,22 +111,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                             </Link>
                         </div>
 
-                        {/* Newsletter (Mock) */}
-                        <div className="bg-white rounded-3xl p-8 border border-gray-100">
-                            <h3 className="text-xl font-bold text-gray-900 mb-2">Join the Community</h3>
-                            <p className="text-gray-500 text-sm mb-4">
+                        {/* Newsletter */}
+                        <div className="surface-card p-8">
+                            <h3 className="type-h4 mb-2">Join the Community</h3>
+                            <p className="text-muted-foreground mb-4 text-sm">
                                 Get travel tips and exclusive offers delivered to your inbox.
                             </p>
-                            <div className="space-y-3">
-                                <input
-                                    type="email"
-                                    placeholder="Your email address"
-                                    className="w-full h-10 px-4 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none text-sm"
-                                />
-                                <Button variant="outline" className="w-full font-bold">
-                                    Subscribe
-                                </Button>
-                            </div>
+                            <NewsletterForm />
                         </div>
                     </aside>
                 </div>

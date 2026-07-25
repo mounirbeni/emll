@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
+import { requireAdminResponse } from '@/lib/api-guard';
 
 export async function GET(request: Request) {
     try {
@@ -70,6 +71,9 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+    const denied = await requireAdminResponse();
+    if (denied) return denied;
+
     try {
         const body = await request.json();
 
